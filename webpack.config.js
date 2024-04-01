@@ -7,12 +7,12 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.tsx?$/,
-                // test: /\.(ts|tsx)$/,
+                // test: /\.tsx?$/,
+                test: /\.(ts|tsx)$/,
                 use: ['babel-loader', 'eslint-loader', 'ts-loader'],
                 // use: 'babel-loader'
                 exclude: /node_modules/,
-                // loader: 'eslint-loader',
+                loader: 'eslint-loader',
                 options: {
                     rules: {
                         indent: ['error', 4]
@@ -20,6 +20,29 @@ module.exports = {
                     }
                 }
             },
+
+            //  {
+            //     enforce: 'pre',
+            //     test: /\.(ts|tsx)$/,
+            //     exclude: /node_modules/,
+            //     loader: 'eslint-loader',
+            //     options: {
+            //         rules: {
+            //             indent: ['error', 4]
+            //             // indent: ["error", { "allowIndentationTabs": true }]
+            //         }
+            //     }
+            //   },
+            //   {
+            //     test: /\.tsx?$/,
+            //     exclude: /node_modules/,
+            //     loader: 'babel-loader',
+            //   },
+            //   {
+            //     test: /\.(ts|tsx)$/,
+            //     exclude: /node_modules/,
+            //     loader: 'ts-loader',
+            //   },
         ],
     },
     resolve: {
