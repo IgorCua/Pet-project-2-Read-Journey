@@ -6,14 +6,7 @@ import {
     usersRefreshTokenAPI,
     usersSignOutAPI 
 } from "../../services/connectionsAPI"
-import axios, { AxiosPromise, AxiosResponse } from "axios";
-import { usersSignupRes } from "./actionTypes";
-
-enum EStatus {
-    pending = "pending",
-    fulfilled = "fulfilled",
-    rejected = "rejected"
-}
+import axios from "axios";
 
 interface ISignup {
     name: string, 
@@ -24,11 +17,6 @@ interface ISignup {
 interface ISignin {
     email: string, 
     password: string
-}
-interface IRequestStatus {
-    pending: string,
-    fulfilled: string,
-    rejected: string
 }
 
 export const axiosToken = {
