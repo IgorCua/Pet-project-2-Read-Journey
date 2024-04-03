@@ -1,4 +1,4 @@
-import { AsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { 
     userGetCurrent, 
     userRefreshToken, 
@@ -6,6 +6,7 @@ import {
     userSignOut, 
     userSignup 
 } from "./operations";
+import { PendingAction, RejectedAction } from "../actionTypes";
 
 interface IInitialState {
     _id: string | null,
@@ -33,10 +34,10 @@ const initialState = {
     userBooks: null
 } satisfies IInitialState as IInitialState
 
-type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
+// type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
 
-type PendingAction = ReturnType<GenericAsyncThunk['pending']>
-type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>
+// type PendingAction = ReturnType<GenericAsyncThunk['pending']>
+// type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>
 
 const authSlice = createSlice({
     name: 'auth',
