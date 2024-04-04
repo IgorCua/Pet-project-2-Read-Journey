@@ -18,7 +18,7 @@ interface IInitialState {
     isError: boolean
     error: unknown | null,
     isLoading: boolean,
-    userBooks: {}[] | null
+    // userBooks: {}[] | null
 }
 
 const initialState = {
@@ -31,13 +31,8 @@ const initialState = {
     isError: false,
     error: null,
     isLoading: false,
-    userBooks: null
+    // userBooks: null
 } satisfies IInitialState as IInitialState
-
-// type GenericAsyncThunk = AsyncThunk<unknown, unknown, any>
-
-// type PendingAction = ReturnType<GenericAsyncThunk['pending']>
-// type RejectedAction = ReturnType<GenericAsyncThunk['rejected']>
 
 const authSlice = createSlice({
     name: 'auth',

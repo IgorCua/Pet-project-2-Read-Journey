@@ -8,7 +8,7 @@ import {
 } from "../../services/connectionsAPI"
 import axios from "axios";
 
-interface ISignup {
+interface SignupInterface {
     name: string, 
     email: string, 
     password: string
@@ -42,7 +42,7 @@ export const axiosToken = {
 export const userSignup = createAsyncThunk(
     'auth/signup',
 
-    async (data: ISignup, { rejectWithValue }) => {
+    async (data: SignupInterface, { rejectWithValue }) => {
         try{
             const res = await usersSignupAPI(data);
             return res;
