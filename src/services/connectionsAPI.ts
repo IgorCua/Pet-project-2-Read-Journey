@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 
 axios.defaults.baseURL = 'https://readjourney.b.goit.study/api';
 
@@ -39,9 +39,9 @@ type PaginationResponse<T> = {
     perPage: number
 }
 
-type ErrorMessage = {
-    message: string
-}
+// type ErrorMessage = {
+//     message: string
+// }
 type Book = {
     _id: string,
     title: string,
@@ -51,14 +51,14 @@ type Book = {
     recommended: boolean
 }
 
-interface BookProgressInterface {
-    startPage: number,
-    startReading: Date | string,
-    finishPage: number,
-    finishReading: string,
-    speed: number,
-    status: string
-}
+// interface BookProgressInterface {
+//     startPage: number,
+//     startReading: Date | string,
+//     finishPage: number,
+//     finishReading: string,
+//     speed: number,
+//     status: string
+// }
 
 interface AddBookInterface {
     _id: string,
