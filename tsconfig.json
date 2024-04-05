@@ -4,9 +4,12 @@
     "lib": [
       "dom",
       "dom.iterable",
-      "esnext",
+      // "esnext",
       "es2022"
     ],
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,13 +17,33 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "esnext",
+    "module": "es2022",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "outDir": "./dist"
+    "outDir": "./dist",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "preserveConstEnums": true,
   },
   "include": ["src/**/*"]
 }
+// "compilerOptions": {
+//   "rootDir": "./src",
+//   "outDir": "./dist",
+//   "allowJs": false,
+//   "allowSyntheticDefaultImports": true,
+//   "emitDecoratorMetadata": true,
+//   "esModuleInterop": true,
+//   "experimentalDecorators": true,
+//   "lib": ["dom", "ES2021"], // new
+//   "module": "es2020",
+//   "moduleResolution": "node",
+//   "preserveConstEnums": true,
+//   "skipLibCheck": true,
+//   "strictNullChecks": true,
+//   "target": "es2019"
+// },
+// "include": ["**/*.ts"]
