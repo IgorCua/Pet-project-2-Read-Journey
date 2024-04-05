@@ -6,7 +6,7 @@ import {
     userSignOut, 
     userSignup 
 } from "./operations";
-import { PendingAction, RejectedAction } from "../actionTypes";
+import { PendingAction, RejectedAction } from "../reduxTypes";
 
 interface IInitialState {
     _id: string | null,

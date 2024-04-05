@@ -1,61 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
-import { PendingAction, RejectedAction } from "../actionTypes"
-
-interface BookInterface {
-    _id: string,
-    title: string,
-    author: string,
-    imageUrl: string,
-    totalPages: number,
-    recommended: boolean
-}
-
-interface recomendedBooksInterface {
-    results: BookInterface[],
-    totalPages: number,
-    page: number,
-    perPage: number
-}
-
-// interface AddBookInterface {
-//     _id: string,
-//     title: string,
-//     author: string,
-//     imageUrl: string,
-//     totalPages: string,
-//     satus: string,
-//     owner: string,
-//     progress: any[]
-// }
-
-// interface BookProgressInterface {
-//     startPage: number,
-//     startReading: Date | string,
-//     finishPage: number,
-//     finishReading: string,
-//     speed: number,
-//     status: string
-// }
-
-interface AddBookInterface {
-    _id: string,
-    title: string,
-    author: string,
-    imageUrl: string,
-    totalPages: string,
-    satus: string,
-    owner: string,
-    progress: unknown[]
-}
+// import { PendingAction, RejectedAction } from "../actionTypes"
+import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction } from "../reduxTypes";
 
 interface initialStateInterface {
     recommendedBooks: recomendedBooksInterface | null,
-    userBooks: AddBookInterface[] | [],
-    readingStart: number | null,
-    readingEnd: number | null,
-    currentReading: null | AddBookInterface,
-    bookInfo: null | AddBookInterface,
+    userBooks: BookInterface[] | [],
+    readingStart: any | null,
+    readingEnd: any | null,
+    currentReading: null | BookInterface,
+    bookInfo: null | BookInterface,
     isLoading: boolean,
     isError: boolean,
     error: any
