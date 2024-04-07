@@ -8,8 +8,8 @@ import booksSlice from './books/slice';
 
 const store = configureStore({
     reducer: {
-        authSlice: authSlice,
-        booksSlice: booksSlice
+        auth: authSlice,
+        books: booksSlice
     }
 });
 
