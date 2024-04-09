@@ -21,6 +21,8 @@ export const RegisterPage = () => {
             <p>Register Page</p>
             <StyledP>StyledP</StyledP>
             <Button variant="contained">Hello</Button>
+            <p>👍</p>
+
         </div>
     )
 }
