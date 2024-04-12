@@ -4,8 +4,8 @@ const customStyles = {
     body: {
         margin: 0,
         fontFamily: '-apple-system, BlinkMacSystemFont, Poppins, sans-serif',
-        '-webkit-font-smoothing': 'antialiased',
-        '-moz-osx-font-smoothing': 'grayscale',
+        'WebkitFontSmoothing': 'antialiased',
+        'MozOsxFontSmoothing': 'grayscale',
     },
     '*': {
         boxSizing: 'border-box'
@@ -30,11 +30,11 @@ const customStyles = {
     },
     figure: {
         margin: 0,
-    }
+    },
 }
 
 export function CustomGlobalStyles() { 
-    return <GlobalStyles styles={customStyles} /> 
+    return <GlobalStyles styles={customStyles}/> 
 }
 
 // ul {

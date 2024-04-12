@@ -18,7 +18,7 @@
     font-family: 'Poppins';
     src: local('Poppins Medium'), local('Poppins-Medium'),
     url('./Poppins-Medium.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: 500;
     /* font-style: normal; */
 }
 
@@ -26,6 +26,6 @@
     font-family: 'Poppins';
     src: local('Poppins Light'), local('Poppins-Bold'),
     url('./Poppins-Light.ttf') format('truetype');
-    font-weight: 400;
+    font-weight: 300;
     /* font-style: normal; */
 }
