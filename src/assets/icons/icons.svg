@@ -47,12 +47,12 @@
             <path fill="#E90516" fill-rule="evenodd" d="M10 18.125a8.125 8.125 0 1 0 0-16.25 8.125 8.125 0 0 0 0 16.25ZM10 20a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm1.25-6.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm-.313-7.813a.938.938 0 0 0-1.874 0v4.375a.937.937 0 0 0 1.874 0V5.939Z" clip-rule="evenodd"/>
         </g>
         <defs>
-        <clipPath id="a">
+            <clipPath id="a">
             <path fill="#fff" d="M0 0h20v20H0z"/>
             </clipPath>
         </defs>
     </symbol>
-    <symbol id="icon-error" fill="none" viewBox="0 0 20 20">
+    <!-- <symbol id="icon-error" fill="none" viewBox="0 0 20 20">
         <g clip-path="url(#a)">
             <path fill="#E90516" fill-rule="evenodd" d="M10 18.125a8.125 8.125 0 1 0 0-16.25 8.125 8.125 0 0 0 0 16.25ZM10 20a10 10 0 1 0 0-20 10 10 0 0 0 0 20Zm1.25-6.25a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm-.313-7.813a.938.938 0 0 0-1.874 0v4.375a.937.937 0 0 0 1.874 0V5.939Z" clip-rule="evenodd"/>
         </g>
@@ -61,7 +61,7 @@
                 <path fill="#fff" d="M0 0h20v20H0z"/>
             </clipPath>
         </defs>
-    </symbol>
+    </symbol> -->
     <symbol id="icon-success" fill="none" viewBox="0 0 20 20">
         <g fill="#30B94D" clip-path="url(#a)">
             <path d="M9.375 13.6 6 9.8l1.125-1.267 2.25 2.533L13.875 6 15 7.267l-5.625 6.331v.002Z"/>
@@ -87,6 +87,9 @@
     </symbol>
     <symbol id="icon-trash-bin" fill="none" viewBox="0 0 14 14">
         <path stroke="#686868" stroke-linecap="round" stroke-linejoin="round" d="M1.75 3.5h10.5M11.083 3.5v8.167a1.167 1.167 0 0 1-1.166 1.166H4.083a1.167 1.167 0 0 1-1.166-1.166V3.5m1.75 0V2.333a1.167 1.167 0 0 1 1.166-1.166h2.334a1.167 1.167 0 0 1 1.166 1.166V3.5M5.833 6.417v3.5M8.167 6.417v3.5"/>
+    </symbol>
+    <symbol id='icon-logo' fill="none" viewBox="0 0 42 17" >
+        <path fill="#F9F9F9" d="M0 11V0h12.89c1.753 0 3.46.558 4.873 1.594a6.216 6.216 0 0 1 1.962 2.393l1.491 3.205a21.673 21.673 0 0 1 2.155-4.003l.074-.108c.245-.361.527-.696.839-1.001l.635-.62a4.313 4.313 0 0 1 1.444-.933l.055-.022A7.366 7.366 0 0 1 29.1 0H42v11H0ZM0 13h42v4H0z"/>
     </symbol>
   </defs>
 </svg>

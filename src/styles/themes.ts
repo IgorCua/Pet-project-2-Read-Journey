@@ -108,10 +108,10 @@ export const theme = createTheme({
     },
     breakpoints: {
         values: {
-          mobile: 0,
-          tablet: 640,
+          mobile: 260,
+          tablet: 768,
           laptop: 1024,
-          desktop: 1200,
+          desktop: 1440,
         },
     },
     components: {
