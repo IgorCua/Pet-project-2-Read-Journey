@@ -1,10 +1,9 @@
-import { TextField, InputAdornment, ButtonBase } from '@mui/material';
-import { ErrorMessage, Formik, validateYupSchema } from 'formik';
+import { TextField, InputAdornment, ButtonBase, TextFieldProps } from '@mui/material';
+import { ErrorMessage, Field, FieldProps, Form, Formik, FormikHelpers, FormikProps, FormikValues, getIn, useFormik, useFormikContext, validateYupSchema } from 'formik';
 import * as Yup from 'yup';
 import { EmailField, NameField, PasswordField, RegForm, SubmitButton } from './styled';
 import { Icon } from '../icon/Icon';
-import React, { useState } from 'react';
-
+import React, { memo, useState } from 'react';
 interface ValuesInterface {
     name: string,
     email: string,
@@ -44,13 +43,16 @@ type RenderEyeIconProps = {
     onClick: (value: string) => void;
   }
 
-export const RegisterForm: React.FC = () => {
+export const RegisterForm: React.FC = (props) => {
     const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
+    // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
-    const handleSubmit = ( values: any, {resetForm}: any) => {
-        resetForm();
+    const handleSubmit = ( values: FormikValues, {resetForm}: any) => {
 
         console.log('registerForm submit', values);
+
+        // resetForm();
+
     }
 
     const renderEyeIcon = () => {
@@ -77,39 +79,82 @@ export const RegisterForm: React.FC = () => {
     }
 
     return <>
-        <Formik 
-            initialValues={initialValues}
-            validationSchema={schema}
-            onSubmit={handleSubmit}
-        >
+    <Formik
+        initialValues={initialValues}
+        validationSchema={schema}
+        onSubmit={handleSubmit}
+    >
+            {/* <Form onSubmit={formik.handleSubmit}> */}
             <RegForm>
                 <div>
-                    <NameField 
-                        // InputLabelProps={{ shrink: true }}
-                        type='text' name='name'
-                    />    
-                    <ErrorMessage name='name'></ErrorMessage>
+                    <Field type='name' name='name' component={NameField}/>
+                    <ErrorMessage name='name' component='div'></ErrorMessage>
                 </div>
                 <div>
-                    <EmailField type='email' name='email'/>
+                    <Field type='email' name='email' component={EmailField}/>
                     <ErrorMessage name='email'></ErrorMessage>
                 </div>
                 <div>
-                    <PasswordField 
-                        type={isEyeOpen ? 'text' : 'password'}
+                    <Field 
+                        type={!isEyeOpen ? 'password' : 'text'} 
                         name='password' 
-                        InputProps={{ endAdornment: (
-                            renderEyeIcon()
-                        )}}
+                        component={PasswordField} 
+                        InputProps={{ endAdornment: (renderEyeIcon())}}
                     />
                     <ErrorMessage name='password'></ErrorMessage>
                 </div>
                 <div>
-                    {/* <SubmitButton type="submit">Register</SubmitButton> */}
-                    <button type="submit">Register</button>
+                    <SubmitButton type="submit">Register</SubmitButton>
+                    {/* <button type="submit">Register</button> */}
                     {/* <ButtonBase>Already have an account?</ButtonBase> */}
                 </div>
             </RegForm>
+            
         </Formik>
     </>
+
+    // return <Formik
+    //     initialValues={initialValues}
+    //     validationSchema={schema}
+    //     onSubmit={handleSubmit}
+    // >
+    //     <Form >
+    //         <label htmlFor='nameField'>
+    //             <Field
+    //                 id="nameField"
+    //                 name="name"
+    //                 placeholder="Name"
+    //                 type="text"
+    //                 component={NameField}
+    //             />
+                
+    //             <ErrorMessage name="name" component="span"/>
+    //         </label>
+    //         <label htmlFor="emailField" >
+    //             <Field
+    //                 id="emailField"
+    //                 name="email"
+    //                 placeholder="Email"
+    //                 type="email"
+    //                 component={EmailField}
+    //             />
+
+    //             <ErrorMessage name="email" component="span"/>
+    //         </label>
+    //         <label htmlFor="passField">
+
+    //             <Field
+    //                 id="passField"
+    //                 name="password"
+    //                 placeholder="Password"
+    //                 type='password'
+    //                 component={PasswordField}
+    //             />
+
+    //             <ErrorMessage name="password" component="span"/>
+    //         </label>
+    //         <button type="submit"> Register </button>
+    //     </Form>
+    // </Formik>
+
 }

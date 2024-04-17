@@ -2,8 +2,9 @@ import { Button, TextField } from "@mui/material";
 import { styled } from "@mui/system";
 import { Form } from "formik";
 import React from "react";
+import { FormTextField } from "./FormTextField";
 
-export const RegForm: React.FC<{ children?: React.ReactNode }> = styled(Form)(({theme}) =>({
+export const RegForm: React.FC<{ children?: React.ReactNode, onSubmit?:any }> = styled(Form)(({theme}) =>({
         // backgroundColor: 'red',
         display: 'flex',
         flexDirection: 'column',
@@ -16,7 +17,7 @@ export const RegForm: React.FC<{ children?: React.ReactNode }> = styled(Form)(({
         // }
 }));
 
-export const NameField = styled(TextField)(({theme})=>({
+export const NameField = styled(FormTextField)(({theme})=>({
     // paddingLeft: '',
     '& div': {
         paddingLeft: '14px',
@@ -31,12 +32,10 @@ export const NameField = styled(TextField)(({theme})=>({
     '& div input': {
         paddingLeft: '10px',
         fontSize: '12px'        
-    },
-    '&:hover': {
     }
-})) as typeof TextField;
+})) as typeof FormTextField;
 
-export const EmailField = styled(TextField)(({theme})=>({
+export const EmailField = styled(FormTextField)(({theme})=>({
     '& div': {
         paddingLeft: '14px',
     },
@@ -50,10 +49,10 @@ export const EmailField = styled(TextField)(({theme})=>({
     '& div input': {
         paddingLeft: '10px',
         fontSize: '12px'        
-    },
-})) as typeof TextField;
+    }
+})) as typeof FormTextField;
 
-export const PasswordField = styled(TextField)(({theme})=>({
+export const PasswordField = styled(FormTextField)(({theme})=>({
     fontSize: '12px',
     '& div': {
         paddingLeft: '14px',
@@ -69,8 +68,8 @@ export const PasswordField = styled(TextField)(({theme})=>({
     '& div input': {
         paddingLeft: '10px',
         fontSize: '12px'
-    },
-})) as typeof TextField;
+    }
+})) as typeof FormTextField;
 
 export const SubmitButton = styled(Button)(({theme})=>({
 
