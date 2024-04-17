@@ -3,7 +3,8 @@ import { CustomIcon } from "./styled";
 
 type Props = {
     iconName: Object,
-    sx?: Object
+    sx?: Object,
+    onClick?: () => void
 }
 
 export const Icon = ({iconName, sx}: Props) => {
