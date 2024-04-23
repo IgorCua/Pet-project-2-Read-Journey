@@ -1,10 +1,18 @@
 // import styled from "@emotion/styled";
 // import { Container, styled } from "@mui/material";
 // import Button from '@mui/material/Button';
+import { PhoneImg } from "../../components/PhoneImg/PhoneImg";
 import { Icon } from "../../components/icon/Icon";
 import { RegisterForm } from "../../components/registerForm/RegisterForm";
 import { Section } from "../../components/section/Section";
-import { ContainerMain, ContainerSecondary, DecorationContainer } from "./styled";
+import { 
+    ContainerMain, 
+    ContainerSecondary, 
+    DecorationContainer,
+    Header,
+    IconContainer,
+    Span
+} from "./styled";
 
 export const RegisterPage = () => {
 
@@ -12,11 +20,14 @@ export const RegisterPage = () => {
         <Section>
             <DecorationContainer>
             <ContainerMain>
-                <Icon iconName='#icon-logo' sx={{width: '42px', height: '17px'}}/>
+                <IconContainer>
+                    <Icon iconName='#icon-logo' sx={{width: '42px', height: '17px'}}/>
+                </IconContainer>
+                <Header>Expand your mind, reading <Span>a book</Span></Header>
                 <RegisterForm/>
             </ContainerMain>
             <ContainerSecondary>
-
+                <PhoneImg/>
             </ContainerSecondary>
             </DecorationContainer>
         </Section>

@@ -1,3 +1,4 @@
+import parts from './webpack.parts'
 var path = require('path');
 // const HtmlWebpackPlugin = require('html-webpack-plugin');
 var ESLintPlugin = require('eslint-webpack-plugin');
@@ -20,7 +21,11 @@ module.exports = {
                     }
                 }
             },
-
+            {
+                test: /\.(png|jpg)$/,
+                type: "asset/resource",
+                // parser: { dataUrlCondition: { maxSize: 10000 } },
+            },
             //  {
             //     enforce: 'pre',
             //     test: /\.(ts|tsx)$/,

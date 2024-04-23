@@ -18,6 +18,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColorOptions {
     textMain?: string;
     textSecondary?: string;
+    bgWhite?: string;
     bg1?: string;
     bg2?: string;
     bg3?: string;
@@ -30,6 +31,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColor {
     textMain: string;
     textSecondary: string;
+    bgWhite: string;
     bg1: string;
     bg2: string;
     bg3: string;
@@ -82,6 +84,7 @@ declare module '@mui/material/styles/createPalette' {
 type CustomTeme = {
   textMain: string,
   textSecondary: string,
+  bgWhite: string,
   bg1: string,
   bg2: string,
   bg3: string,
@@ -95,6 +98,7 @@ type CustomTeme = {
 const customTheme: CustomTeme = {
   textMain: '#F9F9F9',
   textSecondary: '#686868',
+  bgWhite: '#F9F9F9',
   bg1: 'rgba(227, 227, 227, 0.30)',
   bg2: '#262626',
   bg3: '#1F1F1F',
@@ -122,6 +126,7 @@ export const theme = createTheme({
     custom: {
       textMain: '#F9F9F9',
       textSecondary: '#686868',
+      bgWhite: '#F9F9F9',
       bg1: 'rgba(227, 227, 227, 0.30)',
       bg2: '#262626',
       bg3: '#1F1F1F',
@@ -145,8 +150,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           padding: '12px 29px',
-          // backgroundColor: theme.custom.buttonBgWhite,
-          backgroundColor: 'grey',
+          backgroundColor: customTheme.bgWhite,
+          // backgroundColor: 'grey',
           borderRadius: '30px',
           textTransform: 'none',
 
@@ -155,12 +160,38 @@ export const theme = createTheme({
           fontWeight: '700',
           lineHeight: `calc(18 / 14)`,
           letterSpacing: '0.28px',
-          color: 'black'
+          color: 'black',
+
+          '&:hover': {
+            backgroundColor: customTheme.bg1
+          }
         },
         colorPrimary: {
 
         }
 
+      }
+    },
+    MuiButtonBase:{
+      styleOverrides: {
+        // root: {
+        //   height: '15px',
+        //   fontFamily: 'Gilroy'
+        // }
+      }
+    },
+    MuiTouchRipple: {
+      styleOverrides:{
+        root: {
+          padding: '0px'
+        }
+      }
+    },
+    MuiContainer: {
+      styleOverrides: {
+        root: {
+          padding: '0px'
+        }
       }
     },
     MuiFormControl: {
@@ -183,6 +214,7 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
+          // padding: '22px 22px',
           // width: '100%',
           backgroundColor: customTheme.bg2,
           // '&:focus': {
@@ -190,17 +222,18 @@ export const theme = createTheme({
           // }
         },
         input: {
-          paddingLeft: '65px',
+          // paddingLeft: '65px',
+          // padding: '22px 22px',
 
           color: customTheme.textMain,
           border: 'none',
 
-          '&::placeholder': {
-            color: customTheme.textSecondary,
-            opacity: '1',
-            fontSize: '14px',
+          // '&::placeholder': {
+          //   color: customTheme.textSecondary,
+          //   opacity: '1',
+          //   fontSize: '14px',
 
-          },
+          // },
           '&:-webkit-autofill': {
             // backgroundColor: customTheme.textSecondary,
             // color: 'yellow',
