@@ -6,8 +6,8 @@ const customStyles = {
         fontFamily: '-apple-system, BlinkMacSystemFont, Gilroy, Poppins, sans-serif',
         'WebkitFontSmoothing': 'antialiased',
         'MozOsxFontSmoothing': 'grayscale',
-        '-ms-overflow-style': 'none',  /* IE and Edge */
-        'scrollbar-width': 'none',  /* Firefox */
+        'msOverflowStyle': 'none',  /* IE and Edge */
+        'scrollbarWidth': 'none',  /* Firefox */
 
         backgroundColor: '#141414',
 

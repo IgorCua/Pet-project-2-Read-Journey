@@ -48,7 +48,7 @@ export const List = styled('ul')(({theme})=>({
         position: 'relative'
     },
 
-    '& li:nth-child(-n + 2)': {
+    '& li:nth-of-type(-n + 2)': {
         marginBottom: '8px',
 
         [theme.breakpoints.up('tablet')]: {
@@ -132,7 +132,7 @@ export const PasswordField = styled(FormTextField)(({theme})=>({
         paddingLeft: '14px',
         verticalAlign: 'baseline',
     },
-    '& div:nth-child(1)::before': {
+    '& div:nth-of-type(1)::before': {
         content: '"Password:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
