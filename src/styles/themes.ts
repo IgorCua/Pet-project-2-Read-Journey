@@ -142,7 +142,7 @@ export const theme = createTheme({
       mobile: 260,
       tablet: 768,
       laptop: 1024,
-      desktop: 1440,
+      desktop: 1280,
     },
   },
   components: {

@@ -15,6 +15,7 @@ import {
 } from './styled';
 import { Icon } from '../icon/Icon';
 import React, { useState } from 'react';
+import { theme } from '../../styles/themes';
 
 interface InitialValuesInterface {
     name: string,
@@ -50,12 +51,12 @@ const initialValues: InitialValuesInterface = {
     password: ''
 }
 
-export const RegisterForm: React.FC = (props) => {
+export const RegisterForm: React.FC = () => {
     const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
     // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
     const handleSubmit = ( values: FormikValues, {resetForm}: any) => {
-
+        
         console.log('registerForm submit', values);
 
         // resetForm();
@@ -68,17 +69,29 @@ export const RegisterForm: React.FC = (props) => {
             ?   <InputAdornment position='end' onClick={() => setIsEyeOpen(false)}>
                     <Icon 
                         iconName={'#icon-eye-opened'} 
-                        sx={{width: '15px', height: '15px', cursor: 'pointer'}}
+                        sx={{
+                            width: '15px', 
+                            height: '15px', 
+                            cursor: 'pointer', 
+                            [theme.breakpoints.up('tablet')]:{
+                                width: '20px', height: '20px'
+                            }}}
                         aria-label="toggle password visibility"
-                        onClick={() => {console.log('click'); setIsEyeOpen(false)}}
+                        onClick={() => setIsEyeOpen(false)}
                     />
                 </InputAdornment>
             :   <InputAdornment position='end' onClick={() => setIsEyeOpen(true)}>
                     <Icon 
                         iconName={'#icon-eye-closed'} 
-                        sx={{width: '15px', height: '15px', cursor: 'pointer'}}
+                        sx={{
+                            width: '15px', 
+                            height: '15px', 
+                            cursor: 'pointer', 
+                            [theme.breakpoints.up('tablet')]:{
+                                width: '20px', height: '20px'
+                            }}}
                         aria-label="toggle password visibility"
-                        onClick={() => {console.log('click'); setIsEyeOpen(true)}}
+                        onClick={() => setIsEyeOpen(true)}
                     />
                 </InputAdornment>   
             

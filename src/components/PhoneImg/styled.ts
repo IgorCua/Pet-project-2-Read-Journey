@@ -21,6 +21,10 @@ export const Image = styled('img')(({theme}) => ({
     backgroundPosition: 'center',
     backgroundSize: 'cover',
     
+    [theme.breakpoints.up('desktop')]: {
+        width: '405px',
+        top: '80px'
+    }
 //    [theme.breakpoints.up('mobile')]: {
 //     backgroundImage: 'url(/assets/images/iPhone-15-Black-mobile-1x.png)',
 //     // backgroundImage: `-webkit-image-set(

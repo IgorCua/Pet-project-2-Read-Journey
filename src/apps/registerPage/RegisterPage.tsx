@@ -11,6 +11,7 @@ import {
     DecorationContainer,
     Header,
     IconContainer,
+    IconHeader,
     Span
 } from "./styled";
 
@@ -22,6 +23,7 @@ export const RegisterPage = () => {
             <ContainerMain>
                 <IconContainer>
                     <Icon iconName='#icon-logo' sx={{width: '42px', height: '17px'}}/>
+                    <IconHeader>Read Journey</IconHeader>
                 </IconContainer>
                 <Header>Expand your mind, reading <Span>a book</Span></Header>
                 <RegisterForm/>
