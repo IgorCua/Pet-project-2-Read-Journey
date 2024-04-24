@@ -8,9 +8,16 @@ import booksSlice from './books/slice';
 
 const store = configureStore({
     reducer: {
-        authSlice: authSlice,
-        booksSlice: booksSlice
-    }
+        auth: authSlice,
+        books: booksSlice
+    },
+    middleware: getDefaultMiddleware => 
+        getDefaultMiddleware({
+            serializableCheck: false
+            // serializableCheck: {
+            //     // ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+            // }
+        })
 });
 
 export default store;

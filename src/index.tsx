@@ -6,15 +6,24 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import store from './redux/store';
 import { Provider } from 'react-redux';
+import { CustomGlobalStyles } from './styles/Global';
+import { ThemeProvider } from '@mui/system';
+import { theme } from './styles/themes';
+// import { emotionTheme, theme } from './styles/themes';
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
+
 root.render(
     <Provider store={store}>
         <React.StrictMode>
             <BrowserRouter basename='/'>
-                <App />
+                <ThemeProvider theme={theme}>
+                    {/* <CssBaseline/> */}
+                    <CustomGlobalStyles/>
+                    <App />
+                </ThemeProvider>
             </BrowserRouter>
         </React.StrictMode>
     </Provider>

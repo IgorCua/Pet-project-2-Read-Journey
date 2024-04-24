@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { 
     userGetCurrent, 
     userRefreshToken, 
@@ -32,7 +32,14 @@ const initialState = {
     error: null,
     isLoading: false,
     // userBooks: null
-} satisfies IInitialState as IInitialState
+} satisfies IInitialState as IInitialState;
+
+type SignupRes = {
+    email: string,
+    name: string,
+    token: string,
+    refreshToken: string
+}
 
 const authSlice = createSlice({
     name: 'auth',
@@ -40,35 +47,41 @@ const authSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(userSignup.fulfilled, (state, action) => {
+            .addCase(userSignup.fulfilled, (state, action: PayloadAction<any>) => {
+                state.isLoggedIn = true;
+                state.isLoading = false;
+                state.isError = false;
+                state.error = null;
+                state.name = action.payload.data.name;
+                state.email = action.payload.data.email;
+                state.token = action.payload.data.token;
+                state.refreshToken = action.payload.data.refreshToken;
+            })
+            .addCase(userSignin.fulfilled, (state, action: PayloadAction<any>) => {
+                state.isLoggedIn = true;
+                state.isLoading = false;
+                state.isError = false
+                state.error = null;
+                state.name = action.payload.data.name;
+                state.email = action.payload.data.email;
+                state.token = action.payload.data.token;
+                state.refreshToken = action.payload.data.refreshToken;
+            })
+            .addCase(userGetCurrent.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
                 state.isLoading = false;
                 state.isError = false
                 state.error = null;
                 state = {...state, ...action.payload};
             })
-            .addCase(userSignin.fulfilled, (state, action) => {
+            .addCase(userRefreshToken.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
                 state.isLoading = false;
                 state.isError = false
                 state.error = null;
                 state = {...state, ...action.payload};
             })
-            .addCase(userGetCurrent.fulfilled, (state, action) => {
-                state.isLoggedIn = true;
-                state.isLoading = false;
-                state.isError = false
-                state.error = null;
-                state = {...state, ...action.payload};
-            })
-            .addCase(userRefreshToken.fulfilled, (state, action) => {
-                state.isLoggedIn = true;
-                state.isLoading = false;
-                state.isError = false
-                state.error = null;
-                state = {...state, ...action.payload};
-            })
-            .addCase(userSignOut.fulfilled, (state, action) => {
+            .addCase(userSignOut.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = false;
                 state.isLoading = false;
                 state.isError = false
