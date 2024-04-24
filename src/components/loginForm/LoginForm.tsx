@@ -1,38 +1,35 @@
 import { InputAdornment } from '@mui/material';
-import { ErrorMessage, Field, Formik, FormikValues } from 'formik';
+import { Field, Formik} from 'formik';
 import * as Yup from 'yup';
 import { 
     EmailField, 
-    NameField, 
     PasswordField, 
-    RegForm, 
+    LoginFormContainer, 
     SubmitButton,
     CustomErrorMessage,
-    InputContainer,
     LinkButton,
-    ButtonContainer,
     List
 } from './styled';
 import { Icon } from '../icon/Icon';
 import React, { useState } from 'react';
 import { theme } from '../../styles/themes';
 import { useDispatch } from 'react-redux';
-import { userSignup } from '../../redux/auth/operations';
+import { userSignin } from '../../redux/auth/operations';
 import store from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 
 interface InitialValuesInterface {
-    name: string,
+    // name: string,
     email: string,
     password: string
 }
 
 const schema = Yup.object().shape({
-    name: Yup
-        .string()
-        .min(3, 'Name must be at least 3 characters')
-        .max(64, 'Name must be less than 65 characters')
-        .required('Name is a required field'),
+    // name: Yup
+    //     .string()
+    //     .min(3, 'Name must be at least 3 characters')
+    //     .max(64, 'Name must be less than 65 characters')
+    //     .required('Name is a required field'),
     email: Yup
         .string()
         .min(3, 'Email must be at least 3 characters')
@@ -50,38 +47,36 @@ const schema = Yup.object().shape({
 });
 
 const initialValues: InitialValuesInterface = {
-    name: '',
+    // name: '',
     email: '',
     password: ''
 }
 
 type FormValues = {
-    name: string,
+    // name: string,
     email: string,
     password: string
 }
 
 export type AppDispatch = typeof store.dispatch;
 
-export const RegisterForm: React.FC = () => {
+export const LoginForm: React.FC = () => {
     const [isEyeOpen, setIsEyeOpen] = useState<boolean>(false);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-
     // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
     const handleSubmit = ( values: FormValues, {resetForm}: any) => {
         
         console.log('registerForm submit', values);
-        dispatch(userSignup(values)).then((res) => {
-            console.log("register res: ", res);
+        dispatch(userSignin(values)).then((res) => {
             if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
         // resetForm();
     }
 
     const handleLinkButton = () => {
-        navigate('/login', {replace: true});
+        navigate('/register', {replace: true});
     }
 
     const renderEyeIcon = () => {
@@ -126,12 +121,8 @@ export const RegisterForm: React.FC = () => {
         onSubmit={handleSubmit}
     >
             {/* <Form onSubmit={formik.handleSubmit}> */}
-            <RegForm>
+            <LoginFormContainer>
                 <List>
-                    <li>
-                        <Field type='name' name='name' component={NameField}/>
-                        <CustomErrorMessage name='name' component='p'/>
-                    </li>
                     <li>
                         <Field type='email' name='email' component={EmailField}/>
                         <CustomErrorMessage name='email' component='p'/>
@@ -146,12 +137,11 @@ export const RegisterForm: React.FC = () => {
                         <CustomErrorMessage name='password' component='p'/>
                     </li>
                     <li>
-                        <SubmitButton type="submit">Registration</SubmitButton>
-                        <LinkButton type='button' onClick={handleLinkButton}>Already have an account?</LinkButton>
+                        <SubmitButton type="submit">Log in</SubmitButton>
+                        <LinkButton onClick={handleLinkButton} type='button'>Dont have an account?</LinkButton>
                     </li>
                 </List>
-            </RegForm>
-            
+            </LoginFormContainer>
         </Formik>
     </>
 

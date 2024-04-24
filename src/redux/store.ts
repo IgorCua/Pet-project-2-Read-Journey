@@ -10,7 +10,14 @@ const store = configureStore({
     reducer: {
         auth: authSlice,
         books: booksSlice
-    }
+    },
+    middleware: getDefaultMiddleware => 
+        getDefaultMiddleware({
+            serializableCheck: false
+            // serializableCheck: {
+            //     // ignoreActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+            // }
+        })
 });
 
 export default store;

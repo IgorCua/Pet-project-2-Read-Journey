@@ -5,7 +5,7 @@ import React, { ComponentProps } from "react";
 import { FormTextField } from "../materialUI/FormTextField";
 
 // : React.FC<{ children?: React.ReactNode, onSubmit?: any }>
-export const RegForm = styled(Form)(({theme}) =>({
+export const LoginFormContainer = styled(Form)(({theme}) =>({
         display: 'flex',
         flexDirection: 'column',
         // gap: '8px'
@@ -48,7 +48,7 @@ export const List = styled('ul')(({theme})=>({
         position: 'relative'
     },
 
-    '& li:nth-child(-n + 2)': {
+    '& li:nth-child(-n + 1)': {
         marginBottom: '8px',
 
         [theme.breakpoints.up('tablet')]: {
@@ -73,32 +73,6 @@ export const ButtonContainer = styled(Container)(({theme})=>({
     alignItems: 'center',
     gap: '14px'
 }));
-
-export const NameField = styled(FormTextField)(({theme})=>({
-    '& div': {
-        paddingLeft: '14px',
-    },
-    '& div::before': {
-        content: '"Name:"',
-        fontSize: '12px',
-        color: theme.palette.custom.textSecondary,
-
-        [theme.breakpoints.up('tablet')]: {
-            fontSize: '14px',
-        },
-    },
-    '& div input': {
-        padding: '14px 14px 14px 10px',
-        // paddingLeft: '10px',
-        fontSize: '12px',
-        
-        [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
-
-            fontSize: '14px',
-        },
-    }
-})) as typeof FormTextField;
 
 export const EmailField = styled(FormTextField)(({theme})=>({
     '& div': {

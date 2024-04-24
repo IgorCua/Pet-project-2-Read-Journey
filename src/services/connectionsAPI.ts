@@ -73,8 +73,17 @@ interface AddBookInterface {
 
 type UserBooksByType = '--' | 'unread' | 'in-progress' | 'done';
 
+type SignupRes = {
+    email: string,
+    name: string,
+    token: string,
+    refreshToken: string
+} | {
+    message: string
+}
+
 export const usersSignupAPI = (data: IUserSighup) => {
-    return axios.post('/users/signup', data).then(res => {
+    return axios.post<SignupRes>('/users/signup', data).then(res => {
         return res;
     });
 };

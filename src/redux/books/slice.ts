@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
 // import { PendingAction, RejectedAction } from "../actionTypes"
 import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction } from "../reduxTypes";
@@ -33,19 +33,19 @@ const booksSlice = createSlice({
     reducers: {},
     extraReducers(builder) {
         builder
-            .addCase(booksGetRecommended.fulfilled, (state, action) => {
+            .addCase(booksGetRecommended.fulfilled, (state, action: PayloadAction<any>) => {
                 state.recommendedBooks = action.payload;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksAddBook.fulfilled, (state, action) => {
+            .addCase(booksAddBook.fulfilled, (state, action: PayloadAction<any>) => {
                 state.userBooks = [...state.userBooks, action.payload];
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksAddById.fulfilled, (state, action) => {
+            .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
                 state.userBooks = [...state.userBooks, action.payload];
                 state.isLoading = false;
                 state.isError = false;

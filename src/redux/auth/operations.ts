@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit"
+import { AsyncThunk, createAsyncThunk } from "@reduxjs/toolkit"
 import { 
     usersGetCurrentAPI, 
     usersSigninAPI, 
@@ -59,7 +59,7 @@ export const userSignin = createAsyncThunk(
     async (data: ISignin, thunkApi) => {
         try{
             const res = await usersSigninAPI(data);
-            return res
+            return res;
         }
         catch (error: unknown) {
             return thunkApi.rejectWithValue(error);
