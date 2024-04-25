@@ -100,14 +100,13 @@ export const EmailField = styled(FormTextField)(({theme})=>({
 })) as typeof FormTextField;
 
 export const PasswordField = styled(FormTextField)(({theme})=>({
-    // fontSize: '22px',
+    paddingLeft: '14px',
+    display: 'flex',
+    flexDirection: 'row',
 
-    '& div': {
-        paddingLeft: '14px',
-        verticalAlign: 'baseline',
-    },
-    '& div:nth-of-type(1)::before': {
+    '&:first-of-type::before': {
         content: '"Password:"',
+        alignSelf: 'center',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
 
@@ -115,14 +114,13 @@ export const PasswordField = styled(FormTextField)(({theme})=>({
             fontSize: '14px',
         },
     },
-    '& div input': {
-        padding: '14px 14px 14px 10px',
+    '& input': {
+        padding: '14px 10px 14px 10px',
+
         fontSize: '12px',
-        verticalAlign: 'baseline',
-        alignSelf: 'center',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            padding: '16px 5px 16px 10px',
             
             fontSize: '14px',
         },
@@ -190,5 +188,3 @@ export const LinkButton = styled(ButtonBase)(({theme})=>({
         textDecorationLine: 'underline'
     }
 })) as typeof ButtonBase;
-
-export {}

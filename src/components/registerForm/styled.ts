@@ -1,8 +1,9 @@
 import { Button, ButtonBase, Container, TextField } from "@mui/material";
-import { fontSize, margin, positions, styled, width } from "@mui/system";
+import { display, fontSize, margin, positions, styled, width } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
 import React, { ComponentProps } from "react";
 import { FormTextField } from "../materialUI/FormTextField";
+import zIndex from "@mui/material/styles/zIndex";
 
 // : React.FC<{ children?: React.ReactNode, onSubmit?: any }>
 export const RegForm = styled(Form)(({theme}) =>({
@@ -126,14 +127,13 @@ export const EmailField = styled(FormTextField)(({theme})=>({
 })) as typeof FormTextField;
 
 export const PasswordField = styled(FormTextField)(({theme})=>({
-    // fontSize: '22px',
+    paddingLeft: '14px',
+    display: 'flex',
+    flexDirection: 'row',
 
-    '& div': {
-        paddingLeft: '14px',
-        verticalAlign: 'baseline',
-    },
-    '& div:nth-of-type(1)::before': {
+    '&:first-of-type::before': {
         content: '"Password:"',
+        alignSelf: 'center',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
 
@@ -141,14 +141,12 @@ export const PasswordField = styled(FormTextField)(({theme})=>({
             fontSize: '14px',
         },
     },
-    '& div input': {
-        padding: '14px 14px 14px 10px',
+    '& input': {
+        padding: '14px 10px 14px 10px',
         fontSize: '12px',
-        verticalAlign: 'baseline',
-        alignSelf: 'center',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            padding: '16px 5px 16px 10px',
             
             fontSize: '14px',
         },

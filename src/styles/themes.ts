@@ -214,17 +214,15 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          // padding: '22px 22px',
-          // width: '100%',
+          // padding: '0',
+          // paddingRight: '26px',
+          width: '100%',
           backgroundColor: customTheme.bg2,
           // '&:focus': {
           //   // backgroundColor: '#262626'
           // }
         },
         input: {
-          // paddingLeft: '65px',
-          // padding: '22px 22px',
-
           color: customTheme.textMain,
           border: 'none',
 
@@ -248,7 +246,10 @@ export const theme = createTheme({
     },
     MuiOutlinedInput:{
       styleOverrides:{
-        notchedOutline:{
+        root: {
+          paddingRight: '16px'
+        },
+        notchedOutline: {
           // borderBlockColor: 'green',
           border: 'none',
         }

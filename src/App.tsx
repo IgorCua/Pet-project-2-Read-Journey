@@ -1,6 +1,6 @@
 import './assets/fonts/poppins/poppinsFont.css';
 import './assets/fonts/gilroy/gilroyFont.css';
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 // import logo from './logo.svg';
 import './App.css';
 import { Header } from './apps/header/Header';
@@ -8,18 +8,29 @@ import { PrivateRoute, PublicRoute } from './services/routes';
 import { RegisterPage } from './apps/registerPage/RegisterPage';
 import { LoginPage } from './apps/loginPage/LoginPage';
 import { RecommendedPage } from './apps/recommendedPage/RecommendedPage';
+import { selectAuthIsLoggedIn } from './redux/auth/selectors';
+import { useSelector } from 'react-redux';
+import { useEffect } from 'react';
 
 function App() {
+  const isLoggedIn = useSelector(selectAuthIsLoggedIn);
+  const navigate = useNavigate();
+
   return (
     <Routes>
       <Route path='/register' element={<PublicRoute component={<RegisterPage/>}/>}/>
       <Route path='/login' element={<PublicRoute component={<LoginPage/>}/>}/>
-      <Route path='/' element={<PrivateRoute component={<Header/>}/>}>
-        <Route path='recommended' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-        <Route path='library' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-        <Route path='reading' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-      </Route>
-      <Route path='*' element={<Navigate to='/register' replace={true}/>}/>
+      {/* {isLoggedIn &&  */}
+        <Route element={<PrivateRoute component={<Header/>}/>}>
+          <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
+          <Route path='/library' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
+          <Route path='/reading' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
+        </Route>
+      {/* } */}
+      <Route path='*' element={<Navigate 
+          to={isLoggedIn ? '/recommended' : '/register'} 
+          replace={true}/>
+      }/>
     </Routes>
   );
 }
