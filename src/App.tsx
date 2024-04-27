@@ -10,23 +10,22 @@ import { LoginPage } from './apps/loginPage/LoginPage';
 import { RecommendedPage } from './apps/recommendedPage/RecommendedPage';
 import { selectAuthIsLoggedIn } from './redux/auth/selectors';
 import { useSelector } from 'react-redux';
-import { useEffect } from 'react';
+import { LibraryPage } from './apps/libraryPage/LibraryPage';
 
 function App() {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-  const navigate = useNavigate();
 
   return (
     <Routes>
       <Route path='/register' element={<PublicRoute component={<RegisterPage/>}/>}/>
       <Route path='/login' element={<PublicRoute component={<LoginPage/>}/>}/>
-      {/* {isLoggedIn &&  */}
+      {isLoggedIn && 
         <Route element={<PrivateRoute component={<Header/>}/>}>
           <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-          <Route path='/library' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
+          <Route path='/library' element={<PrivateRoute component={<LibraryPage/>}/>}/>
           <Route path='/reading' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
         </Route>
-      {/* } */}
+      }
       <Route path='*' element={<Navigate 
           to={isLoggedIn ? '/recommended' : '/register'} 
           replace={true}/>

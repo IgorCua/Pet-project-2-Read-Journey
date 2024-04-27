@@ -1,25 +1,13 @@
-import { Button, ButtonBase, Container, TextField } from "@mui/material";
-import { display, fontSize, margin, positions, styled, width } from "@mui/system";
+import { Button, ButtonBase, Container } from "@mui/material";
+import { styled } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
-import React, { ComponentProps } from "react";
 import { FormTextField } from "../materialUI/FormTextField";
-import zIndex from "@mui/material/styles/zIndex";
 
 // : React.FC<{ children?: React.ReactNode, onSubmit?: any }>
 export const RegForm = styled(Form)(({theme}) =>({
         display: 'flex',
         flexDirection: 'column',
-        // gap: '8px'
-        // '& div': {
-        //     width: '100%'
-        // },
-        // '& input': {
-        //     width: '100%'
-        // }
-        // '& div:first-of-type:nth-child(-n + 1)': {
-        //     // marginBottom: '8px'
-        //     backgroundColor: 'red'
-        // }
+    
         [theme.breakpoints.up('tablet')]: {
             width: '472px'
         }
@@ -28,22 +16,14 @@ export const RegForm = styled(Form)(({theme}) =>({
 export const InputContainer = styled(Container)(({theme})=>({
     position: 'relative',
     
-    // '&'
     backgroundColor: theme.palette.custom.bg2,
 
     borderRadius: '12px',
-    // '& :nth-child(4)': {
-    //     backgroundColor: 'red'
-    // }
+  
 }));
 
 export const List = styled('ul')(({theme})=>({
     position: 'relative',
-    
-    // '&'
-    // backgroundColor: theme.palette.custom.bg2,
-
-    // borderRadius: '12px',
 
     '& li': {
         position: 'relative'
@@ -90,7 +70,6 @@ export const NameField = styled(FormTextField)(({theme})=>({
     },
     '& div input': {
         padding: '14px 14px 14px 10px',
-        // paddingLeft: '10px',
         fontSize: '12px',
         
         [theme.breakpoints.up('tablet')]: {
@@ -117,7 +96,7 @@ export const EmailField = styled(FormTextField)(({theme})=>({
     '& div input': {
         padding: '14px 14px 14px 10px',
         fontSize: '12px',
-        
+
         [theme.breakpoints.up('tablet')]: {
             padding: '16px 14px 16px 10px',
             
@@ -142,7 +121,7 @@ export const PasswordField = styled(FormTextField)(({theme})=>({
         },
     },
     '& input': {
-        padding: '14px 10px 14px 10px',
+        padding: '14px 14px 14px 10px',
         fontSize: '12px',
 
         [theme.breakpoints.up('tablet')]: {
@@ -178,10 +157,6 @@ export const SubmitButton = styled(Button)(({theme})=>({
     lineHeight: '18px', /* 128.571% */
     letterSpacing: '0.28px',
 
-    '&:hover': {
-        // backgroundColor: 'grey'
-    },
-
     [theme.breakpoints.up('tablet')]: {
         padding: '16px 54px',
         fontSize: '20px',
@@ -214,5 +189,3 @@ export const LinkButton = styled(ButtonBase)(({theme})=>({
         textDecorationLine: 'underline'
     }
 })) as typeof ButtonBase;
-
-export {}

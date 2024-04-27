@@ -1,24 +1,13 @@
-import { Button, ButtonBase, Container, TextField } from "@mui/material";
-import { fontSize, margin, positions, styled, width } from "@mui/system";
+import { Button, ButtonBase, Container } from "@mui/material";
+import { styled } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
-import React, { ComponentProps } from "react";
 import { FormTextField } from "../materialUI/FormTextField";
 
 // : React.FC<{ children?: React.ReactNode, onSubmit?: any }>
 export const LoginFormContainer = styled(Form)(({theme}) =>({
         display: 'flex',
         flexDirection: 'column',
-        // gap: '8px'
-        // '& div': {
-        //     width: '100%'
-        // },
-        // '& input': {
-        //     width: '100%'
-        // }
-        // '& div:first-of-type:nth-child(-n + 1)': {
-        //     // marginBottom: '8px'
-        //     backgroundColor: 'red'
-        // }
+     
         [theme.breakpoints.up('tablet')]: {
             width: '472px'
         }
@@ -27,23 +16,14 @@ export const LoginFormContainer = styled(Form)(({theme}) =>({
 export const InputContainer = styled(Container)(({theme})=>({
     position: 'relative',
     
-    // '&'
     backgroundColor: theme.palette.custom.bg2,
 
     borderRadius: '12px',
-    // '& :nth-child(4)': {
-    //     backgroundColor: 'red'
-    // }
 }));
 
 export const List = styled('ul')(({theme})=>({
     position: 'relative',
     
-    // '&'
-    // backgroundColor: theme.palette.custom.bg2,
-
-    // borderRadius: '12px',
-
     '& li': {
         position: 'relative'
     },
@@ -56,15 +36,18 @@ export const List = styled('ul')(({theme})=>({
         }
     },
 
-    '& li:last-child':{
-        marginTop: '20px',
+    '& li:nth-of-type(2)':{
+        marginBottom: '73px',
+        
+        [theme.breakpoints.up('tablet')]: {
+            marginBottom: '147px',
+        }
+    },
+
+    '& li:nth-of-type(3)':{
         display: 'flex',
         alignItems: 'center',
         gap: '14px',
-
-        [theme.breakpoints.up('tablet')]: {
-            marginTop: '82px',
-        }
     }
 }));
 
@@ -151,10 +134,6 @@ export const SubmitButton = styled(Button)(({theme})=>({
     fontWeight: '700',
     lineHeight: '18px', /* 128.571% */
     letterSpacing: '0.28px',
-
-    '&:hover': {
-        // backgroundColor: 'grey'
-    },
 
     [theme.breakpoints.up('tablet')]: {
         padding: '16px 54px',

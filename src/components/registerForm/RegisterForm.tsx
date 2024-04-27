@@ -120,12 +120,11 @@ export const RegisterForm: React.FC = () => {
     }
 
     return <>
-    <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-    >
-            {/* <Form onSubmit={formik.handleSubmit}> */}
+        <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+        >
             <RegForm>
                 <List>
                     <li>
@@ -151,7 +150,6 @@ export const RegisterForm: React.FC = () => {
                     </li>
                 </List>
             </RegForm>
-            
         </Formik>
     </>
 

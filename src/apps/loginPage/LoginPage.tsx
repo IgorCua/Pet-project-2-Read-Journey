@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Section } from "../../components/section/Section";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
 import { ContainerMain, ContainerSecondary, DecorationContainer, Header, IconContainer, IconHeader, Span } from "./styled";
 import { Icon } from "../../components/icon/Icon";
 import { LoginForm } from "../../components/loginForm/LoginForm";
@@ -14,7 +14,7 @@ export const LoginPage = () => {
     // }
     
     return (
-        <Section>
+        <PageWrapper>
             <DecorationContainer>
             <ContainerMain>
                 <IconContainer>
@@ -28,6 +28,6 @@ export const LoginPage = () => {
                 <PhoneImg/>
             </ContainerSecondary>
             </DecorationContainer>
-        </Section>
+        </PageWrapper>
     )
 }

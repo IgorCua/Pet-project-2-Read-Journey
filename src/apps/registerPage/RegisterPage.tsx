@@ -4,7 +4,7 @@
 import { PhoneImg } from "../../components/PhoneImg/PhoneImg";
 import { Icon } from "../../components/icon/Icon";
 import { RegisterForm } from "../../components/registerForm/RegisterForm";
-import { Section } from "../../components/section/Section";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
 import { 
     ContainerMain, 
     ContainerSecondary, 
@@ -18,7 +18,7 @@ import {
 export const RegisterPage = () => {
 
     return (
-        <Section>
+        <PageWrapper>
             <DecorationContainer>
             <ContainerMain>
                 <IconContainer>
@@ -32,6 +32,6 @@ export const RegisterPage = () => {
                 <PhoneImg/>
             </ContainerSecondary>
             </DecorationContainer>
-        </Section>
+        </PageWrapper>
     )
 }

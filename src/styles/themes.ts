@@ -167,7 +167,7 @@ export const theme = createTheme({
           }
         },
         colorPrimary: {
-
+          
         }
 
       }
@@ -226,6 +226,9 @@ export const theme = createTheme({
           color: customTheme.textMain,
           border: 'none',
 
+          padding: '14px 10px',
+          fontSize: '12px',
+
           // '&::placeholder': {
           //   color: customTheme.textSecondary,
           //   opacity: '1',
@@ -253,6 +256,28 @@ export const theme = createTheme({
           // borderBlockColor: 'green',
           border: 'none',
         }
+      }
+    },
+    MuiAppBar:{
+      styleOverrides:{
+        root:{
+          backgroundColor: customTheme.bg3
+        }
+      }
+    },
+    MuiMenu:{
+      styleOverrides:{
+        paper:{
+          opacity: '0.5'
+        },
+        
+      }
+    },
+    MuiBackdrop:{
+      styleOverrides:{
+        root:{
+          backgroundColor: 'rgba(20, 20, 20, 0.60)',
+        },
       }
     }
   },
