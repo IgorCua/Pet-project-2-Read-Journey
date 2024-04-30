@@ -1,5 +1,5 @@
 import { ButtonBase } from "@mui/material";
-import { display, styled } from "@mui/system";
+import { display, height, styled, width } from "@mui/system";
 
 export const NavContainer = styled('div')(({theme})=> ({
     paddingTop: '34px',
@@ -10,30 +10,65 @@ export const NavContainer = styled('div')(({theme})=> ({
     flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems:'center',
-    // position: 'relative',
-    // opacity: '1',
 
     '& button:first-of-type': {
-        // top: '30px',
         right: '30px',
         width: '28px', 
         height: '28px',
         alignSelf: 'flex-end',
-        // position:'absolute'
     },
 
     backgroundColor: theme.palette.custom.bg2
 }));
 
 export const Nav = styled('nav')(({theme})=> ({
-    padding: '20px 20px',
+    width: '76px',
     display: 'flex',
-    flexDirection:'column',
-    // opacity: '1 !important',
-    // position:'absolute',
+    flexWrap: 'wrap',
 
-    // backgroundColor: theme.palette.custom.textMain
+    '& a': {
+        color: theme.palette.custom.textMain,
+        textDecoration: 'none',
+
+        '& p': {
+            marginRight: '2px',
+            marginLeft: '2px',
+        },
+
+        '& div': {
+            marginTop: '4px',
+            width: '100%',
+            height: '4px',
+            display: 'none',
+            transitionDuration: '250ms',
+            transitionProperty: 'display',
+
+            backgroundColor: theme.palette.custom.utilBlue,
+            borderRadius: '4px'
+        },
+
+        [theme.breakpoints.down('tablet')]: {
+            borderBottom: `8px solid transparent`,
+        }
+    },
+    '& a.active': {
+        borderBottom: 'none',
+    },
+    '& a.active div': {
+        transitionDuration: '250ms',
+        transitionProperty: 'display',
+
+        display: 'block'
+    },
+
+    [theme.breakpoints.down('tablet')]: {
+        gap: '20px',
+    }
 }));
+
+export const LinkContainer = styled(`div`)(({theme})=> ({
+
+}))
 
 export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     width: '91px',

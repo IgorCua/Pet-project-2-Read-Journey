@@ -7,13 +7,9 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 import { theme } from "../../styles/themes";
 import { Icon } from "../../components/icon/Icon";
 import { LogOffBtn, Nav, NavContainer } from "./styled";
@@ -32,6 +28,7 @@ export function Header() {
     const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorElNav(event.currentTarget);
     };
+
     const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
         // setAnchorElUser(event.currentTarget);
     };
@@ -42,6 +39,7 @@ export function Header() {
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
+        // setIsModalOpen(!isModalOpen);
     }
     // const handleCloseUserMenu = () => {
     //     // setAnchorElUser(null);
@@ -50,7 +48,6 @@ export function Header() {
     return (
         <>
         <PageWrapper>
-
             <AppBar position="static" sx={{ 
                 paddingRight: '13px', 
                 paddingLeft: '20px', 
@@ -146,51 +143,24 @@ export function Header() {
                                         <Icon 
                                             iconName='#icon-close' 
                                             sx={{width: '28px', height: '28px'}} 
-                                            onClick={() => setIsModalOpen(false)}
                                         />
                                     </IconButton>
                                     <Nav>
-                                        <NavLink to={'/recommended'} onClick={handleModal}>Home</NavLink>
-                                        <NavLink to={'/library'} onClick={handleModal}>My library</NavLink>
+                                        <NavLink to={'/recommended'} onClick={() => setIsModalOpen(false)}>
+                                            <p>Home</p>
+                                            <div/>
+                                        </NavLink>
+                                        <NavLink to={'/library'} onClick={() => setIsModalOpen(false)}>
+                                            <p>My library</p>
+                                            <div/>
+                                        </NavLink>
                                     </Nav>
                                     <LogOffBtn>Log out</LogOffBtn>
                                 </NavContainer>
                             </Backdrop>
-                            {/* <Nav>
-                                <NavLink to={'/recommended'}>Home</NavLink>
-                                <NavLink to={'/library'}>My library</NavLink>
-                            </Nav> */}
-                            {/* <Menu
-                                id="menu-appbar"
-                                anchorEl={anchorElNav}
-                                anchorOrigin={{
-                                    vertical: 'bottom',
-                                    horizontal: 'right',
-                                }}
-                                keepMounted
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'left',
-                                }}
-                                open={Boolean(anchorElNav)}
-                                onClose={handleCloseNavMenu}
-                                sx={{
-                                    // [theme.breakpoints.up('mobile')]: {
-                                    //     display:'none'
-                                    // }
-                                }}
-                            >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={handleCloseNavMenu}>
-                                        <Typography textAlign="center">{page}</Typography>
-                                    </MenuItem>
-                                ))}
-                            </Menu> */}
-                            
                         </Box>
                     </Toolbar>
                 </Container>
-                                
             </AppBar>
             <Outlet/>
         </PageWrapper>
