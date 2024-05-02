@@ -1,5 +1,29 @@
 import { ButtonBase } from "@mui/material";
-import { display, height, styled, width } from "@mui/system";
+import { display, height, lineHeight, padding, positions, styled, width } from "@mui/system";
+
+// export const HeaderWrapper = styled
+
+export const UserContainer = styled('div')(({theme}) => ({
+    width: '35px',
+    height: '35px',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+
+    color: theme.palette.custom.textMain,
+    backgroundColor: theme.palette.custom.bg2,
+
+    border: `1px solid ${theme.palette.custom.buttonBorderGrey}`,
+    borderRadius: '50%',
+
+    // [theme.breakpoints.up('mobile')]: {
+    //     marginRight:'10px'
+    // },
+    
+    // [theme.breakpoints.up('tablet')]: {
+    //     marginRight:'16px'
+    // }
+}));
 
 export const NavContainer = styled('div')(({theme})=> ({
     paddingTop: '34px',
@@ -11,6 +35,9 @@ export const NavContainer = styled('div')(({theme})=> ({
     justifyContent: 'space-between',
     alignItems:'center',
 
+    backgroundColor: theme.palette.custom.bg2,
+
+
     '& button:first-of-type': {
         right: '30px',
         width: '28px', 
@@ -18,7 +45,13 @@ export const NavContainer = styled('div')(({theme})=> ({
         alignSelf: 'flex-end',
     },
 
-    backgroundColor: theme.palette.custom.bg2
+    [theme.breakpoints.up('tablet')]: {
+        padding: '0',
+        height: 'auto',
+        width: 'auto',
+        flexDirection:'row',
+        backgroundColor: theme.palette.custom.bg3
+    }    
 }));
 
 export const Nav = styled('nav')(({theme})=> ({
@@ -27,18 +60,28 @@ export const Nav = styled('nav')(({theme})=> ({
     flexWrap: 'wrap',
 
     '& a': {
-        color: theme.palette.custom.textMain,
+        color: theme.palette.custom.textSecondary,
         textDecoration: 'none',
+        position:'relative',
 
         '& p': {
             marginRight: '2px',
             marginLeft: '2px',
+
+            fontSize: '14px',
+            lineHeight: '18px',
+
+            [theme.breakpoints.up('tablet')]: {
+                fontSize: '16px',
+                // lineHeight: '20px',
+            }
         },
 
         '& div': {
-            marginTop: '4px',
+            position: 'absolute',
+            // marginTop: '4px',
             width: '100%',
-            height: '4px',
+            height: '3px',
             display: 'none',
             transitionDuration: '250ms',
             transitionProperty: 'display',
@@ -48,22 +91,41 @@ export const Nav = styled('nav')(({theme})=> ({
         },
 
         [theme.breakpoints.down('tablet')]: {
-            borderBottom: `8px solid transparent`,
+            // borderBottom: `8px solid transparent`,
+        },
+
+        [theme.breakpoints.up('tablet')]: {
+            // borderBottom: `8px solid transparent`,
         }
     },
     '& a.active': {
         borderBottom: 'none',
+        color: theme.palette.custom.textMain
     },
     '& a.active div': {
-        transitionDuration: '250ms',
-        transitionProperty: 'display',
+        
+        // transitionDuration: '250ms',
+        // transitionProperty: 'display',
+        cursor: 'auto',
+        display: 'block',
 
-        display: 'block'
+        [theme.breakpoints.up('mobile')]: {
+            bottom:'-7px'
+        },
+        [theme.breakpoints.up('tablet')]: {
+            bottom:'-10px',
+        }
     },
 
     [theme.breakpoints.down('tablet')]: {
         gap: '20px',
-    }
+    },
+    [theme.breakpoints.up('tablet')]: {
+        // height: 'auto',
+        width: 'auto',
+        flexDirection:'row',
+        gap: '32px'
+    }  
 }));
 
 export const LinkContainer = styled(`div`)(({theme})=> ({
@@ -74,5 +136,9 @@ export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     width: '91px',
     padding: '10px 20px',
     borderRadius: '30px',
-    border: '1px solid rgba(249, 249, 249, 0.20)'
+    border: '1px solid rgba(249, 249, 249, 0.20)',
+
+    [theme.breakpoints.down('tablet')]: {
+        // display: 'none'
+    }
 }))

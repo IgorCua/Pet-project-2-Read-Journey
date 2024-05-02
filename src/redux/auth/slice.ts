@@ -82,11 +82,15 @@ const authSlice = createSlice({
                 state = {...state, ...action.payload};
             })
             .addCase(userSignOut.fulfilled, (state, action: PayloadAction<any>) => {
+                state._id = null;
+                state.name = null;
+                state.email = null;
+                state.token = null;
+                state.refreshToken = null;
                 state.isLoggedIn = false;
                 state.isLoading = false;
                 state.isError = false
                 state.error = null;
-                state = {...state, ...initialState};
             })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),

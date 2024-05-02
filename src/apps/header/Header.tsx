@@ -12,30 +12,33 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import { theme } from "../../styles/themes";
 import { Icon } from "../../components/icon/Icon";
-import { LogOffBtn, Nav, NavContainer } from "./styled";
+import { 
+    LogOffBtn, 
+    Nav, 
+    NavContainer, 
+    UserContainer 
+} from "./styled";
 import React, { useState } from "react";
 import { CustomBackdrop } from "../../components/customBackdrop/CustomBackdrop";
 import { Backdrop } from "@mui/material";
+import { useDispatch } from "react-redux";
+import store from "../../redux/store";
+import { userSignOut } from "../../redux/auth/operations";
+import { useSelector } from "react-redux";
+import { selectName } from "../../redux/auth/selectors";
+import { display } from "@mui/system";
 
 const pages = ['Home', 'My library'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
+export type AppDispatch = typeof store.dispatch;
+
 export function Header() {
-    const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+    // const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
-
-    const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
-        setAnchorElNav(event.currentTarget);
-    };
-
-    const handleOpenUserMenu = (event: React.MouseEvent<HTMLElement>) => {
-        // setAnchorElUser(event.currentTarget);
-    };
-
-    const handleCloseNavMenu = () => {
-        setAnchorElNav(null);
-    };
+    const userName = useSelector(selectName);
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
@@ -45,28 +48,55 @@ export function Header() {
     //     // setAnchorElUser(null);
     // };
 
+    const handleLogOut = () => {
+        console.log('log out')
+        dispatch(userSignOut());
+    }
+
     return (
         <>
         <PageWrapper>
             <AppBar position="static" sx={{ 
-                paddingRight: '13px', 
+                paddingRight: '20px', 
                 paddingLeft: '20px', 
                 borderRadius: '15px', 
                 overflow: 'hidden',
+                [theme.breakpoints.up('tablet')]: {
+                    padding: '16px',
+                }
             }}>
                 <Container>
-                    <Toolbar disableGutters>
-                        <Box sx={{flexGrow: 1}}>
+                    <Toolbar 
+                        disableGutters 
+                        sx={{
+                            justifyContent: 'space-between',
+                            [theme.breakpoints.up('tablet')]: {
+                                flexDirection: 'row'
+                            }
+                        }}>
+
+                        {/* logo box */}
+                        <Box sx={{
+                            flexGrow: 1,
+                            display: 'flex',
+
+                            [theme.breakpoints.up('tablet')]: {
+                                flexGrow: 0,
+                                gap: '4px'
+                            }
+                        }}>
                             {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                             <Icon iconName='#icon-logo' sx={{width: '32px', height: '17px'}}/>
                             <Typography
-                                variant="h6"
+                                // variant="p"
                                 noWrap
-                                component="a"
-                                href="#app-bar-with-responsive-menu"
+                                // display="inline"
+                                // component="a"
+                                // href="#app-bar-with-responsive-menu"
                                 sx={{
-                                    mr: 2,
-                                    display: { xs: 'none', md: 'flex' },
+                                    // mr: 2,
+                                    // display: { xs: 'none', md: 'flex' },
+                                    // display: 'inline-block',
                                     fontWeight: 700,
                                     lineHeight: '18px', /* 100% */
                                     letterSpacing: '0.36px',
@@ -75,41 +105,74 @@ export function Header() {
                                     textTransform: 'uppercase',
                                     [theme.breakpoints.down('laptop')]:{
                                         display:'none'
+                                    },
+                                    [theme.breakpoints.up('laptop')]:{
+                                        fontWeight: '700',
+                                        display: "inline"
                                     } 
                                 }}
                             >
                                 Reading journey
                             </Typography>
                         </Box>
-                            
+
+                        {/* nav box */}
                         <Box sx={{ 
-                            flexGrow: 1, display: 'flex', 
+                            flexGrow: 0,
+                            display: 'flex', 
+
                             [theme.breakpoints.down('tablet')]:{
-                                display:'none'
-                            } 
+                                display:'none',
+                                alignSelf: 'flex-end'
+                            },
+                            
+                            [theme.breakpoints.up('tablet')]:{
+                                marginLeft: '100px'
+                            },
+                            [theme.breakpoints.up('laptop')]:{
+                                marginLeft: '-45px'
+                            }  
                         }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={handleCloseNavMenu}
-                                    sx={{ 
-                                        // my: 2, 
-                                        color: 'white', 
-                                        display: 'block', 
-                                        backgroundColor: 'grey' 
-                                    }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
+                            <NavContainer>
+                                <Nav>
+                                    <NavLink to={'/recommended'} onClick={() => setIsModalOpen(false)}>
+                                        <p>Home</p>
+                                        <div/>
+                                    </NavLink>
+                                    <NavLink to={'/library'} onClick={() => setIsModalOpen(false)}>
+                                        <p>My library</p>
+                                        <div/>
+                                    </NavLink>
+                                </Nav>
+                            </NavContainer>
                         </Box>
+                        
+                        {/* user icon, log out btn */}
                         <Box sx={{ flexGrow: 0 }}>
-                            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                            <IconButton sx={{ 
+                                p: 0,
+                                [theme.breakpoints.up('mobile')]: {
+                                    marginRight:'10px'
+                                },
+                                
+                                [theme.breakpoints.up('tablet')]: {
+                                    marginRight:'16px'
+                                }
+                            }}>
+                                <UserContainer>
+                                    <p>L</p>
+                                </UserContainer>
                             </IconButton>
+                            
+                            <LogOffBtn 
+                                onClick={handleLogOut}
+                                sx={{[theme.breakpoints.down('tablet')]: {display: 'none'}}}
+                            >Log out</LogOffBtn>
                         </Box>
+                        
+                        {/* mobile nav with backdrop */}
                         <Box sx={{ 
-                            display: 'flex',
+                            // display: 'flex',
                             [theme.breakpoints.up('tablet')]: {
                                 display:'none',
                             } 
@@ -122,13 +185,20 @@ export function Header() {
                                 // onClick={handleOpenNavMenu}
                                 onClick={() => setIsModalOpen(true)}
                                 color="inherit"
+                                sx={{padding: '0'}}
                             >
                                 <Icon iconName='#icon-burger-menu' sx={{width: '28px', height: '28px'}}/>
                             </IconButton>
+
                             <Backdrop 
                                 open={isModalOpen}
                                 onClick={handleModal}
-                                sx={{justifyContent: 'flex-end'}}
+                                sx={{
+                                    justifyContent: 'flex-end',
+                                    [theme.breakpoints.up('tablet')]: {
+                                        display:'none',
+                                    } 
+                                }}
                             >
                                 <NavContainer>
                                     <IconButton
@@ -155,7 +225,9 @@ export function Header() {
                                             <div/>
                                         </NavLink>
                                     </Nav>
-                                    <LogOffBtn>Log out</LogOffBtn>
+                                    <LogOffBtn 
+                                        sx={{[theme.breakpoints.up('tablet')]: {display: 'none'}}} 
+                                        onClick={handleLogOut}>Log out</LogOffBtn>
                                 </NavContainer>
                             </Backdrop>
                         </Box>

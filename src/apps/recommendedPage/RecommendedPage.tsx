@@ -1,7 +1,7 @@
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper"
+
 export const RecommendedPage = () => {
     return (
-        <div>
-            <p>Recommended Page</p>
-        </div>
+        <div></div>
     )
 }

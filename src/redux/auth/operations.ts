@@ -45,6 +45,10 @@ export const userSignup = createAsyncThunk(
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
             const res = await usersSignupAPI(data);
+            const {token}:any = res.data;
+            
+            axiosToken.set(token);
+
             return res;
         }
         catch (error: unknown) {
@@ -59,6 +63,10 @@ export const userSignin = createAsyncThunk(
     async (data: ISignin, thunkApi) => {
         try{
             const res = await usersSigninAPI(data);
+            const {token}:any = res.data;
+            
+            axiosToken.set(token);
+
             return res;
         }
         catch (error: unknown) {
