@@ -28,25 +28,16 @@ import { useSelector } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
 import { display } from "@mui/system";
 
-const pages = ['Home', 'My library'];
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-
 export type AppDispatch = typeof store.dispatch;
 
 export function Header() {
-    // const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
     const userName = useSelector(selectName);
     const dispatch = useDispatch<AppDispatch>();
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
-        // setIsModalOpen(!isModalOpen);
     }
-    // const handleCloseUserMenu = () => {
-    //     // setAnchorElUser(null);
-    // };
 
     const handleLogOut = () => {
         console.log('log out')
@@ -85,18 +76,10 @@ export function Header() {
                                 gap: '4px'
                             }
                         }}>
-                            {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                             <Icon iconName='#icon-logo' sx={{width: '32px', height: '17px'}}/>
                             <Typography
-                                // variant="p"
                                 noWrap
-                                // display="inline"
-                                // component="a"
-                                // href="#app-bar-with-responsive-menu"
                                 sx={{
-                                    // mr: 2,
-                                    // display: { xs: 'none', md: 'flex' },
-                                    // display: 'inline-block',
                                     fontWeight: 700,
                                     lineHeight: '18px', /* 100% */
                                     letterSpacing: '0.36px',
@@ -172,7 +155,6 @@ export function Header() {
                         
                         {/* mobile nav with backdrop */}
                         <Box sx={{ 
-                            // display: 'flex',
                             [theme.breakpoints.up('tablet')]: {
                                 display:'none',
                             } 

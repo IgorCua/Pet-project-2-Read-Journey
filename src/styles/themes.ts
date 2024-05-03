@@ -279,6 +279,22 @@ export const theme = createTheme({
           backgroundColor: 'rgba(20, 20, 20, 0.60)',
         },
       }
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: '0',
+          position: 'inherit'
+        }
+      }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: '0',
+          position: 'inherit'
+        }
+      }
     }
   },
   typography: {

@@ -103,5 +103,8 @@
     <symbol id='icon-border' viewBox="0 0 44 4" fill="none">
         <path d="M2 2H40" stroke="#4F92F7" stroke-linecap="round"/>
     </symbol>
+    <symbol id='icon-arrow-right' fill="none" viewBox="0 0 24 24">
+        <path stroke="#F9F9F9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m14 17 5-5-5-5M19 12H5"/>
+    </symbol>
   </defs>
 </svg>

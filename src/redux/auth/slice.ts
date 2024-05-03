@@ -93,7 +93,10 @@ const authSlice = createSlice({
                 state.error = null;
             })
             .addMatcher(
-                (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
+                (action): action is PendingAction => (
+                    action.type.startsWith('auth') 
+                    && action.type.endsWith('/pending')
+                ),
                 (state, _) => {
                     state.isLoading = true;
                     state.isError = false;
@@ -101,7 +104,10 @@ const authSlice = createSlice({
                 }
             )
             .addMatcher(
-                (action): action is RejectedAction => action.type.startsWith('auth') && action.type.endsWith('/rejected'),
+                (action): action is RejectedAction => (
+                    action.type.startsWith('auth') 
+                    && action.type.endsWith('/rejected')
+                ),
                 (state, action) => {
                     state.isLoading = false;
                     state.isError = true;

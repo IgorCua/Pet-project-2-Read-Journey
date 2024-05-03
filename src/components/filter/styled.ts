@@ -1,16 +1,21 @@
 import { ButtonBase, TextField } from "@mui/material";
-import { styled } from "@mui/system";
+import { styled, width } from "@mui/system";
 import { FormTextField } from "../materialUI/FormTextField";
 
-export const Container = styled('div')(({theme}) => ({
-
+export const Form = styled('form')(({theme}) => ({
+    marginBottom: '20px'
 }));
 
-export const Form = styled('form')(({theme}) => ({
-    
+export const FormHeader = styled('h3')(({theme})=>({
+    marginLeft: '14px',
+    marginBottom:'8px',
+    fontSize: '10px',
+    color: theme.palette.custom.textMain,
 }));
 
 export const InputTitle = styled(TextField)(({theme})=>({
+    marginBottom: '8px',
+
     '& div': {
         paddingLeft: '14px',
     },
@@ -36,10 +41,13 @@ export const InputTitle = styled(TextField)(({theme})=>({
 })) as typeof TextField;
 
 export const InputAuthor = styled(TextField)(({theme})=>({
+    marginBottom: '20px',
     '& div': {
         paddingLeft: '14px',
+        // width: '30px'
     },
     '& div::before': {
+        width: '111px',
         content: '"The author:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
@@ -61,11 +69,25 @@ export const InputAuthor = styled(TextField)(({theme})=>({
 })) as typeof TextField;
 
 export const Submit = styled(ButtonBase)(({theme}) => ({
-    
+    // width: '91px',
+    padding: '10px 20px',
+    borderRadius: '30px',
+    border: '1px solid rgba(249, 249, 249, 0.20)',
+
+    color: theme.palette.custom.textMain,
+
+    '&:hover': {
+        backgroundColor: theme.palette.custom.bg2
+    }
 }));
 
 export const WorkoutContainer = styled('div')(({theme}) => ({
-    
+    padding: '20px 20px',
+    marginTop: '10px',
+
+    backgroundColor: theme.palette.custom.bg2,
+
+    borderRadius: '30px',
 }));
 
 export const LinksContainer = styled('div')(({theme}) => ({
