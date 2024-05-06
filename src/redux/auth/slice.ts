@@ -27,7 +27,7 @@ const initialState = {
     email: null,
     token: null,
     refreshToken: null,
-    isLoggedIn: true,
+    isLoggedIn: false,
     isError: false,
     error: null,
     isLoading: false,

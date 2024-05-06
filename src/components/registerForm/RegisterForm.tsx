@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { theme } from '../../styles/themes';
 import { useDispatch } from 'react-redux';
 import { userSignup } from '../../redux/auth/operations';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 
 interface InitialValuesInterface {

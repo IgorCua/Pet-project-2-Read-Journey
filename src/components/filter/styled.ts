@@ -76,6 +76,9 @@ export const Submit = styled(ButtonBase)(({theme}) => ({
 
     color: theme.palette.custom.textMain,
 
+    transitionProperty: 'background-color',
+    transitionDuration: '250ms',
+
     '&:hover': {
         backgroundColor: theme.palette.custom.bg2
     }

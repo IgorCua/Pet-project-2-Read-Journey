@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import store from './redux/store';
+import { persistor, store } from './redux/store';
 import { Provider } from 'react-redux';
 import { CustomGlobalStyles } from './styles/Global';
 import { ThemeProvider } from '@mui/system';
 import { theme } from './styles/themes';
+import { PersistGate } from 'redux-persist/integration/react';
 // import { emotionTheme, theme } from './styles/themes';
 
 const root = ReactDOM.createRoot(
@@ -17,15 +18,17 @@ const root = ReactDOM.createRoot(
 
 root.render(
     <Provider store={store}>
-        <React.StrictMode>
-            <BrowserRouter basename='/'>
-                <ThemeProvider theme={theme}>
-                    {/* <CssBaseline/> */}
-                    <CustomGlobalStyles/>
-                    <App />
-                </ThemeProvider>
-            </BrowserRouter>
-        </React.StrictMode>
+        <PersistGate loading={null} persistor={persistor}>
+            <React.StrictMode>
+                <BrowserRouter basename='/'>
+                    <ThemeProvider theme={theme}>
+                        {/* <CssBaseline/> */}
+                        <CustomGlobalStyles/>
+                        <App />
+                    </ThemeProvider>
+                </BrowserRouter>
+            </React.StrictMode>
+        </PersistGate>
     </Provider>
 );
 

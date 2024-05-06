@@ -22,7 +22,7 @@ import React, { useState } from "react";
 import { CustomBackdrop } from "../../components/customBackdrop/CustomBackdrop";
 import { Backdrop } from "@mui/material";
 import { useDispatch } from "react-redux";
-import store from "../../redux/store";
+import { store } from "../../redux/store";
 import { userSignOut } from "../../redux/auth/operations";
 import { useSelector } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
@@ -155,6 +155,8 @@ export function Header() {
                         
                         {/* mobile nav with backdrop */}
                         <Box sx={{ 
+                            zIndex: 1000,
+
                             [theme.breakpoints.up('tablet')]: {
                                 display:'none',
                             } 

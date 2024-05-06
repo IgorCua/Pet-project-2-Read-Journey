@@ -1,5 +1,5 @@
-import { ButtonBase, List } from "@mui/material";
-import { display, styled } from "@mui/system";
+import { ButtonBase, IconButton, List } from "@mui/material";
+import { borderRadius, display, styled } from "@mui/system";
 
 export const Container = styled('div')({
     marginTop: '10px',
@@ -80,9 +80,32 @@ export const Span = styled('span')(({theme}) => ({
 }));
 
 export const LinkButton = styled(ButtonBase)(({theme}) => ({
+    padding: '3px 5px',
     textDecoration: 'underline',
     textUnderlinePosition: 'under',
     fontSize: '14px',
     lineHeight: '18px',
-    color: theme.palette.custom.textSecondary
+    color: theme.palette.custom.textSecondary,
+
+    borderRadius: '4px',
+
+    transitionProperty: 'background-color',
+    transitionDuration: '250ms',
+
+    '&:hover': {
+        backgroundColor: theme.palette.custom.bg3
+    }
+}));
+
+export const IconWrapper = styled(IconButton)(({theme}) => ({
+    padding: '0',
+    width: '32px',
+    height: '32px',
+    // display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    color: theme.palette.custom.textMain,
+
+    border: `1px solid ${theme.palette.custom.buttonBorderGrey}`
 }));

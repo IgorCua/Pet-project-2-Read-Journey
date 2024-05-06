@@ -37,7 +37,7 @@ export const NavContainer = styled('div')(({theme})=> ({
 
     backgroundColor: theme.palette.custom.bg2,
 
-
+    // zIndex: -100,
     '& button:first-of-type': {
         right: '30px',
         width: '28px', 
