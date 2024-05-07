@@ -6,7 +6,7 @@ import {
     usersRefreshTokenAPI,
     usersSignOutAPI 
 } from "../../services/connectionsAPI"
-import axios from "axios";
+import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
     name: string, 
@@ -19,35 +19,17 @@ interface ISignin {
     password: string
 }
 
-export const axiosToken = {
-    set(token: string) {
-        if(token) {
-            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-        } 
-        // else {
-        //     localStorage.getItem('persist:auth').then(data => {
-        //         const storageToken = JSON.parse(JSON.parse(data).token);
-                
-        //         if(data) axios.defaults.headers.common.Authorization = `Bearer ${storageToken}`;
-
-        //         return;
-        //     });
-        // }
-    },
-    unset() {
-      axios.defaults.headers.common.Authorization = ``;
-    },
-};
-
 export const userSignup = createAsyncThunk(
     'auth/signup',
 
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
             const res = await usersSignupAPI(data);
-            const {token}:any = res.data;
-            
+            const {token}: any = res.data;
+
             axiosToken.set(token);
+
+            // console.log(axios.defaults);
 
             return res;
         }
@@ -64,8 +46,9 @@ export const userSignin = createAsyncThunk(
         try{
             const res = await usersSigninAPI(data);
             const {token}:any = res.data;
-            
+
             axiosToken.set(token);
+            // console.log(axios.defaults);
 
             return res;
         }
@@ -80,6 +63,7 @@ export const userGetCurrent = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await usersGetCurrentAPI();
             return res;
         }

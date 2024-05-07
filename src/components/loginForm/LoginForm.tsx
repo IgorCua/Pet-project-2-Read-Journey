@@ -68,7 +68,7 @@ export const LoginForm: React.FC = () => {
 
     const handleSubmit = ( values: FormValues, {resetForm}: any) => {
         
-        console.log('registerForm submit', values);
+        // console.log('registerForm submit', values);
         dispatch(userSignin(values)).then((res) => {
             if(res.meta.requestStatus === 'fulfilled') resetForm();
         });

@@ -1,11 +1,13 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { booksAddBookAPI, booksAddByIdAPI, booksDeleteReadingAPI, booksGetBookInfoAPI, booksGetRecommendedAPI, booksGetUserBooksAPI, booksRemoveBookAPI, booksSaveEndOfReadingAPI, booksSaveReadingStartAPI } from "../../services/connectionsAPI";
+import axios from "axios";
+import { axiosToken } from "../../services/axiosSettings";
 
 interface GetRecommendedInterface {
     title?: string,
     author?: string,
-    page: number | string | null,
-    limit: number | string | null
+    page?: number | string | null,
+    limit?: number | string | null
 }
 
 interface AddBookInterface {
@@ -16,11 +18,13 @@ interface AddBookInterface {
 
 type GetUserBooksInterface = '--' | 'unread' | 'in-progress' | 'done';
 
-export const booksGetRecommended = createAsyncThunk(
+export const booksGetRecommended: any = createAsyncThunk(
     'books/getRecommended',
 
     async (data: GetRecommendedInterface, { rejectWithValue }) => {
         try{
+            console.log(axios.defaults);
+            await axiosToken.set();
             const res = await booksGetRecommendedAPI(data);
             return res;
         }
@@ -35,6 +39,7 @@ export const booksAddBook = createAsyncThunk(
 
     async (data: AddBookInterface, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksAddBookAPI(data);
             return res;
         }
@@ -49,6 +54,7 @@ export const booksAddById = createAsyncThunk(
 
     async (data: string, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksAddByIdAPI(data);
             return res;
         }
@@ -63,6 +69,7 @@ export const booksRemoveBook = createAsyncThunk(
 
     async (data: string, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             await booksRemoveBookAPI(data);
             const userBooks = await booksGetUserBooksAPI('--');
             return userBooks;
@@ -78,6 +85,7 @@ export const booksGetUserBooks = createAsyncThunk(
 
     async (data: GetUserBooksInterface, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksGetUserBooksAPI(data);
             return res;
         }
@@ -92,6 +100,7 @@ export const booksSaveReadingStart = createAsyncThunk(
 
     async (data: {id: string, page: number}, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksSaveReadingStartAPI(data);
             return res;
         }
@@ -106,6 +115,7 @@ export const booksSaveEndOfReading = createAsyncThunk(
 
     async (data: {id: string, page: number}, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksSaveEndOfReadingAPI(data);
             return res;
         }
@@ -120,6 +130,7 @@ export const booksDeleteReading = createAsyncThunk(
 
     async (data: {bookId: string, readingId: string}, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksDeleteReadingAPI(data);
             return res;
         }
@@ -134,6 +145,7 @@ export const booksGetBookInfo = createAsyncThunk(
 
     async (data: string, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await booksGetBookInfoAPI(data);
             return res;
         }

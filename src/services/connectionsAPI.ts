@@ -29,8 +29,8 @@ interface IBooksAddBook {
 interface IBooksGetRecommended {
     title?: string,
     author?: string,
-    page: number | string | null
-    limit: number | string | null
+    page?: number | string | null
+    limit?: number | string | null
 }
 type PaginationResponse<T> = {
     results: T[],
@@ -114,8 +114,9 @@ export const usersSignOutAPI = () => {
 
 // create object success error responces
 
-export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-    return axios.get<any, PaginationResponse<Book>>('/users/signout', {params: data}).then(res => {
+// export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
+export const booksGetRecommendedAPI = (data: any) => {
+    return axios.get<any, PaginationResponse<Book>>('/books/recommend', data).then(res => {
         return res;
     });
 };
