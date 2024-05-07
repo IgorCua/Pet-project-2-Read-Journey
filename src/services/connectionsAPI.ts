@@ -114,9 +114,9 @@ export const usersSignOutAPI = () => {
 
 // create object success error responces
 
-// export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-export const booksGetRecommendedAPI = (data: any) => {
-    return axios.get<any, PaginationResponse<Book>>('/books/recommend', data).then(res => {
+export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
+// export const booksGetRecommendedAPI = (data: any) => {
+    return axios.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {
         return res;
     });
 };

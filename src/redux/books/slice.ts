@@ -34,7 +34,8 @@ const booksSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(booksGetRecommended.fulfilled, (state, action: PayloadAction<any>) => {
-                // state.recommendedBooks = action.payload;
+                state.recommendedBooks = action.payload.data;
+                // console.log
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
