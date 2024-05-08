@@ -23,7 +23,6 @@ export const booksGetRecommended: any = createAsyncThunk(
 
     async (data: GetRecommendedInterface, { rejectWithValue }) => {
         try{
-            console.log(axios.defaults);
             await axiosToken.set();
             const res = await booksGetRecommendedAPI(data);
             return res;

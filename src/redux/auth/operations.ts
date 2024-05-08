@@ -29,8 +29,6 @@ export const userSignup = createAsyncThunk(
 
             axiosToken.set(token);
 
-            // console.log(axios.defaults);
-
             return res;
         }
         catch (error: unknown) {
@@ -48,7 +46,6 @@ export const userSignin = createAsyncThunk(
             const {token}:any = res.data;
 
             axiosToken.set(token);
-            // console.log(axios.defaults);
 
             return res;
         }
@@ -92,6 +89,8 @@ export const userSignOut = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
+            localStorage.removeItem('persist:auth');
+            
             const res = await usersSignOutAPI();
             axiosToken.unset();
             return res;

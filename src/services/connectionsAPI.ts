@@ -82,6 +82,7 @@ type SignupRes = {
     message: string
 }
 
+// user connections
 export const usersSignupAPI = (data: IUserSighup) => {
     return axios.post<SignupRes>('/users/signup', data).then(res => {
         return res;
@@ -112,8 +113,8 @@ export const usersSignOutAPI = () => {
     });
 };
 
+// books connections
 // create object success error responces
-
 export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
 // export const booksGetRecommendedAPI = (data: any) => {
     return axios.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {

@@ -4,8 +4,15 @@ import { Filter } from "../../components/filter/Filter"
 import { Container, DescripotionList, IconWrapper, LinkButton, ListHeader, ListItemHeader, NumberDiv, Section, Span } from "./styled"
 import { Icon } from "../../components/icon/Icon"
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks"
+import { useNavigate } from "react-router-dom"
 
 export const RecommendedPage = () => {
+    const navigate = useNavigate();
+
+    const handleLinkClick = () => {
+        navigate('/library', {replace: true});
+    }
+
     return (
         <Container>
             <Section>
@@ -29,8 +36,8 @@ export const RecommendedPage = () => {
                         </ListItemHeader>
                     </ListItem>
                     <ListItem>
-                        <LinkButton>My library</LinkButton>
-                        <IconWrapper size="small" sx={{padding: '0'}}>
+                        <LinkButton onClick={handleLinkClick}>My library</LinkButton>
+                        <IconWrapper onClick={handleLinkClick} size="small" sx={{padding: '0'}}>
                             <Icon iconName={'#icon-arrow-right'} sx={{width: '24px', height: '24px'}}/>
                         </IconWrapper>
                     </ListItem>
