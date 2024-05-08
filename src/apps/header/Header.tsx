@@ -178,6 +178,7 @@ export function Header() {
                                 open={isModalOpen}
                                 onClick={handleModal}
                                 sx={{
+                                    minWidth: '280px',
                                     justifyContent: 'flex-end',
                                     [theme.breakpoints.up('tablet')]: {
                                         display:'none',

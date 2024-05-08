@@ -33,5 +33,6 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
 
 export const CardsContainer = styled('div')({
     display: 'flex',
-    gap: '20px'
+    gap: '20px',
+    justifyContent: 'center'
 });

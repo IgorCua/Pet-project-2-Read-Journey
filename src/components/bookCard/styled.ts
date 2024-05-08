@@ -2,6 +2,8 @@ import { Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
+    // minWidth:'112px',
+    // maxWidth: '137px',
     width: '137px',
     display: 'flex',
     flexWrap: 'wrap'
