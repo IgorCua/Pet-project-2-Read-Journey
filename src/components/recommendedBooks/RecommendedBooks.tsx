@@ -12,47 +12,60 @@ import { theme } from "../../styles/themes"
 
 type AppDispatch = typeof store.dispatch;
 
-type Request = {
+interface Request {
+    page: number,
     title?: string,
     author?: string,
-    page?: string | number,
-    limit?: string | number
+    limit?: number
 }
 
 export const RecommendedBooks = () => {
     const booksObj = useSelector(selectRecommendedBooks);
     const dispatch = useDispatch<AppDispatch>();
-    let req: Request = {}
+    let req: Request = {
+        page: booksObj ? booksObj.page : 1
+    }
+
+    const handlePageLimit = () => {
+        if(window.innerWidth < 768) {
+            req.limit = 2;
+            return
+        }
+        if(window.innerWidth < 1024) {
+            req.limit = 8;
+            return
+        }
+        if(window.innerWidth >= 1024) {
+            req.limit = 10;
+            return
+        }
+    }
 
     useEffect(()=>{
         if(!booksObj) {
-            if(window.innerWidth < 768) {
-                req.limit = 2;
-                dispatch(booksGetRecommended(req));
-                // event.target.reset();
-                return
-            }
-            if(window.innerWidth < 1024) {
-                req.limit = 8;
-                dispatch(booksGetRecommended(req));
-                // event.target.reset();
-                return
-            }
-            if(window.innerWidth >= 1024) {
-                req.limit = 10;
-                dispatch(booksGetRecommended(req));
-                // event.target.reset();
-                return
-            }
+            handlePageLimit();
+            dispatch(booksGetRecommended(req));
         }
     });
 
     const handleNextPageClick = () => {
-
+        if(booksObj){
+            if (req.page === booksObj.totalPages) return;
+            req.page += 1;
+            handlePageLimit();
+            dispatch(booksGetRecommended(req));
+        }
+        return
     }
 
     const handlePreviousPageClick = () => {
-
+        if(booksObj){
+            if (req.page === 1) return;
+            req.page -= 1 ;
+            handlePageLimit();
+            dispatch(booksGetRecommended(req));
+        }
+        return
     }
 
     const handleIconPreviousColor = () => {
@@ -76,7 +89,7 @@ export const RecommendedBooks = () => {
         <HeaderContainer>
             <Header>Recommended</Header>
             <Box sx={{display: 'flex', gap: '8px'}}>
-                <IconWrapper size="small" onClick={handlePreviousPageClick}>
+                <IconWrapper size="small" onClick={() => handlePreviousPageClick()}>
                     <Icon iconName={'#icon-chevron-left'} sx={{
                         width: '12px', 
                         height: '12px', 
@@ -84,9 +97,10 @@ export const RecommendedBooks = () => {
                         position: 'absolute',
                         left: '9px'
                         // color: '#fff'
-                    }}></Icon>
+                    }}
+                    ></Icon>
                 </IconWrapper>
-                <IconWrapper size="small" onClick={handleNextPageClick}>
+                <IconWrapper size="small" onClick={() => handleNextPageClick()}>
                     <Icon iconName={'#icon-chevron-right'} sx={{
                         width: '12px', 
                         height: '12px', 
