@@ -51,7 +51,6 @@ export const Filter = ({numOfInputs}: FilterProps) => {
             // event.target.reset();
             return
         }
-        // event.target.reset();
     }
 
     return <Form onSubmit={handleSubmit}>

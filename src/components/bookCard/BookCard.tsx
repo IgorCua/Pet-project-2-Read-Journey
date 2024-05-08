@@ -6,18 +6,18 @@ import { Icon } from "../icon/Icon"
 type Props = {
     cardType: 'recommended' | 'modal' | 'library',
     url: string,
-    header: string,
+    title: string,
     author: string,
     pages?: string
 }
 
-export const BookCard = ({cardType, url, header, author, pages}: Props) => {
+export const BookCard = ({cardType, url, title, author, pages}: Props) => {
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     return <Container>
         <Image src={url}/>
         <DescriptionContainer>
-            <Header>{header}</Header>
-            <Author>{author}</Author>
+            <Header noWrap>{title}</Header>
+            <Author noWrap>{author}</Author>
             {cardType === 'modal' && <Pages>{pages}</Pages>}
         </DescriptionContainer>
         {cardType === 'library' && 

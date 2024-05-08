@@ -2,6 +2,7 @@ import { IconButton } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const HeaderContainer = styled('div')(({theme}) => ({
+    marginBottom: '20px',
     display: 'flex',
     justifyContent: 'space-between',
     // alignItems: 'center',
@@ -29,3 +30,8 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
 
     border: `1px solid ${theme.palette.custom.buttonBorderGrey}`
 })) as typeof IconButton;
+
+export const CardsContainer = styled('div')({
+    display: 'flex',
+    gap: '20px'
+});
