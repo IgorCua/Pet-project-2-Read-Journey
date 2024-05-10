@@ -10,7 +10,7 @@ export const RecommendedPage = () => {
     const navigate = useNavigate();
 
     const handleLinkClick = () => {
-        navigate('/library', {replace: true});
+        navigate('/library');
     }
 
     return (
