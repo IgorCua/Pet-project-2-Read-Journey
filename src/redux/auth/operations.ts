@@ -24,10 +24,12 @@ export const userSignup = createAsyncThunk(
 
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
-            const res = await usersSignupAPI(data);
+            const res: any = await usersSignupAPI(data);
             const {token}: any = res.data;
 
             axiosToken.set(token);
+            
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
 
             return res;
         }
@@ -42,10 +44,12 @@ export const userSignin = createAsyncThunk(
 
     async (data: ISignin, thunkApi) => {
         try{
-            const res = await usersSigninAPI(data);
+            const res: any = await usersSigninAPI(data);
             const {token}:any = res.data;
 
             axiosToken.set(token);
+            // console.log('action', res)
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
 
             return res;
         }
@@ -75,7 +79,11 @@ export const userRefreshToken = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
-            const res = await usersRefreshTokenAPI();
+            const res: any = await usersRefreshTokenAPI();
+            // console.log(res)
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+            axiosToken.set(res.data.token);
+
             return res;
         }
         catch (error: unknown) {
@@ -90,10 +98,28 @@ export const userSignOut = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             localStorage.removeItem('persist:auth');
+            localStorage.removeItem('updateAccess');
             
             const res = await usersSignOutAPI();
             axiosToken.unset();
             return res;
+        }
+        catch (error: unknown) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const userLocalSignOut = createAsyncThunk(
+    'auth/localSignOut',
+
+    async ( _, { rejectWithValue }) => {
+        try{
+            localStorage.removeItem('persist:auth');
+            localStorage.removeItem('updateAccess');
+            
+            axiosToken.unset();
+            return null;
         }
         catch (error: unknown) {
             return rejectWithValue(error);

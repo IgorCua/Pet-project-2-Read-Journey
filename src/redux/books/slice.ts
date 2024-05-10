@@ -97,7 +97,9 @@ const booksSlice = createSlice({
                 }
             )
             .addMatcher(
-                (action): action is RejectedAction => action.type.startsWith('auth') && action.type.endsWith('/rejected'),
+                (action): action is RejectedAction => 
+                    action.type.startsWith('books') 
+                    && action.type.endsWith('/rejected'),
                 (state, action) => {
                     state.isLoading = false;
                     state.isError = true;

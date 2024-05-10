@@ -45,3 +45,9 @@ export const Author = styled(Typography)(({theme}) => ({
 export const Pages = styled(Typography)(({theme}) => ({
     // textOverflow: 'ellipsis'
 })) as typeof Typography;
+
+export const BackdropContainer = styled('div')(({theme}) => ({
+    padding: '16px 16px',
+
+    backgroundColor: theme.palette.custom.bg3
+}));

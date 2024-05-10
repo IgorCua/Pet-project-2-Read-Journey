@@ -9,6 +9,7 @@ import { store } from "../../redux/store"
 import { booksGetRecommended } from "../../redux/books/operations"
 import { BookCard } from "../bookCard/BookCard"
 import { theme } from "../../styles/themes"
+import { userRefreshToken } from "../../redux/auth/operations"
 
 type AppDispatch = typeof store.dispatch;
 
@@ -54,7 +55,10 @@ export const RecommendedBooks = () => {
             req.page += 1;
             handlePageLimit();
             dispatch(booksGetRecommended(req));
+            // dispatch(userRefreshToken());
         }
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Mjk2NzI3NTkxNDk2NGI0YTdhNTk3YyIsImlhdCI6MTcxNTI3ODUzMCwiZXhwIjoxNzE1MjgyMTMwfQ.EUs2HDRh5sXiIya7nwVlZkNNX3UVWEZutuc7T202Kr0"
+        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Mjk2NzI3NTkxNDk2NGI0YTdhNTk3YyIsImlhdCI6MTcxNTI3ODUzMCwiZXhwIjoxNzE1ODgzMzMwfQ.ksX-ACEQE3uV2j2ra4ekmFA-w-pt3m0d036_T3yayLA"
         return
     }
 
@@ -85,6 +89,12 @@ export const RecommendedBooks = () => {
         }
         return theme.palette.custom.textMain
     }
+
+    const handleCardBackdrop = (title: any) => {
+        console.log('bookBackdrop');
+        return 'hello'
+    }
+
     return <>
         <HeaderContainer>
             <Header>Recommended</Header>
@@ -113,12 +123,13 @@ export const RecommendedBooks = () => {
         </HeaderContainer>
         <CardsContainer>
             {booksObj && booksObj.results.map((book, i)=>{
-                return <BookCard 
+                return <BookCard
                     key={i}
                     cardType="recommended" 
                     url={book.imageUrl}
                     title={book.title}
                     author={book.author}
+                    handleClick={handleCardBackdrop}
                 />
             })}
         </CardsContainer>

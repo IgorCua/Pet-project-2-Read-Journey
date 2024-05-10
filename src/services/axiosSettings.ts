@@ -10,7 +10,6 @@ export const axiosToken = {
             localStorage.getItem('persist:auth').then(data => {
                 // if(typeof data === 'string'){
                     const storageToken = typeof data === 'string' && JSON.parse(JSON.parse(data).token);
-                    console.log('storage token', storageToken)
                 // }
                 // const storageToken = JSON.parse(JSON.parse(data).token);
                 if(storageToken) axios.defaults.headers.common.Authorization = `Bearer ${storageToken}`;

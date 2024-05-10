@@ -11,26 +11,29 @@ import { RecommendedPage } from './apps/recommendedPage/RecommendedPage';
 import { selectAuthIsLoggedIn } from './redux/auth/selectors';
 import { useSelector } from 'react-redux';
 import { LibraryPage } from './apps/libraryPage/LibraryPage';
+import { Authenticate } from './components/authenticate/Authenticate';
 
 function App() {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
 
   return (
-    <Routes>
-      <Route path='/register' element={<PublicRoute component={<RegisterPage/>}/>}/>
-      <Route path='/login' element={<PublicRoute component={<LoginPage/>}/>}/>
-      {isLoggedIn && 
-        <Route element={<PrivateRoute component={<Header/>}/>}>
-          <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-          <Route path='/library' element={<PrivateRoute component={<LibraryPage/>}/>}/>
-          <Route path='/reading' element={<PrivateRoute component={<RecommendedPage/>}/>}/>
-        </Route>
-      }
-      <Route path='*' element={<Navigate 
-          to={isLoggedIn ? '/recommended' : '/register'} 
-          replace={true}/>
-      }/>
-    </Routes>
+      <Authenticate>
+          <Routes>
+              <Route path='/register' element={<PublicRoute component={<RegisterPage />} />} />
+              <Route path='/login' element={<PublicRoute component={<LoginPage />} />} />
+              {isLoggedIn &&
+                  <Route element={<PrivateRoute component={<Header />} />}>
+                      <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage />} />} />
+                      <Route path='/library' element={<PrivateRoute component={<LibraryPage />} />} />
+                      <Route path='/reading' element={<PrivateRoute component={<RecommendedPage />} />} />
+                  </Route>
+              }
+              <Route path='*' element={<Navigate
+                  to={isLoggedIn ? '/recommended' : '/register'}
+                  replace={true} />
+              } />
+          </Routes>
+      </Authenticate>
   );
 }
 
