@@ -211,7 +211,7 @@ export function Header() {
                                         </NavLink>
                                     </Nav>
                                     <LogOffBtn 
-                                        sx={{[theme.breakpoints.up('tablet')]: {display: 'none'}}} 
+                                        // sx={{[theme.breakpoints.up('tablet')]: {display: 'none'}}} 
                                         onClick={handleLogOut}>Log out</LogOffBtn>
                                 </NavContainer>
                             </Backdrop>

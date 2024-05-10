@@ -129,6 +129,7 @@ export const RecommendedBooks = () => {
                     url={book.imageUrl}
                     title={book.title}
                     author={book.author}
+                    pages={book.totalPages}
                     handleClick={handleCardBackdrop}
                 />
             })}

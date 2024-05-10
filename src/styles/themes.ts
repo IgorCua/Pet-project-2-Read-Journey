@@ -25,6 +25,7 @@ declare module '@mui/material/styles/createPalette' {
     bg4?: string;
     buttonBorderGrey?: string;
     buttonBgWhite?: string;
+    modalBorder?: string,
     utilBlue?: string;
     utilGreen?: string;
   }
@@ -38,6 +39,7 @@ declare module '@mui/material/styles/createPalette' {
     bg4: string;
     buttonBgWhite: string;
     buttonBorderGrey: string;
+    modalBorder: string,
     utilBlue: string;
     utilGreen: string;
   }
@@ -91,6 +93,7 @@ type CustomTeme = {
   bg4: string,
   buttonBgWhite: string,
   buttonBorderGrey: string,
+  modalBorder: string,
   utilBlue: string,
   utilGreen: string
 }
@@ -105,6 +108,7 @@ const customTheme: CustomTeme = {
   bg4: '#141414',
   buttonBgWhite: '#F9F9F9',
   buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
+  modalBorder: 'rgba(68, 68, 68, 0.20)',
   utilBlue: '#4F92F7',
   utilGreen: '#30B94D'
 }
@@ -133,6 +137,7 @@ export const theme = createTheme({
       bg4: '#141414',
       buttonBgWhite: '#F9F9F9',
       buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
+      modalBorder: 'rgba(68, 68, 68, 0.20)',
       utilBlue: '#4F92F7',
       utilGreen: '#30B94D'
     }

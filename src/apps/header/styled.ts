@@ -130,7 +130,7 @@ export const Nav = styled('nav')(({theme})=> ({
 
 export const LinkContainer = styled(`div`)(({theme})=> ({
 
-}))
+}));
 
 export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     width: '91px',
@@ -138,7 +138,7 @@ export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     borderRadius: '30px',
     border: '1px solid rgba(249, 249, 249, 0.20)',
 
-    [theme.breakpoints.down('tablet')]: {
-        // display: 'none'
+    [theme.breakpoints.up('tablet')]: {
+        display: 'none'
     }
-}))
+}));
