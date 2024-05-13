@@ -20,7 +20,7 @@ interface IInitialState {
     isError: boolean
     error: unknown | null,
     isLoading: boolean,
-    userBooks: []
+    userBooks: {}[]
 }
 
 type SignupRes = {
@@ -102,7 +102,9 @@ const authSlice = createSlice({
                 state.error = null;
                 console.log('localSignOut payload:', action.payload);
             })
-            .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction) => {
+            .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction<any>) => {
+                console.log(action.payload);
+                state.userBooks = [...state.userBooks, action.payload.data]
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
