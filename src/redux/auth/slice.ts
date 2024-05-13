@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { 
+    userAddBookByID,
     userGetCurrent, 
     userLocalSignOut, 
     userRefreshToken, 
@@ -19,7 +20,14 @@ interface IInitialState {
     isError: boolean
     error: unknown | null,
     isLoading: boolean,
-    // userBooks: {}[] | null
+    userBooks: []
+}
+
+type SignupRes = {
+    email: string,
+    name: string,
+    token: string,
+    refreshToken: string
 }
 
 const initialState = {
@@ -32,15 +40,8 @@ const initialState = {
     isError: false,
     error: null,
     isLoading: false,
-    // userBooks: null
+    userBooks: []
 } satisfies IInitialState as IInitialState;
-
-type SignupRes = {
-    email: string,
-    name: string,
-    token: string,
-    refreshToken: string
-}
 
 const authSlice = createSlice({
     name: 'auth',
@@ -100,6 +101,11 @@ const authSlice = createSlice({
                 state.isError = false;
                 state.error = null;
                 console.log('localSignOut payload:', action.payload);
+            })
+            .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction) => {
+                state.isLoading = false;
+                state.isError = false;
+                state.error = null;
             })
             .addMatcher(
                 (action): action is PendingAction => (

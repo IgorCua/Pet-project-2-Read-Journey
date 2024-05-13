@@ -125,6 +125,7 @@ export const RecommendedBooks = () => {
             {booksObj && booksObj.results.map((book, i)=>{
                 return <BookCard
                     key={i}
+                    id={book._id}
                     cardType="recommended" 
                     url={book.imageUrl}
                     title={book.title}

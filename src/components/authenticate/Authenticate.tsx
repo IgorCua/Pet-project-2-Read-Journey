@@ -27,23 +27,22 @@ export const Authenticate = ({children}: Props) => {
     
     const handleDelay = () => {
         if(decodedToken) {
-            return decodedToken.exp * 1000 - new Date().getTime()
+            return decodedToken.exp * 1000 - new Date().getTime();
         };
 
         return -1;
     }
 
     if(authError || booksError) {
-        console.log('authError', authError)
         if(authError.response.status === 401 || booksError.response.status === 401) {
             dispatch(userLocalSignOut());
+            // return;
+        } else {
         }
     }
 
     if(token && refreshToken){
-        console.log('handleDelay: ', handleDelay());
         setTimeout(() => {
-            console.log('setTimeout');
             axiosToken.set(refreshToken);
             dispatch(userRefreshToken());
         }, handleDelay());

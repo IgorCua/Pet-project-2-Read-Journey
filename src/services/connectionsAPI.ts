@@ -134,7 +134,7 @@ export const booksAddBookAPI = (data: IBooksAddBook) => {
 };
 
 export const booksAddByIdAPI = (data: string) => {
-    return axios.post<any, AddBookInterface>(`/books/add/:${data}`).then(res => {
+    return axios.post<any, AddBookInterface>(`/books/add/${data}`).then(res => {
         return res;
     });
 };

@@ -4,7 +4,8 @@ import {
     usersSigninAPI, 
     usersSignupAPI, 
     usersRefreshTokenAPI,
-    usersSignOutAPI 
+    usersSignOutAPI, 
+    booksAddByIdAPI
 } from "../../services/connectionsAPI"
 import { axiosToken } from "../../services/axiosSettings";
 
@@ -83,6 +84,23 @@ export const userRefreshToken = createAsyncThunk(
             // console.log(res)
             if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
             axiosToken.set(res.data.token);
+
+            return res;
+        }
+        catch (error: unknown) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const userAddBookByID = createAsyncThunk(
+    'auth/addBookByID',
+
+    async ( data: string, { rejectWithValue }) => {
+        try{
+            axiosToken.set();
+            const res: any = await booksAddByIdAPI(data);
+            // console.log(res)
 
             return res;
         }

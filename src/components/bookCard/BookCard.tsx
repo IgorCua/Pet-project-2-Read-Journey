@@ -5,8 +5,12 @@ import { Icon } from "../icon/Icon"
 import React, { useState } from "react"
 import { Backdrop, Box, IconButton } from "@mui/material";
 import { theme } from "../../styles/themes"
+import { store } from "../../redux/store"
+import { useDispatch } from "react-redux"
+import { userAddBookByID } from "../../redux/auth/operations"
 
 type Props = {
+    id: string,
     cardType: 'recommended' | 'modal' | 'library',
     url: string,
     title: string,
@@ -22,15 +26,20 @@ type BackdropProps = {
     pages?: number,
 }
 
-export const BookCard = ({cardType, url, title, author, pages, handleClick}: Props) => {
+type AppDispatch = typeof store.dispatch;
+
+export const BookCard = ({id, cardType, url, title, author, pages, handleClick}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    
+    const dispatch = useDispatch<AppDispatch>();
+
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
     }
 
     const handleAddToLibrary = () => {
-        console.log('click')
+        console.log('click');
+        console.log(id);
+        dispatch(userAddBookByID(id));
     }
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)
@@ -81,6 +90,7 @@ export const BookCard = ({cardType, url, title, author, pages, handleClick}: Pro
                             }} 
                         />
                 </IconButton>
+
                 <BackdropCardContainer>
                     <BackdropImage src={url}/>
                     <BackdropDescrContainer>
