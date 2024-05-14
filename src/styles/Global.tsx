@@ -12,17 +12,17 @@ const customStyles = {
         backgroundColor: '#141414',
 
         '&::-webkit-scrollbar':{
-            // display:'none',
+            display:'none',
             // width: '4px'
             
         }
     },
     'html::-webkit-scrollbar': {
-        // display: 'none',
+        display: 'none',
         // width: '4px'
     },
     '::-webkit-scrollbar': {
-        width: '5px'
+        width: '5px',
     },
     
     '::-webkit-scrollbar-track': {

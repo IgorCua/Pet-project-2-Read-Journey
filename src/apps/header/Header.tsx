@@ -149,7 +149,6 @@ export function Header() {
                             
                             <LogOffBtn 
                                 onClick={handleLogOut}
-                                sx={{[theme.breakpoints.down('tablet')]: {display: 'none'}}}
                             >Log out</LogOffBtn>
                         </Box>
                         

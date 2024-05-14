@@ -14,6 +14,19 @@ export const Section = styled('section')(({theme}) => ({
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
+
+    [theme.breakpoints.up('tablet')]: {
+        '&:nth-of-type(1)': {
+            padding: '30px 30px',
+            display: 'flex', 
+            gap: '32px'
+        },
+
+        '&:nth-of-type(2)': {
+            padding: '40px 40px'
+        }
+    }
+    
 }));
 
 export const DescripotionList = styled(List)(({theme}) => ({

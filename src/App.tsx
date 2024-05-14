@@ -1,8 +1,7 @@
 import './assets/fonts/poppins/poppinsFont.css';
 import './assets/fonts/gilroy/gilroyFont.css';
-import { Navigate, Route, Routes, useNavigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 // import logo from './logo.svg';
-import './App.css';
 import { Header } from './apps/header/Header';
 import { PrivateRoute, PublicRoute } from './services/routes';
 import { RegisterPage } from './apps/registerPage/RegisterPage';

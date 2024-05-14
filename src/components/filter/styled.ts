@@ -1,9 +1,13 @@
 import { ButtonBase, TextField } from "@mui/material";
-import { styled, width } from "@mui/system";
+import { lineHeight, styled, width } from "@mui/system";
 import { FormTextField } from "../materialUI/FormTextField";
 
 export const Form = styled('form')(({theme}) => ({
-    marginBottom: '20px'
+    marginBottom: '20px',
+    
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '14px',
+    },
 }));
 
 export const FormHeader = styled('h3')(({theme})=>({
@@ -11,6 +15,11 @@ export const FormHeader = styled('h3')(({theme})=>({
     marginBottom:'8px',
     fontSize: '10px',
     color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '14px',
+        lineHeight: '18px'
+    }
 }));
 
 export const InputTitle = styled(TextField)(({theme})=>({
@@ -20,7 +29,8 @@ export const InputTitle = styled(TextField)(({theme})=>({
         paddingLeft: '14px',
     },
     '& div::before': {
-        content: '"Email:"',
+        content: '"Book title:"',
+        width: '93px',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
@@ -54,6 +64,7 @@ export const InputAuthor = styled(TextField)(({theme})=>({
         
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
+            width:'112px'
         },
     },
     '& div input': {

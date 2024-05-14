@@ -1,5 +1,5 @@
 import { Box, IconButton } from "@mui/material"
-import { CardsContainer, Header, HeaderContainer, IconWrapper } from "./styled"
+import { CardsContainer, Container, Header, HeaderContainer, IconWrapper } from "./styled"
 import { Icon } from "../icon/Icon"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
@@ -55,11 +55,8 @@ export const RecommendedBooks = () => {
             req.page += 1;
             handlePageLimit();
             dispatch(booksGetRecommended(req));
-            // dispatch(userRefreshToken());
         }
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Mjk2NzI3NTkxNDk2NGI0YTdhNTk3YyIsImlhdCI6MTcxNTI3ODUzMCwiZXhwIjoxNzE1MjgyMTMwfQ.EUs2HDRh5sXiIya7nwVlZkNNX3UVWEZutuc7T202Kr0"
-        // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2Mjk2NzI3NTkxNDk2NGI0YTdhNTk3YyIsImlhdCI6MTcxNTI3ODUzMCwiZXhwIjoxNzE1ODgzMzMwfQ.ksX-ACEQE3uV2j2ra4ekmFA-w-pt3m0d036_T3yayLA"
-        return
+        return;
     }
 
     const handlePreviousPageClick = () => {
@@ -95,7 +92,7 @@ export const RecommendedBooks = () => {
         return 'hello'
     }
 
-    return <>
+    return <Container>
         <HeaderContainer>
             <Header>Recommended</Header>
             <Box sx={{display: 'flex', gap: '8px'}}>
@@ -105,8 +102,11 @@ export const RecommendedBooks = () => {
                         height: '12px', 
                         stroke: handleIconPreviousColor(),
                         position: 'absolute',
-                        left: '9px'
-                        // color: '#fff'
+                        left: '9px',
+                        [theme.breakpoints.up('tablet')]: {
+                            width: '20px', 
+                            height: '20px', 
+                        }
                     }}
                     ></Icon>
                 </IconWrapper>
@@ -116,7 +116,11 @@ export const RecommendedBooks = () => {
                         height: '12px', 
                         stroke: handleIconNextColor(),
                         position: 'absolute',
-                        left: '10px'
+                        left: '10px',
+                        [theme.breakpoints.up('tablet')]: {
+                            width: '20px', 
+                            height: '20px', 
+                        }
                     }}></Icon>
                 </IconWrapper>
             </Box>
@@ -135,5 +139,5 @@ export const RecommendedBooks = () => {
                 />
             })}
         </CardsContainer>
-    </>
+    </Container>
 }

@@ -2,9 +2,11 @@ import { ButtonBase, Typography } from "@mui/material";
 import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
-    // minWidth:'112px',
-    // maxWidth: '137px',
-    width: '137px',
+    minWidth:'80px',
+    maxWidth: '137px',
+    width: '100%',
+    // width: '107px',
+    // width: 'auto',
     display: 'flex',
     flexWrap: 'wrap'
 }));
@@ -20,12 +22,9 @@ export const Image = styled('img')(({theme}) => ({
 
 export const DescriptionContainer = styled('div')({
     overflow:'hidden',
-    textOverflow: 'ellipsis'
 });
 
 export const Header = styled(Typography)(({theme}) => ({
-    // overflow:'hidden',
-    // textOverflow: 'ellipsis'
     marginBottom: '2px',
 
     fontSize: '14px',
@@ -35,7 +34,6 @@ export const Header = styled(Typography)(({theme}) => ({
 })) as typeof Typography;
 
 export const Author = styled(Typography)(({theme}) => ({
-    // textOverflow: 'ellipsis',
     fontSize: '10px',
     lineHeight: '12px',
     fontWeight: '500',
