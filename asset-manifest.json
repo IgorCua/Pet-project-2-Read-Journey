@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e15de941.css",
-    "main.js": "/static/js/main.310d4718.js",
+    "main.css": "/static/css/main.e7d8f9f0.css",
+    "main.js": "/static/js/main.47d522d6.js",
     "static/js/453.359ea441.chunk.js": "/static/js/453.359ea441.chunk.js",
     "static/media/iPhone-15-Black-pc-2x.png": "/static/media/iPhone-15-Black-pc-2x.589c7eddf437dd92c2f2.png",
     "static/media/iPhone-15-Black-pc-1x.png": "/static/media/iPhone-15-Black-pc-1x.eb3b5245e8c99ec0e404.png",
@@ -14,12 +14,12 @@
     "static/media/Gilroy-Light.ttf": "/static/media/Gilroy-Light.1a25de360e096d7c3e24.ttf",
     "static/media/icons.svg": "/static/media/icons.9ee6232ba8d33d2dd0db7004a0bc6be8.svg",
     "index.html": "/index.html",
-    "main.e15de941.css.map": "/static/css/main.e15de941.css.map",
-    "main.310d4718.js.map": "/static/js/main.310d4718.js.map",
+    "main.e7d8f9f0.css.map": "/static/css/main.e7d8f9f0.css.map",
+    "main.47d522d6.js.map": "/static/js/main.47d522d6.js.map",
     "453.359ea441.chunk.js.map": "/static/js/453.359ea441.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e15de941.css",
-    "static/js/main.310d4718.js"
+    "static/css/main.e7d8f9f0.css",
+    "static/js/main.47d522d6.js"
   ]
 }
