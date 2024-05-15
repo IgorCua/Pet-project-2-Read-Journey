@@ -33,13 +33,21 @@ export const Authenticate = ({children}: Props) => {
         return -1;
     }
 
-    if(authError || booksError) {
-        if(authError.response.status === 401 || booksError.response.status === 401) {
-            dispatch(userLocalSignOut());
-            // return;
-        } else {
-        }
+    if(authError && authError.response.status === 401) {
+        dispatch(userLocalSignOut());
     }
+    if(booksError && booksError.response.status === 401) {
+        dispatch(userLocalSignOut());
+    }
+
+    // if(authError || booksError) {
+    //     // if(authError === null || booksError === null) return;
+    //     if(authError.response.status === 401 || booksError.response.status === 401) {
+    //         dispatch(userLocalSignOut());
+    //         // return;
+    //     } else {
+    //     }
+    // }
 
     if(token && refreshToken){
         setTimeout(() => {
