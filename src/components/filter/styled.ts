@@ -32,11 +32,12 @@ export const InputTitle = styled(TextField)(({theme})=>({
     },
     '& div::before': {
         content: '"Book title:"',
-        minWidth: '93px',
+        width: '79px',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
         [theme.breakpoints.up('tablet')]: {
+            width: '66px',
             fontSize: '14px',
         },
     },
@@ -46,7 +47,8 @@ export const InputTitle = styled(TextField)(({theme})=>({
 
         [theme.breakpoints.up('tablet')]: {
             padding: '16px 14px 16px 10px',
-            
+            width: '84px',
+
             fontSize: '14px',
         },
     }
@@ -59,14 +61,14 @@ export const InputAuthor = styled(TextField)(({theme})=>({
         // width: '30px'
     },
     '& div::before': {
-        minWidth: '111px',
+        width: '94px',
         content: '"The author:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
-            width:'112px'
+            width: '120px'
         },
     },
     '& div input': {

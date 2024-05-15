@@ -23,12 +23,11 @@ export const Section = styled('section')(({theme}) => ({
     padding: '20px 20px',
 
     backgroundColor: theme.palette.custom.bg3,
-
     borderRadius: '30px',
 
     [theme.breakpoints.up('tablet')]: {
         '&:nth-of-type(1)': {
-            maxWidth: '353px',
+            // maxWidth: '353px',
             padding: '30px 30px',
             display: 'flex', 
             gap: '32px',
@@ -40,16 +39,15 @@ export const Section = styled('section')(({theme}) => ({
     },
     
     [theme.breakpoints.up('desktop')]: {
-
-
         '&:nth-of-type(1)': {
+            maxWidth: '353px',
             padding: '20px 20px',
             flexDirection: 'column',
         },
 
-        '&:nth-of-type(2)': {
-            // padding: '40px 40px'
-        }
+        // '&:nth-of-type(2)': {
+        //     // padding: '40px 40px'
+        // }
     }
 }));
 

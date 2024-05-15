@@ -17,7 +17,9 @@ export const Image = styled('img')(({theme}) => ({
     height: '208px',
     // maxHeight: '208px'
 
-    borderRadius: '8px'
+    borderRadius: '8px',
+
+    cursor: 'pointer'
 }));
 
 export const DescriptionContainer = styled('div')({
