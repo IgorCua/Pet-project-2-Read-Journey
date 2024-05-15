@@ -32,6 +32,7 @@ export const Section = styled('section')(({theme}) => ({
 export const DescripotionList = styled(List)(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',
+    minWidth: '313px',
     flexDirection: 'column',
     gap: '20px',
 
@@ -53,7 +54,7 @@ export const DescripotionList = styled(List)(({theme}) => ({
     }
 })) as typeof List;
 
-export const NumberDiv = styled('div')({
+export const NumberDiv = styled('div')(({theme}) => ({
     // marginRight: '12px',
     minWidth: '40px',
     height: '40px',
@@ -69,16 +70,29 @@ export const NumberDiv = styled('div')({
     color: 'black',
     backgroundColor: '#fff',
 
-    borderRadius: '50%'
-})
+    borderRadius: '50%',
 
-export const ListHeader = styled('h2')({
+    [theme.breakpoints.up('tablet')]: {
+        minWidth: '40px',
+        height: '40px',
+
+        fontSize: '18px',
+        lineHeight: '18px',
+    }
+}));
+
+export const ListHeader = styled('h2')(({theme}) => ({
     fontSize: '18px',
     lineHeight: '18px',
-    fontWeight: '700'
-});
+    fontWeight: '700',
 
-export const ListItemHeader = styled('h2')({
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '20px',
+        lineHeight: '20px',
+    }
+}));
+
+export const ListItemText = styled('h2')({
     fontSize: '14px',
     lineHeight: '18px',
     fontWeight: '500'
@@ -107,7 +121,10 @@ export const LinkButton = styled(ButtonBase)(({theme}) => ({
 
     '&:hover': {
         backgroundColor: theme.palette.custom.bg3
-    }
+    },
+
+    // [theme.breakpoints.up('tablet')]: {
+    // }
 }));
 
 export const IconWrapper = styled(IconButton)(({theme}) => ({

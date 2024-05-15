@@ -1,11 +1,13 @@
 import { ButtonBase, TextField } from "@mui/material";
-import { lineHeight, styled, width } from "@mui/system";
+import { lineHeight, maxWidth, minWidth, styled, width } from "@mui/system";
 import { FormTextField } from "../materialUI/FormTextField";
 
 export const Form = styled('form')(({theme}) => ({
     marginBottom: '20px',
     
     [theme.breakpoints.up('tablet')]: {
+        minWidth: '295px',
+        maxWidth: '47.5%',
         fontSize: '14px',
     },
 }));
@@ -30,7 +32,7 @@ export const InputTitle = styled(TextField)(({theme})=>({
     },
     '& div::before': {
         content: '"Book title:"',
-        width: '93px',
+        minWidth: '93px',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
@@ -57,7 +59,7 @@ export const InputAuthor = styled(TextField)(({theme})=>({
         // width: '30px'
     },
     '& div::before': {
-        width: '111px',
+        minWidth: '111px',
         content: '"The author:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
@@ -92,6 +94,13 @@ export const Submit = styled(ButtonBase)(({theme}) => ({
 
     '&:hover': {
         backgroundColor: theme.palette.custom.bg2
+    },
+
+    [theme.breakpoints.up('tablet')]: {
+        padding: '12px 28px',
+
+        fontSize: '16px',
+        lineHeight: '18px'
     }
 }));
 
