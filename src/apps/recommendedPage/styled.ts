@@ -1,12 +1,23 @@
-import { ButtonBase, IconButton, List } from "@mui/material";
-import { borderRadius, display, styled } from "@mui/system";
+import { ButtonBase, IconButton, List, Typography } from "@mui/material";
+import { borderRadius, display, maxWidth, styled, width } from "@mui/system";
 
-export const Container = styled('div')({
+export const Container = styled('div')(({theme}) => ({
     marginTop: '10px',
     display: 'flex',
     flexDirection:'column',
-    gap: '10px'
-});
+    gap: '10px',
+
+    [theme.breakpoints.up('desktop')]: {
+        marginTop: '16px',
+        flexDirection: 'row',
+        gap: '16px',
+        '&:nth-of-type(1)': {
+        },
+
+        '&:nth-of-type(2)': {
+        }
+    }
+}));
 
 export const Section = styled('section')(({theme}) => ({
     padding: '20px 20px',
@@ -17,16 +28,29 @@ export const Section = styled('section')(({theme}) => ({
 
     [theme.breakpoints.up('tablet')]: {
         '&:nth-of-type(1)': {
+            maxWidth: '353px',
             padding: '30px 30px',
             display: 'flex', 
-            gap: '32px'
+            gap: '32px',
         },
 
         '&:nth-of-type(2)': {
             padding: '40px 40px'
         }
-    }
+    },
     
+    [theme.breakpoints.up('desktop')]: {
+
+
+        '&:nth-of-type(1)': {
+            padding: '20px 20px',
+            flexDirection: 'column',
+        },
+
+        '&:nth-of-type(2)': {
+            // padding: '40px 40px'
+        }
+    }
 }));
 
 export const DescripotionList = styled(List)(({theme}) => ({
@@ -50,8 +74,13 @@ export const DescripotionList = styled(List)(({theme}) => ({
     },
 
     '& li:last-of-type': {
-        justifyContent: 'space-between'
-    }
+        justifyContent: 'space-between',
+    },
+
+    // [theme.breakpoints.up('desktop')]: {
+    //     minWidth: '313px',
+    //     width: '100%'
+    // }
 })) as typeof List;
 
 export const NumberDiv = styled('div')(({theme}) => ({
@@ -138,4 +167,29 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
     color: theme.palette.custom.textMain,
 
     border: `1px solid ${theme.palette.custom.buttonBorderGrey}`
+}));
+
+export const Figure = styled('figure')(({theme}) => ({
+    padding: '15px 20px',
+    display: 'flex',
+    gap: '7px',
+
+    backgroundColor: theme.palette.custom.bg2,
+
+    borderRadius: '12px'
+}));
+
+export const Img = styled('img')(({theme}) => ({
+    height: '40px',
+    width: '40px'
+}));
+
+export const FigureText = styled(Typography)(({theme}) => ({
+    fontSize: '14px',
+    lineHeight: '18px',
+    color: theme.palette.custom.textSecondary
+})) as typeof Typography;
+
+export const FigureSpan = styled('span')(({theme}) => ({
+    color: theme.palette.custom.textMain
 }));

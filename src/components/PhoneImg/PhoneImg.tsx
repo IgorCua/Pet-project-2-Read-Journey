@@ -4,7 +4,7 @@ export const PhoneImg = () => {
     return <>    
         <ImageContainer>
             <Image 
-                alt="test img" 
+                alt="phone image" 
                 src={require('../../assets/images/iPhone-15-Black-pc-1x.png')} 
                 srcSet={`
                     ${require("../../assets/images/iPhone-15-Black-pc-1x.png")} 1x, 

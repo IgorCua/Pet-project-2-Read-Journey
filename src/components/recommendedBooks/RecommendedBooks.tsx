@@ -1,5 +1,5 @@
 import { Box, IconButton } from "@mui/material"
-import { CardsContainer, Container, Header, HeaderContainer, IconWrapper } from "./styled"
+import { CardsContainer, CardsDecorationContainer, Container, Header, HeaderContainer, IconWrapper } from "./styled"
 import { Icon } from "../icon/Icon"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"

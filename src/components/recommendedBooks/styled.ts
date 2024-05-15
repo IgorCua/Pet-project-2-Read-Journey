@@ -60,12 +60,29 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
 
 export const CardsContainer = styled('div')(({theme}) => ({
     display: 'flex',
+    maxHeight: '651px',
     gap: '20px',
-    justifyContent: 'center',
-    // flexWrap: 'wrap'
+    // justifyContent: 'center',
+    flexWrap: 'wrap',
+    
+    [theme.breakpoints.up('tablet')]: {
+        flexWrap: 'wrap',
+        gap: '25px'
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // flexWrap: 'wrap',
+        gap: '20px'
+    }
+}));
+
+export const CardsDecorationContainer = styled('div')(({theme}) => ({
+    display: 'flex',
+    gap: '20px',
+    flexWrap: 'wrap',
     
     [theme.breakpoints.up('tablet')]: {
         flexWrap: 'wrap',
         gap: '25px'
     }
 }));
+
