@@ -10,6 +10,10 @@ export const LoginFormContainer = styled(Form)(({theme}) =>({
      
         [theme.breakpoints.up('tablet')]: {
             width: '472px'
+        },
+
+        [theme.breakpoints.only('tablet')]: {
+            marginBottom: '174px'
         }
 }));
 
@@ -23,7 +27,7 @@ export const InputContainer = styled(Container)(({theme})=>({
 
 export const List = styled('ul')(({theme})=>({
     position: 'relative',
-    
+
     '& li': {
         position: 'relative'
     },
@@ -37,7 +41,7 @@ export const List = styled('ul')(({theme})=>({
     },
 
     '& li:nth-of-type(2)':{
-        marginBottom: '73px',
+        marginBottom: '71px',
         
         [theme.breakpoints.up('tablet')]: {
             marginBottom: '147px',
@@ -59,8 +63,9 @@ export const ButtonContainer = styled(Container)(({theme})=>({
 
 export const EmailField = styled(FormTextField)(({theme})=>({
     '& div': {
-        paddingLeft: '14px',
+        paddingLeft: '13px',
     },
+    
     '& div::before': {
         content: '"Email:"',
         fontSize: '12px',
@@ -71,11 +76,11 @@ export const EmailField = styled(FormTextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '14px 14px 14px 10px',
+        padding: '13px 13px 13px 10px',
         fontSize: '12px',
         
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            padding: '15px 14px 15px 10px',
             
             fontSize: '14px',
         },
@@ -83,27 +88,28 @@ export const EmailField = styled(FormTextField)(({theme})=>({
 })) as typeof FormTextField;
 
 export const PasswordField = styled(FormTextField)(({theme})=>({
-    paddingLeft: '14px',
     display: 'flex',
     flexDirection: 'row',
 
-    '&:first-of-type::before': {
+    '& .MuiInputBase-root::before': {
+        paddingLeft: '14px',
         content: '"Password:"',
         alignSelf: 'center',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
 
+        zIndex: '1000',
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
         },
     },
     '& input': {
-        padding: '14px 10px 14px 10px',
+        padding: '13px 10px 13px 10px',
 
         fontSize: '12px',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 5px 16px 10px',
+            padding: '15px 4px 15px 10px',
             
             fontSize: '14px',
         },

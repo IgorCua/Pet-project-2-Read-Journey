@@ -1,7 +1,8 @@
 import { Button, ButtonBase, Container } from "@mui/material";
-import { styled } from "@mui/system";
+import { borderRadius, styled } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
 import { FormTextField } from "../materialUI/FormTextField";
+import zIndex from "@mui/material/styles/zIndex";
 
 // : React.FC<{ children?: React.ReactNode, onSubmit?: any }>
 export const RegForm = styled(Form)(({theme}) =>({
@@ -9,7 +10,11 @@ export const RegForm = styled(Form)(({theme}) =>({
         flexDirection: 'column',
     
         [theme.breakpoints.up('tablet')]: {
-            width: '472px'
+            width: '472px',
+            // marginBottom: '174px'
+        },
+        [theme.breakpoints.only('tablet')]: {
+            marginBottom: '174px'
         }
 }));
 
@@ -26,7 +31,7 @@ export const List = styled('ul')(({theme})=>({
     position: 'relative',
 
     '& li': {
-        position: 'relative'
+        position: 'relative',
     },
 
     '& li:nth-of-type(-n + 2)': {
@@ -57,8 +62,9 @@ export const ButtonContainer = styled(Container)(({theme})=>({
 
 export const NameField = styled(FormTextField)(({theme})=>({
     '& div': {
-        paddingLeft: '14px',
+        paddingLeft: '13px',
     },
+
     '& div::before': {
         content: '"Name:"',
         fontSize: '12px',
@@ -69,21 +75,22 @@ export const NameField = styled(FormTextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '14px 14px 14px 10px',
+        padding: '13px 13px 13px 10px',
         fontSize: '12px',
         
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            padding: '15px 14px 15px 10px',
 
             fontSize: '14px',
         },
-    }
+    },
 })) as typeof FormTextField;
 
 export const EmailField = styled(FormTextField)(({theme})=>({
     '& div': {
-        paddingLeft: '14px',
+        paddingLeft: '13px',
     },
+
     '& div::before': {
         content: '"Email:"',
         fontSize: '12px',
@@ -94,11 +101,11 @@ export const EmailField = styled(FormTextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '14px 14px 14px 10px',
+        padding: '13px 13px 13px 10px',
         fontSize: '12px',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            padding: '15px 14px 15px 10px',
             
             fontSize: '14px',
         },
@@ -106,30 +113,34 @@ export const EmailField = styled(FormTextField)(({theme})=>({
 })) as typeof FormTextField;
 
 export const PasswordField = styled(FormTextField)(({theme})=>({
-    paddingLeft: '14px',
     display: 'flex',
     flexDirection: 'row',
+    transitionDuration: '250ms',
+    transitionProperty:'box-shadow',
 
-    '&:first-of-type::before': {
+    '& input': {
+        padding: '13px 13px 13px 10px',
+        fontSize: '12px',
+
+        [theme.breakpoints.up('tablet')]: {
+            padding: '15px 5px 15px 10px',
+            
+            fontSize: '14px',
+        },
+    },
+
+    '& .MuiInputBase-root::before': {
+        paddingLeft: '14px',
         content: '"Password:"',
         alignSelf: 'center',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
 
+        zIndex: '1000',
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
         },
     },
-    '& input': {
-        padding: '14px 14px 14px 10px',
-        fontSize: '12px',
-
-        [theme.breakpoints.up('tablet')]: {
-            padding: '16px 5px 16px 10px',
-            
-            fontSize: '14px',
-        },
-    }
 })) as typeof FormTextField;
 
 export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({

@@ -26,6 +26,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonBorderGrey?: string;
     buttonBgWhite?: string;
     modalBorder?: string,
+    authInputBorder: string,
     utilBlue?: string;
     utilGreen?: string;
   }
@@ -40,6 +41,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonBgWhite: string;
     buttonBorderGrey: string;
     modalBorder: string,
+    authInputBorder: string,
     utilBlue: string;
     utilGreen: string;
   }
@@ -94,6 +96,7 @@ type CustomTeme = {
   buttonBgWhite: string,
   buttonBorderGrey: string,
   modalBorder: string,
+  authInputBorder: string,
   utilBlue: string,
   utilGreen: string
 }
@@ -109,6 +112,7 @@ const customTheme: CustomTeme = {
   buttonBgWhite: '#F9F9F9',
   buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
   modalBorder: 'rgba(68, 68, 68, 0.20)',
+  authInputBorder: 'rgb(68, 68, 68)',
   utilBlue: '#4F92F7',
   utilGreen: '#30B94D'
 }
@@ -138,6 +142,7 @@ export const theme = createTheme({
       buttonBgWhite: '#F9F9F9',
       buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
       modalBorder: 'rgba(68, 68, 68, 0.20)',
+      authInputBorder: 'rgb(68, 68, 68)',
       utilBlue: '#4F92F7',
       utilGreen: '#30B94D'
     }
@@ -203,8 +208,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          borderRadius: '12px',
-          overflow:'hidden'
+          // borderRadius: '12px',
+          // overflow:'hidden'
         }
       }
     },
@@ -212,6 +217,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           // paddingLeft: '65px',
+          borderRadius: '12px',
           backgroundColor: customTheme.bg2,
         }
       }
@@ -219,13 +225,19 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          // padding: '0',
-          // paddingRight: '26px',
           width: '100%',
+
           backgroundColor: customTheme.bg2,
-          // '&:focus': {
-          //   // backgroundColor: '#262626'
-          // }
+          border: '1px solid transparent',
+          borderRadius: '12px',
+
+          // '&:hover': {
+          //   border: `1px solid ${customTheme.authInputBorder}`,
+          // },
+          // '&.Mui-focused': {
+          //   border: `1px solid ${customTheme.authInputBorder}`,
+          //   // borderRadius: '12px'
+          // },
         },
         input: {
           color: customTheme.textMain,
@@ -255,7 +267,20 @@ export const theme = createTheme({
     MuiOutlinedInput:{
       styleOverrides:{
         root: {
-          paddingRight: '16px'
+          paddingRight: '16px',
+          borderRadius: '12px',
+          transitionDuration: '250ms',
+          transitionProperty:'border',
+          
+          border: '1px solid transparent',
+
+          '&:hover': {
+            border: `1px solid ${customTheme.authInputBorder}`,
+          },
+          '&.Mui-focused': {
+            border: `1px solid ${customTheme.authInputBorder}`,
+            // borderRadius: '12px'
+          },
         },
         notchedOutline: {
           // borderBlockColor: 'green',
