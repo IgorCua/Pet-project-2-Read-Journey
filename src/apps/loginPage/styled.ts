@@ -80,7 +80,7 @@ export const Span = styled('span')(({theme}) => ({
     color: theme.palette.custom.textSecondary
 }));
 
-export const ContainerMain = styled('div')(({theme}) => ({
+export const Section = styled('div')(({theme}) => ({
     padding: '20px 20px',
     width: '100%',
     backgroundColor: theme.palette.custom.bg3,
@@ -95,7 +95,7 @@ export const ContainerMain = styled('div')(({theme}) => ({
     },
 }));
 
-export const ContainerSecondary = styled('figure')(({theme}) => ({
+export const Figure = styled('figure')(({theme}) => ({
     height: '351px',
     width: '100%',
     paddingTop: '20px',

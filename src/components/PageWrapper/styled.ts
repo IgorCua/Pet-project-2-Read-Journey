@@ -1,6 +1,6 @@
 import { styled } from "@mui/system";
 
-export const StyledSection = styled('section')(({theme}) => ({
+export const WrapperDiv = styled('div')(({theme}) => ({
     margin: 'auto',
     padding: '20px 20px',
     width: '100%',

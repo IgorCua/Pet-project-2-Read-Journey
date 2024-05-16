@@ -4,9 +4,10 @@ import {
     usersSigninAPI, 
     usersSignupAPI, 
     usersRefreshTokenAPI,
-    usersSignOutAPI 
+    usersSignOutAPI, 
+    booksAddByIdAPI
 } from "../../services/connectionsAPI"
-import axios from "axios";
+import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
     name: string, 
@@ -19,32 +20,18 @@ interface ISignin {
     password: string
 }
 
-export const axiosToken = {
-    set(token: string) {
-        if(token) {
-            axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-        } 
-        // else {
-        //     localStorage.getItem('persist:auth').then(data => {
-        //         const storageToken = JSON.parse(JSON.parse(data).token);
-                
-        //         if(data) axios.defaults.headers.common.Authorization = `Bearer ${storageToken}`;
-
-        //         return;
-        //     });
-        // }
-    },
-    unset() {
-      axios.defaults.headers.common.Authorization = ``;
-    },
-};
-
 export const userSignup = createAsyncThunk(
     'auth/signup',
 
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
-            const res = await usersSignupAPI(data);
+            const res: any = await usersSignupAPI(data);
+            const {token}: any = res.data;
+
+            axiosToken.set(token);
+            
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+
             return res;
         }
         catch (error: unknown) {
@@ -58,7 +45,13 @@ export const userSignin = createAsyncThunk(
 
     async (data: ISignin, thunkApi) => {
         try{
-            const res = await usersSigninAPI(data);
+            const res: any = await usersSigninAPI(data);
+            const {token}:any = res.data;
+
+            axiosToken.set(token);
+            // console.log('action', res)
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+
             return res;
         }
         catch (error: unknown) {
@@ -72,6 +65,7 @@ export const userGetCurrent = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
+            await axiosToken.set();
             const res = await usersGetCurrentAPI();
             return res;
         }
@@ -86,7 +80,28 @@ export const userRefreshToken = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
-            const res = await usersRefreshTokenAPI();
+            const res: any = await usersRefreshTokenAPI();
+            // console.log(res)
+            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+            axiosToken.set(res.data.token);
+
+            return res;
+        }
+        catch (error: unknown) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const userAddBookByID = createAsyncThunk(
+    'auth/addBookByID',
+
+    async ( data: string, { rejectWithValue }) => {
+        try{
+            axiosToken.set();
+            const res: any = await booksAddByIdAPI(data);
+            // console.log(res)
+
             return res;
         }
         catch (error: unknown) {
@@ -100,9 +115,29 @@ export const userSignOut = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
+            localStorage.removeItem('persist:auth');
+            localStorage.removeItem('updateAccess');
+            
             const res = await usersSignOutAPI();
             axiosToken.unset();
             return res;
+        }
+        catch (error: unknown) {
+            return rejectWithValue(error);
+        }
+    }
+);
+
+export const userLocalSignOut = createAsyncThunk(
+    'auth/localSignOut',
+
+    async ( _, { rejectWithValue }) => {
+        try{
+            localStorage.removeItem('persist:auth');
+            localStorage.removeItem('updateAccess');
+            
+            axiosToken.unset();
+            return null;
         }
         catch (error: unknown) {
             return rejectWithValue(error);

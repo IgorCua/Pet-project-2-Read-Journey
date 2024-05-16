@@ -18,7 +18,7 @@ import React, { useState } from 'react';
 import { theme } from '../../styles/themes';
 import { useDispatch } from 'react-redux';
 import { userSignup } from '../../redux/auth/operations';
-import store from '../../redux/store';
+import { store } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
 
 interface InitialValuesInterface {
@@ -120,12 +120,11 @@ export const RegisterForm: React.FC = () => {
     }
 
     return <>
-    <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-    >
-            {/* <Form onSubmit={formik.handleSubmit}> */}
+        <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+        >
             <RegForm>
                 <List>
                     <li>
@@ -151,7 +150,6 @@ export const RegisterForm: React.FC = () => {
                     </li>
                 </List>
             </RegForm>
-            
         </Formik>
     </>
 

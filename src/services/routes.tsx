@@ -6,33 +6,31 @@ import { Navigate, useNavigate } from "react-router-dom";
 // import { Navigate } from "react-router-dom";
 
 type Props = {
+    component: React.ReactNode,
     redirectTo?: string,
-    component: React.ReactNode
 }
 
 export const PrivateRoute: React.FC<Props> = ({component, redirectTo = "/register"}): any => {
     const isLoggedIn = useSelector(selectAuthIsLoggedIn);
     // const navigate = useNavigate();
-
+    
+    // if(isLoggedIn) navigate(redirectTo, {replace: true});
+    
     // useEffect(() => {
-    //     if(!isLoggedIn) navigate(`${redirectTo}`, {replace: true});
+    //     if(isLoggedIn) navigate(`${redirectTo}`, {replace: true});
     // }, [isLoggedIn, redirectTo, navigate]);
     return isLoggedIn ? component : <Navigate to={redirectTo} replace={true}/>;
-    // return (
-    //     component
-    // )
+    // return component;
 }
 
-export const PublicRoute: React.FC<Props> = ({component, redirectTo = "/"}): any => {
+export const PublicRoute: React.FC<Props> = ({component, redirectTo = "/recommended"}): any => {
     const isLoggedIn = useSelector(selectAuthIsLoggedIn);
     // const navigate = useNavigate();
-
+    // if(!isLoggedIn) navigate(redirectTo, {replace: true});
     // useEffect(() => {
     //     if(!isLoggedIn) navigate(`${redirectTo}`, {replace: true});
     // }, [isLoggedIn, redirectTo, navigate]);
 
     return !isLoggedIn ? component : <Navigate to={redirectTo} replace={true}/>;
-    // return (
-    //     component
-    // )
+    // return component;
 }

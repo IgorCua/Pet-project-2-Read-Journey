@@ -34,7 +34,8 @@ const booksSlice = createSlice({
     extraReducers(builder) {
         builder
             .addCase(booksGetRecommended.fulfilled, (state, action: PayloadAction<any>) => {
-                state.recommendedBooks = action.payload;
+                state.recommendedBooks = action.payload.data;
+                // console.log
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
@@ -96,10 +97,13 @@ const booksSlice = createSlice({
                 }
             )
             .addMatcher(
-                (action): action is RejectedAction => action.type.startsWith('auth') && action.type.endsWith('/rejected'),
+                (action): action is RejectedAction => 
+                    action.type.startsWith('books') 
+                    && action.type.endsWith('/rejected'),
                 (state, action) => {
                     state.isLoading = false;
                     state.isError = true;
+                    console.log(action.payload)
                     state.error = action.payload;
                 }
             )

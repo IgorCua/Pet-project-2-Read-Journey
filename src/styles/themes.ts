@@ -25,6 +25,8 @@ declare module '@mui/material/styles/createPalette' {
     bg4?: string;
     buttonBorderGrey?: string;
     buttonBgWhite?: string;
+    modalBorder?: string,
+    authInputBorder: string,
     utilBlue?: string;
     utilGreen?: string;
   }
@@ -38,6 +40,8 @@ declare module '@mui/material/styles/createPalette' {
     bg4: string;
     buttonBgWhite: string;
     buttonBorderGrey: string;
+    modalBorder: string,
+    authInputBorder: string,
     utilBlue: string;
     utilGreen: string;
   }
@@ -91,6 +95,8 @@ type CustomTeme = {
   bg4: string,
   buttonBgWhite: string,
   buttonBorderGrey: string,
+  modalBorder: string,
+  authInputBorder: string,
   utilBlue: string,
   utilGreen: string
 }
@@ -105,6 +111,8 @@ const customTheme: CustomTeme = {
   bg4: '#141414',
   buttonBgWhite: '#F9F9F9',
   buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
+  modalBorder: 'rgba(68, 68, 68, 0.20)',
+  authInputBorder: 'rgb(68, 68, 68)',
   utilBlue: '#4F92F7',
   utilGreen: '#30B94D'
 }
@@ -133,6 +141,8 @@ export const theme = createTheme({
       bg4: '#141414',
       buttonBgWhite: '#F9F9F9',
       buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
+      modalBorder: 'rgba(68, 68, 68, 0.20)',
+      authInputBorder: 'rgb(68, 68, 68)',
       utilBlue: '#4F92F7',
       utilGreen: '#30B94D'
     }
@@ -167,7 +177,7 @@ export const theme = createTheme({
           }
         },
         colorPrimary: {
-
+          
         }
 
       }
@@ -198,8 +208,8 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           width: '100%',
-          borderRadius: '12px',
-          overflow:'hidden'
+          // borderRadius: '12px',
+          // overflow:'hidden'
         }
       }
     },
@@ -207,6 +217,7 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           // paddingLeft: '65px',
+          borderRadius: '12px',
           backgroundColor: customTheme.bg2,
         }
       }
@@ -214,19 +225,26 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
-          // padding: '22px 22px',
-          // width: '100%',
+          width: '100%',
+
           backgroundColor: customTheme.bg2,
-          // '&:focus': {
-          //   // backgroundColor: '#262626'
-          // }
+          border: '1px solid transparent',
+          borderRadius: '12px',
+
+          // '&:hover': {
+          //   border: `1px solid ${customTheme.authInputBorder}`,
+          // },
+          // '&.Mui-focused': {
+          //   border: `1px solid ${customTheme.authInputBorder}`,
+          //   // borderRadius: '12px'
+          // },
         },
         input: {
-          // paddingLeft: '65px',
-          // padding: '22px 22px',
-
           color: customTheme.textMain,
           border: 'none',
+
+          padding: '14px 10px',
+          fontSize: '12px',
 
           // '&::placeholder': {
           //   color: customTheme.textSecondary,
@@ -248,9 +266,63 @@ export const theme = createTheme({
     },
     MuiOutlinedInput:{
       styleOverrides:{
-        notchedOutline:{
+        root: {
+          paddingRight: '16px',
+          borderRadius: '12px',
+          transitionDuration: '250ms',
+          transitionProperty:'border',
+          
+          border: '1px solid transparent',
+
+          '&:hover': {
+            border: `1px solid ${customTheme.authInputBorder}`,
+          },
+          '&.Mui-focused': {
+            border: `1px solid ${customTheme.authInputBorder}`,
+            // borderRadius: '12px'
+          },
+        },
+        notchedOutline: {
           // borderBlockColor: 'green',
           border: 'none',
+        }
+      }
+    },
+    MuiAppBar:{
+      styleOverrides:{
+        root:{
+          backgroundColor: customTheme.bg3
+        }
+      }
+    },
+    MuiMenu:{
+      styleOverrides:{
+        paper:{
+          opacity: '0.5'
+        },
+        
+      }
+    },
+    MuiBackdrop:{
+      styleOverrides:{
+        root:{
+          backgroundColor: 'rgba(20, 20, 20, 0.60)',
+        },
+      }
+    },
+    MuiList: {
+      styleOverrides: {
+        root: {
+          padding: '0',
+          position: 'inherit'
+        }
+      }
+    },
+    MuiListItem: {
+      styleOverrides: {
+        root: {
+          padding: '0',
+          position: 'inherit'
         }
       }
     }

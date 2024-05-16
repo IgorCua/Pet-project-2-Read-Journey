@@ -4,10 +4,10 @@
 import { PhoneImg } from "../../components/PhoneImg/PhoneImg";
 import { Icon } from "../../components/icon/Icon";
 import { RegisterForm } from "../../components/registerForm/RegisterForm";
-import { Section } from "../../components/section/Section";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
 import { 
-    ContainerMain, 
-    ContainerSecondary, 
+    Section, 
+    Figure, 
     DecorationContainer,
     Header,
     IconContainer,
@@ -18,20 +18,20 @@ import {
 export const RegisterPage = () => {
 
     return (
-        <Section>
+        <PageWrapper>
             <DecorationContainer>
-            <ContainerMain>
+            <Section>
                 <IconContainer>
                     <Icon iconName='#icon-logo' sx={{width: '42px', height: '17px'}}/>
                     <IconHeader>Read Journey</IconHeader>
                 </IconContainer>
                 <Header>Expand your mind, reading <Span>a book</Span></Header>
                 <RegisterForm/>
-            </ContainerMain>
-            <ContainerSecondary>
+            </Section>
+            <Figure>
                 <PhoneImg/>
-            </ContainerSecondary>
+            </Figure>
             </DecorationContainer>
-        </Section>
+        </PageWrapper>
     )
 }

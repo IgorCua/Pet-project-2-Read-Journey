@@ -29,8 +29,8 @@ interface IBooksAddBook {
 interface IBooksGetRecommended {
     title?: string,
     author?: string,
-    page: number | string | null
-    limit: number | string | null
+    page?: number | string | null
+    limit?: number | string | null
 }
 type PaginationResponse<T> = {
     results: T[],
@@ -82,6 +82,7 @@ type SignupRes = {
     message: string
 }
 
+// user connections
 export const usersSignupAPI = (data: IUserSighup) => {
     return axios.post<SignupRes>('/users/signup', data).then(res => {
         return res;
@@ -112,10 +113,11 @@ export const usersSignOutAPI = () => {
     });
 };
 
+// books connections
 // create object success error responces
-
 export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-    return axios.get<any, PaginationResponse<Book>>('/users/signout', {params: data}).then(res => {
+// export const booksGetRecommendedAPI = (data: any) => {
+    return axios.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {
         return res;
     });
 };
@@ -132,7 +134,7 @@ export const booksAddBookAPI = (data: IBooksAddBook) => {
 };
 
 export const booksAddByIdAPI = (data: string) => {
-    return axios.post<any, AddBookInterface>(`/books/add/:${data}`).then(res => {
+    return axios.post<any, AddBookInterface>(`/books/add/${data}`).then(res => {
         return res;
     });
 };
