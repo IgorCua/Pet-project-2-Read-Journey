@@ -60,16 +60,20 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
 
 export const CardsContainer = styled('div')(({theme}) => ({
     display: 'flex',
-    maxHeight: '651px',
+    // minWidth: '200px',
+    // maxWidth: '300px',
+    // width: '100%',
+    // maxHeight: '651px',
     gap: '20px',
     // justifyContent: 'center',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
     
     [theme.breakpoints.up('tablet')]: {
         flexWrap: 'wrap',
         gap: '25px'
     },
     [theme.breakpoints.up('desktop')]: {
+        maxHeight: '651px',
         // flexWrap: 'wrap',
         gap: '20px'
     }

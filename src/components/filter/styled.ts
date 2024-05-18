@@ -32,12 +32,12 @@ export const InputTitle = styled(TextField)(({theme})=>({
     },
     '& div::before': {
         content: '"Book title:"',
-        width: '79px',
+        minWidth: '57px',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
         [theme.breakpoints.up('tablet')]: {
-            width: '66px',
+            minWidth: '66px',
             fontSize: '14px',
         },
     },
@@ -61,14 +61,43 @@ export const InputAuthor = styled(TextField)(({theme})=>({
         // width: '30px'
     },
     '& div::before': {
-        width: '94px',
+        minWidth: '65px',
         content: '"The author:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
-            width: '120px'
+            minWidth: '75px'
+        },
+    },
+    '& div input': {
+        padding: '14px 14px 14px 10px',
+        fontSize: '12px',
+
+        [theme.breakpoints.up('tablet')]: {
+            padding: '16px 14px 16px 10px',
+            
+            fontSize: '14px',
+        },
+    }
+})) as typeof TextField;
+
+export const NumOfPages = styled(TextField)(({theme})=>({
+    marginBottom: '20px',
+    '& div': {
+        paddingLeft: '14px',
+        // width: '30px'
+    },
+    '& div::before': {
+        // minWidth: '65px',
+        content: '"Number of Pages:"',
+        fontSize: '12px',
+        color: theme.palette.custom.textSecondary,
+        
+        [theme.breakpoints.up('tablet')]: {
+            fontSize: '14px',
+            minWidth: '75px'
         },
     },
     '& div input': {

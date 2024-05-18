@@ -7,7 +7,8 @@ declare module '@mui/material/styles' {
     md: false;
     lg: false;
     xl: false;
-    mobile: true; // adds the `mobile` breakpoint
+    mobileS: true;
+    mobileM: true; // adds the `mobile` breakpoint
     tablet: true;
     laptop: true;
     desktop: true;
@@ -149,7 +150,8 @@ export const theme = createTheme({
   },
   breakpoints: {
     values: {
-      mobile: 260,
+      mobileS: 260,
+      mobileM: 320,
       tablet: 768,
       laptop: 1024,
       desktop: 1280,

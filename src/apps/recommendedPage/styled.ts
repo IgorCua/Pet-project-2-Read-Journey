@@ -54,7 +54,7 @@ export const Section = styled('section')(({theme}) => ({
 export const DescripotionList = styled(List)(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',
-    minWidth: '313px',
+    minWidth: '200px',
     flexDirection: 'column',
     gap: '20px',
 
@@ -75,10 +75,10 @@ export const DescripotionList = styled(List)(({theme}) => ({
         justifyContent: 'space-between',
     },
 
-    // [theme.breakpoints.up('desktop')]: {
-    //     minWidth: '313px',
-    //     width: '100%'
-    // }
+    [theme.breakpoints.up('desktop')]: {
+        minWidth: '313px',
+        width: '100%'
+    }
 })) as typeof List;
 
 export const NumberDiv = styled('div')(({theme}) => ({

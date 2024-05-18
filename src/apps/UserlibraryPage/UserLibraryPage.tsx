@@ -7,7 +7,7 @@ const StyledP = styled('p')`
     }
 `
 
-export const LibraryPage = () => {
+export const UserLibraryPage = () => {
     return (
         <div>
             <p>Library Page</p>
