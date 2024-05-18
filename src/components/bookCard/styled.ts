@@ -2,13 +2,13 @@ import { ButtonBase, Typography } from "@mui/material";
 import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
-    minWidth:'80px',
+    minWidth:'71px',
     maxWidth: '137px',
-    width: '100%',
-    // width: '107px',
-    // width: 'auto',
+    // width: '110px',
+    // width: '100%',
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+
 }));
 
 export const Image = styled('img')(({theme}) => ({
@@ -24,6 +24,7 @@ export const Image = styled('img')(({theme}) => ({
 
 export const DescriptionContainer = styled('div')({
     overflow:'hidden',
+    textOverflow: 'ellipsis',
 });
 
 export const Header = styled(Typography)(({theme}) => ({
@@ -43,8 +44,8 @@ export const Author = styled(Typography)(({theme}) => ({
 })) as typeof Typography;
 
 export const BackdropContainer = styled('div')(({theme}) => ({
-    padding: '40px 0px',
-    width: '335px',
+    // padding: '40px 0px',
+    // width: '335px',
     position: 'relative',
 
     display:'flex',
@@ -53,8 +54,8 @@ export const BackdropContainer = styled('div')(({theme}) => ({
 
     backgroundColor: theme.palette.custom.bg3,
 
-    border: `1px solid ${theme.palette.custom.modalBorder}`,
-    borderRadius: '12px',
+    // border: `1px solid ${theme.palette.custom.modalBorder}`,
+    // borderRadius: '12px',
 }));
 
 export const BackdropCardContainer = styled('div')(({theme}) => ({
@@ -66,15 +67,6 @@ export const BackdropCardContainer = styled('div')(({theme}) => ({
 
     overflow:'hidden',
     textOverflow: 'ellipsis',
-}));
-
-export const BackdropImage = styled('img')(({theme}) => ({
-    marginBottom: '20px',
-    width: '100%',
-    height: '208px',
-    // maxHeight: '208px'
-
-    borderRadius: '8px'
 }));
 
 export const BackdropDescrContainer = styled('div')(({theme}) => ({
@@ -94,27 +86,6 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
     }
 }));
 
-export const BackdropHeader = styled(Typography)(({theme}) => ({
-    // overflow:'hidden',
-    // textOverflow: 'ellipsis'
-
-    marginBottom: '2px',
-
-    fontSize: '18px',
-    lineHeight: '18px',
-    fontWeight: '700',
-    color: theme.palette.custom.textMain
-})) as typeof Typography;
-
-export const BackdropAuthor = styled(Typography)(({theme}) => ({
-    marginBottom: '4px',    
-
-    fontSize: '12px',
-    lineHeight: '14px',
-    fontWeight: '500',
-    color: theme.palette.custom.textSecondary
-})) as typeof Typography;
-
 export const Pages = styled(Typography)(({theme}) => ({
     fontSize: '10px',
     lineHeight: '12px',
@@ -124,6 +95,22 @@ export const Pages = styled(Typography)(({theme}) => ({
 })) as typeof Typography;
 
 export const AddToLibraryBtn = styled(ButtonBase)(({theme})=>({
+    width: '141px',
+    padding: '12px 24px',
+    borderRadius: '30px',
+    border: '1px solid rgba(249, 249, 249, 0.20)',
+
+    color: theme.palette.custom.textMain,
+    fontWeight: '700',
+    fontSize: '14px',
+    lineHeight: '18px',
+
+    [theme.breakpoints.down('tablet')]: {
+        // display: 'none'
+    }
+}));
+
+export const StartReadingBtn = styled(ButtonBase)(({theme})=>({
     width: '141px',
     padding: '12px 24px',
     borderRadius: '30px',

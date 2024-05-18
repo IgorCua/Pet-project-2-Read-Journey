@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { FormTextField } from "../materialUI/FormTextField"
-import { Form, FormHeader, InputAuthor, InputTitle, Submit } from "./styled"
+import { Form, FormHeader, InputAuthor, InputTitle, NumOfPages, Submit } from "./styled"
 import React, { useRef } from "react";
 import { booksGetRecommended } from "../../redux/books/operations";
 
@@ -11,14 +11,16 @@ type Request = {
     title?: string,
     author?: string,
     page?: string | number,
-    limit?: string | number
+    limit?: string | number,
+    totalPages?: number
 }
 
-type FilterProps = {
-    numOfInputs?: number
+type Props = {
+    numOfInputs?: 2 | 3,
+    reqestLimit?: number
 }
 
-export const Filter = ({numOfInputs}: FilterProps) => {
+export const Filter = ({numOfInputs, reqestLimit}: Props) => {
     // const inputTitleRef = useRef<null | HTMLInputElement>(null);
     // const inputAuthorRef = useRef<null | HTMLInputElement>(null);
     const dispatch = useDispatch<AppDispatch>();
@@ -32,24 +34,27 @@ export const Filter = ({numOfInputs}: FilterProps) => {
 
         if(title) req.title = title;
         if(author) req.author = author;
+        if(reqestLimit) req.totalPages = reqestLimit;
 
-        if(window.innerWidth < 768) {
-            req.limit = 2;
-            dispatch(booksGetRecommended(req));
-            // event.target.reset();
-            return
-        }
-        if(window.innerWidth < 1024) {
-            req.limit = 8;
-            dispatch(booksGetRecommended(req));
-            // event.target.reset();
-            return
-        }
-        if(window.innerWidth >= 1024) {
-            req.limit = 10;
-            dispatch(booksGetRecommended(req));
-            // event.target.reset();
-            return
+        if(!reqestLimit){
+            if(window.innerWidth < 768) {
+                req.limit = 2;
+                dispatch(booksGetRecommended(req));
+                // event.target.reset();
+                return
+            }
+            if(window.innerWidth < 1024) {
+                req.limit = 8;
+                dispatch(booksGetRecommended(req));
+                // event.target.reset();
+                return
+            }
+            if(window.innerWidth >= 1024) {
+                req.limit = 10;
+                dispatch(booksGetRecommended(req));
+                // event.target.reset();
+                return
+            }
         }
     }
 
@@ -57,6 +62,9 @@ export const Filter = ({numOfInputs}: FilterProps) => {
         <FormHeader>Filters:</FormHeader>
         <InputTitle type="text" name="title"/>
         <InputAuthor type="text" name="author"/>
+        {numOfInputs === 3 && 
+            <NumOfPages type="text" name="author"/>
+        }
         <Submit type="submit">To Apply</Submit>
     </Form>
 }

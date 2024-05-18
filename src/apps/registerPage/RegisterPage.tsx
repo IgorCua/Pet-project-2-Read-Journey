@@ -23,7 +23,7 @@ export const RegisterPage = () => {
             <Section>
                 <IconContainer>
                     <Icon iconName='#icon-logo' sx={{width: '42px', height: '17px'}}/>
-                    <IconHeader>Read Journey</IconHeader>
+                    <IconHeader>Reading Journey</IconHeader>
                 </IconContainer>
                 <Header>Expand your mind, reading <Span>a book</Span></Header>
                 <RegisterForm/>

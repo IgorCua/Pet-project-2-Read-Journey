@@ -109,7 +109,7 @@ export const Nav = styled('nav')(({theme})=> ({
         cursor: 'auto',
         display: 'block',
 
-        [theme.breakpoints.up('mobile')]: {
+        [theme.breakpoints.up('mobileS')]: {
             bottom:'-7px'
         },
         [theme.breakpoints.up('tablet')]: {

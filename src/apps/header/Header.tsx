@@ -8,8 +8,6 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import { theme } from "../../styles/themes";
 import { Icon } from "../../components/icon/Icon";
 import { 
@@ -19,20 +17,18 @@ import {
     UserContainer 
 } from "./styled";
 import React, { useState } from "react";
-import { CustomBackdrop } from "../../components/customBackdrop/CustomBackdrop";
 import { Backdrop } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { userSignOut } from "../../redux/auth/operations";
 import { useSelector } from "react-redux";
 import { selectName } from "../../redux/auth/selectors";
-import { display } from "@mui/system";
 
 export type AppDispatch = typeof store.dispatch;
 
 export function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const userName = useSelector(selectName);
+    // const userName = useSelector(selectName);
     const dispatch = useDispatch<AppDispatch>();
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
@@ -134,7 +130,7 @@ export function Header() {
                         <Box sx={{ flexGrow: 0 }}>
                             <IconButton sx={{ 
                                 p: 0,
-                                [theme.breakpoints.up('mobile')]: {
+                                [theme.breakpoints.up('mobileS')]: {
                                     marginRight:'10px'
                                 },
                                 
@@ -210,7 +206,7 @@ export function Header() {
                                         </NavLink>
                                     </Nav>
                                     <LogOffBtn 
-                                        // sx={{[theme.breakpoints.up('tablet')]: {display: 'none'}}} 
+                                        sx={{[theme.breakpoints.down('tablet')]: {display: 'block'}}} 
                                         onClick={handleLogOut}>Log out</LogOffBtn>
                                 </NavContainer>
                             </Backdrop>

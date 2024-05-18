@@ -9,7 +9,7 @@ import { LoginPage } from './apps/loginPage/LoginPage';
 import { RecommendedPage } from './apps/recommendedPage/RecommendedPage';
 import { selectAuthIsLoggedIn } from './redux/auth/selectors';
 import { useSelector } from 'react-redux';
-import { LibraryPage } from './apps/libraryPage/LibraryPage';
+import { UserLibraryPage } from './apps/UserlibraryPage/UserLibraryPage';
 import { Authenticate } from './components/authenticate/Authenticate';
 
 function App() {
@@ -23,7 +23,7 @@ function App() {
               {isLoggedIn &&
                   <Route element={<PrivateRoute component={<Header />} />}>
                       <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage />} />} />
-                      <Route path='/library' element={<PrivateRoute component={<LibraryPage />} />} />
+                      <Route path='/library' element={<PrivateRoute component={<UserLibraryPage />} />} />
                       <Route path='/reading' element={<PrivateRoute component={<RecommendedPage />} />} />
                   </Route>
               }
