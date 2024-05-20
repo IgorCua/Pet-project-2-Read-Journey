@@ -14,7 +14,19 @@ type Props = {
     errorMessage: string,
     sx?: any
 };
+
 type AppDispatch = typeof store.dispatch;
+
+type ErrorObj = {
+    errorCode: string,
+    errorMessage: string
+}
+
+let errorObj: ErrorObj = {
+    errorCode: '',
+    errorMessage: ''
+};
+
 export const ErrorModal = (props: Props) => {
     const {
         type, 
@@ -26,11 +38,15 @@ export const ErrorModal = (props: Props) => {
     } = props;
 
     const error = useMemo(()=>{
+        if(erorrCode !== 'code' || errorMessage !== 'message'){
+            errorObj.errorCode = erorrCode;
+            errorObj.errorMessage = errorMessage;
+        }
         return {
             erorrCode: erorrCode,
             errorMessage: errorMessage
         }
-    }, [isModalOpen])
+    }, [isModalOpen]);
 
     const dispatch = useDispatch<AppDispatch>();
     
@@ -38,9 +54,10 @@ export const ErrorModal = (props: Props) => {
         if(event.target === event.currentTarget) {
             if(type === 'userError') dispatch(userRemoveError());
             if(type === 'booksError') dispatch(booksRemoveError());
+
         };
         setIsModalOpen(!isModalOpen);
-    }
+    };
 
     return <Backdrop
         open={isModalOpen}
@@ -53,8 +70,8 @@ export const ErrorModal = (props: Props) => {
         <Container>
             <ErrorContainer>
                 <ErrorHeader>ERROR</ErrorHeader>
-                <ErrorCode>{error.erorrCode}</ErrorCode>
-                <ErrorMessage>{error.errorMessage}</ErrorMessage>
+                <ErrorCode>{error.erorrCode === 'code' ? errorObj.errorCode : error.erorrCode}</ErrorCode>
+                <ErrorMessage>{error.errorMessage === 'message' ? errorObj.errorMessage : error.errorMessage}</ErrorMessage>
                 <ErrorButton onClick={handleError}>OK</ErrorButton>
             </ErrorContainer>
         </Container>

@@ -28,6 +28,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonBgWhite?: string;
     modalBorder?: string,
     authInputBorder: string,
+    buttonSecondaryHover: string,
     utilBlue?: string;
     utilGreen?: string;
   }
@@ -43,6 +44,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonBorderGrey: string;
     modalBorder: string,
     authInputBorder: string,
+    buttonSecondaryHover: string,
     utilBlue: string;
     utilGreen: string;
   }
@@ -98,6 +100,7 @@ type CustomTeme = {
   buttonBorderGrey: string,
   modalBorder: string,
   authInputBorder: string,
+  buttonSecondaryHover: string,
   utilBlue: string,
   utilGreen: string
 }
@@ -114,6 +117,7 @@ const customTheme: CustomTeme = {
   buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
   modalBorder: 'rgba(68, 68, 68, 0.20)',
   authInputBorder: 'rgb(68, 68, 68)',
+  buttonSecondaryHover: '#262626',
   utilBlue: '#4F92F7',
   utilGreen: '#30B94D'
 }
@@ -144,6 +148,7 @@ export const theme = createTheme({
       buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
       modalBorder: 'rgba(68, 68, 68, 0.20)',
       authInputBorder: 'rgb(68, 68, 68)',
+      buttonSecondaryHover: '#262626',
       utilBlue: '#4F92F7',
       utilGreen: '#30B94D'
     }
@@ -186,10 +191,28 @@ export const theme = createTheme({
     },
     MuiButtonBase:{
       styleOverrides: {
-        // root: {
-        //   height: '15px',
-        //   fontFamily: 'Gilroy'
-        // }
+        root: {
+          // height: '15px',
+          // fontFamily: 'Gilroy'
+          transitionProperty: 'background-color',
+          transitionDuration: '250ms',
+
+          '&:hover':{
+            backgroundColor: customTheme.buttonSecondaryHover
+          }
+        },
+      }
+    },
+    MuiIconButton:{
+      styleOverrides:{
+        root:{
+          transitionProperty: 'background-color',
+          transitionDuration: '250ms',
+
+            '&:hover':{
+            backgroundColor: customTheme.buttonSecondaryHover
+          }
+        }
       }
     },
     MuiTouchRipple: {

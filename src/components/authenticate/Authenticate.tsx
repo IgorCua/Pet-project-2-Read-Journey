@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux";
 import { selectAuthError, selectToken } from "../../redux/auth/selectors";
 import { useDispatch } from "react-redux";
@@ -25,15 +25,15 @@ export const Authenticate = ({children}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const dispatch = useDispatch<AppDispatch>();
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
-    const errorObj = useMemo(()=>{
+    const errorObj = useMemo(() => {
         return {
             errorCode: 'code',
             errorMessage: 'message'
         };
-    },[authError]);
-    
+    }, [authError]);
+
     const handleDelay = () => {
         if(decodedToken) {
             return decodedToken.exp * 1000 - new Date().getTime();
@@ -44,7 +44,7 @@ export const Authenticate = ({children}: Props) => {
     useEffect(() => {
         if(authError && authError.config.url === "/users/signin"){
             errorObj.errorCode = authError.response.status;
-            errorObj.errorMessage = authError.response.data.message;
+            errorObj.errorMessage = 'Email or password is wrong.'; 
             setIsModalOpen(true);
         }
     }, [isModalOpen, setIsModalOpen, authError, errorObj]);

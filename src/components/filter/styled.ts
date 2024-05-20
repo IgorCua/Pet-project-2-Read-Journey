@@ -120,12 +120,12 @@ export const Submit = styled(ButtonBase)(({theme}) => ({
 
     color: theme.palette.custom.textMain,
 
-    transitionProperty: 'background-color',
-    transitionDuration: '250ms',
+    // transitionProperty: 'background-color',
+    // transitionDuration: '250ms',
 
-    '&:hover': {
-        backgroundColor: theme.palette.custom.bg2
-    },
+    // '&:hover': {
+    //     backgroundColor: theme.palette.custom.bg2
+    // },
 
     [theme.breakpoints.up('tablet')]: {
         padding: '12px 28px',
