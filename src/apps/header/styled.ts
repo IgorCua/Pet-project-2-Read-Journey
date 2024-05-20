@@ -141,4 +141,4 @@ export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     [theme.breakpoints.down('tablet')]: {
         display: 'none'
     }
-}));
+})) as typeof ButtonBase;

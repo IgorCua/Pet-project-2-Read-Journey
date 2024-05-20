@@ -144,3 +144,11 @@ export const userLocalSignOut = createAsyncThunk(
         }
     }
 );
+
+export const userRemoveError = createAsyncThunk(
+    'auth/removeError',
+
+    async ( _, { rejectWithValue }) => {
+        return null;
+    }
+);

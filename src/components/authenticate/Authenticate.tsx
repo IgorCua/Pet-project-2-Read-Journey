@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo } from "react"
-import { useSelector } from "react-redux"
-import { selectAuthError, selectAuthIsLoading, selectAuthIsLoggedIn, selectToken } from "../../redux/auth/selectors"
-import { useDispatch } from "react-redux"
-import { userLocalSignOut, userRefreshToken, userSignOut } from "../../redux/auth/operations"
-import { store } from "../../redux/store"
-import { axiosToken } from "../../services/axiosSettings"
-import { useNavigate } from "react-router-dom"
-import { selectBooksError } from "../../redux/books/selectors"
+import React, { useEffect, useMemo, useState } from "react"
+import { useSelector } from "react-redux";
+import { selectAuthError, selectToken } from "../../redux/auth/selectors";
+import { useDispatch } from "react-redux";
+import { userRefreshToken } from "../../redux/auth/operations";
+import { store } from "../../redux/store";
+import { axiosToken } from "../../services/axiosSettings";
+import { useNavigate } from "react-router-dom";
+import { selectBooksError } from "../../redux/books/selectors";
+import { ErrorModal } from "../errorModal/ErrorModal";
 
 type Props = {
     children: React.ReactElement
@@ -21,9 +22,17 @@ export const Authenticate = ({children}: Props) => {
     const authError: any = useSelector(selectAuthError);
     const booksError: any = useSelector(selectBooksError);
 
-    // const isLoggedIn = useSelector(selectAuthIsLoggedIn);    
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
     const dispatch = useDispatch<AppDispatch>();
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
+
+    const errorObj = useMemo(()=>{
+        return {
+            errorCode: 'code',
+            errorMessage: 'message'
+        };
+    },[authError]);
     
     const handleDelay = () => {
         if(decodedToken) {
@@ -32,13 +41,13 @@ export const Authenticate = ({children}: Props) => {
         return -1;
     }
 
-    if(authError && authError.response.status === 401) {
-        dispatch(userLocalSignOut());
-    }
-
-    if(booksError && booksError.response.status === 401) {
-        dispatch(userLocalSignOut());
-    }
+    useEffect(() => {
+        if(authError && authError.config.url === "/users/signin"){
+            errorObj.errorCode = authError.response.status;
+            errorObj.errorMessage = authError.response.data.message;
+            setIsModalOpen(true);
+        }
+    }, [isModalOpen, setIsModalOpen, authError, errorObj]);
 
     if(token && refreshToken){
         setTimeout(() => {
@@ -47,5 +56,14 @@ export const Authenticate = ({children}: Props) => {
         }, handleDelay());
     }
     
-    return <>{children}</>
+    return <>
+        {children}
+        <ErrorModal
+            type="userError"
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            erorrCode={errorObj.errorCode}
+            errorMessage={errorObj.errorMessage}
+        />
+    </>
 }

@@ -4,6 +4,7 @@ import {
     userGetCurrent, 
     userLocalSignOut, 
     userRefreshToken, 
+    userRemoveError, 
     userSignin, 
     userSignOut, 
     userSignup 
@@ -108,6 +109,10 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
+            })
+            .addCase(userRemoveError.fulfilled, (state, action) => {
+                state.error = action.payload;
+                state.isError = false;
             })
             .addMatcher(
                 (action): action is PendingAction => (

@@ -1,23 +1,32 @@
-import { Backdrop, IconButton } from "@mui/material"
-import React, { MouseEvent } from "react"
-import { Container } from "./styled";
+import { Backdrop, IconButton } from "@mui/material";
+import React, { MouseEvent } from "react";
+import { Button, Container } from "./styled";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
 
 type Props = {
-    isModalOpen: boolean;
-    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>
-    children: React.ReactElement;
+    isModalOpen: boolean,
+    setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
+    children: React.ReactElement,
+    sx?: any
 };
 
-export const CustomBackdrop = ({isModalOpen, setIsModalOpen, children}: Props) => {
+export const CustomBackdrop = (props: Props) => {
+    const {
+        isModalOpen, 
+        setIsModalOpen, 
+        children, 
+        sx
+    } = props;
+
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
-        if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
+        if(event.target === event.currentTarget) setIsModalOpen(!isModalOpen);
     }
 
     return <Backdrop
         open={isModalOpen}
         onClick={handleModal}
+        sx={sx}
     >
         <Container>
             <IconButton
@@ -43,9 +52,7 @@ export const CustomBackdrop = ({isModalOpen, setIsModalOpen, children}: Props) =
                         }} 
                     />
             </IconButton>
-
             {children}
-
         </Container>
     </Backdrop>
 }

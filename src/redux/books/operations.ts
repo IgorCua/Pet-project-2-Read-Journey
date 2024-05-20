@@ -153,3 +153,11 @@ export const booksGetBookInfo = createAsyncThunk(
         }
     }
 );
+
+export const booksRemoveError = createAsyncThunk(
+    'books/removeError',
+
+    async ( _, { rejectWithValue }) => {
+        return null;
+    }
+);
