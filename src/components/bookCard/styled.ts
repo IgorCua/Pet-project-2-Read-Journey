@@ -8,7 +8,19 @@ export const Container = styled('div')(({theme}) => ({
     // width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
+    cursor: 'pointer',
 
+    '& img': {
+        transitionDuration: '250ms',
+        transitionProperty: 'box-shadow',
+    },
+
+    '&:hover': {
+        '& img':{
+            borderRadius: '8px',
+            boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
+        }
+    }
 }));
 
 export const Image = styled('img')(({theme}) => ({
@@ -19,7 +31,7 @@ export const Image = styled('img')(({theme}) => ({
 
     borderRadius: '8px',
 
-    cursor: 'pointer'
+    // cursor: 'pointer'
 }));
 
 export const DescriptionContainer = styled('div')({

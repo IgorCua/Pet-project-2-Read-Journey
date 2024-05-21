@@ -209,7 +209,7 @@ export const theme = createTheme({
           transitionProperty: 'background-color',
           transitionDuration: '250ms',
 
-            '&:hover':{
+          '&:hover':{
             backgroundColor: customTheme.buttonSecondaryHover
           }
         }

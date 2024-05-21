@@ -62,8 +62,8 @@ export const BookCard = ({id, cardType, url, title, author, pages, handleClick}:
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)
     return <>
-        <Container>
-            <Image src={url} onClick={() => {setIsModalOpen(true); console.log('img click')}}/>
+        <Container onClick={() => {setIsModalOpen(true)}}>
+            <Image src={url}/>
             <DescriptionContainer>
                 <Header variant="h3" noWrap>{title}</Header>
                 <Author noWrap>{author}</Author>

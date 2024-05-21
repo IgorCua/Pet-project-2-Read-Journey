@@ -83,7 +83,6 @@ export const ErrorModal = (props: Props) => {
                     ? <ErrorButton onClick={handleError}>OK</ErrorButton>
                     : <ErrorButton onClick={handleDispatch}>OK</ErrorButton>
                 }
-
             </ErrorContainer>
         </Container>
     </Backdrop>

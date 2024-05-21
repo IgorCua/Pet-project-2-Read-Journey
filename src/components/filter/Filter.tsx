@@ -36,6 +36,10 @@ export const Filter = ({numOfInputs, requestLimit}: Props) => {
         if(author) req.author = author;
         // if(reqestLimit) req.totalPages = reqestLimit;
 
+        if(requestLimit === 3){
+            
+        } 
+
         if(!requestLimit){
             if(window.innerWidth < 768) {
                 req.limit = 2;
@@ -56,10 +60,6 @@ export const Filter = ({numOfInputs, requestLimit}: Props) => {
                 return
             }
         }
-
-        if(requestLimit === 3){
-            
-        } 
     }
 
     return <Form onSubmit={handleSubmit}>
