@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux";
 import { selectAuthError, selectToken } from "../../redux/auth/selectors";
 import { useDispatch } from "react-redux";
-import { userRefreshToken } from "../../redux/auth/operations";
+import { userLocalSignOut, userRefreshToken } from "../../redux/auth/operations";
 import { store } from "../../redux/store";
 import { axiosToken } from "../../services/axiosSettings";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,15 @@ import { ErrorModal } from "../errorModal/ErrorModal";
 
 type Props = {
     children: React.ReactElement
+}
+
+type DispatchAction = () => void;
+
+type ErrorObj = {
+    errorCode: string,
+    errorMessage: string,
+    // dispatchAction: null | DispatchAction
+    dispatchAction: any
 }
 
 type AppDispatch = typeof store.dispatch;
@@ -27,10 +36,11 @@ export const Authenticate = ({children}: Props) => {
     const dispatch = useDispatch<AppDispatch>();
     // const navigate = useNavigate();
 
-    const errorObj = useMemo(() => {
+    const errorObj: ErrorObj = useMemo(() => {
         return {
             errorCode: 'code',
-            errorMessage: 'message'
+            errorMessage: 'message',
+            dispatchAction: null
         };
     }, [authError]);
 
@@ -42,10 +52,20 @@ export const Authenticate = ({children}: Props) => {
     }
 
     useEffect(() => {
-        if(authError && authError.config.url === "/users/signin"){
-            errorObj.errorCode = authError.response.status;
-            errorObj.errorMessage = 'Email or password is wrong.'; 
-            setIsModalOpen(true);
+        if(authError){
+            if(authError.config.url === "/users/signin"){
+                errorObj.errorCode = authError.response.status;
+                errorObj.errorMessage = 'Email or password is wrong.'; 
+                setIsModalOpen(true);
+                return
+            }
+            if(authError.config.url === "/users/signup"){
+                errorObj.errorCode = authError.response.status;
+                errorObj.errorMessage = 'User already exist.'; 
+                setIsModalOpen(true);
+                return
+            }
+            if(authError.response.status === 401) errorObj.dispatchAction = userLocalSignOut();
         }
     }, [isModalOpen, setIsModalOpen, authError, errorObj]);
 
@@ -64,6 +84,7 @@ export const Authenticate = ({children}: Props) => {
             setIsModalOpen={setIsModalOpen}
             erorrCode={errorObj.errorCode}
             errorMessage={errorObj.errorMessage}
+            // dispatchAction={userLocalSignOut()}
         />
     </>
 }

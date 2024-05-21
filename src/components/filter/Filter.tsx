@@ -17,10 +17,10 @@ type Request = {
 
 type Props = {
     numOfInputs?: 2 | 3,
-    reqestLimit?: number
+    requestLimit?: number
 }
 
-export const Filter = ({numOfInputs, reqestLimit}: Props) => {
+export const Filter = ({numOfInputs, requestLimit}: Props) => {
     // const inputTitleRef = useRef<null | HTMLInputElement>(null);
     // const inputAuthorRef = useRef<null | HTMLInputElement>(null);
     const dispatch = useDispatch<AppDispatch>();
@@ -34,9 +34,9 @@ export const Filter = ({numOfInputs, reqestLimit}: Props) => {
 
         if(title) req.title = title;
         if(author) req.author = author;
-        if(reqestLimit) req.totalPages = reqestLimit;
+        // if(reqestLimit) req.totalPages = reqestLimit;
 
-        if(!reqestLimit){
+        if(!requestLimit){
             if(window.innerWidth < 768) {
                 req.limit = 2;
                 dispatch(booksGetRecommended(req));
@@ -56,6 +56,10 @@ export const Filter = ({numOfInputs, reqestLimit}: Props) => {
                 return
             }
         }
+
+        if(requestLimit === 3){
+            
+        } 
     }
 
     return <Form onSubmit={handleSubmit}>
@@ -63,7 +67,7 @@ export const Filter = ({numOfInputs, reqestLimit}: Props) => {
         <InputTitle type="text" name="title"/>
         <InputAuthor type="text" name="author"/>
         {numOfInputs === 3 && 
-            <NumOfPages type="text" name="author"/>
+            <NumOfPages type="text" name="numberOfPages"/>
         }
         <Submit type="submit">To Apply</Submit>
     </Form>

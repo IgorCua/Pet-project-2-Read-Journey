@@ -12,6 +12,7 @@ type Props = {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
     erorrCode: string,
     errorMessage: string,
+    dispatchAction?: any,
     sx?: any
 };
 
@@ -34,8 +35,10 @@ export const ErrorModal = (props: Props) => {
         errorMessage, 
         isModalOpen, 
         setIsModalOpen, 
+        dispatchAction,
         sx
     } = props;
+    const dispatch = useDispatch<AppDispatch>();
 
     const error = useMemo(()=>{
         if(erorrCode !== 'code' || errorMessage !== 'message'){
@@ -48,7 +51,7 @@ export const ErrorModal = (props: Props) => {
         }
     }, [isModalOpen]);
 
-    const dispatch = useDispatch<AppDispatch>();
+    if(typeof dispatchAction === 'function')console.log('error dispatch');
     
     const handleError = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget) {
@@ -58,6 +61,10 @@ export const ErrorModal = (props: Props) => {
         };
         setIsModalOpen(!isModalOpen);
     };
+
+    const handleDispatch = () => {
+        console.log('handleDispatch',dispatchAction);
+    }
 
     return <Backdrop
         open={isModalOpen}
@@ -72,7 +79,11 @@ export const ErrorModal = (props: Props) => {
                 <ErrorHeader>ERROR</ErrorHeader>
                 <ErrorCode>{error.erorrCode === 'code' ? errorObj.errorCode : error.erorrCode}</ErrorCode>
                 <ErrorMessage>{error.errorMessage === 'message' ? errorObj.errorMessage : error.errorMessage}</ErrorMessage>
-                <ErrorButton onClick={handleError}>OK</ErrorButton>
+                {!dispatchAction 
+                    ? <ErrorButton onClick={handleError}>OK</ErrorButton>
+                    : <ErrorButton onClick={handleDispatch}>OK</ErrorButton>
+                }
+
             </ErrorContainer>
         </Container>
     </Backdrop>
