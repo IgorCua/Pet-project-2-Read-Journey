@@ -55,7 +55,6 @@ export const InputTitle = styled(TextField)(({theme})=>({
 })) as typeof TextField;
 
 export const InputAuthor = styled(TextField)(({theme})=>({
-    marginBottom: '20px',
     '& div': {
         paddingLeft: '14px',
         // width: '30px'
@@ -84,20 +83,22 @@ export const InputAuthor = styled(TextField)(({theme})=>({
 })) as typeof TextField;
 
 export const NumOfPages = styled(TextField)(({theme})=>({
-    marginBottom: '20px',
+    // marginBottom: '20px',
+    marginTop: '8px',
     '& div': {
         paddingLeft: '14px',
         // width: '30px'
     },
     '& div::before': {
-        // minWidth: '65px',
+        minWidth: '100px',
         content: '"Number of Pages:"',
         fontSize: '12px',
         color: theme.palette.custom.textSecondary,
         
         [theme.breakpoints.up('tablet')]: {
+            minWidth: '116px',
+
             fontSize: '14px',
-            minWidth: '75px'
         },
     },
     '& div input': {
@@ -113,6 +114,7 @@ export const NumOfPages = styled(TextField)(({theme})=>({
 })) as typeof TextField;
 
 export const Submit = styled(ButtonBase)(({theme}) => ({
+    marginTop: '20px',
     // width: '91px',
     padding: '10px 20px',
     borderRadius: '30px',

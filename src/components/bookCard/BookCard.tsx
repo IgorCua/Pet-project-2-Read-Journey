@@ -29,7 +29,8 @@ type Props = {
     title: string,
     author: string,
     pages?: number,
-    handleClick: (title: any) => void
+    sx?: {}
+    // handleClick?: (title: any) => void
 }
 
 type BackdropProps = {
@@ -41,7 +42,7 @@ type BackdropProps = {
 
 type AppDispatch = typeof store.dispatch;
 
-export const BookCard = ({id, cardType, url, title, author, pages, handleClick}: Props) => {
+export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [isReading, setIsReading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
@@ -62,7 +63,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, handleClick}:
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)
     return <>
-        <Container onClick={() => {setIsModalOpen(true)}}>
+        <Container onClick={() => {setIsModalOpen(true)}} sx={sx}>
             <Image src={url}/>
             <DescriptionContainer>
                 <Header variant="h3" noWrap>{title}</Header>

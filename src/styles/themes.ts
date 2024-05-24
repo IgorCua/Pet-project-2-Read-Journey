@@ -27,8 +27,9 @@ declare module '@mui/material/styles/createPalette' {
     buttonBorderGrey?: string;
     buttonBgWhite?: string;
     modalBorder?: string,
-    authInputBorder: string,
-    buttonSecondaryHover: string,
+    backdropBackground?: string,
+    authInputBorder?: string,
+    buttonSecondaryHover?: string,
     utilBlue?: string;
     utilGreen?: string;
   }
@@ -43,6 +44,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonBgWhite: string;
     buttonBorderGrey: string;
     modalBorder: string,
+    backdropBackground: string,
     authInputBorder: string,
     buttonSecondaryHover: string,
     utilBlue: string;
@@ -99,6 +101,7 @@ type CustomTeme = {
   buttonBgWhite: string,
   buttonBorderGrey: string,
   modalBorder: string,
+  backdropBackground: string,
   authInputBorder: string,
   buttonSecondaryHover: string,
   utilBlue: string,
@@ -116,6 +119,7 @@ const customTheme: CustomTeme = {
   buttonBgWhite: '#F9F9F9',
   buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
   modalBorder: 'rgba(68, 68, 68, 0.20)',
+  backdropBackground: 'rgba(20, 20, 20, 0.60)',
   authInputBorder: 'rgb(68, 68, 68)',
   buttonSecondaryHover: '#262626',
   utilBlue: '#4F92F7',
@@ -147,6 +151,7 @@ export const theme = createTheme({
       buttonBgWhite: '#F9F9F9',
       buttonBorderGrey: 'rgba(249, 249, 249, 0.20)',
       modalBorder: 'rgba(68, 68, 68, 0.20)',
+      backdropBackground: 'rgba(20, 20, 20, 0.60)',
       authInputBorder: 'rgb(68, 68, 68)',
       buttonSecondaryHover: '#262626',
       utilBlue: '#4F92F7',
@@ -192,6 +197,7 @@ export const theme = createTheme({
     MuiButtonBase:{
       styleOverrides: {
         root: {
+          padding: '0px',
           // height: '15px',
           // fontFamily: 'Gilroy'
           transitionProperty: 'background-color',
@@ -206,6 +212,7 @@ export const theme = createTheme({
     MuiIconButton:{
       styleOverrides:{
         root:{
+          // padding: '0',
           transitionProperty: 'background-color',
           transitionDuration: '250ms',
 
@@ -331,7 +338,7 @@ export const theme = createTheme({
     MuiBackdrop:{
       styleOverrides:{
         root:{
-          backgroundColor: 'rgba(20, 20, 20, 0.60)',
+          // backgroundColor: 'rgba(20, 20, 20, 0.60)',
         },
       }
     },

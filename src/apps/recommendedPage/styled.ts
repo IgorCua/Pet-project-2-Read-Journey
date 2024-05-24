@@ -152,7 +152,7 @@ export const LinkButton = styled(ButtonBase)(({theme}) => ({
 
     // [theme.breakpoints.up('tablet')]: {
     // }
-}));
+}))as typeof ButtonBase;;
 
 export const IconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
@@ -165,7 +165,7 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
     color: theme.palette.custom.textMain,
 
     border: `1px solid ${theme.palette.custom.buttonBorderGrey}`
-}));
+})) as typeof IconButton;;
 
 export const Figure = styled('figure')(({theme}) => ({
     padding: '15px 20px',

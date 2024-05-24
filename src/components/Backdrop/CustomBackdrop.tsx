@@ -26,7 +26,10 @@ export const CustomBackdrop = (props: Props) => {
     return <Backdrop
         open={isModalOpen}
         onClick={handleModal}
-        sx={sx}
+        sx={{
+            backgroundColor: theme.palette.custom.backdropBackground,
+            ...sx
+        }}
     >
         <Container>
             <IconButton

@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { userRemoveError } from "../../redux/auth/operations";
 import { booksRemoveError } from "../../redux/books/operations";
 import { useMemo } from "react";
+import { theme } from "../../styles/themes";
 
 type Props = {
     type: 'userError' | 'booksError',
@@ -71,6 +72,7 @@ export const ErrorModal = (props: Props) => {
         onClick={handleError}
         sx={{
             zIndex: '2000',
+            backgroundColor: theme.palette.custom.backdropBackground,
             ...sx
         }}
     >

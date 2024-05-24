@@ -1,12 +1,29 @@
-import { IconButton, List, ListItem } from "@mui/material"
-import { PageWrapper } from "../../components/PageWrapper/PageWrapper"
-import { Filter } from "../../components/filter/Filter"
-import { Container, DescripotionList, Figure, Img, FigureSpan, FigureText, IconWrapper, LinkButton, ListHeader, ListItemText, NumberDiv, Section, Span } from "./styled"
-import { Icon } from "../../components/icon/Icon"
-import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks"
-import { useNavigate } from "react-router-dom"
+import { IconButton, List, ListItem } from "@mui/material";
+import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
+import { Filter } from "../../components/filter/Filter";
+import { 
+    Container, 
+    DescripotionList, 
+    Figure, 
+    Img, 
+    FigureSpan, 
+    FigureText, 
+    IconWrapper, 
+    LinkButton, 
+    ListHeader, 
+    ListItemText, 
+    NumberDiv, 
+    Section, 
+    Span 
+} from "./styled";
+import { Icon } from "../../components/icon/Icon";
+import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectBooksError } from "../../redux/books/selectors";
 
 export const RecommendedPage = () => {
+    // const booksError = useSelector(selectBooksError);
     const navigate = useNavigate();
 
     const handleLinkClick = () => {

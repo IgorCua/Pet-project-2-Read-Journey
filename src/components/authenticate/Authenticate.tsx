@@ -66,13 +66,16 @@ export const Authenticate = ({children}: Props) => {
                 return
             }
             if(authError.response.status === 401) errorObj.dispatchAction = userLocalSignOut();
+            if(booksError.response.status === 401) errorObj.dispatchAction = userLocalSignOut();
         }
     }, [isModalOpen, setIsModalOpen, authError, errorObj]);
 
     if(token && refreshToken){
         setTimeout(() => {
-            axiosToken.set(refreshToken);
-            dispatch(userRefreshToken());
+            if (!authError && !booksError) {
+                axiosToken.set(refreshToken);
+                dispatch(userRefreshToken());
+            }
         }, handleDelay());
     }
     
