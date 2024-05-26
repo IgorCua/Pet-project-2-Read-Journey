@@ -29,7 +29,7 @@ type Props = {
     url: string,
     title: string,
     author: string,
-    pages?: number,
+    pages?: number | string,
     sx?: {}
     // handleClick?: (title: any) => void
 }
@@ -48,8 +48,22 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     // const [isReading, setIsReading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
 
-    const handleModal = (event: React.MouseEvent<HTMLElement>) => {
-        if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
+    const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
+        if(event.target instanceof Element){ 
+            if(
+                event.target.localName !== "button" 
+                && event.target.localName !== "svg" 
+                && event.target.localName !== "use"
+            ){
+                // console.log('current target', event.currentTarget.localName);
+                if(event.target !== event.currentTarget)setIsModalOpen(!isModalOpen);
+                return;
+            }
+
+            if(event.currentTarget.localName === 'button'){
+                console.log('delete book', id);
+            }
+        }
     }
 
     const handleAddToLibrary = () => {
@@ -64,7 +78,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)
     return <>
-        <Container onClick={() => {setIsModalOpen(true)}} sx={sx}>
+        <Container sx={sx} onClick={handleCardClick}>
             <Image src={url}/>
             <DescriptionContainer>
                 <TitleContainer>
@@ -72,34 +86,40 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                     <Author noWrap>{author}</Author>
                 </TitleContainer>
                 {cardType === 'library' && 
+                    <IconButton size="small" 
+                        onClick={handleCardClick} 
+                        sx={{marginLeft: '14px', 
+                        padding: '0px'
+                    }}>
                     <Icon 
+                        // onClick={handleDeleteBook}
                         iconName={'#icon-trash-bin-red'} 
                         sx={{
                             padding: '5px 4px',
-                            marginLeft: '14px',
+                            
                             width: '28px',
                             height: '28px',
                             display: 'flex',
                             alignSelf: 'center',
+                            transitionDuration: '250ms',
+                            transitionProperty:'background-color, border',
 
                             backgroundColor: 'rgba(232, 80, 80, 0.1)',
                             border: '1px solid rgba(232, 80, 80, 0.2)',
-                            borderRadius: '50%'
+                            borderRadius: '50%',
+
+                            cursor: 'pointer',
+                            // zIndex: '',
+                            '&:hover':{
+                                backgroundColor: 'rgba(232, 80, 80, 0.3)',
+                                border: '1px solid rgba(232, 80, 80, 0.5)',
+                                borderRadius: '50%',
+                            }
                         }}
                     />
+                    </IconButton>
                 }
             </DescriptionContainer>
-            {/* {cardType === 'library' && 
-                <Icon 
-                    iconName={'#icont-trash-bin-red'} 
-                    sx={{
-                        padding: '7px 7px',
-                        marginLeft: '14px',
-                        width: '28px',
-                        height: '28px'
-                    }}
-                />
-            } */}
         </Container>
         
         {isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>

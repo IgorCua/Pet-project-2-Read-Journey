@@ -238,11 +238,13 @@ export const UserLibraryPage = () => {
             {userBooks && userBooks.length !== 0 && <ContainerBooks>
                 {userBooks.map((book, i) => {
                     return <BookCard
+                        key={book._id}
                         cardType="library"
                         id={book._id}
                         url={book.imageUrl}
                         title={book.title}
                         author={book.author}
+                        pages={book.totalPages}
                         sx={{width: '137px'}}
                     />
                 })}

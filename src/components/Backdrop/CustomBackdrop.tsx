@@ -28,6 +28,7 @@ export const CustomBackdrop = (props: Props) => {
         onClick={handleModal}
         sx={{
             backgroundColor: theme.palette.custom.backdropBackground,
+            zIndex: '1000',
             ...sx
         }}
     >
