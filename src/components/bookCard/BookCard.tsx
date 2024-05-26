@@ -10,7 +10,8 @@ import {
     Header, 
     Image, 
     Pages, 
-    StartReadingBtn 
+    StartReadingBtn,
+    TitleContainer
 } from "./styled";
 import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
@@ -66,12 +67,31 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
         <Container onClick={() => {setIsModalOpen(true)}} sx={sx}>
             <Image src={url}/>
             <DescriptionContainer>
-                <Header variant="h3" noWrap>{title}</Header>
-                <Author noWrap>{author}</Author>
+                <TitleContainer>
+                    <Header variant="h3" noWrap>{title}</Header>
+                    <Author noWrap>{author}</Author>
+                </TitleContainer>
+                {cardType === 'library' && 
+                    <Icon 
+                        iconName={'#icon-trash-bin-red'} 
+                        sx={{
+                            padding: '5px 4px',
+                            marginLeft: '14px',
+                            width: '28px',
+                            height: '28px',
+                            display: 'flex',
+                            alignSelf: 'center',
+
+                            backgroundColor: 'rgba(232, 80, 80, 0.1)',
+                            border: '1px solid rgba(232, 80, 80, 0.2)',
+                            borderRadius: '50%'
+                        }}
+                    />
+                }
             </DescriptionContainer>
-            {cardType === 'library' && 
+            {/* {cardType === 'library' && 
                 <Icon 
-                    iconName={'#icont-rash-bin-red'} 
+                    iconName={'#icont-trash-bin-red'} 
                     sx={{
                         padding: '7px 7px',
                         marginLeft: '14px',
@@ -79,7 +99,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                         height: '28px'
                     }}
                 />
-            }
+            } */}
         </Container>
         
         {isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>

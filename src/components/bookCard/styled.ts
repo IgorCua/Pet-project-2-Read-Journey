@@ -7,7 +7,8 @@ export const Container = styled('div')(({theme}) => ({
     // width: '110px',
     // width: '100%',
     display: 'flex',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
+    flexDirection: 'column',
     cursor: 'pointer',
 
     '& img': {
@@ -35,8 +36,22 @@ export const Image = styled('img')(({theme}) => ({
 }));
 
 export const DescriptionContainer = styled('div')({
-    overflow:'hidden',
+    width: '100%',
+    // overflow:'hidden',
     textOverflow: 'ellipsis',
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    justifyContent: 'center'
+
+});
+
+export const TitleContainer = styled('div')({
+    minWidth: '70%',
+    maxWidth: '100%',
+
+    display: 'flex',
+    flexDirection: 'column'
 });
 
 export const Header = styled(Typography)(({theme}) => ({

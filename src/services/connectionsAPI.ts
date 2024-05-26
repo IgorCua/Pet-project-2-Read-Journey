@@ -71,7 +71,7 @@ interface AddBookInterface {
     progress: unknown[]
 }
 
-type UserBooksByType = '--' | 'unread' | 'in-progress' | 'done';
+type UserBooksByType = null | 'unread' | 'in-progress' | 'done';
 
 type SignupRes = {
     email: string,

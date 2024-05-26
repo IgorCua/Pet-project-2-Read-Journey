@@ -5,7 +5,8 @@ import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction 
 
 interface initialStateInterface {
     recommendedBooks: recomendedBooksInterface | null,
-    userBooks: BookInterface[] | [],
+    // userBooks: BookInterface[] | [],
+    userBooks: BookInterface[] | null,
     readingStart: any | null,
     readingEnd: any | null,
     currentReading: null | BookInterface,
@@ -17,7 +18,7 @@ interface initialStateInterface {
 
 const initialState = {
     recommendedBooks: null,
-    userBooks: [],
+    userBooks: null,
     readingStart: null,
     readingEnd: null,
     currentReading: null,
@@ -41,13 +42,15 @@ const booksSlice = createSlice({
                 state.error = null;
             })
             .addCase(booksAddBook.fulfilled, (state, action: PayloadAction<any>) => {
-                state.userBooks = [...state.userBooks, action.payload];
+                // state.userBooks = [...state.userBooks, action.payload];
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
             .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
-                state.userBooks = [...state.userBooks, action.payload];
+                // state.userBooks = [...state.userBooks, action.payload];
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
@@ -58,8 +61,8 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksGetUserBooks.fulfilled, (state, action) => {
-                state.userBooks = action.payload;
+            .addCase(booksGetUserBooks.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;

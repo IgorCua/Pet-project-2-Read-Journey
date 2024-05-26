@@ -16,7 +16,7 @@ interface AddBookInterface {
     totalPages: number
 }
 
-type GetUserBooksInterface = '--' | 'unread' | 'in-progress' | 'done';
+type GetUserBooksInterface = null | 'unread' | 'in-progress' | 'done';
 
 export const booksGetRecommended: any = createAsyncThunk(
     'books/getRecommended',
@@ -70,7 +70,7 @@ export const booksRemoveBook = createAsyncThunk(
         try{
             await axiosToken.set();
             await booksRemoveBookAPI(data);
-            const userBooks = await booksGetUserBooksAPI('--');
+            const userBooks = await booksGetUserBooksAPI(null);
             return userBooks;
         }
         catch (error: unknown) {

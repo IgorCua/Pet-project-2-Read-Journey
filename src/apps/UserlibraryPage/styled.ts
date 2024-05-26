@@ -10,14 +10,14 @@ export const Container = styled('div')(({theme}) => ({
     // borderRadius: '30px'
 }));
 
-export const DecorationContainer = styled('div')(({theme}) => ({
-    // marginTop: '10px',
-    // padding: '20px 20px',
+// export const DecorationContainer = styled('div')(({theme}) => ({
+//     // marginTop: '10px',
+//     // padding: '20px 20px',
 
-    backgroundColor: theme.palette.custom.bg3,
+//     backgroundColor: theme.palette.custom.bg3,
 
-    borderRadius: '30px'
-}));
+//     borderRadius: '30px'
+// }));
 
 export const ContainerFilter = styled('div')(({theme}) => ({
     padding: '20px 20px',
@@ -26,8 +26,10 @@ export const ContainerFilter = styled('div')(({theme}) => ({
     // gap: '',
     // justifyContent: 'space-between',
     // backgroundColor: theme.palette.custom.bg2,
+    backgroundColor: theme.palette.custom.bg3,
 
-    borderRadius: '12px'
+    borderRadius: '30px'
+    // borderRadius: '12px'
 }));
 export const ContainerRecommended = styled('div')(({theme}) => ({
     padding: '20px 20px',
@@ -101,11 +103,13 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
 export const ContainerMyLibrary = styled('div')(({theme}) => ({
     marginTop: '10px',
     padding: '40px 20px',
-    // marginBottom: '11px',
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'flex-start',
-    gap: '20px'
+    gap: '20px',
+
+    backgroundColor: theme.palette.custom.bg3,
+
+    borderRadius: '30px',
 }));
 
 export const LibraryHeaderContainer = styled('div')(({theme}) => ({
@@ -156,4 +160,11 @@ export const ImageText = styled('p')(({theme}) => ({
 
 export const ImageSpan = styled('span')(({theme}) => ({
     color: theme.palette.custom.textSecondary
+}));
+
+export const ContainerBooks = styled('div')(({theme}) => ({
+    // color: theme.palette.custom.textSecondary
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '20px'
 }));

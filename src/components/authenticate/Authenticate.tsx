@@ -80,7 +80,6 @@ export const Authenticate = ({children}: Props) => {
     }
     
     return <>
-        {children}
         <ErrorModal
             type="userError"
             isModalOpen={isModalOpen}
@@ -89,5 +88,6 @@ export const Authenticate = ({children}: Props) => {
             errorMessage={errorObj.errorMessage}
             // dispatchAction={userLocalSignOut()}
         />
+        {children}
     </>
 }
