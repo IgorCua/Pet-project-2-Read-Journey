@@ -6,6 +6,7 @@ import { userRemoveError } from "../../redux/auth/operations";
 import { booksRemoveError } from "../../redux/books/operations";
 import { useMemo } from "react";
 import { theme } from "../../styles/themes";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     type: 'userError' | 'booksError',
@@ -13,7 +14,7 @@ type Props = {
     setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>,
     erorrCode: string,
     errorMessage: string,
-    dispatchAction?: any,
+    dispatchFunction?: any,
     sx?: any
 };
 
@@ -36,10 +37,11 @@ export const ErrorModal = (props: Props) => {
         errorMessage, 
         isModalOpen, 
         setIsModalOpen, 
-        dispatchAction,
+        dispatchFunction,
         sx
     } = props;
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const error = useMemo(()=>{
         if(erorrCode !== 'code' || errorMessage !== 'message'){
@@ -52,7 +54,7 @@ export const ErrorModal = (props: Props) => {
         }
     }, [isModalOpen]);
 
-    if(typeof dispatchAction === 'function')console.log('error dispatch');
+    if(typeof dispatchFunction === 'function')console.log('error dispatch');
     
     const handleError = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget) {
@@ -63,9 +65,13 @@ export const ErrorModal = (props: Props) => {
         setIsModalOpen(!isModalOpen);
     };
 
-    const handleDispatch = () => {
-        console.log('handleDispatch',dispatchAction);
-    }
+    // const handleDispatch = () => {
+    //     // console.log('handleDispatch',dispatchAction);
+    //     // if(type === 'userError') dispatch(userRemoveError());
+    //     // if(type === 'booksError') dispatch(booksRemoveError());
+    //     navigate('/login');
+    //     dispatch(dispatchAction())
+    // }
 
     return <Backdrop
         open={isModalOpen}
@@ -79,11 +85,11 @@ export const ErrorModal = (props: Props) => {
         <Container>
             <ErrorContainer>
                 <ErrorHeader>ERROR</ErrorHeader>
-                <ErrorCode>{error.erorrCode === 'code' ? errorObj.errorCode : error.erorrCode}</ErrorCode>
-                <ErrorMessage>{error.errorMessage === 'message' ? errorObj.errorMessage : error.errorMessage}</ErrorMessage>
-                {!dispatchAction 
+                <ErrorCode>{error.erorrCode === 'code' ? 'code' : error.erorrCode}</ErrorCode>
+                <ErrorMessage>{error.errorMessage === 'message' ? 'message' : error.errorMessage}</ErrorMessage>
+                {!dispatchFunction 
                     ? <ErrorButton onClick={handleError}>OK</ErrorButton>
-                    : <ErrorButton onClick={handleDispatch}>OK</ErrorButton>
+                    : <ErrorButton onClick={dispatchFunction}>OK</ErrorButton>
                 }
             </ErrorContainer>
         </Container>

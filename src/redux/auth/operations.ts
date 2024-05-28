@@ -65,7 +65,7 @@ export const userGetCurrent = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
+            axiosToken.set();
             const res = await usersGetCurrentAPI();
             return res;
         }

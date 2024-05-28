@@ -69,6 +69,6 @@ export const Filter = ({numOfInputs, requestLimit}: Props) => {
         {numOfInputs === 3 && 
             <NumOfPages type="text" name="numberOfPages"/>
         }
-        <Submit type="submit">To Apply</Submit>
+        <Submit type="submit">Apply</Submit>
     </Form>
 }

@@ -72,7 +72,7 @@ export const UserLibraryPage = () => {
     useEffect(()=>{
         // if()
 
-        if(!booksObj || booksObj.results.length !== 3) {
+        if(!booksError && (!booksObj || booksObj.results.length !== 3)) {
             // handlePageLimit();
             console.log('useEffect')
             dispatch(booksGetRecommended(request));

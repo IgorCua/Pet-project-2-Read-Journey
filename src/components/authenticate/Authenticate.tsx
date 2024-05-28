@@ -19,7 +19,7 @@ type ErrorObj = {
     errorCode: string,
     errorMessage: string,
     // dispatchAction: null | DispatchAction
-    dispatchAction: any
+    // dispatchAction: any
 }
 
 type AppDispatch = typeof store.dispatch;
@@ -40,7 +40,7 @@ export const Authenticate = ({children}: Props) => {
         return {
             errorCode: 'code',
             errorMessage: 'message',
-            dispatchAction: null
+            // dispatchFunction: null
         };
     }, [authError]);
 
@@ -51,24 +51,55 @@ export const Authenticate = ({children}: Props) => {
         return -1;
     }
 
+    // const renderError = ()=> {
+    //     return <ErrorModal
+    //         type="userError"
+    //         isModalOpen={isModalOpen}
+    //         setIsModalOpen={setIsModalOpen}
+    //         erorrCode={errorObj.errorCode}
+    //         errorMessage={errorObj.errorMessage}
+    //         // dispatchAction={userLocalSignOut()}
+    //     />
+    // }
+
     useEffect(() => {
         if(authError){
             if(authError.config.url === "/users/signin"){
+                console.log('Authenticate');
                 errorObj.errorCode = authError.response.status;
                 errorObj.errorMessage = 'Email or password is wrong.'; 
                 setIsModalOpen(true);
-                return
+                // return
             }
             if(authError.config.url === "/users/signup"){
+                console.log('Authenticate');
                 errorObj.errorCode = authError.response.status;
                 errorObj.errorMessage = 'User already exist.'; 
                 setIsModalOpen(true);
-                return
+                // return
             }
-            if(authError.response.status === 401) errorObj.dispatchAction = userLocalSignOut();
-            if(booksError.response.status === 401) errorObj.dispatchAction = userLocalSignOut();
+            if(authError.config.url !== "/users/signin" && authError.response.status === 401) {
+                console.log('Authenticate auth', authError.response.status);
+                errorObj.errorCode = authError.response.status;
+                // errorObj.dispatchAction = userLocalSignOut();
+                errorObj.errorMessage = 'Your session timed out.';
+                setIsModalOpen(true);
+                // return
+                // renderError()
+            }
         }
-    }, [isModalOpen, setIsModalOpen, authError, errorObj]);
+        if(!authError && booksError){
+            if(booksError.response.status === 401) {
+                console.log('Authenticate books', booksError.response.status);
+                // errorObj.dispatchAction = userLocalSignOut();
+                errorObj.errorCode = booksError.response.status;
+                errorObj.errorMessage = 'Your session timed out.';
+                setIsModalOpen(true);
+                // return
+                // renderError()
+            }
+        }
+    }, [isModalOpen, setIsModalOpen, authError, booksError, errorObj]);
 
     if(token && refreshToken){
         setTimeout(() => {
@@ -79,6 +110,10 @@ export const Authenticate = ({children}: Props) => {
         }, handleDelay());
     }
     
+    const authErrorDispatch = () => {
+        dispatch(userLocalSignOut());
+    }
+
     return <>
         <ErrorModal
             type="userError"
@@ -86,7 +121,7 @@ export const Authenticate = ({children}: Props) => {
             setIsModalOpen={setIsModalOpen}
             erorrCode={errorObj.errorCode}
             errorMessage={errorObj.errorMessage}
-            // dispatchAction={userLocalSignOut()}
+            dispatchFunction={authErrorDispatch}
         />
         {children}
     </>
