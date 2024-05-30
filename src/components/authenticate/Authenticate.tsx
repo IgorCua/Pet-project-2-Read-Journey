@@ -78,8 +78,11 @@ export const Authenticate = ({children}: Props) => {
                 setIsModalOpen(true);
                 // return
             }
-            if(authError.config.url !== "/users/signin" && authError.response.status === 401) {
-                console.log('Authenticate auth', authError.response.status);
+            if( authError.config.url !== "/users/signin"
+                && authError.config.url !== "/users/signup"
+                && authError.response.status === 401
+            ) {
+                // console.log('Authenticate auth', authError.response.status);
                 errorObj.errorCode = authError.response.status;
                 // errorObj.dispatchAction = userLocalSignOut();
                 errorObj.errorMessage = 'Your session timed out.';
@@ -89,7 +92,7 @@ export const Authenticate = ({children}: Props) => {
             }
         }
         if(!authError && booksError){
-            if(booksError.response.status === 401) {
+            if(booksError.response?.status === 401) {
                 console.log('Authenticate books', booksError.response.status);
                 // errorObj.dispatchAction = userLocalSignOut();
                 errorObj.errorCode = booksError.response.status;

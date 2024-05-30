@@ -16,7 +16,14 @@ interface AddBookInterface {
     totalPages: number
 }
 
-type GetUserBooksInterface = null | 'unread' | 'in-progress' | 'done';
+// type GetUserBooksInterface = 'unread' | 'in-progress' | 'done' | null;
+type UserBooksByStatus = {
+    status: string
+} | null;
+// type UserBooksByStatus = {
+//     status: 'unread' | 'in-progress' | 'done'
+// } | null;
+// type GetUserBooksInterface = any;
 
 export const booksGetRecommended: any = createAsyncThunk(
     'books/getRecommended',
@@ -82,9 +89,9 @@ export const booksRemoveBook = createAsyncThunk(
 export const booksGetUserBooks = createAsyncThunk(
     'books/getUserBooks',
 
-    async (data: GetUserBooksInterface, { rejectWithValue }) => {
+    async (data: UserBooksByStatus, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
+            axiosToken.set();
             const res = await booksGetUserBooksAPI(data);
             return res;
         }
@@ -99,7 +106,7 @@ export const booksSaveReadingStart = createAsyncThunk(
 
     async (data: {id: string, page: number}, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
+            axiosToken.set();
             const res = await booksSaveReadingStartAPI(data);
             return res;
         }

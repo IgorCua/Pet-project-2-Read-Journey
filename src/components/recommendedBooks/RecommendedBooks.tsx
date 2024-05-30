@@ -47,6 +47,7 @@ export const RecommendedBooks = () => {
     }
 
     useEffect(()=>{
+        // if(!booksObj || booksObj.results.length !== 2) {
         if(!booksObj || booksObj.results.length !== 2) {
             handlePageLimit();
             dispatch(booksGetRecommended(req));

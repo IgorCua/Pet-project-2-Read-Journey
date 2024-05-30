@@ -21,7 +21,7 @@ interface IInitialState {
     isError: boolean
     error: unknown | null,
     isLoading: boolean,
-    userBooks: {}[]
+    // userBooks: {}[]
 }
 
 type SignupRes = {
@@ -41,7 +41,7 @@ const initialState = {
     isError: false,
     error: null,
     isLoading: false,
-    userBooks: []
+    // userBooks: []
 } satisfies IInitialState as IInitialState;
 
 const authSlice = createSlice({
@@ -103,13 +103,13 @@ const authSlice = createSlice({
                 state.error = null;
                 console.log('localSignOut payload:', action.payload);
             })
-            .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction<any>) => {
-                console.log(action.payload);
-                state.userBooks = [...state.userBooks, action.payload.data]
-                state.isLoading = false;
-                state.isError = false;
-                state.error = null;
-            })
+            // .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction<any>) => {
+            //     console.log(action.payload);
+            //     state.userBooks = [...state.userBooks, action.payload.data]
+            //     state.isLoading = false;
+            //     state.isError = false;
+            //     state.error = null;
+            // })
             .addCase(userRemoveError.fulfilled, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;

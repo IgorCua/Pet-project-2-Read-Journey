@@ -29,7 +29,7 @@ export const RecommendedPage = () => {
     const handleLinkClick = () => {
         navigate('/library');
     }
-
+console.log('recommendedPages')
     return (
         <Container>
             <Section>

@@ -22,13 +22,24 @@ import { Filter } from "../../components/filter/Filter";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { booksGetRecommended, booksGetUserBooks } from "../../redux/books/operations";
-import { useEffect, useMemo, useState } from "react";
+import { memo, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
-import { selectBooksError, selectBooksIsError, selectRecommendedBooks, selectUserBooks } from "../../redux/books/selectors";
+import { 
+    selectBooksError, 
+    selectBooksIsError, 
+    selectRecommendedBooks, 
+    selectRecommendedBooksIDsArr, 
+    selectUserBooks 
+} from "../../redux/books/selectors";
 import { BookCard } from "../../components/bookCard/BookCard";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../components/icon/Icon";
-import { FormControl, FormHelperText, MenuItem, Select, SelectChangeEvent } from "@mui/material";
+import { 
+    FormControl, 
+    MenuItem, 
+    Select, 
+    SelectChangeEvent 
+} from "@mui/material";
 import { theme } from "../../styles/themes";
 import { ExpandMore } from "@mui/icons-material";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
@@ -44,18 +55,21 @@ interface Request {
 
 export const UserLibraryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
-    const booksObj = useSelector(selectRecommendedBooks);
+    const recommendedBooks = useSelector(selectRecommendedBooks);
     const userBooks = useSelector(selectUserBooks);
     const isBooksError = useSelector(selectBooksIsError);
     const booksError: any = useSelector(selectBooksError);
+    const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
     
     const navigate = useNavigate();
     const [selectedBooks, setSelectedBooks] = useState('');
+    const [filterData, setFilterData] = useState({
+        title: null,
+        author: null,
+        totalPages: null
+    });
     const [isErrorModal, setIsErrorModal] = useState(false);
     
-    const testUserBooks: [] = [];
-    const [testState, setTestState] = useState(false);
-
     let request = {
         limit: 3,
         page: 1
@@ -69,12 +83,14 @@ export const UserLibraryPage = () => {
         return null;
     }, [userBooks]);
 
-    useEffect(()=>{
-        // if()
+    const RecommendedMemo = useMemo(() => {
+        return recommendedBooks ? recommendedBooks : null;
+    }, [recommendedBooks]);
 
-        if(!booksError && (!booksObj || booksObj.results.length !== 3)) {
-            // handlePageLimit();
-            console.log('useEffect')
+    useEffect(()=>{
+        if(!booksError && (!recommendedBooks || recommendedBooks.results.length !== 3)) {
+            const randomPage = Math.floor(Math.random() * 9);
+            request.page = randomPage;
             dispatch(booksGetRecommended(request));
         };
         // if(testUserBooks !== userBooksMemo){
@@ -83,14 +99,15 @@ export const UserLibraryPage = () => {
         //         console.log('dispatch');
         //     }, 1000);
         // }
+        // console.log(recommendedBooks);
+        // console.log(recommendedBooksIDs);
+        // console.log('memo',RecommendedMemo);
+        // console.log(RecommendedMemo)
         // console.log('useEffect memo', userBooksMemo);
         if(!booksError && userBooks === null && userBooksMemo === null){
-            // console.log();
             setTimeout(() => {
-                // console.log('useEffect');
                 console.log('useEffect books', userBooks);
                 console.log('useEffect memo', userBooksMemo);
-                // setTestState(true);
                 dispatch(booksGetUserBooks(null));
             }, 1000);
 
@@ -98,29 +115,70 @@ export const UserLibraryPage = () => {
         
     });
 
+    // console.log(filterData);
+
     const handleLinkClick = () => {
         navigate('/recommended');
     }
 
     const handleSelect = (event: SelectChangeEvent) => {
-        console.log(event.target.value);
         setSelectedBooks(event.target.value);
+        if(!event.target.value) dispatch(booksGetUserBooks(null));
+        if(event.target.value) {
+            console.log(event.target.value);
+            dispatch(booksGetUserBooks({status: event.target.value}));
+            // console.log(event.target.value);
+        };
+        // dispatch(booksGetUserBooks(event.target.value))
     }
+    // console.log(recommendedBooks);
+    // console.log(recommendedBooksIDs);
+
+    const CardsComponent = memo(() => {
+        return <ContainerFilterCards>
+            {recommendedBooks && recommendedBooks.results.map((book, i) => {
+                return <BookCard 
+                    key={i}
+                    id={book._id}
+                    cardType="recommended"
+                    title={book.title}
+                    author={book.author}
+                    pages={book.totalPages}
+                    url={book.imageUrl}
+                    sx={{
+                        width: '71px',
+                        '& img': {
+                            height: '107px'
+                        },
+                        '& h3': {
+                            fontSize: '10px',
+                            lineHeight: '12px',
+                        },
+                        // '& p': {
+                        //     fontSize: '10px',
+                        //     lineHeight: '12px',
+                        // }
+                    }}
+                />
+            })}
+        </ContainerFilterCards>
+    })
 
     return <Container>
-        <ErrorModal 
+        {booksError && <ErrorModal 
             type='booksError'
             isModalOpen={isErrorModal}
             setIsModalOpen={setIsErrorModal}
-            erorrCode={booksError && booksError.response.status}
-            errorMessage={booksError && booksError.response.data.message}
-        />
+            erorrCode={booksError && booksError.response?.status}
+            errorMessage={booksError && booksError.response?.data.message}
+        />}
         <ContainerFilter>
-            <Filter numOfInputs={3}/>
+            <Filter numOfInputs={3} requestLimit={3} setFilterData={setFilterData}/>
             <ContainerRecommended>
                 <Header>Recommended books</Header>
-                <ContainerFilterCards>
-                    {booksObj && booksObj.results.map((book, i) => {
+                <CardsComponent/>
+                {/* {<ContainerFilterCards>
+                    {recommendedBooks && recommendedBooks.results.map((book, i) => {
                         return <BookCard 
                             key={i}
                             id={book._id}
@@ -145,7 +203,7 @@ export const UserLibraryPage = () => {
                             }}
                         />
                     })}
-                </ContainerFilterCards>
+                </ContainerFilterCards>} */}
                 <ContainerLinks>
                     <LinkButton onClick={handleLinkClick}>Home</LinkButton>
                     <IconWrapper onClick={handleLinkClick} >
@@ -185,7 +243,6 @@ export const UserLibraryPage = () => {
                         }}
                         IconComponent={ExpandMore}
                         MenuProps={{
-                            
                             PaperProps: {
                               sx: {
                                 marginTop: '4px',
@@ -226,10 +283,10 @@ export const UserLibraryPage = () => {
                         }}
                     >
                         {/* <MenuItem value="">All books</MenuItem> */}
-                        <MenuItem value={'Unread'}>Unread</MenuItem>
-                        <MenuItem value={'In progress'}>In progress</MenuItem>
-                        <MenuItem value={'Done'}>Done</MenuItem>
-                        <MenuItem value="">All books</MenuItem>
+                        <MenuItem value={'unread'}>Unread</MenuItem>
+                        <MenuItem value={'in-progress'}>In progress</MenuItem>
+                        <MenuItem value={'done'}>Done</MenuItem>
+                        <MenuItem value={''}>All books</MenuItem>
                         {/* <MenuItem value={'All books'}sx={{minHeight: '20px'}}>All Books</MenuItem> */}
                     </Select>
                 </FormControl>
@@ -237,16 +294,27 @@ export const UserLibraryPage = () => {
 
             {userBooks && userBooks.length !== 0 && <ContainerBooks>
                 {userBooks.map((book, i) => {
-                    return <BookCard
-                        key={book._id}
-                        cardType="library"
-                        id={book._id}
-                        url={book.imageUrl}
-                        title={book.title}
-                        author={book.author}
-                        pages={book.totalPages}
-                        sx={{width: '137px'}}
-                    />
+                    const {title, author, totalPages} = filterData;
+                    // {
+                    //     title: null,
+                    //     author: null,
+                    //     totalPages: null
+                    // }
+                    if(filterData.title !== null){
+                        console.log('card by title');
+                    }
+                    if(!title && !author && !totalPages){
+                        return <BookCard
+                            key={book._id}
+                            cardType="library"
+                            id={book._id}
+                            url={book.imageUrl}
+                            title={book.title}
+                            author={book.author}
+                            pages={book.totalPages}
+                            sx={{width: '137px'}}
+                        />
+                    }
                 })}
             </ContainerBooks>}
 

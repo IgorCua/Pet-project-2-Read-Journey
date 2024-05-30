@@ -71,7 +71,9 @@ interface AddBookInterface {
     progress: unknown[]
 }
 
-type UserBooksByType = null | 'unread' | 'in-progress' | 'done';
+type UserBooksByStatus = {
+    status: string
+} | null;
 
 type SignupRes = {
     email: string,
@@ -145,8 +147,10 @@ export const booksRemoveBookAPI = (data: string) => {
     });
 };
 
-export const booksGetUserBooksAPI = (data: UserBooksByType) => {
+export const booksGetUserBooksAPI = (data: UserBooksByStatus) => {
+    console.log('booksGetUserBooksAPI', data);
     return axios.get<any, AddBookInterface[]>('/books/own', {params: data}).then(res => {
+    // return axios.get<any, any>('/books/own', {params: data}).then(res => {
         return res;
     });
 };

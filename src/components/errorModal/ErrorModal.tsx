@@ -60,7 +60,6 @@ export const ErrorModal = (props: Props) => {
         if(event.target === event.currentTarget) {
             if(type === 'userError') dispatch(userRemoveError());
             if(type === 'booksError') dispatch(booksRemoveError());
-
         };
         setIsModalOpen(!isModalOpen);
     };

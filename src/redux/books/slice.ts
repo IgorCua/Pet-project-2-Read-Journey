@@ -110,8 +110,8 @@ const booksSlice = createSlice({
                 (state, action) => {
                     state.isLoading = false;
                     state.isError = true;
-                    console.log(action.payload)
                     state.error = action.payload;
+                    console.log('books slice error', action.payload)
                 }
             )
     },

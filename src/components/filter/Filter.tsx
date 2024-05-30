@@ -15,20 +15,31 @@ type Request = {
     totalPages?: number
 }
 
-type Props = {
-    numOfInputs?: 2 | 3,
-    requestLimit?: number
+type FilterDataState = {
+    // title: null | string, //doesnt work
+    // author: null | string,
+    // totalPages: null| string
+    title: any,
+    author: any,
+    totalPages: any
 }
 
-export const Filter = ({numOfInputs, requestLimit}: Props) => {
+type Props = {
+    numOfInputs?: 2 | 3,
+    requestLimit?: number,
+    // setFilterData?: React.Dispatch<React.SetStateAction<FilterDataState>>
+    setFilterData?: any
+}
+
+export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
     // const inputTitleRef = useRef<null | HTMLInputElement>(null);
     // const inputAuthorRef = useRef<null | HTMLInputElement>(null);
     const dispatch = useDispatch<AppDispatch>();
 
     const handleSubmit = (event: any) => {
+        event.preventDefault();
         let req: Request = {};
 
-        event.preventDefault();
         const title = event.target.elements[0].value;
         const author = event.target.elements[2].value;
 
@@ -37,7 +48,18 @@ export const Filter = ({numOfInputs, requestLimit}: Props) => {
         // if(reqestLimit) req.totalPages = reqestLimit;
 
         if(requestLimit === 3){
-            
+            console.log('filter limit', 3);
+        } 
+
+        if(numOfInputs === 3){
+            const totalPages = event.target.elements[4].value;
+            console.log('filter', title, author, totalPages);
+
+            // setFilterData({
+            //     title: title,
+            //     author: author,
+            //     totalPages: totalPages
+            // });
         } 
 
         if(!requestLimit){
