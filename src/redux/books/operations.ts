@@ -75,9 +75,10 @@ export const booksRemoveBook = createAsyncThunk(
 
     async (data: string, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
+            axiosToken.set();
             await booksRemoveBookAPI(data);
             const userBooks = await booksGetUserBooksAPI(null);
+            console.log('user books', userBooks)
             return userBooks;
         }
         catch (error: unknown) {

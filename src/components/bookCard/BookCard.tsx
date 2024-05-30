@@ -22,6 +22,7 @@ import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
+import { booksRemoveBook } from "../../redux/books/operations";
 
 type Props = {
     id: string,
@@ -62,6 +63,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
 
             if(event.currentTarget.localName === 'button'){
                 console.log('delete book', id);
+                dispatch(booksRemoveBook(id));
             }
         }
     }
@@ -74,6 +76,10 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
 
     const handleStartReading = () => {
         console.log('Start reading click');
+    }
+
+    const handleDeleteBook = (event: React.MouseEvent<HTMLElement>) => {
+        
     }
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)

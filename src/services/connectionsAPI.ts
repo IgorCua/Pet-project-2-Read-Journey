@@ -142,7 +142,7 @@ export const booksAddByIdAPI = (data: string) => {
 };
 
 export const booksRemoveBookAPI = (data: string) => {
-    return axios.delete(`/books/remove/:${data}`).then(res => {
+    return axios.delete(`/books/remove/${data}`).then(res => {
         return res;
     });
 };

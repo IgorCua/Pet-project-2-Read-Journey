@@ -55,8 +55,8 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksRemoveBook.fulfilled, (state, action) => {
-                state.userBooks = action.payload;
+            .addCase(booksRemoveBook.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
