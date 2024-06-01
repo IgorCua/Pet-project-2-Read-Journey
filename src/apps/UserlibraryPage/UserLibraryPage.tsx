@@ -117,37 +117,35 @@ export const UserLibraryPage = () => {
         };
     }
 
-    // const CardsComponent = memo(() => {
-    //     return <ContainerFilterCards>
-    //         {recommendedBooks && recommendedBooks.results.map((book, i) => {
-    //             return <BookCard 
-    //                 key={i}
-    //                 id={book._id}
-    //                 cardType="recommended"
-    //                 title={book.title}
-    //                 author={book.author}
-    //                 pages={book.totalPages}
-    //                 url={book.imageUrl}
-    //                 sx={{
-    //                     width: '71px',
-    //                     '& img': {
-    //                         height: '107px'
-    //                     },
-    //                     '& h3': {
-    //                         fontSize: '10px',
-    //                         lineHeight: '12px',
-    //                     },
-    //                     // '& p': {
-    //                     //     fontSize: '10px',
-    //                     //     lineHeight: '12px',
-    //                     // }
-    //                 }}
-    //             />
-    //         })}
-    //     </ContainerFilterCards>
-    // })
     console.log('booksError', booksError);
     console.log('filterData', filterData);
+
+    const shouldCardRender = (book: any) => {
+        const {title, author, totalPages} = filterData;
+                    
+        const regexFn = (inputVal: any): any => {
+            return new RegExp(inputVal, 'i');
+        }
+
+        if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
+            // console.log('title return', true, book.title.search(regexFn(`${title}`)));
+            return false;
+        }
+        if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
+            // console.log('author return', true);
+            return false;
+        }
+        if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
+            // console.log('totalPages return', true);
+            return false;
+        }
+
+        return true;
+        // if(totalPages) {
+        //     console.log(`${book.totalPages}`.includes(totalPages))
+        // }
+    }
+
     return <Container>
         {booksError && <ErrorModal 
             type='booksError'
@@ -280,10 +278,6 @@ export const UserLibraryPage = () => {
                 {userBooks.map((book, i) => {
                     const {title, author, totalPages} = filterData;
                     
-                    const regexFn = (inputVal: any): any => {
-                        return new RegExp(inputVal, 'i');
-                    }
-                    
                     if(!title && !author && !totalPages){
                         return <BookCard
                             key={book._id}
@@ -296,65 +290,20 @@ export const UserLibraryPage = () => {
                             sx={{width: '137px'}}
                         />
                     }
-
-                    type Key = 'title' | 'author' | 'totalPages';
-                    let key: Key;
-
-                    // for(key in filterData){
-                        // if(filterData.key !== null) console.log('key', key)
-                        // if(filterData[key] && book[key].search(regexFn(title)) !== -1){
-                        //     console.log('filter data',filterData[key]);
-                        //     // break;
-                        //     if(key === 'totalPages'){
-                        //         console.log('pass')
-                        //     }
-                        // }
-                    // }
-
-                    // switch (filterData) {
-                    //     case !filterData.title:
-                    //         console.log('title', title);
-                    //         break;
-                    //     case filterData.author:
-                    //         console.log('author', author);
-                    //         break;
-                    //     case filterData.totalPages:
-                    //         console.log('totalPages', totalPages);
-                    //         break;
-                    //     default: 
-                    //         console.log('default');    
-                    // }
-
-                    // if(totalPages && book.totalPages.search(regexFn(`${totalPages}`)) !== -1){
-                    //     // console.log(book.title.search(regexFn(title)));
-                    //     console.log('filter check data', filterData);
-                    //     // console.log('filter check book', book);
-                    // }
-
-                    if(totalPages) {
-                        console.log(filterData.totalPages.includes(totalPages))
+                    
+                    if(shouldCardRender(book)){
+                        return <BookCard
+                            key={book._id}
+                            cardType="library"
+                            id={book._id}
+                            url={book.imageUrl}
+                            title={book.title}
+                            author={book.author}
+                            pages={book.totalPages}
+                            sx={{width: '137px'}}
+                        />
                     }
 
-                    // {
-                    //     title: null,
-                    //     author: null,
-                    //     totalPages: null
-                    // }
-                    // if(filterData.title !== null){
-                    //     console.log('card by title');
-                    // }
-                    // if(!title && !author && !totalPages){
-                    //     return <BookCard
-                    //         key={book._id}
-                    //         cardType="library"
-                    //         id={book._id}
-                    //         url={book.imageUrl}
-                    //         title={book.title}
-                    //         author={book.author}
-                    //         pages={book.totalPages}
-                    //         sx={{width: '137px'}}
-                    //     />
-                    // }
                 })}
             </ContainerBooks>}
 
