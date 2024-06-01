@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react"
 import { useSelector } from "react-redux";
-import { selectAuthError, selectToken } from "../../redux/auth/selectors";
+import { selectAuthError, selectRefreshToken, selectToken } from "../../redux/auth/selectors";
 import { useDispatch } from "react-redux";
 import { userLocalSignOut, userRefreshToken } from "../../redux/auth/operations";
 import { store } from "../../redux/store";
@@ -26,7 +26,8 @@ type AppDispatch = typeof store.dispatch;
 
 export const Authenticate = ({children}: Props) => {
     const token = useSelector(selectToken);
-    const refreshToken = localStorage.getItem('updateAccess');
+    // const refreshToken = localStorage.getItem('updateAccess');
+    const refreshToken = useSelector(selectRefreshToken);
     const decodedToken = token && JSON.parse(atob(token.split('.')[1]));
     const authError: any = useSelector(selectAuthError);
     const booksError: any = useSelector(selectBooksError);

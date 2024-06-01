@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { FormTextField } from "../materialUI/FormTextField"
 import { Form, FormHeader, InputAuthor, InputTitle, NumOfPages, Submit } from "./styled"
-import React, { useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { booksGetRecommended } from "../../redux/books/operations";
 
 type AppDispatch = typeof store.dispatch;
@@ -48,18 +48,18 @@ export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
         // if(reqestLimit) req.totalPages = reqestLimit;
 
         if(requestLimit === 3){
-            console.log('filter limit', 3);
+            // console.log('filter limit', 3);
         } 
 
         if(numOfInputs === 3){
             const totalPages = event.target.elements[4].value;
             console.log('filter', title, author, totalPages);
 
-            // setFilterData({
-            //     title: title,
-            //     author: author,
-            //     totalPages: totalPages
-            // });
+            setFilterData({
+                title: title,
+                author: author,
+                totalPages: totalPages
+            });
         } 
 
         if(!requestLimit){
@@ -83,6 +83,10 @@ export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
             }
         }
     }
+
+    useEffect(()=>{
+
+    }, [])
 
     return <Form onSubmit={handleSubmit}>
         <FormHeader>Filters:</FormHeader>

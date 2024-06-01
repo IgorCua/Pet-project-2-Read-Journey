@@ -60,9 +60,10 @@ export const booksAddById = createAsyncThunk(
 
     async (data: string, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
-            const res = await booksAddByIdAPI(data);
-            return res;
+            axiosToken.set();
+            await booksAddByIdAPI(data);
+            const userBooks = await booksGetUserBooksAPI(null);
+            return userBooks;
         }
         catch (error: unknown) {
             return rejectWithValue(error);
@@ -78,7 +79,7 @@ export const booksRemoveBook = createAsyncThunk(
             axiosToken.set();
             await booksRemoveBookAPI(data);
             const userBooks = await booksGetUserBooksAPI(null);
-            console.log('user books', userBooks)
+            // console.log('user books', userBooks)
             return userBooks;
         }
         catch (error: unknown) {

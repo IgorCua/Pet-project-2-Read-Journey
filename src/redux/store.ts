@@ -23,7 +23,7 @@ const persistAuthConfig = {
         'name', 
         'email', 
         'token',
-        // 'refreshToken', 
+        'refreshToken', 
         'isLoggedIn',
     ]
 }
@@ -32,7 +32,7 @@ const persistBooksConfig = {
     key: 'books',
     storage,
     whitelist: [
-        'recommendedBooks',
+        // 'recommendedBooks',
         'userBooks'
     ]
 }

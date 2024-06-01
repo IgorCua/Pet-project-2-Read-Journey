@@ -5,8 +5,8 @@ import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction 
 
 interface initialStateInterface {
     recommendedBooks: recomendedBooksInterface | null,
-    // userBooks: BookInterface[] | [],
-    userBooks: BookInterface[] | null,
+    userBooks: BookInterface[] | [],
+    // userBooks: BookInterface[] | null,
     readingStart: any | null,
     readingEnd: any | null,
     currentReading: null | BookInterface,
@@ -18,7 +18,7 @@ interface initialStateInterface {
 
 const initialState = {
     recommendedBooks: null,
-    userBooks: null,
+    userBooks: [],
     readingStart: null,
     readingEnd: null,
     currentReading: null,
@@ -48,8 +48,15 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
+            // .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
+            //     // state.userBooks = [...state.userBooks, action.payload];
+            //     state.userBooks = action.payload.data;
+            //     state.isLoading = false;
+            //     state.isError = false;
+            //     state.error = null;
+            // })
             .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
-                // state.userBooks = [...state.userBooks, action.payload];
+                // console.log(action.payload);
                 state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;

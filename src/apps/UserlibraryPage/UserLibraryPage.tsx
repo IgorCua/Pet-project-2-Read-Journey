@@ -63,7 +63,7 @@ export const UserLibraryPage = () => {
     
     const navigate = useNavigate();
     const [selectedBooks, setSelectedBooks] = useState('');
-    const [filterData, setFilterData] = useState({
+    const [filterData, setFilterData] = useState<any>({
         title: null,
         author: null,
         totalPages: null
@@ -93,17 +93,7 @@ export const UserLibraryPage = () => {
             request.page = randomPage;
             dispatch(booksGetRecommended(request));
         };
-        // if(testUserBooks !== userBooksMemo){
-        //     // dispatch(booksGetUserBooks(null));
-        //     setTimeout(() => {
-        //         console.log('dispatch');
-        //     }, 1000);
-        // }
-        // console.log(recommendedBooks);
-        // console.log(recommendedBooksIDs);
-        // console.log('memo',RecommendedMemo);
-        // console.log(RecommendedMemo)
-        // console.log('useEffect memo', userBooksMemo);
+        
         if(!booksError && userBooks === null && userBooksMemo === null){
             setTimeout(() => {
                 console.log('useEffect books', userBooks);
@@ -113,9 +103,7 @@ export const UserLibraryPage = () => {
 
         };
         
-    });
-
-    // console.log(filterData);
+    }, [filterData, booksError, request, recommendedBooks, dispatch]);
 
     const handleLinkClick = () => {
         navigate('/recommended');
@@ -125,45 +113,41 @@ export const UserLibraryPage = () => {
         setSelectedBooks(event.target.value);
         if(!event.target.value) dispatch(booksGetUserBooks(null));
         if(event.target.value) {
-            console.log(event.target.value);
             dispatch(booksGetUserBooks({status: event.target.value}));
-            // console.log(event.target.value);
         };
-        // dispatch(booksGetUserBooks(event.target.value))
     }
-    // console.log(recommendedBooks);
-    // console.log(recommendedBooksIDs);
 
-    const CardsComponent = memo(() => {
-        return <ContainerFilterCards>
-            {recommendedBooks && recommendedBooks.results.map((book, i) => {
-                return <BookCard 
-                    key={i}
-                    id={book._id}
-                    cardType="recommended"
-                    title={book.title}
-                    author={book.author}
-                    pages={book.totalPages}
-                    url={book.imageUrl}
-                    sx={{
-                        width: '71px',
-                        '& img': {
-                            height: '107px'
-                        },
-                        '& h3': {
-                            fontSize: '10px',
-                            lineHeight: '12px',
-                        },
-                        // '& p': {
-                        //     fontSize: '10px',
-                        //     lineHeight: '12px',
-                        // }
-                    }}
-                />
-            })}
-        </ContainerFilterCards>
-    })
-
+    // const CardsComponent = memo(() => {
+    //     return <ContainerFilterCards>
+    //         {recommendedBooks && recommendedBooks.results.map((book, i) => {
+    //             return <BookCard 
+    //                 key={i}
+    //                 id={book._id}
+    //                 cardType="recommended"
+    //                 title={book.title}
+    //                 author={book.author}
+    //                 pages={book.totalPages}
+    //                 url={book.imageUrl}
+    //                 sx={{
+    //                     width: '71px',
+    //                     '& img': {
+    //                         height: '107px'
+    //                     },
+    //                     '& h3': {
+    //                         fontSize: '10px',
+    //                         lineHeight: '12px',
+    //                     },
+    //                     // '& p': {
+    //                     //     fontSize: '10px',
+    //                     //     lineHeight: '12px',
+    //                     // }
+    //                 }}
+    //             />
+    //         })}
+    //     </ContainerFilterCards>
+    // })
+    console.log('booksError', booksError);
+    console.log('filterData', filterData);
     return <Container>
         {booksError && <ErrorModal 
             type='booksError'
@@ -176,8 +160,8 @@ export const UserLibraryPage = () => {
             <Filter numOfInputs={3} requestLimit={3} setFilterData={setFilterData}/>
             <ContainerRecommended>
                 <Header>Recommended books</Header>
-                <CardsComponent/>
-                {/* {<ContainerFilterCards>
+                {/* <CardsComponent/> */}
+                <ContainerFilterCards>
                     {recommendedBooks && recommendedBooks.results.map((book, i) => {
                         return <BookCard 
                             key={i}
@@ -203,7 +187,7 @@ export const UserLibraryPage = () => {
                             }}
                         />
                     })}
-                </ContainerFilterCards>} */}
+                </ContainerFilterCards>
                 <ContainerLinks>
                     <LinkButton onClick={handleLinkClick}>Home</LinkButton>
                     <IconWrapper onClick={handleLinkClick} >
@@ -295,14 +279,11 @@ export const UserLibraryPage = () => {
             {userBooks && userBooks.length !== 0 && <ContainerBooks>
                 {userBooks.map((book, i) => {
                     const {title, author, totalPages} = filterData;
-                    // {
-                    //     title: null,
-                    //     author: null,
-                    //     totalPages: null
-                    // }
-                    if(filterData.title !== null){
-                        console.log('card by title');
+                    
+                    const regexFn = (inputVal: any): any => {
+                        return new RegExp(inputVal, 'i');
                     }
+                    
                     if(!title && !author && !totalPages){
                         return <BookCard
                             key={book._id}
@@ -315,6 +296,65 @@ export const UserLibraryPage = () => {
                             sx={{width: '137px'}}
                         />
                     }
+
+                    type Key = 'title' | 'author' | 'totalPages';
+                    let key: Key;
+
+                    // for(key in filterData){
+                        // if(filterData.key !== null) console.log('key', key)
+                        // if(filterData[key] && book[key].search(regexFn(title)) !== -1){
+                        //     console.log('filter data',filterData[key]);
+                        //     // break;
+                        //     if(key === 'totalPages'){
+                        //         console.log('pass')
+                        //     }
+                        // }
+                    // }
+
+                    // switch (filterData) {
+                    //     case !filterData.title:
+                    //         console.log('title', title);
+                    //         break;
+                    //     case filterData.author:
+                    //         console.log('author', author);
+                    //         break;
+                    //     case filterData.totalPages:
+                    //         console.log('totalPages', totalPages);
+                    //         break;
+                    //     default: 
+                    //         console.log('default');    
+                    // }
+
+                    // if(totalPages && book.totalPages.search(regexFn(`${totalPages}`)) !== -1){
+                    //     // console.log(book.title.search(regexFn(title)));
+                    //     console.log('filter check data', filterData);
+                    //     // console.log('filter check book', book);
+                    // }
+
+                    if(totalPages) {
+                        console.log(filterData.totalPages.includes(totalPages))
+                    }
+
+                    // {
+                    //     title: null,
+                    //     author: null,
+                    //     totalPages: null
+                    // }
+                    // if(filterData.title !== null){
+                    //     console.log('card by title');
+                    // }
+                    // if(!title && !author && !totalPages){
+                    //     return <BookCard
+                    //         key={book._id}
+                    //         cardType="library"
+                    //         id={book._id}
+                    //         url={book.imageUrl}
+                    //         title={book.title}
+                    //         author={book.author}
+                    //         pages={book.totalPages}
+                    //         sx={{width: '137px'}}
+                    //     />
+                    // }
                 })}
             </ContainerBooks>}
 

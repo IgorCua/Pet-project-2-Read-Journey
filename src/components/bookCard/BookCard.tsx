@@ -20,9 +20,9 @@ import { Backdrop, Box, IconButton } from "@mui/material";
 import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
-import { userAddBookByID } from "../../redux/auth/operations";
+// import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
-import { booksRemoveBook } from "../../redux/books/operations";
+import { booksAddById, booksRemoveBook } from "../../redux/books/operations";
 
 type Props = {
     id: string,
@@ -71,7 +71,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     const handleAddToLibrary = () => {
         console.log('click');
         console.log(id);
-        dispatch(userAddBookByID(id));
+        dispatch(booksAddById(id));
     }
 
     const handleStartReading = () => {

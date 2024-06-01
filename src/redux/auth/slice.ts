@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { 
-    userAddBookByID,
+    // userAddBookByID,
     userGetCurrent, 
     userLocalSignOut, 
     userRefreshToken, 
@@ -16,7 +16,7 @@ interface IInitialState {
     name: string | null,
     email: string | null,
     token: string | null,
-    // refreshToken: string | null,
+    refreshToken: string | null,
     isLoggedIn: boolean,
     isError: boolean
     error: unknown | null,
@@ -36,7 +36,7 @@ const initialState = {
     name: null,
     email: null,
     token: null,
-    // refreshToken: null,
+    refreshToken: null,
     isLoggedIn: false,
     isError: false,
     error: null,
@@ -58,6 +58,7 @@ const authSlice = createSlice({
                 state.name = action.payload.data.name;
                 state.email = action.payload.data.email;
                 state.token = action.payload.data.token;
+                state.refreshToken = action.payload.data.refreshToken;
             })
             .addCase(userSignin.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
@@ -67,6 +68,7 @@ const authSlice = createSlice({
                 state.name = action.payload.data.name;
                 state.email = action.payload.data.email;
                 state.token = action.payload.data.token;
+                state.refreshToken = action.payload.data.refreshToken;
             })
             .addCase(userGetCurrent.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
@@ -81,6 +83,7 @@ const authSlice = createSlice({
                 state.isError = false
                 state.error = null;
                 state.token = action.payload.data.token;
+                state.refreshToken = action.payload.data.refreshToken;
             })
             .addCase(userSignOut.fulfilled, (state, action: PayloadAction<any>) => {
                 state._id = null;

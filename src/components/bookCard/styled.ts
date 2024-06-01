@@ -35,7 +35,7 @@ export const DescriptionContainer = styled('div')(({theme}) => ({
     display: 'flex',
     flexDirection: 'row',
     alignContent: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
 
     // 'img:has(~ &:hover)': {
     //     boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
