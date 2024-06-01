@@ -43,6 +43,7 @@ import {
 import { theme } from "../../styles/themes";
 import { ExpandMore } from "@mui/icons-material";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
+import { SelectForm } from "../../components/materialUI/SelectForm";
 
 type AppDispatch = typeof store.dispatch;
 
@@ -103,6 +104,10 @@ export const UserLibraryPage = () => {
 
         };
         
+        if(booksError) {
+            setIsErrorModal(true)
+        }
+
     }, [filterData, booksError, request, recommendedBooks, dispatch]);
 
     const handleLinkClick = () => {
@@ -127,16 +132,17 @@ export const UserLibraryPage = () => {
             return new RegExp(inputVal, 'i');
         }
 
+        if(!title && !author && !totalPages){
+            return true;
+        }
+
         if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
-            // console.log('title return', true, book.title.search(regexFn(`${title}`)));
             return false;
         }
         if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
-            // console.log('author return', true);
             return false;
         }
         if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
-            // console.log('totalPages return', true);
             return false;
         }
 
@@ -146,19 +152,26 @@ export const UserLibraryPage = () => {
         // }
     }
 
+    const handleErrorMessage = () => {
+        if(booksError && booksError.response?.status === 500){
+            return 'Server error, please try to reload page.';
+        }
+
+        return booksError.response?.data.message;
+    }
+    
     return <Container>
         {booksError && <ErrorModal 
             type='booksError'
             isModalOpen={isErrorModal}
             setIsModalOpen={setIsErrorModal}
-            erorrCode={booksError && booksError.response?.status}
-            errorMessage={booksError && booksError.response?.data.message}
+            erorrCode={booksError.response?.status}
+            errorMessage={handleErrorMessage()}
         />}
         <ContainerFilter>
             <Filter numOfInputs={3} requestLimit={3} setFilterData={setFilterData}/>
             <ContainerRecommended>
                 <Header>Recommended books</Header>
-                {/* <CardsComponent/> */}
                 <ContainerFilterCards>
                     {recommendedBooks && recommendedBooks.results.map((book, i) => {
                         return <BookCard 
@@ -198,99 +211,12 @@ export const UserLibraryPage = () => {
         <ContainerMyLibrary>
             <LibraryHeaderContainer>
                 <LibraryHeader>My Library</LibraryHeader>
-                <FormControl sx={{ 
-                    minWidth: 120,
-                    width: '120px',
-                    
-                }}>
-                    <Select
-                        value={selectedBooks}
-                        onChange={handleSelect}
-                        displayEmpty
-                        inputProps={{ 'aria-label': 'Without label' }}
-                        sx={{
-                            padding: '0px',
-                            // backgroundColor: theme.palette.custom.bg4,
-                            backgroundColor: 'transparent',
-                            border: `1px solid ${theme.palette.custom.authInputBorder}`,
-                            '.MuiSelect-select': {
-                                padding: '12px 0px 12px 14px'
-                            },
-                            '.MuiSelect-outlined': {
-
-                            },
-                            '.MuiSelect-icon':{
-                                color: theme.palette.custom.textMain
-                            },
-                        }}
-                        IconComponent={ExpandMore}
-                        MenuProps={{
-                            PaperProps: {
-                              sx: {
-                                marginTop: '4px',
-                                minHeight: '122px',
-                                // overflowx: 'hidden'
-                                backgroundColor: theme.palette.custom.bg2,
-
-                                borderRadius: '12px',
-                              }
-                            },
-                            MenuListProps:{
-                                sx: {
-                                    padding:'14px 0px',
-                                    width: '100%',
-                                    // paddingTop: '12px',
-                                    color: theme.palette.custom.textSecondary,
-                                    // overflowx: 'hidden'
-                                    
-                                    '& li': {
-                                        padding: '0px 14px',
-                                        // paddingLeft: '5px',
-                                        minHeight:'10px',
-                                        width: '100%',
-
-                                        fontSize: '12px',
-                                        lineHeight: '18px'
-                                    },
-                                    '& li.Mui-selected': {
-                                        color: theme.palette.custom.textMain,
-                                        backgroundColor: 'none'
-                                    },
-                                    '& li:not(:last-child)':{
-                                        marginBottom: '7px'
-                                    }
-                                }
-                            },
-                            
-                        }}
-                    >
-                        {/* <MenuItem value="">All books</MenuItem> */}
-                        <MenuItem value={'unread'}>Unread</MenuItem>
-                        <MenuItem value={'in-progress'}>In progress</MenuItem>
-                        <MenuItem value={'done'}>Done</MenuItem>
-                        <MenuItem value={''}>All books</MenuItem>
-                        {/* <MenuItem value={'All books'}sx={{minHeight: '20px'}}>All Books</MenuItem> */}
-                    </Select>
-                </FormControl>
+                <SelectForm/>
             </LibraryHeaderContainer>
 
             {userBooks && userBooks.length !== 0 && <ContainerBooks>
                 {userBooks.map((book, i) => {
-                    const {title, author, totalPages} = filterData;
-                    
-                    if(!title && !author && !totalPages){
-                        return <BookCard
-                            key={book._id}
-                            cardType="library"
-                            id={book._id}
-                            url={book.imageUrl}
-                            title={book.title}
-                            author={book.author}
-                            pages={book.totalPages}
-                            sx={{width: '137px'}}
-                        />
-                    }
-                    
+
                     if(shouldCardRender(book)){
                         return <BookCard
                             key={book._id}

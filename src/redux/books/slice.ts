@@ -101,6 +101,7 @@ const booksSlice = createSlice({
             .addCase(booksRemoveError.fulfilled, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
+                state.isLoading = false;
             })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),

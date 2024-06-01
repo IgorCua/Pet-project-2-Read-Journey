@@ -116,6 +116,7 @@ const authSlice = createSlice({
             .addCase(userRemoveError.fulfilled, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
+                state.isLoading = false;
             })
             .addMatcher(
                 (action): action is PendingAction => (
