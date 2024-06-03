@@ -9,6 +9,7 @@ export const Container = styled('div')(({theme}) => ({
 
     // borderRadius: '30px'
     [theme.breakpoints.up('desktop')]: {
+        width: '100%',
         marginTop: '16px',
         display: 'flex',
         flexDirection: 'row'
@@ -145,6 +146,7 @@ export const ContainerMyLibrary = styled('section')(({theme}) => ({
     borderRadius: '30px',
 
     [theme.breakpoints.up('desktop')]:{
+        width: '100%',
         marginTop: '0px',
     }
 }));

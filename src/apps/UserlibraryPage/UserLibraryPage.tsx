@@ -22,13 +22,13 @@ import { Filter } from "../../components/filter/Filter";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { booksGetRecommended, booksGetUserBooks } from "../../redux/books/operations";
-import { memo, useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { 
     selectBooksError, 
-    selectBooksIsError, 
+    // selectBooksIsError, 
     selectRecommendedBooks, 
-    selectRecommendedBooksIDsArr, 
+    // selectRecommendedBooksIDsArr, 
     selectUserBooks 
 } from "../../redux/books/selectors";
 import { BookCard } from "../../components/bookCard/BookCard";
@@ -36,7 +36,6 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "../../components/icon/Icon";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { SelectForm } from "../../components/materialUI/SelectForm";
-import { theme } from "../../styles/themes";
 
 type AppDispatch = typeof store.dispatch;
 
@@ -51,9 +50,9 @@ export const UserLibraryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const recommendedBooks = useSelector(selectRecommendedBooks);
     const userBooks = useSelector(selectUserBooks);
-    const isBooksError = useSelector(selectBooksIsError);
+    // const isBooksError = useSelector(selectBooksIsError);
     const booksError: any = useSelector(selectBooksError);
-    const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
+    // const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
     
     const navigate = useNavigate();
     const [filterData, setFilterData] = useState<any>({
@@ -63,7 +62,7 @@ export const UserLibraryPage = () => {
     });
     const [isErrorModal, setIsErrorModal] = useState(false);
     
-    let request = {
+    let request: Request = {
         limit: 3,
         page: 1
     }
