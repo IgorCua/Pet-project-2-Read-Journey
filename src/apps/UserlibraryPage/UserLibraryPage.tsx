@@ -36,6 +36,7 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "../../components/icon/Icon";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { SelectForm } from "../../components/materialUI/SelectForm";
+import { theme } from "../../styles/themes";
 
 type AppDispatch = typeof store.dispatch;
 
@@ -154,6 +155,9 @@ export const UserLibraryPage = () => {
                 numOfInputs={3} 
                 requestLimit={3} 
                 setFilterData={setFilterData}
+                sx={{
+                    width: '100%'
+                }}
             />
             <ContainerRecommended>
                 <Header variant="h2">Recommended books</Header>

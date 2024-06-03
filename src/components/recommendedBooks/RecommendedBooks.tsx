@@ -1,5 +1,5 @@
 import { Box, IconButton } from "@mui/material"
-import { CardsContainer, CardsDecorationContainer, Container, Header, HeaderContainer, IconWrapper } from "./styled"
+import { CardsContainer, CardsDecorationContainer, Section, Header, HeaderContainer, IconWrapper } from "./styled"
 import { Icon } from "../icon/Icon"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
@@ -58,7 +58,8 @@ export const RecommendedBooks = ({booksLimit}: Props) => {
             dispatch(booksGetRecommended(req));
         }
 
-        if(!booksObj && booksLimit) {
+        if((booksObj && booksObj.results.length === 3) || (!booksObj && booksLimit)) {
+            req.page = 1;
             dispatch(booksGetRecommended(req));
         }
     });
@@ -106,7 +107,7 @@ export const RecommendedBooks = ({booksLimit}: Props) => {
         return 'hello';
     }
 
-    return <Container>
+    return <Section>
         <HeaderContainer>
             <Header>Recommended</Header>
             <Box sx={{display: 'flex', gap: '8px'}}>
@@ -165,5 +166,5 @@ export const RecommendedBooks = ({booksLimit}: Props) => {
                 />
             })}
         </CardsContainer>
-    </Container>
+    </Section>
 }

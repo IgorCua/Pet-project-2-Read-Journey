@@ -14,7 +14,8 @@ import {
     ListItemText, 
     NumberDiv, 
     Section, 
-    Span 
+    Span,
+    CardsContainer
 } from "./styled";
 import { Icon } from "../../components/icon/Icon";
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
@@ -95,9 +96,9 @@ console.log('recommendedPages')
                 </Figure>}
             </Section>
             
-            <Section>
+            <CardsContainer>
                 <RecommendedBooks booksLimit={handleBooksLimit()}/>
-            </Section>
+            </CardsContainer>
         </Container>
     )
 }

@@ -8,6 +8,7 @@ export const Container = styled('div')(({theme}) => ({
     gap: '10px',
 
     [theme.breakpoints.up('desktop')]: {
+        width: '100%',
         marginTop: '16px',
         flexDirection: 'row',
         gap: '16px',
@@ -52,6 +53,33 @@ export const Section = styled('section')(({theme}) => ({
         //     // padding: '40px 40px'
         // }
     }
+}));
+
+export const CardsContainer = styled('div')(({theme}) => ({
+    padding: '20px 20px',
+    display: 'flex', 
+    gap: '20px',
+    flexDirection: 'column',
+
+    backgroundColor: theme.palette.custom.bg3,
+    borderRadius: '30px',
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '100%',
+        padding: '40px 40px'
+    },
+    
+    // [theme.breakpoints.up('desktop')]: {
+    //     '&:nth-of-type(1)': {
+    //         maxWidth: '353px',
+    //         padding: '20px 20px',
+    //         flexDirection: 'column',
+    //     },
+
+    //     // '&:nth-of-type(2)': {
+    //     //     // padding: '40px 40px'
+    //     // }
+    // }
 }));
 
 export const DescripotionList = styled(List)(({theme}) => ({

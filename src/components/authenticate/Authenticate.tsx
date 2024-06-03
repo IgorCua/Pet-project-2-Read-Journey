@@ -46,7 +46,9 @@ export const Authenticate = ({children}: Props) => {
     }, [authError]);
 
     const handleDelay = () => {
+        console.log("authenticate decoded token", decodedToken);
         if(decodedToken) {
+            console.log('authenticate count to refresh', decodedToken.exp * 1000 - new Date().getTime());
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;
@@ -107,6 +109,8 @@ export const Authenticate = ({children}: Props) => {
 
     if(token && refreshToken){
         setTimeout(() => {
+            console.log('seTimeout token', token)
+            console.log('seTimeout refreshToken', refreshToken)
             if (!authError && !booksError) {
                 axiosToken.set(refreshToken);
                 dispatch(userRefreshToken());

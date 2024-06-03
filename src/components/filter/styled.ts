@@ -7,9 +7,13 @@ export const Form = styled('form')(({theme}) => ({
     
     [theme.breakpoints.up('tablet')]: {
         minWidth: '295px',
-        maxWidth: '47.5%',
+        width: '47.5%',
         fontSize: '14px',
     },
+    [theme.breakpoints.up('desktop')]: {
+        width: '100%'
+    }
+
 }));
 
 export const FormHeader = styled('h3')(({theme})=>({

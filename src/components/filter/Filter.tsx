@@ -28,10 +28,11 @@ type Props = {
     numOfInputs?: 2 | 3,
     requestLimit?: number,
     // setFilterData?: React.Dispatch<React.SetStateAction<FilterDataState>>
-    setFilterData?: any
+    setFilterData?: any,
+    sx?: {}
 }
 
-export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
+export const Filter = ({numOfInputs, requestLimit, setFilterData, sx}: Props) => {
     // const inputTitleRef = useRef<null | HTMLInputElement>(null);
     // const inputAuthorRef = useRef<null | HTMLInputElement>(null);
     const dispatch = useDispatch<AppDispatch>();
@@ -88,7 +89,7 @@ export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
 
     }, [])
 
-    return <Form onSubmit={handleSubmit}>
+    return <Form onSubmit={handleSubmit} style={sx}>
         <FormHeader>Filters:</FormHeader>
         <InputTitle type="text" name="title"/>
         <InputAuthor type="text" name="author"/>

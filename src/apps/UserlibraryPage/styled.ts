@@ -1,5 +1,5 @@
 import { ButtonBase, IconButton, Typography } from "@mui/material";
-import { borderRadius, styled } from "@mui/system";
+import { borderRadius, display, styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     marginTop: '10px',
@@ -8,6 +8,11 @@ export const Container = styled('div')(({theme}) => ({
     // backgroundColor: theme.palette.custom.bg3,
 
     // borderRadius: '30px'
+    [theme.breakpoints.up('desktop')]: {
+        marginTop: '16px',
+        display: 'flex',
+        flexDirection: 'row'
+    }
 }));
 
 // export const DecorationContainer = styled('div')(({theme}) => ({
@@ -34,9 +39,16 @@ export const ContainerFilter = styled('section')(({theme}) => ({
         padding: '32px 32px',
         flexDirection: 'row',
         gap: '32px'
+    },
+
+    [theme.breakpoints.up('desktop')]:{
+        padding: '20px 20px',
+        marginRight: '16px',
+        width: '353px',
+        flexDirection: 'column',
     }
 }));
-export const ContainerRecommended = styled('section')(({theme}) => ({
+export const ContainerRecommended = styled('div')(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
@@ -131,6 +143,10 @@ export const ContainerMyLibrary = styled('section')(({theme}) => ({
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
+
+    [theme.breakpoints.up('desktop')]:{
+        marginTop: '0px',
+    }
 }));
 
 export const LibraryHeaderContainer = styled('div')(({theme}) => ({

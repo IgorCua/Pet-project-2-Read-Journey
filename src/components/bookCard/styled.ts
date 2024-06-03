@@ -3,9 +3,10 @@ import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     minWidth:'71px',
+    // width:'137px',
     maxWidth: '137px',
     // width: '110px',
-    // width: '100%',
+    width: '100%',
     display: 'flex',
     // flexWrap: 'wrap',
     flexDirection: 'column',
