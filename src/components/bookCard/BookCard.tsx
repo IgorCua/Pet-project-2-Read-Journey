@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux"
+// import { useSelector } from "react-redux";
 import { 
     AddToLibraryBtn, 
     Author, 
@@ -13,16 +13,17 @@ import {
     StartReadingBtn,
     TitleContainer
 } from "./styled";
-import { selectRecommendedBooks } from "../../redux/books/selectors";
+// import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
 import React, { useState } from "react";
-import { Backdrop, Box, IconButton } from "@mui/material";
-import { theme } from "../../styles/themes";
+import { IconButton } from "@mui/material";
+// import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 // import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { booksAddById, booksRemoveBook } from "../../redux/books/operations";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
     id: string,
@@ -48,6 +49,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     const [isModalOpen, setIsModalOpen] = useState(false);
     // const [isReading, setIsReading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate();
 
     const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target instanceof Element){ 
@@ -62,20 +64,18 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
             }
 
             if(event.currentTarget.localName === 'button'){
-                console.log('delete book', id);
                 dispatch(booksRemoveBook(id));
             }
         }
     }
 
     const handleAddToLibrary = () => {
-        console.log('click');
-        console.log(id);
         dispatch(booksAddById(id));
     }
 
     const handleStartReading = () => {
-        console.log('Start reading click');
+        // console.log('Start reading click');
+        navigate('/reading');
     }
 
     const handleDeleteBook = (event: React.MouseEvent<HTMLElement>) => {

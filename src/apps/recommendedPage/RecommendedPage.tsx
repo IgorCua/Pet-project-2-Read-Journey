@@ -31,7 +31,6 @@ export const RecommendedPage = () => {
     const handleLinkClick = () => {
         navigate('/library');
     }
-console.log('recommendedPages')
 
     const handleBooksLimit = () => {
         if(window.innerWidth < 768) {
