@@ -19,19 +19,24 @@ export const Container = styled('div')(({theme}) => ({
 //     borderRadius: '30px'
 // }));
 
-export const ContainerFilter = styled('div')(({theme}) => ({
+export const ContainerFilter = styled('section')(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
-    // gap: '',
+    gap: '20px',
     // justifyContent: 'space-between',
     // backgroundColor: theme.palette.custom.bg2,
     backgroundColor: theme.palette.custom.bg3,
 
-    borderRadius: '30px'
+    borderRadius: '30px',
     // borderRadius: '12px'
+    [theme.breakpoints.up('tablet')]:{
+        padding: '32px 32px',
+        flexDirection: 'row',
+        gap: '32px'
+    }
 }));
-export const ContainerRecommended = styled('div')(({theme}) => ({
+export const ContainerRecommended = styled('section')(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
@@ -39,7 +44,12 @@ export const ContainerRecommended = styled('div')(({theme}) => ({
     // justifyContent: 'space-between',
     backgroundColor: theme.palette.custom.bg2,
 
-    borderRadius: '12px'
+    borderRadius: '12px',
+    
+    [theme.breakpoints.up('tablet')]: {
+        paddingTop: '26px',
+        width: '313px'
+    }
 }));
 
 export const Header = styled(Typography)(({theme}) => ({
@@ -50,13 +60,24 @@ export const Header = styled(Typography)(({theme}) => ({
     fontWeight: '700',
 
     color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]:{
+        marginBottom: '20px',
+        
+        fontSize: '20px',
+        lineHeight: '20px',
+    }
 })) as typeof Typography;
 
 export const ContainerFilterCards = styled('div')(({theme}) => ({
     marginBottom: '11px',
     display: 'flex',
     justifyContent: 'flex-start',
-    gap: '20px'
+    gap: '20px',
+
+    [theme.breakpoints.up('tablet')]: {
+        marginBottom: '20px'
+    }
 }));
 
 export const ContainerLinks = styled('div')(({theme}) => ({
@@ -100,7 +121,7 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
     // border: `1px solid ${theme.palette.custom.buttonBorderGrey}`
 })) as typeof IconButton;
 
-export const ContainerMyLibrary = styled('div')(({theme}) => ({
+export const ContainerMyLibrary = styled('section')(({theme}) => ({
     marginTop: '10px',
     padding: '40px 20px',
     display: 'flex',
@@ -119,7 +140,7 @@ export const LibraryHeaderContainer = styled('div')(({theme}) => ({
     justifyContent: 'space-between'
 }));
 
-export const LibraryHeader = styled('p')(({theme}) => ({
+export const LibraryHeader = styled('h2')(({theme}) => ({
     fontSize: '20px',
     lineHeight: '20px',
     fontWeight: '700',
@@ -127,10 +148,9 @@ export const LibraryHeader = styled('p')(({theme}) => ({
     color: theme.palette.custom.textMain,
 }));
 
-export const LibrarySelect = styled('div')(({theme}) => ({
-    color: theme.palette.custom.textMain,
-}));
-
+// export const LibrarySelect = styled('div')(({theme}) => ({
+//     color: theme.palette.custom.textMain,
+// }));
 
 export const ContainerEmptyLibrary = styled('div')(({theme}) => ({
     padding: '60px 40px',
@@ -139,7 +159,7 @@ export const ContainerEmptyLibrary = styled('div')(({theme}) => ({
     alignItems: 'center'
 }));
 
-export const ImageContainer = styled('div')(({theme}) => ({
+export const ImageContainer = styled('figure')(({theme}) => ({
     padding: '25px 25px',
     marginBottom: '10px',
 

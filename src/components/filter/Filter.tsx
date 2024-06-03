@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { FormTextField } from "../materialUI/FormTextField"
-import { Form, FormHeader, InputAuthor, InputTitle, NumOfPages, Submit } from "./styled"
+import { Form, FormHeader, InputAuthor, InputTitle, InputNumOfPages, Submit } from "./styled"
 import React, { useEffect, useRef } from "react";
 import { booksGetRecommended } from "../../redux/books/operations";
 
@@ -93,7 +93,7 @@ export const Filter = ({numOfInputs, requestLimit, setFilterData}: Props) => {
         <InputTitle type="text" name="title"/>
         <InputAuthor type="text" name="author"/>
         {numOfInputs === 3 && 
-            <NumOfPages type="text" name="numberOfPages"/>
+            <InputNumOfPages type="text" name="numberOfPages"/>
         }
         <Submit type="submit">Apply</Submit>
     </Form>

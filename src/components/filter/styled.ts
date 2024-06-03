@@ -3,7 +3,7 @@ import { lineHeight, maxWidth, minWidth, styled, width } from "@mui/system";
 import { FormTextField } from "../materialUI/FormTextField";
 
 export const Form = styled('form')(({theme}) => ({
-    marginBottom: '20px',
+    // marginBottom: '20px',
     
     [theme.breakpoints.up('tablet')]: {
         minWidth: '295px',
@@ -82,7 +82,7 @@ export const InputAuthor = styled(TextField)(({theme})=>({
     }
 })) as typeof TextField;
 
-export const NumOfPages = styled(TextField)(({theme})=>({
+export const InputNumOfPages = styled(TextField)(({theme})=>({
     // marginBottom: '20px',
     marginTop: '8px',
     '& div': {
@@ -137,15 +137,15 @@ export const Submit = styled(ButtonBase)(({theme}) => ({
     }
 }));
 
-export const WorkoutContainer = styled('div')(({theme}) => ({
-    padding: '20px 20px',
-    marginTop: '10px',
+// export const WorkoutContainer = styled('div')(({theme}) => ({
+//     padding: '20px 20px',
+//     marginTop: '10px',
 
-    backgroundColor: theme.palette.custom.bg2,
+//     backgroundColor: theme.palette.custom.bg2,
 
-    borderRadius: '30px',
-}));
+//     borderRadius: '30px',
+// }));
 
-export const LinksContainer = styled('div')(({theme}) => ({
+// export const LinksContainer = styled('div')(({theme}) => ({
     
-}));
+// }));

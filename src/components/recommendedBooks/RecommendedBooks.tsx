@@ -20,11 +20,16 @@ interface Request {
     limit?: number
 }
 
-export const RecommendedBooks = () => {
+type Props = {
+    booksLimit?: number
+}
+
+export const RecommendedBooks = ({booksLimit}: Props) => {
     const booksObj = useSelector(selectRecommendedBooks);
     const dispatch = useDispatch<AppDispatch>();
     let req: Request = {
-        page: booksObj ? booksObj.page : 1
+        page: booksObj ? booksObj.page : 1,
+        limit: booksLimit ? booksLimit : 0
     }
 
     const handlePageLimit = () => {
@@ -48,8 +53,12 @@ export const RecommendedBooks = () => {
 
     useEffect(()=>{
         // if(!booksObj || booksObj.results.length !== 2) {
-        if(!booksObj || booksObj.results.length !== 2) {
+        if(!booksObj && !booksLimit) {
             handlePageLimit();
+            dispatch(booksGetRecommended(req));
+        }
+
+        if(!booksObj && booksLimit) {
             dispatch(booksGetRecommended(req));
         }
     });
@@ -144,6 +153,16 @@ export const RecommendedBooks = () => {
                         // handleClick={handleCardBackdrop}
                     />
                 }
+                return <BookCard
+                    key={i}
+                    id={book._id}
+                    cardType="recommended"
+                    url={book.imageUrl}
+                    title={book.title}
+                    author={book.author}
+                    pages={book.totalPages}
+                    // handleClick={handleCardBackdrop}
+                />
             })}
         </CardsContainer>
     </Container>

@@ -21,6 +21,9 @@ export const Container = styled('div')(({theme}) => ({
 
 export const Section = styled('section')(({theme}) => ({
     padding: '20px 20px',
+    display: 'flex', 
+    gap: '20px',
+    flexDirection: 'column',
 
     backgroundColor: theme.palette.custom.bg3,
     borderRadius: '30px',
@@ -29,8 +32,8 @@ export const Section = styled('section')(({theme}) => ({
         '&:nth-of-type(1)': {
             // maxWidth: '353px',
             padding: '30px 30px',
-            display: 'flex', 
             gap: '32px',
+            flexDirection: 'row'
         },
 
         '&:nth-of-type(2)': {

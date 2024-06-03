@@ -20,16 +20,37 @@ import { Icon } from "../../components/icon/Icon";
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectBooksError } from "../../redux/books/selectors";
+import { selectBooksError, selectRecommendedBooks } from "../../redux/books/selectors";
 
 export const RecommendedPage = () => {
     // const booksError = useSelector(selectBooksError);
+    // const booksObj = useSelector(selectRecommendedBooks);
     const navigate = useNavigate();
 
     const handleLinkClick = () => {
         navigate('/library');
     }
 console.log('recommendedPages')
+
+    const handleBooksLimit = () => {
+        if(window.innerWidth < 768) {
+            // req.limit = 2;
+            return 2;
+        }
+        if(window.innerWidth < 1024) {
+            // req.limit = 8;
+            return 8;
+        }
+        if(window.innerWidth >= 1024) {
+            // req.limit = 10;
+            return 10;
+        }
+        if(window.innerWidth > 1280) {
+            // req.limit = 12;
+            return 12;
+        }
+    }
+
     return (
         <Container>
             <Section>
@@ -75,7 +96,7 @@ console.log('recommendedPages')
             </Section>
             
             <Section>
-                <RecommendedBooks/>
+                <RecommendedBooks booksLimit={handleBooksLimit()}/>
             </Section>
         </Container>
     )

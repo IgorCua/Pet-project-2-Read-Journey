@@ -14,7 +14,7 @@ import {
     ContainerEmptyLibrary,
     LibraryHeaderContainer,
     LibraryHeader,
-    LibrarySelect,
+    // LibrarySelect,
     ContainerFilter,
     ContainerBooks
 } from "./styled";
@@ -34,14 +34,6 @@ import {
 import { BookCard } from "../../components/bookCard/BookCard";
 import { useNavigate } from "react-router-dom";
 import { Icon } from "../../components/icon/Icon";
-import { 
-    FormControl, 
-    MenuItem, 
-    Select, 
-    SelectChangeEvent 
-} from "@mui/material";
-import { theme } from "../../styles/themes";
-import { ExpandMore } from "@mui/icons-material";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { SelectForm } from "../../components/materialUI/SelectForm";
 
@@ -63,7 +55,6 @@ export const UserLibraryPage = () => {
     const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
     
     const navigate = useNavigate();
-    const [selectedBooks, setSelectedBooks] = useState('');
     const [filterData, setFilterData] = useState<any>({
         title: null,
         author: null,
@@ -84,9 +75,9 @@ export const UserLibraryPage = () => {
         return null;
     }, [userBooks]);
 
-    const RecommendedMemo = useMemo(() => {
-        return recommendedBooks ? recommendedBooks : null;
-    }, [recommendedBooks]);
+    // const RecommendedMemo = useMemo(() => {
+    //     return recommendedBooks ? recommendedBooks : null;
+    // }, [recommendedBooks]);
 
     useEffect(()=>{
         if(!booksError && (!recommendedBooks || recommendedBooks.results.length !== 3)) {
@@ -101,25 +92,16 @@ export const UserLibraryPage = () => {
                 console.log('useEffect memo', userBooksMemo);
                 dispatch(booksGetUserBooks(null));
             }, 1000);
-
         };
         
         if(booksError) {
-            setIsErrorModal(true)
+            setIsErrorModal(true);
         }
 
     }, [filterData, booksError, request, recommendedBooks, dispatch]);
 
     const handleLinkClick = () => {
         navigate('/recommended');
-    }
-
-    const handleSelect = (event: SelectChangeEvent) => {
-        setSelectedBooks(event.target.value);
-        if(!event.target.value) dispatch(booksGetUserBooks(null));
-        if(event.target.value) {
-            dispatch(booksGetUserBooks({status: event.target.value}));
-        };
     }
 
     console.log('booksError', booksError);
@@ -145,13 +127,12 @@ export const UserLibraryPage = () => {
         if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
             return false;
         }
-
         return true;
         // if(totalPages) {
         //     console.log(`${book.totalPages}`.includes(totalPages))
         // }
     }
-
+    
     const handleErrorMessage = () => {
         if(booksError && booksError.response?.status === 500){
             return 'Server error, please try to reload page.';
@@ -169,9 +150,13 @@ export const UserLibraryPage = () => {
             errorMessage={handleErrorMessage()}
         />}
         <ContainerFilter>
-            <Filter numOfInputs={3} requestLimit={3} setFilterData={setFilterData}/>
+            <Filter 
+                numOfInputs={3} 
+                requestLimit={3} 
+                setFilterData={setFilterData}
+            />
             <ContainerRecommended>
-                <Header>Recommended books</Header>
+                <Header variant="h2">Recommended books</Header>
                 <ContainerFilterCards>
                     {recommendedBooks && recommendedBooks.results.map((book, i) => {
                         return <BookCard 
