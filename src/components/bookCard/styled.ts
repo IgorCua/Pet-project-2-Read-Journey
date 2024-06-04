@@ -3,12 +3,19 @@ import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     minWidth:'71px',
+    // width:'137px',
     maxWidth: '137px',
     // width: '110px',
-    // width: '100%',
+    width: '100%',
     display: 'flex',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
+    flexDirection: 'column',
+    // cursor: 'pointer',
 
+    // '&:hover': {
+    '&:hover img': {
+        boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
+    },
 }));
 
 export const Image = styled('img')(({theme}) => ({
@@ -16,15 +23,34 @@ export const Image = styled('img')(({theme}) => ({
     width: '100%',
     height: '208px',
     // maxHeight: '208px'
-
+    cursor: 'pointer',
     borderRadius: '8px',
-
-    cursor: 'pointer'
+    transitionDuration: '250ms',
+    transitionProperty: 'box-shadow',
 }));
 
-export const DescriptionContainer = styled('div')({
-    overflow:'hidden',
+export const DescriptionContainer = styled('div')(({theme}) => ({
+    width: '100%',
+    // overflow:'hidden',
     textOverflow: 'ellipsis',
+    display: 'flex',
+    flexDirection: 'row',
+    alignContent: 'center',
+    // justifyContent: 'center',
+
+    // 'img:has(~ &:hover)': {
+    //     boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
+    // },
+
+}));
+
+export const TitleContainer = styled('div')({
+    minWidth: '70%',
+    maxWidth: '100%',
+
+    display: 'flex',
+    flexDirection: 'column',
+    cursor: 'pointer'
 });
 
 export const Header = styled(Typography)(({theme}) => ({

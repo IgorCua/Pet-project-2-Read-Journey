@@ -72,9 +72,7 @@ export const RegisterForm: React.FC = () => {
 
     const handleSubmit = ( values: FormValues, {resetForm}: any) => {
         
-        console.log('registerForm submit', values);
         dispatch(userSignup(values)).then((res) => {
-            console.log("register res: ", res);
             if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
         // resetForm();

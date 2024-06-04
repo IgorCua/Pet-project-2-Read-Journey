@@ -23,18 +23,28 @@ const persistAuthConfig = {
         'name', 
         'email', 
         'token',
-        // 'refreshToken', 
+        'refreshToken', 
         'isLoggedIn',
     ]
 }
 
+const persistBooksConfig = {
+    key: 'books',
+    storage,
+    whitelist: [
+        // 'recommendedBooks',
+        'userBooks'
+    ]
+}
+
 const persistAuthReducer = persistReducer(persistAuthConfig, authSlice);
+const persistBooksReducer = persistReducer(persistBooksConfig, booksSlice)
 // export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 
 export const store = configureStore({
     reducer: {
         auth: persistAuthReducer,
-        books: booksSlice
+        books: persistBooksReducer
     },
     middleware: getDefaultMiddleware => 
     getDefaultMiddleware({

@@ -1,15 +1,21 @@
 import { IconButton } from "@mui/material";
 import { fontSize, maxWidth, minWidth, styled } from "@mui/system";
 
-export const Container = styled('div')(({theme}) => ({
+export const Section = styled('section')(({theme}) => ({
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    // [theme.breakpoints.down('tablet')]: {
-    //     // justifyContent: 'center',
-    //     flexDirection: 'column',
-    //     alignItems: 'center',
-    // }
+    // alignItems: 'center',
+    [theme.breakpoints.up('tablet')]: {
+        width: '624px',
+        alignSelf: 'center'
+        // justifyContent: 'center',
+        // flexDirection: 'column',
+        // alignItems: 'center',
+    },
+
+    [theme.breakpoints.up('desktop')]: {
+        width: '100%'
+    }
 }));
 
 export const HeaderContainer = styled('div')(({theme}) => ({
@@ -62,7 +68,7 @@ export const CardsContainer = styled('div')(({theme}) => ({
     display: 'flex',
     // minWidth: '200px',
     // maxWidth: '300px',
-    // width: '100%',
+    width: '100%',
     // maxHeight: '651px',
     gap: '20px',
     // justifyContent: 'center',
@@ -73,9 +79,10 @@ export const CardsContainer = styled('div')(({theme}) => ({
         gap: '25px'
     },
     [theme.breakpoints.up('desktop')]: {
-        maxHeight: '651px',
+        // maxHeight: '651px',
+        width: '100%',
         // flexWrap: 'wrap',
-        gap: '20px'
+        gap: '20px',
     }
 }));
 

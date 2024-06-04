@@ -65,7 +65,7 @@ export const userGetCurrent = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
-            await axiosToken.set();
+            axiosToken.set();
             const res = await usersGetCurrentAPI();
             return res;
         }
@@ -81,8 +81,8 @@ export const userRefreshToken = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             const res: any = await usersRefreshTokenAPI();
-            // console.log(res)
-            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+            console.log('refreshToken', res);
+            if(res) localStorage.setItem('refreshtoken', res.data.refreshToken);
             axiosToken.set(res.data.token);
 
             return res;
@@ -93,22 +93,22 @@ export const userRefreshToken = createAsyncThunk(
     }
 );
 
-export const userAddBookByID = createAsyncThunk(
-    'auth/addBookByID',
+// export const userAddBookByID = createAsyncThunk(
+//     'auth/addBookByID',
 
-    async ( data: string, { rejectWithValue }) => {
-        try{
-            axiosToken.set();
-            const res: any = await booksAddByIdAPI(data);
-            // console.log(res)
+//     async ( data: string, { rejectWithValue }) => {
+//         try{
+//             axiosToken.set();
+//             const res: any = await booksAddByIdAPI(data);
+//             // console.log(res)
 
-            return res;
-        }
-        catch (error: unknown) {
-            return rejectWithValue(error);
-        }
-    }
-);
+//             return res;
+//         }
+//         catch (error: unknown) {
+//             return rejectWithValue(error);
+//         }
+//     }
+// );
 
 export const userSignOut = createAsyncThunk(
     'auth/signOut',
@@ -142,5 +142,13 @@ export const userLocalSignOut = createAsyncThunk(
         catch (error: unknown) {
             return rejectWithValue(error);
         }
+    }
+);
+
+export const userRemoveError = createAsyncThunk(
+    'auth/removeError',
+
+    async ( _, { rejectWithValue }) => {
+        return null;
     }
 );

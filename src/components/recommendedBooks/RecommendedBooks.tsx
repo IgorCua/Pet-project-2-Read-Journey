@@ -1,5 +1,5 @@
 import { Box, IconButton } from "@mui/material"
-import { CardsContainer, CardsDecorationContainer, Container, Header, HeaderContainer, IconWrapper } from "./styled"
+import { CardsContainer, CardsDecorationContainer, Section, Header, HeaderContainer, IconWrapper } from "./styled"
 import { Icon } from "../icon/Icon"
 import { useEffect } from "react"
 import { useSelector } from "react-redux"
@@ -20,31 +20,46 @@ interface Request {
     limit?: number
 }
 
-export const RecommendedBooks = () => {
+type Props = {
+    booksLimit?: number
+}
+
+export const RecommendedBooks = ({booksLimit}: Props) => {
     const booksObj = useSelector(selectRecommendedBooks);
     const dispatch = useDispatch<AppDispatch>();
     let req: Request = {
-        page: booksObj ? booksObj.page : 1
+        page: booksObj ? booksObj.page : 1,
+        limit: booksLimit ? booksLimit : 0
     }
 
     const handlePageLimit = () => {
         if(window.innerWidth < 768) {
             req.limit = 2;
-            return
+            return;
         }
         if(window.innerWidth < 1024) {
             req.limit = 8;
-            return
+            return;
         }
         if(window.innerWidth >= 1024) {
             req.limit = 10;
-            return
+            return;
+        }
+        if(window.innerWidth > 1280) {
+            req.limit = 12;
+            return;
         }
     }
 
     useEffect(()=>{
-        if(!booksObj) {
+        // if(!booksObj || booksObj.results.length !== 2) {
+        if(!booksObj && !booksLimit) {
             handlePageLimit();
+            dispatch(booksGetRecommended(req));
+        }
+
+        if((booksObj && booksObj.results.length === 3) || (!booksObj && booksLimit)) {
+            req.page = 1;
             dispatch(booksGetRecommended(req));
         }
     });
@@ -66,7 +81,7 @@ export const RecommendedBooks = () => {
             handlePageLimit();
             dispatch(booksGetRecommended(req));
         }
-        return
+        return;
     }
 
     const handleIconPreviousColor = () => {
@@ -89,37 +104,37 @@ export const RecommendedBooks = () => {
 
     const handleCardBackdrop = (title: any) => {
         console.log('bookBackdrop');
-        return 'hello'
+        return 'hello';
     }
 
-    return <Container>
+    return <Section>
         <HeaderContainer>
             <Header>Recommended</Header>
             <Box sx={{display: 'flex', gap: '8px'}}>
                 <IconWrapper size="small" onClick={() => handlePreviousPageClick()}>
                     <Icon iconName={'#icon-chevron-left'} sx={{
-                        width: '12px', 
-                        height: '12px', 
+                        width: '12px',
+                        height: '12px',
                         stroke: handleIconPreviousColor(),
                         position: 'absolute',
                         left: '9px',
                         [theme.breakpoints.up('tablet')]: {
-                            width: '20px', 
-                            height: '20px', 
+                            width: '20px',
+                            height: '20px',
                         }
                     }}
                     ></Icon>
                 </IconWrapper>
                 <IconWrapper size="small" onClick={() => handleNextPageClick()}>
                     <Icon iconName={'#icon-chevron-right'} sx={{
-                        width: '12px', 
-                        height: '12px', 
+                        width: '12px',
+                        height: '12px',
                         stroke: handleIconNextColor(),
                         position: 'absolute',
                         left: '10px',
                         [theme.breakpoints.up('tablet')]: {
-                            width: '20px', 
-                            height: '20px', 
+                            width: '20px',
+                            height: '20px',
                         }
                     }}></Icon>
                 </IconWrapper>
@@ -127,17 +142,29 @@ export const RecommendedBooks = () => {
         </HeaderContainer>
         <CardsContainer>
             {booksObj && booksObj.results.map((book, i)=>{
+                if(window.innerWidth < 768 && i < 2){
+                    return <BookCard
+                        key={i}
+                        id={book._id}
+                        cardType="recommended"
+                        url={book.imageUrl}
+                        title={book.title}
+                        author={book.author}
+                        pages={book.totalPages}
+                        // handleClick={handleCardBackdrop}
+                    />
+                }
                 return <BookCard
                     key={i}
                     id={book._id}
-                    cardType="recommended" 
+                    cardType="recommended"
                     url={book.imageUrl}
                     title={book.title}
                     author={book.author}
                     pages={book.totalPages}
-                    handleClick={handleCardBackdrop}
+                    // handleClick={handleCardBackdrop}
                 />
             })}
         </CardsContainer>
-    </Container>
+    </Section>
 }

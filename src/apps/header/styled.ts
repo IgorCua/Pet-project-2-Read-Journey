@@ -58,11 +58,15 @@ export const Nav = styled('nav')(({theme})=> ({
     width: '76px',
     display: 'flex',
     flexWrap: 'wrap',
+    transition: '250ms',
+    transitionProperty: 'hover',
 
     '& a': {
         color: theme.palette.custom.textSecondary,
         textDecoration: 'none',
         position:'relative',
+        transition: '250ms',
+        transitionProperty: ':hover',
 
         '& p': {
             marginRight: '2px',
@@ -96,6 +100,10 @@ export const Nav = styled('nav')(({theme})=> ({
 
         [theme.breakpoints.up('tablet')]: {
             // borderBottom: `8px solid transparent`,
+        },
+
+        '&:hover': {
+            color: theme.palette.custom.textMain
         }
     },
     '& a.active': {
@@ -125,7 +133,7 @@ export const Nav = styled('nav')(({theme})=> ({
         width: 'auto',
         flexDirection:'row',
         gap: '32px'
-    }  
+    },
 }));
 
 export const LinkContainer = styled(`div`)(({theme})=> ({
@@ -141,4 +149,4 @@ export const LogOffBtn = styled(ButtonBase)(({theme})=>({
     [theme.breakpoints.down('tablet')]: {
         display: 'none'
     }
-}));
+})) as typeof ButtonBase;

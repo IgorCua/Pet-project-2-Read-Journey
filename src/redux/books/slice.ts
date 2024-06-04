@@ -1,11 +1,12 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
+import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksRemoveError, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
 // import { PendingAction, RejectedAction } from "../actionTypes"
 import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction } from "../reduxTypes";
 
 interface initialStateInterface {
     recommendedBooks: recomendedBooksInterface | null,
     userBooks: BookInterface[] | [],
+    // userBooks: BookInterface[] | null,
     readingStart: any | null,
     readingEnd: any | null,
     currentReading: null | BookInterface,
@@ -41,25 +42,34 @@ const booksSlice = createSlice({
                 state.error = null;
             })
             .addCase(booksAddBook.fulfilled, (state, action: PayloadAction<any>) => {
-                state.userBooks = [...state.userBooks, action.payload];
+                // state.userBooks = [...state.userBooks, action.payload];
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
+            // .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
+            //     // state.userBooks = [...state.userBooks, action.payload];
+            //     state.userBooks = action.payload.data;
+            //     state.isLoading = false;
+            //     state.isError = false;
+            //     state.error = null;
+            // })
             .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
-                state.userBooks = [...state.userBooks, action.payload];
+                // console.log(action.payload);
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksRemoveBook.fulfilled, (state, action) => {
-                state.userBooks = action.payload;
+            .addCase(booksRemoveBook.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksGetUserBooks.fulfilled, (state, action) => {
-                state.userBooks = action.payload;
+            .addCase(booksGetUserBooks.fulfilled, (state, action: PayloadAction<any>) => {
+                state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
@@ -88,6 +98,11 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
+            .addCase(booksRemoveError.fulfilled, (state, action) => {
+                state.error = action.payload;
+                state.isError = false;
+                state.isLoading = false;
+            })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
                 (state, _) => {
@@ -103,8 +118,8 @@ const booksSlice = createSlice({
                 (state, action) => {
                     state.isLoading = false;
                     state.isError = true;
-                    console.log(action.payload)
                     state.error = action.payload;
+                    console.log('books slice error', action.payload)
                 }
             )
     },

@@ -11,6 +11,7 @@ import { selectAuthIsLoggedIn } from './redux/auth/selectors';
 import { useSelector } from 'react-redux';
 import { UserLibraryPage } from './apps/UserlibraryPage/UserLibraryPage';
 import { Authenticate } from './components/authenticate/Authenticate';
+import { ReadingPage } from './apps/readingPage/ReadingPage';
 
 function App() {
   const isLoggedIn = useSelector(selectAuthIsLoggedIn);
@@ -24,7 +25,7 @@ function App() {
                   <Route element={<PrivateRoute component={<Header />} />}>
                       <Route path='/recommended' element={<PrivateRoute component={<RecommendedPage />} />} />
                       <Route path='/library' element={<PrivateRoute component={<UserLibraryPage />} />} />
-                      <Route path='/reading' element={<PrivateRoute component={<RecommendedPage />} />} />
+                      <Route path='/reading' element={<PrivateRoute component={<ReadingPage />} />} />
                   </Route>
               }
               <Route path='*' element={<Navigate
