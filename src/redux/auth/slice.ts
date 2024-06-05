@@ -113,7 +113,7 @@ const authSlice = createSlice({
             //     state.isError = false;
             //     state.error = null;
             // })
-            .addCase(userRemoveError.fulfilled, (state, action) => {
+            .addCase(userRemoveError, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
                 state.isLoading = false;

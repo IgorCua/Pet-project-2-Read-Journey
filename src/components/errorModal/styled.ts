@@ -2,6 +2,7 @@ import { Button, ButtonBase } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) =>({
+    minWidth: '250px',
     position: 'relative',
 
     backgroundColor: theme.palette.custom.bg3,
@@ -21,6 +22,7 @@ export const Container = styled('div')(({theme}) =>({
 }));
 
 export const ErrorContainer = styled('div')(({theme})=>({
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'

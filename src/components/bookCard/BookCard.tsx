@@ -22,8 +22,9 @@ import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 // import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
-import { booksAddById, booksRemoveBook } from "../../redux/books/operations";
+import { booksAddById, booksCurrentReading, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 type Props = {
     id: string,
@@ -75,6 +76,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
 
     const handleStartReading = () => {
         // console.log('Start reading click');
+        dispatch(booksGetBookInfo(id));
         navigate('/reading');
     }
 

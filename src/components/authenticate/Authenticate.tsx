@@ -96,7 +96,7 @@ export const Authenticate = ({children}: Props) => {
         }
         if(!authError && booksError){
             if(booksError.response?.status === 401) {
-                console.log('Authenticate books', booksError.response.status);
+                console.log('Authenticate books error', booksError.response.status);
                 // errorObj.dispatchAction = userLocalSignOut();
                 errorObj.errorCode = booksError.response.status;
                 errorObj.errorMessage = 'Your session timed out.';

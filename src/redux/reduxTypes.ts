@@ -27,7 +27,7 @@ export interface BookInterface {
     title: string,
     author: string,
     imageUrl: string,
-    totalPages: string,
+    totalPages: number,
     satus: string,
     owner: string,
     progress: unknown[]

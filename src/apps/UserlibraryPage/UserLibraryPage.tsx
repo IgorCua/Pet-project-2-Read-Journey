@@ -104,8 +104,8 @@ export const UserLibraryPage = () => {
         navigate('/recommended');
     }
 
-    console.log('booksError', booksError);
-    console.log('filterData', filterData);
+    // console.log('booksError', booksError);
+    // console.log('filterData', filterData);
 
     const shouldCardRender = (book: any) => {
         const {title, author, totalPages} = filterData;
@@ -134,7 +134,7 @@ export const UserLibraryPage = () => {
     }
     
     const handleErrorMessage = () => {
-        if(booksError && booksError.response?.status === 500){
+        if(booksError && booksError.response?.status >= 500){
             return 'Server error, please try to reload page.';
         }
 

@@ -23,8 +23,9 @@ const persistAuthConfig = {
         'name', 
         'email', 
         'token',
-        // 'refreshToken', 
+        'refreshToken', 
         'isLoggedIn',
+        'bookInfo'
     ]
 }
 
