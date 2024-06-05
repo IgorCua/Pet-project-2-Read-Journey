@@ -100,11 +100,11 @@ const authSlice = createSlice({
                 state.name = null;
                 state.email = null;
                 state.token = null;
+                state.refreshToken = null;
                 state.isLoggedIn = false;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
-                console.log('localSignOut payload:', action.payload);
             })
             // .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction<any>) => {
             //     console.log(action.payload);

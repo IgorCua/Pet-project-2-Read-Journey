@@ -81,7 +81,6 @@ export const userRefreshToken = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             const res: any = await usersRefreshTokenAPI();
-            console.log('refreshToken', res);
             if(res) localStorage.setItem('refreshtoken', res.data.refreshToken);
             axiosToken.set(res.data.token);
 
@@ -116,7 +115,7 @@ export const userSignOut = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             localStorage.removeItem('persist:auth');
-            localStorage.removeItem('updateAccess');
+            localStorage.removeItem('refreshtoken');
             
             const res = await usersSignOutAPI();
             axiosToken.unset();

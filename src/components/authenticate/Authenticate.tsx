@@ -26,7 +26,7 @@ type AppDispatch = typeof store.dispatch;
 
 export const Authenticate = ({children}: Props) => {
     const token = useSelector(selectToken);
-    // const refreshToken = localStorage.getItem('updateAccess');
+    // const refreshToken = localStorage.getItem('refreshtoken');
     const refreshToken = useSelector(selectRefreshToken);
     const decodedToken = token && JSON.parse(atob(token.split('.')[1]));
     const authError: any = useSelector(selectAuthError);

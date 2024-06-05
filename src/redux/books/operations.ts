@@ -1,7 +1,8 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { PrepareAction, createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { booksAddBookAPI, booksAddByIdAPI, booksDeleteReadingAPI, booksGetBookInfoAPI, booksGetRecommendedAPI, booksGetUserBooksAPI, booksRemoveBookAPI, booksSaveEndOfReadingAPI, booksSaveReadingStartAPI } from "../../services/connectionsAPI";
 import axios from "axios";
 import { axiosToken } from "../../services/axiosSettings";
+import { BookInterface } from "../reduxTypes";
 
 interface GetRecommendedInterface {
     title?: string,
@@ -163,10 +164,18 @@ export const booksGetBookInfo = createAsyncThunk(
     }
 );
 
-export const booksRemoveError = createAsyncThunk(
+export const booksRemoveError = createAction(
     'books/removeError',
 
-    async ( _, { rejectWithValue }) => {
+    ( _ ): any => {
         return null;
     }
 );
+
+export const booksCurrentReading = createAction(
+    'books/currentReading',
+
+    (data) => {
+        return data;       
+    }
+)

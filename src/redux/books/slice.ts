@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksRemoveError, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
+import { booksAddBook, booksAddById, booksCurrentReading, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksRemoveError, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
 // import { PendingAction, RejectedAction } from "../actionTypes"
 import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction } from "../reduxTypes";
 
@@ -98,10 +98,14 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksRemoveError.fulfilled, (state, action) => {
+            .addCase(booksRemoveError, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
                 state.isLoading = false;
+            })
+            .addCase(booksCurrentReading, (state, action: PayloadAction<any>) => {
+                console.log('slice books/currentReading', action);
+                state.currentReading = action.payload;
             })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
