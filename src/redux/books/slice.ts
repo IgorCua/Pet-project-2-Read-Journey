@@ -119,6 +119,9 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.isLoading = false;
             })
+            .addCase('SIGNOUT', (state) => {
+                Object.assign(state, initialState);
+            })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
                 (state, _) => {
@@ -135,7 +138,7 @@ const booksSlice = createSlice({
                     state.isLoading = false;
                     state.isError = true;
                     state.error = action.payload;
-                    console.log('books slice error', action.payload)
+                    // console.log('books slice error', action.payload)
                 }
             )
     },

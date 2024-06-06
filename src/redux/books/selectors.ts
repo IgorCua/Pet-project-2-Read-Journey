@@ -17,4 +17,18 @@ export const selectRecommendedBooksIDsArr = createSelector(
     (recommendedBooks) => {
         return recommendedBooks ? recommendedBooks.results.map((book) => book._id) : null; 
     }
-)
+);
+
+export const selectUserBooksIDsArr = createSelector(
+    [selectUserBooks],
+    (userBooks) => {
+        return userBooks ? userBooks.map((book) => book._id) : null; 
+    }
+);
+
+export const selectUserBooksTitlesArr = createSelector(
+    [selectUserBooks],
+    (userBooks) => {
+        return userBooks ? userBooks.map((book) => book.title) : null; 
+    }
+);

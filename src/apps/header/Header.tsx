@@ -36,8 +36,8 @@ export function Header() {
     }
 
     const handleLogOut = () => {
-        console.log('log out')
         dispatch(userSignOut());
+        dispatch({type: 'SIGNOUT'});
     }
 
     return (

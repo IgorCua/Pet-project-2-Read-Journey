@@ -17,6 +17,7 @@ import { useDispatch } from 'react-redux';
 import { userSignin } from '../../redux/auth/operations';
 import { store } from '../../redux/store';
 import { useNavigate } from 'react-router-dom';
+import { booksGetUserBooks } from '../../redux/books/operations';
 
 interface InitialValuesInterface {
     // name: string,
@@ -66,12 +67,14 @@ export const LoginForm: React.FC = () => {
     const navigate = useNavigate();
     // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
-    const handleSubmit = ( values: FormValues, {resetForm}: any) => {
+    const handleSubmit = async ( values: FormValues, {resetForm}: any) => {
         
         // console.log('registerForm submit', values);
-        dispatch(userSignin(values)).then((res) => {
+        await dispatch(userSignin(values)).then((res) => {
             if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
+
+        dispatch(booksGetUserBooks(null));
         // resetForm();
     }
 

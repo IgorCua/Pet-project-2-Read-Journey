@@ -64,7 +64,7 @@ export const RecommendedPage = () => {
 
     return (
         <Container>
-            {booksError && <ErrorModal 
+            {booksError && booksError.response.status !== 401 && <ErrorModal 
                 type='booksError'
                 isModalOpen={isErrorModal}
                 setIsModalOpen={setIsErrorModal}

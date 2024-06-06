@@ -15,7 +15,7 @@ import {
 } from "./styled";
 // import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconButton } from "@mui/material";
 // import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
@@ -25,6 +25,8 @@ import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { booksAddById, booksCurrentReading, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { selectBooksError, selectBooksIsError, selectUserBooksIDsArr, selectUserBooksTitlesArr } from "../../redux/books/selectors";
+import { ErrorModal } from "../errorModal/ErrorModal";
 
 type Props = {
     id: string,
@@ -48,10 +50,15 @@ type AppDispatch = typeof store.dispatch;
 
 export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isError, setIsError] = useState(false);
+    // const bookError = useSelector(selectBooksError);
+    // const isBookError = useSelector(selectBooksIsError);
+    // const userBooksIdArr = useSelector(selectUserBooksIDsArr);
+    const userBooksTitlesArr = useSelector(selectUserBooksTitlesArr);
     // const [isReading, setIsReading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-
+    
     const handleCardClick = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target instanceof Element){ 
             if(
@@ -71,7 +78,18 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     }
 
     const handleAddToLibrary = () => {
-        dispatch(booksAddById(id));
+        if(userBooksTitlesArr){
+            if(userBooksTitlesArr.includes(title) === true){
+                setIsError(true);
+                setIsModalOpen(false);
+                return;
+            }
+            if(userBooksTitlesArr.includes(title) === false) {
+                dispatch(booksAddById(id));
+                setIsModalOpen(false);
+                return;
+            }
+        }
     }
 
     const handleStartReading = () => {
@@ -83,9 +101,27 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
     const handleDeleteBook = (event: React.MouseEvent<HTMLElement>) => {
         
     }
+
+    const handleButtonRender = () => {
+        if(userBooksTitlesArr){
+            if(userBooksTitlesArr.includes(title) === true){
+                return true;
+            }
+            if(userBooksTitlesArr.includes(title) === false) {
+                return false;
+            }
+        }
+    }
     // const recommendedBooks = useSelector(selectRecommendedBooks);
     // console.log(cardType)
     return <>
+        <ErrorModal
+            type="booksError"
+            isModalOpen={isError}
+            setIsModalOpen={setIsError}
+            erorrCode="400"
+            errorMessage="Book already added."
+        />
         <Container sx={sx} onClick={handleCardClick}>
             <Image src={url}/>
             <DescriptionContainer>
@@ -141,7 +177,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                         borderRadius: '8px',
                         cursor: 'auto'
                     }}/>
-                    <BackdropDescrContainer>
+                    <BackdropDescrContainer sx={{textAlign: 'center'}}>
                         <Header variant="h3" noWrap sx={{
                             marginBottom: '2px',
                             width: '100%',
@@ -153,10 +189,10 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                     </BackdropDescrContainer>
                 </BackdropCardContainer>
 
-                { cardType === 'recommended' && 
+                {!handleButtonRender() && 
                     <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
                 }
-                { cardType === 'library' && 
+                {handleButtonRender() && 
                     <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
                 }
                 {/* { (cardType === 'myReading' && !isReading) ? 

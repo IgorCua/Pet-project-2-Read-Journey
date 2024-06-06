@@ -174,7 +174,7 @@ export const booksDeleteReadingAPI = (data: { bookId: string, readingId: string 
 };
 
 export const booksGetBookInfoAPI = (data: string) => {
-    return axios.get<any, AddBookInterface>(`/books/:${data}`).then(res => {
+    return axios.get<any, AddBookInterface>(`/books/${data}`).then(res => {
         return res;
     });
 };

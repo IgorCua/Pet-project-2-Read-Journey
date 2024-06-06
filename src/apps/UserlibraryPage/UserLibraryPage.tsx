@@ -26,10 +26,11 @@ import { useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { 
     selectBooksError, 
-    // selectBooksIsError, 
+    selectBooksIsError, 
     selectRecommendedBooks, 
     // selectRecommendedBooksIDsArr, 
-    selectUserBooks 
+    selectUserBooks, 
+    selectUserBooksIDsArr
 } from "../../redux/books/selectors";
 import { BookCard } from "../../components/bookCard/BookCard";
 import { useNavigate } from "react-router-dom";
@@ -50,10 +51,14 @@ export const UserLibraryPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const recommendedBooks = useSelector(selectRecommendedBooks);
     const userBooks = useSelector(selectUserBooks);
-    // const isBooksError = useSelector(selectBooksIsError);
+    const userBooksIdArr = useSelector(selectUserBooksIDsArr);
+    const isBooksError = useSelector(selectBooksIsError);
     const booksError: any = useSelector(selectBooksError);
     // const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
-    
+    // const booksErrorURL = booksError ? booksError.config.url : null;
+    // const booksErrorCode = booksError ? booksError.response.status : null;
+    // const booksErrorMessage = booksError ? booksError.response.data.message : null;
+
     const navigate = useNavigate();
     const [filterData, setFilterData] = useState<any>({
         title: null,
@@ -75,11 +80,16 @@ export const UserLibraryPage = () => {
         return null;
     }, [userBooks]);
 
+    const isBooksErrorMemo = useMemo(() => {
+        // isBooksError ? false : 
+        return isBooksError;
+    }, [userBooksIdArr]);
     // const RecommendedMemo = useMemo(() => {
     //     return recommendedBooks ? recommendedBooks : null;
     // }, [recommendedBooks]);
 
     useEffect(()=>{
+        if (!isErrorModal){}
         if(!booksError && (!recommendedBooks || recommendedBooks.results.length !== 3)) {
             const randomPage = Math.floor(Math.random() * 9);
             request.page = randomPage;
@@ -95,10 +105,17 @@ export const UserLibraryPage = () => {
         };
         
         if(booksError) {
-            setIsErrorModal(true);
+            // if( booksErrorCode === 500
+            //     && booksErrorURL === "/books/6550a7da6a35493225696509"
+            //     && booksErrorMessage === "Cannot read properties of undefined (reading 'toString')"
+            // ) {
+            //     setIsErrorModal(true);
+            // }
+            console.log('isErrorMemo', isBooksErrorMemo)
+            setIsErrorModal(true)
         }
 
-    }, [filterData, booksError, request, recommendedBooks, dispatch]);
+    }, [filterData, booksError, request, recommendedBooks, dispatch, isBooksErrorMemo]);
 
     const handleLinkClick = () => {
         navigate('/recommended');
@@ -133,6 +150,25 @@ export const UserLibraryPage = () => {
         // }
     }
     
+    // const handleErrorMessage = () => {
+    //     if(booksError && booksError.response?.status >= 500
+    //     ){
+    //         // console.log('500 error', booksError)
+    //         // console.log('500 error', booksErrorCode)
+    //         // console.log('500 error', booksErrorURL)
+    //         // console.log('500 error', booksErrorMessage)
+    //         if(booksErrorURL.includes('/books/')
+    //             && booksErrorMessage === "Cannot read properties of undefined (reading 'toString')"
+    //         ) {
+    //             console.log('500 undefined');
+    //             return 'Book is not in your library.';
+    //         }
+    //         return 'Server error, please try to reload page.';
+    //     }
+
+    //     return booksError.response?.data.message;
+    // }
+    
     const handleErrorMessage = () => {
         if(booksError && booksError.response?.status >= 500){
             return 'Server error, please try to reload page.';
@@ -140,9 +176,9 @@ export const UserLibraryPage = () => {
 
         return booksError.response?.data.message;
     }
-    
+
     return <Container>
-        {booksError && <ErrorModal 
+        {booksError && booksError.response.status !== 401 && <ErrorModal 
             type='booksError'
             isModalOpen={isErrorModal}
             setIsModalOpen={setIsErrorModal}

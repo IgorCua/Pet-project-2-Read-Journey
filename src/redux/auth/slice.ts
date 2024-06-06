@@ -95,6 +95,9 @@ const authSlice = createSlice({
                 state.isError = false
                 state.error = null;
             })
+            .addCase('SIGNOUT', (state) => {
+                Object.assign(state, initialState);
+            })
             .addCase(userLocalSignOut.fulfilled, (state, action: PayloadAction<any>) => {
                 state._id = null;
                 state.name = null;
