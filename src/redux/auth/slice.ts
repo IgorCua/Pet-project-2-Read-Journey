@@ -95,16 +95,19 @@ const authSlice = createSlice({
                 state.isError = false
                 state.error = null;
             })
+            .addCase('SIGNOUT', (state) => {
+                Object.assign(state, initialState);
+            })
             .addCase(userLocalSignOut.fulfilled, (state, action: PayloadAction<any>) => {
                 state._id = null;
                 state.name = null;
                 state.email = null;
                 state.token = null;
+                state.refreshToken = null;
                 state.isLoggedIn = false;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
-                console.log('localSignOut payload:', action.payload);
             })
             // .addCase(userAddBookByID.fulfilled, (state, action: PayloadAction<any>) => {
             //     console.log(action.payload);
@@ -113,7 +116,7 @@ const authSlice = createSlice({
             //     state.isError = false;
             //     state.error = null;
             // })
-            .addCase(userRemoveError.fulfilled, (state, action) => {
+            .addCase(userRemoveError, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
                 state.isLoading = false;

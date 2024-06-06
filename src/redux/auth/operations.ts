@@ -1,11 +1,11 @@
-import { AsyncThunk, createAsyncThunk } from "@reduxjs/toolkit"
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit"
 import { 
     usersGetCurrentAPI, 
     usersSigninAPI, 
     usersSignupAPI, 
     usersRefreshTokenAPI,
     usersSignOutAPI, 
-    booksAddByIdAPI
+    // booksAddByIdAPI
 } from "../../services/connectionsAPI"
 import { axiosToken } from "../../services/axiosSettings";
 
@@ -29,8 +29,8 @@ export const userSignup = createAsyncThunk(
             const {token}: any = res.data;
 
             axiosToken.set(token);
-            
-            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+
+            if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
 
             return res;
         }
@@ -49,8 +49,9 @@ export const userSignin = createAsyncThunk(
             const {token}:any = res.data;
 
             axiosToken.set(token);
+
             // console.log('action', res)
-            if(res) localStorage.setItem('updateAccess', res.data.refreshToken);
+            if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
 
             return res;
         }
@@ -81,8 +82,7 @@ export const userRefreshToken = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             const res: any = await usersRefreshTokenAPI();
-            console.log('refreshToken', res);
-            if(res) localStorage.setItem('refreshtoken', res.data.refreshToken);
+            if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
             axiosToken.set(res.data.token);
 
             return res;
@@ -116,7 +116,7 @@ export const userSignOut = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             localStorage.removeItem('persist:auth');
-            localStorage.removeItem('updateAccess');
+            localStorage.removeItem('refreshToken');
             
             const res = await usersSignOutAPI();
             axiosToken.unset();
@@ -134,7 +134,7 @@ export const userLocalSignOut = createAsyncThunk(
     async ( _, { rejectWithValue }) => {
         try{
             localStorage.removeItem('persist:auth');
-            localStorage.removeItem('updateAccess');
+            localStorage.removeItem('refreshToken');
             
             axiosToken.unset();
             return null;
@@ -145,10 +145,12 @@ export const userLocalSignOut = createAsyncThunk(
     }
 );
 
-export const userRemoveError = createAsyncThunk(
+export const userRemoveError = createAction(
     'auth/removeError',
 
-    async ( _, { rejectWithValue }) => {
-        return null;
+    (): any => {
+        return {
+            payload: null
+        };   
     }
 );

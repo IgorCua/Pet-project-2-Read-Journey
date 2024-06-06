@@ -22,12 +22,15 @@ import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedB
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectRecommendedBooks } from "../../redux/books/selectors";
+import { useState } from "react";
+import { ErrorModal } from "../../components/errorModal/ErrorModal";
 
 export const RecommendedPage = () => {
     // const booksError = useSelector(selectBooksError);
     // const booksObj = useSelector(selectRecommendedBooks);
+    const booksError: any = useSelector(selectBooksError);
     const navigate = useNavigate();
-
+    const [isErrorModal, setIsErrorModal] = useState(false);
     const handleLinkClick = () => {
         navigate('/library');
     }
@@ -51,8 +54,23 @@ export const RecommendedPage = () => {
         }
     }
 
+    const handleErrorMessage = () => {
+        if(booksError && booksError.response?.status >= 500){
+            return 'Server error, please try to reload page.';
+        }
+
+        return booksError.response?.data.message;
+    }
+
     return (
         <Container>
+            {booksError && booksError.response.status !== 401 && <ErrorModal 
+                type='booksError'
+                isModalOpen={isErrorModal}
+                setIsModalOpen={setIsErrorModal}
+                erorrCode={booksError.response?.status}
+                errorMessage={handleErrorMessage()}
+            />}
             <Section>
                 <Filter/>
                 <DescripotionList>

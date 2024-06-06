@@ -26,7 +26,7 @@ type AppDispatch = typeof store.dispatch;
 
 export const Authenticate = ({children}: Props) => {
     const token = useSelector(selectToken);
-    // const refreshToken = localStorage.getItem('updateAccess');
+    // const refreshToken = localStorage.getItem('refreshtoken');
     const refreshToken = useSelector(selectRefreshToken);
     const decodedToken = token && JSON.parse(atob(token.split('.')[1]));
     const authError: any = useSelector(selectAuthError);
@@ -96,7 +96,7 @@ export const Authenticate = ({children}: Props) => {
         }
         if(!authError && booksError){
             if(booksError.response?.status === 401) {
-                console.log('Authenticate books', booksError.response.status);
+                console.log('Authenticate books error', booksError.response.status);
                 // errorObj.dispatchAction = userLocalSignOut();
                 errorObj.errorCode = booksError.response.status;
                 errorObj.errorMessage = 'Your session timed out.';

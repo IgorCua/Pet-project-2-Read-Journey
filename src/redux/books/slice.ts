@@ -1,5 +1,5 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit"
-import { booksAddBook, booksAddById, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksRemoveError, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
+import { booksAddBook, booksAddById, booksCurrentReading, booksDeleteReading, booksGetBookInfo, booksGetRecommended, booksGetUserBooks, booksRemoveBook, booksRemoveError, booksSaveEndOfReading, booksSaveReadingStart } from "./operations"
 // import { PendingAction, RejectedAction } from "../actionTypes"
 import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction } from "../reduxTypes";
 
@@ -9,19 +9,35 @@ interface initialStateInterface {
     // userBooks: BookInterface[] | null,
     readingStart: any | null,
     readingEnd: any | null,
-    currentReading: null | BookInterface,
-    bookInfo: null | BookInterface,
+    // currentReading: null | BookInterface,
+    bookInfo: BookInterface | null,
     isLoading: boolean,
     isError: boolean,
     error: any
 }
+
+// interface BookInfo {
+//     _id: string,
+//     title: string
+// }
+
+// const bookInfo = {
+//     _id: null,
+//     title: null,
+//     author: null,
+//     imageUrl: null,
+//     totalPages: null,
+//     satus: null,
+//     owner: null,
+//     progress: []
+// }
 
 const initialState = {
     recommendedBooks: null,
     userBooks: [],
     readingStart: null,
     readingEnd: null,
-    currentReading: null,
+    // currentReading: null,
     bookInfo: null,
     isLoading: false,
     isError: false,
@@ -74,34 +90,37 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksSaveReadingStart.fulfilled, (state, action) => {
-                state.currentReading = action.payload;
+            .addCase(booksSaveReadingStart.fulfilled, (state, action: PayloadAction<any>) => {
+                state.bookInfo = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksSaveEndOfReading.fulfilled, (state, action) => {
-                state.currentReading = action.payload;
+            .addCase(booksSaveEndOfReading.fulfilled, (state, action: PayloadAction<any>) => {
+                state.bookInfo = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksDeleteReading.fulfilled, (state, _) => {
-                state.currentReading = null;
+            .addCase(booksDeleteReading.fulfilled, (state, action: PayloadAction<any>) => {
+                state.bookInfo = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksGetBookInfo.fulfilled, (state, action) => {
-                state.bookInfo = action.payload;                
+            .addCase(booksGetBookInfo.fulfilled, (state, action: PayloadAction<any>) => {
+                state.bookInfo = action.payload.data;                
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
             })
-            .addCase(booksRemoveError.fulfilled, (state, action) => {
+            .addCase(booksRemoveError, (state, action) => {
                 state.error = action.payload;
                 state.isError = false;
                 state.isLoading = false;
+            })
+            .addCase('SIGNOUT', (state) => {
+                Object.assign(state, initialState);
             })
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
@@ -119,7 +138,7 @@ const booksSlice = createSlice({
                     state.isLoading = false;
                     state.isError = true;
                     state.error = action.payload;
-                    console.log('books slice error', action.payload)
+                    // console.log('books slice error', action.payload)
                 }
             )
     },
