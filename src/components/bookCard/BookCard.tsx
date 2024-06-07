@@ -15,14 +15,14 @@ import {
 } from "./styled";
 // import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 // import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 // import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
-import { booksAddById, booksCurrentReading, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
+import { booksAddById, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectBooksIsError, selectUserBooksIDsArr, selectUserBooksTitlesArr } from "../../redux/books/selectors";
@@ -98,10 +98,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
         navigate('/reading');
     }
 
-    const handleDeleteBook = (event: React.MouseEvent<HTMLElement>) => {
-        
-    }
-
     const handleButtonRender = () => {
         if(userBooksTitlesArr){
             if(userBooksTitlesArr.includes(title) === true){
@@ -112,8 +108,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
             }
         }
     }
-    // const recommendedBooks = useSelector(selectRecommendedBooks);
-    // console.log(cardType)
     return <>
         <ErrorModal
             type="booksError"

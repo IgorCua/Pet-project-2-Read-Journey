@@ -32,17 +32,27 @@ type Props = {
     sx?: {}
 }
 
+interface FormElements extends HTMLFormControlsCollection {
+    yourInputName: HTMLInputElement
+}
+
+interface FormElement extends HTMLFormElement {
+   readonly elements: FormElements
+}
+
 export const Filter = ({numOfInputs, requestLimit, setFilterData, sx}: Props) => {
     // const inputTitleRef = useRef<null | HTMLInputElement>(null);
     // const inputAuthorRef = useRef<null | HTMLInputElement>(null);
     const dispatch = useDispatch<AppDispatch>();
-
+    // event: React.FormEvent<HTMLInputElement>
     const handleSubmit = (event: any) => {
         event.preventDefault();
         let req: Request = {};
-
+        
         const title = event.target.elements[0].value;
         const author = event.target.elements[2].value;
+        // const title = event.target.elements[2].value;
+        // const author = event.target.elements[2].value;
 
         if(title) req.title = title;
         if(author) req.author = author;
