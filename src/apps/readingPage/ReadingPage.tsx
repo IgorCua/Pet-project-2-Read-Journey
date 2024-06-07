@@ -20,7 +20,7 @@ export const ReadingPage = () => {
         // event.target.reset();
     }
     return <Container component='section'>
-        <Dashboard>
+        <Dashboard sx={{gap: '40px'}}>
             <>
                 <Form action="" onSubmit={handleSubmit}>
                     <FormHeader>Stop page:</FormHeader>
@@ -32,13 +32,15 @@ export const ReadingPage = () => {
 
                 <ContainerStats component={'section'}>
                     <ContainerNoStats>
-                        <Header>Progress</Header>
+                        <Header variant="h2">Progress</Header>
                         {/* <ImageContainer> */}
                     {/* <Image 
                         🌟
                     /> */}
                 {/* </ImageContainer> */}
-                <Text component='p'>
+                <Text component='p' sx={{
+                    marginBottom: '20px'
+                }}>
                     Here you will see when and how much you read. To record, click on the red button above.
                 </Text>
                 <Box component={'div'} sx={{

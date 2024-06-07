@@ -83,14 +83,20 @@ export const ContainerNoStats = styled(Box)(({theme}) => ({
 })) as typeof Box;
 
 export const Header = styled(Typography)(({theme}) => ({
+    marginBottom: '14px',
+
     fontSize: '18px',
     lineHeight: '18px',
     fontWeight: '700',
+    
     color: theme.palette.custom.textMain
 })) as typeof Typography;
 
-export const Text = styled(Typography)(({theme}) => ({
+export const Text = styled(Typography)(({theme}) => ({    
     fontSize: '14px',
     lineHeight: '18px',
+    // letterSpacing: 'calc(16px / 100px)',
+    letterSpacing: '-0.02em',
+    
     color: theme.palette.custom.textSecondary
 })) as typeof Typography;
