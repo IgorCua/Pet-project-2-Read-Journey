@@ -162,7 +162,7 @@ export const booksSaveReadingStartAPI = (data: {id: string, page: number}) => {
 };
 
 export const booksSaveEndOfReadingAPI = (data: {id: string, page: number}) => {
-    return axios.post<any, AddBookInterface>('/books/readin/finish', data).then(res => {
+    return axios.post<any, AddBookInterface>('/books/reading/finish', data).then(res => {
         return res;
     });
 };

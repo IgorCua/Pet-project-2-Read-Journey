@@ -12,6 +12,7 @@ export const Section = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
+    
     [theme.breakpoints.up('tablet')]:{
         padding: '32px 32px',
         flexDirection: 'row',

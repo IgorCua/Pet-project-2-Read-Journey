@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Dashboard } from "../../components/dashboard/Dashboard"
 import { FormTextField } from "../../components/materialUI/FormTextField"
 import { CircleInside, CircleOutside, Container, ContainerNoStats, ContainerStats, Form, FormHeader, Header, Input, MyReadingContainer, MyReadingHeader, Submit, Text } from "./styled"
@@ -8,15 +8,38 @@ import { borderRadius, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
 import { useSelector } from "react-redux"
 import { selectBookInfo } from "../../redux/books/selectors"
+import { useDispatch } from "react-redux"
+import { booksSaveEndOfReading, booksSaveReadingStart } from "../../redux/books/operations"
+import { store } from "../../redux/store"
+
+type AppDispatch = typeof store.dispatch;
 
 export const ReadingPage = () => {
     const [isReading, setIsReading] = useState(false);
     const bookInfo = useSelector(selectBookInfo);
-
+    const dispatch = useDispatch<AppDispatch>();
 
     const handleSubmit = (event: React.FormEvent<any>) => {
         event.preventDefault();
-        console.log(event.currentTarget.elements[0].value)
+        const inputValue = event.currentTarget.elements[0].value;
+        console.log(event.currentTarget.elements[0].value);
+
+        if(inputValue >= 0 && isReading === false){
+            if(bookInfo){
+                dispatch(booksSaveReadingStart({
+                    id: bookInfo?._id,
+                    page: inputValue
+                }));
+            }
+        }
+        if(inputValue >= 0 && isReading === true){
+            if(bookInfo){
+                dispatch(booksSaveEndOfReading({
+                    id: bookInfo?._id,
+                    page: inputValue
+                }));
+            }
+        }
         // console.log(event.target.elements[0].value as HTMLInputElement)
         // const inputValue = (event!.target.elements[0] as HTMLInputElement)!.value;
         // console.log(inputValue)
@@ -24,6 +47,18 @@ export const ReadingPage = () => {
         setIsReading(!isReading);
         // event.target.reset();
     }
+
+    useEffect(()=>{
+        if(bookInfo && bookInfo.progress.length > 0){
+            console.log('useEffect bookInfo');
+            // console.log(bookInfo.progress[bookInfo.progress.length - 1].status);
+            if (bookInfo.progress[bookInfo.progress.length - 1].status === 'active'){
+                console.log('active');
+                setIsReading(true);
+            }
+        }
+    }, [bookInfo]);
+
     return <Container component='section'>
         <Dashboard sx={{gap: '40px'}}>
             <>

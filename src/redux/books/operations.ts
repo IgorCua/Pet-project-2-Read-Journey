@@ -17,6 +17,10 @@ interface AddBookInterface {
     totalPages: number
 }
 
+interface BooksSaveReading {
+    id: string,
+    page: number
+}
 // type GetUserBooksInterface = 'unread' | 'in-progress' | 'done' | null;
 type UserBooksByStatus = {
     status: string
@@ -107,10 +111,11 @@ export const booksGetUserBooks = createAsyncThunk(
 export const booksSaveReadingStart = createAsyncThunk(
     'books/saveReadingStart',
 
-    async (data: {id: string, page: number}, { rejectWithValue }) => {
+    async (data: BooksSaveReading, { rejectWithValue }) => {
         try{
-            axiosToken.set();
+            await axiosToken.set();
             const res = await booksSaveReadingStartAPI(data);
+            console.log('booksSaveReadingStart', res);
             return res;
         }
         catch (error: unknown) {
@@ -122,10 +127,11 @@ export const booksSaveReadingStart = createAsyncThunk(
 export const booksSaveEndOfReading = createAsyncThunk(
     'books/saveEndOfReading',
 
-    async (data: {id: string, page: number}, { rejectWithValue }) => {
+    async (data: BooksSaveReading, { rejectWithValue }) => {
         try{
             await axiosToken.set();
             const res = await booksSaveEndOfReadingAPI(data);
+            console.log('booksSaveEndOfReading', res);
             return res;
         }
         catch (error: unknown) {
