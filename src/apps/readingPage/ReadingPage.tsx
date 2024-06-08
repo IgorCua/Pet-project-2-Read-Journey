@@ -8,11 +8,11 @@ import { borderRadius, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
 import { useSelector } from "react-redux"
 import { selectBookInfo } from "../../redux/books/selectors"
-import { Icon } from "../../components/icon/Icon"
 
 export const ReadingPage = () => {
     const [isReading, setIsReading] = useState(false);
     const bookInfo = useSelector(selectBookInfo);
+
 
     const handleSubmit = (event: React.FormEvent<any>) => {
         event.preventDefault();
@@ -67,53 +67,51 @@ export const ReadingPage = () => {
                         </Box>
                     </ContainerNoStats>
                 </ContainerStats>
-
-                <MyReadingContainer>
-                    <MyReadingHeader>My reading</MyReadingHeader>
-                    
-                    {bookInfo && <BookCard
-                        cardType="recommended"
-                        id={bookInfo._id}
-                        url={bookInfo.imageUrl}
-                        title={bookInfo.title}
-                        author={bookInfo.author}
-                        isModal={false}
-                        sx={{
-                            marginBottom: '20px',
-                            textAlign: 'center',
-                             '& img':{
-                                cursor: 'auto',
-                            },
-                            '& h3': {
-                                textWrap: 'wrap'
-                            },
-                            '&:hover':{
-                                cursor: 'auto',
-                                '& img':{
-                                    boxShadow: `none`,
-                                },
-                                '& div':{
-                                    cursor: 'auto',
-                                    boxShadow: `none`,
-                                }
-                            },
-                        }}
-                    />}
-
-                    {/* <Icon iconName={}/> */}
-                    
-                    <CircleOutside>
-                        {!isReading  
-                            ? <CircleInside/>
-                            : <CircleInside sx={{
-                                width: '15px',
-                                height: '15px',
-                                borderRadius: '3px'
-                            }}/>
-                        }
-                    </CircleOutside>
-                </MyReadingContainer>
             </>
         </Dashboard>
+        
+        <MyReadingContainer>
+            <MyReadingHeader>My reading</MyReadingHeader>
+            
+            {bookInfo && <BookCard
+                cardType="recommended"
+                id={bookInfo._id}
+                url={bookInfo.imageUrl}
+                title={bookInfo.title}
+                author={bookInfo.author}
+                isModal={false}
+                sx={{
+                    marginBottom: '20px',
+                    textAlign: 'center',
+                     '& img':{
+                        cursor: 'auto',
+                    },
+                    '& h3': {
+                        textWrap: 'wrap'
+                    },
+                    '&:hover':{
+                        cursor: 'auto',
+                        '& img':{
+                            boxShadow: `none`,
+                        },
+                        '& div':{
+                            cursor: 'auto',
+                            boxShadow: `none`,
+                        }
+                    },
+                }}
+            />}
+
+            <CircleOutside>
+                {!isReading  
+                    ? <CircleInside/>
+                    : <CircleInside sx={{
+                        width: '15px',
+                        height: '15px',
+                        borderRadius: '3px'
+                    }}/>
+                }
+            </CircleOutside>
+        </MyReadingContainer>
     </Container>
 }

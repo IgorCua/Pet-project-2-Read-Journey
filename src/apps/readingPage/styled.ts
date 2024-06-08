@@ -108,7 +108,7 @@ export const MyReadingContainer = styled(Box)(({theme}) => ({
     // justifyContent: 'center',
     alignItems: 'center',
 
-    backgroundColor: theme.palette.custom.bg2,
+    backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px'
 }));

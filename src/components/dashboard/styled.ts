@@ -3,6 +3,7 @@ import { Box } from "@mui/material";
 
 export const Section = styled(Box)(({theme}) => ({
     marginTop: '10px',
+    marginBottom: '10px',
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
