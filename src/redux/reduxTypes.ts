@@ -22,6 +22,15 @@ export interface recomendedBooksInterface {
     perPage: number
 }
 
+type BookInfoProgress = {
+    startPage: number,
+    startReading: string,
+    finishPage?: number,
+    finishReading?: string,
+    speed?: number,
+    status?: 'in-progress' | 'inactive' | 'active'
+}
+
 export interface BookInterface {
     _id: string,
     title: string,
@@ -30,7 +39,7 @@ export interface BookInterface {
     totalPages: number,
     satus: string,
     owner: string,
-    progress: unknown[]
+    progress: BookInfoProgress[] | []
 }
 
 // interface BookProgressInterface {

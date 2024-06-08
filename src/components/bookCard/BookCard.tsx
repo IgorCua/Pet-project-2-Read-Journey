@@ -15,14 +15,14 @@ import {
 } from "./styled";
 // import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IconButton } from "@mui/material";
 // import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 // import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
-import { booksAddById, booksCurrentReading, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
+import { booksAddById, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectBooksIsError, selectUserBooksIDsArr, selectUserBooksTitlesArr } from "../../redux/books/selectors";
@@ -35,6 +35,7 @@ type Props = {
     title: string,
     author: string,
     pages?: number | string,
+    isModal?: boolean
     sx?: {}
     // handleClick?: (title: any) => void
 }
@@ -48,7 +49,7 @@ type BackdropProps = {
 
 type AppDispatch = typeof store.dispatch;
 
-export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) => {
+export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isError, setIsError] = useState(false);
     // const bookError = useSelector(selectBooksError);
@@ -98,10 +99,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
         navigate('/reading');
     }
 
-    const handleDeleteBook = (event: React.MouseEvent<HTMLElement>) => {
-        
-    }
-
     const handleButtonRender = () => {
         if(userBooksTitlesArr){
             if(userBooksTitlesArr.includes(title) === true){
@@ -112,8 +109,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
             }
         }
     }
-    // const recommendedBooks = useSelector(selectRecommendedBooks);
-    // console.log(cardType)
     return <>
         <ErrorModal
             type="booksError"
@@ -165,42 +160,42 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                 }
             </DescriptionContainer>
         </Container>
-        
-        {isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-            <BackdropContainer>
-                <BackdropCardContainer>
-                    <Image src={url} sx={{ 
-                        marginBottom: '16px',
-                        width: '100%',
-                        height: '208px',
-                        // maxHeight: '208px'
-                        borderRadius: '8px',
-                        cursor: 'auto'
-                    }}/>
-                    <BackdropDescrContainer sx={{textAlign: 'center'}}>
-                        <Header variant="h3" noWrap sx={{
-                            marginBottom: '2px',
+        { isModal !== null && isModal !== false && 
+            isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+                <BackdropContainer>
+                    <BackdropCardContainer>
+                        <Image src={url} sx={{ 
+                            marginBottom: '16px',
                             width: '100%',
-                        }}>{title}</Header>
-                        <Author noWrap sx={{
-                            marginBottom: '4px',
-                        }}>{author}</Author>
-                        <Pages>{pages} pages</Pages>
-                    </BackdropDescrContainer>
-                </BackdropCardContainer>
+                            height: '208px',
+                            // maxHeight: '208px'
+                            borderRadius: '8px',
+                            cursor: 'auto'
+                        }}/>
+                        <BackdropDescrContainer sx={{textAlign: 'center'}}>
+                            <Header variant="h3" noWrap sx={{
+                                marginBottom: '2px',
+                                width: '100%',
+                            }}>{title}</Header>
+                            <Author noWrap sx={{
+                                marginBottom: '4px',
+                            }}>{author}</Author>
+                            <Pages>{pages} pages</Pages>
+                        </BackdropDescrContainer>
+                    </BackdropCardContainer>
 
-                {!handleButtonRender() && 
-                    <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
-                }
-                {handleButtonRender() && 
-                    <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
-                }
-                {/* { (cardType === 'myReading' && !isReading) ? 
-                    <Icon iconName={'#'}/>
-                    : <Icon iconName={'#'}/>
-                } */}
-
-            </BackdropContainer>
-        </CustomBackdrop>}
+                    {!handleButtonRender() && 
+                        <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
+                    }
+                    {handleButtonRender() && 
+                        <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
+                    }
+                    {/* { (cardType === 'myReading' && !isReading) ? 
+                        <Icon iconName={'#'}/>
+                        : <Icon iconName={'#'}/>
+                    } */}
+                </BackdropContainer>
+            </CustomBackdrop>
+        }
     </>
 }

@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
-import { FieldProps, getIn } from 'formik'
-import { TextField, TextFieldProps } from '@mui/material'
+import React, { memo } from 'react';
+import { FieldProps, getIn } from 'formik';
+import { TextField, TextFieldProps } from '@mui/material';
 
 /**
  * Material TextField Component with Formik Support including Errors.

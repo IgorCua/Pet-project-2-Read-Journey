@@ -2,6 +2,8 @@ import { styled } from "@mui/system";
 import { Box } from "@mui/material";
 
 export const Section = styled(Box)(({theme}) => ({
+    marginTop: '10px',
+    marginBottom: '10px',
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
@@ -10,6 +12,7 @@ export const Section = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
+    
     [theme.breakpoints.up('tablet')]:{
         padding: '32px 32px',
         flexDirection: 'row',
