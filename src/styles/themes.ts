@@ -32,6 +32,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonSecondaryHover?: string,
     utilBlue?: string;
     utilGreen?: string;
+    utilRed?: string
   }
   interface CustomPaletteColor {
     textMain: string;
@@ -49,6 +50,7 @@ declare module '@mui/material/styles/createPalette' {
     buttonSecondaryHover: string,
     utilBlue: string;
     utilGreen: string;
+    utilRed: string
   }
   interface PaletteOptions {
     custom?: CustomPaletteColorOptions;
@@ -106,6 +108,7 @@ type CustomTeme = {
   buttonSecondaryHover: string,
   utilBlue: string,
   utilGreen: string
+  utilRed: string
 }
 
 const customTheme: CustomTeme = {
@@ -123,7 +126,8 @@ const customTheme: CustomTeme = {
   authInputBorder: 'rgb(68, 68, 68)',
   buttonSecondaryHover: '#262626',
   utilBlue: '#4F92F7',
-  utilGreen: '#30B94D'
+  utilGreen: '#30B94D',
+  utilRed: '#E90516'
 }
 
 export const theme = createTheme({
@@ -155,7 +159,8 @@ export const theme = createTheme({
       authInputBorder: 'rgb(68, 68, 68)',
       buttonSecondaryHover: '#262626',
       utilBlue: '#4F92F7',
-      utilGreen: '#30B94D'
+      utilGreen: '#30B94D',
+      utilRed: '#E90516'
     }
   },
   breakpoints: {
