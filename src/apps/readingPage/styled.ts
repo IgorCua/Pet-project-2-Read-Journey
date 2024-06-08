@@ -133,15 +133,15 @@ export const CircleOutside = styled(Box)(({theme}) => ({
     borderRadius: '50%',
     border: `2px solid ${theme.palette.custom.bgWhite}`
 }));
+
 export const CircleInside = styled(Box)(({theme}) => ({
     width: '30px',
-    height: '30px',
+    height: '29px',
     transitionDuration: '300ms',
     transitionProperty: 'height, width, border-radius',
 
     backgroundColor: theme.palette.custom.utilRed,
 
     borderRadius: '50%',
-
     // border: `1px solid ${theme.palette.custom.bgWhite}`
 })) as typeof Box;

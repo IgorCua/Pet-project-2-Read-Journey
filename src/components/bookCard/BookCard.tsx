@@ -35,6 +35,7 @@ type Props = {
     title: string,
     author: string,
     pages?: number | string,
+    isModal?: boolean
     sx?: {}
     // handleClick?: (title: any) => void
 }
@@ -48,7 +49,7 @@ type BackdropProps = {
 
 type AppDispatch = typeof store.dispatch;
 
-export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) => {
+export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isError, setIsError] = useState(false);
     // const bookError = useSelector(selectBooksError);
@@ -159,42 +160,42 @@ export const BookCard = ({id, cardType, url, title, author, pages, sx}: Props) =
                 }
             </DescriptionContainer>
         </Container>
-        
-        {isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
-            <BackdropContainer>
-                <BackdropCardContainer>
-                    <Image src={url} sx={{ 
-                        marginBottom: '16px',
-                        width: '100%',
-                        height: '208px',
-                        // maxHeight: '208px'
-                        borderRadius: '8px',
-                        cursor: 'auto'
-                    }}/>
-                    <BackdropDescrContainer sx={{textAlign: 'center'}}>
-                        <Header variant="h3" noWrap sx={{
-                            marginBottom: '2px',
+        { isModal !== null && isModal !== false && 
+            isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+                <BackdropContainer>
+                    <BackdropCardContainer>
+                        <Image src={url} sx={{ 
+                            marginBottom: '16px',
                             width: '100%',
-                        }}>{title}</Header>
-                        <Author noWrap sx={{
-                            marginBottom: '4px',
-                        }}>{author}</Author>
-                        <Pages>{pages} pages</Pages>
-                    </BackdropDescrContainer>
-                </BackdropCardContainer>
+                            height: '208px',
+                            // maxHeight: '208px'
+                            borderRadius: '8px',
+                            cursor: 'auto'
+                        }}/>
+                        <BackdropDescrContainer sx={{textAlign: 'center'}}>
+                            <Header variant="h3" noWrap sx={{
+                                marginBottom: '2px',
+                                width: '100%',
+                            }}>{title}</Header>
+                            <Author noWrap sx={{
+                                marginBottom: '4px',
+                            }}>{author}</Author>
+                            <Pages>{pages} pages</Pages>
+                        </BackdropDescrContainer>
+                    </BackdropCardContainer>
 
-                {!handleButtonRender() && 
-                    <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
-                }
-                {handleButtonRender() && 
-                    <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
-                }
-                {/* { (cardType === 'myReading' && !isReading) ? 
-                    <Icon iconName={'#'}/>
-                    : <Icon iconName={'#'}/>
-                } */}
-
-            </BackdropContainer>
-        </CustomBackdrop>}
+                    {!handleButtonRender() && 
+                        <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
+                    }
+                    {handleButtonRender() && 
+                        <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
+                    }
+                    {/* { (cardType === 'myReading' && !isReading) ? 
+                        <Icon iconName={'#'}/>
+                        : <Icon iconName={'#'}/>
+                    } */}
+                </BackdropContainer>
+            </CustomBackdrop>
+        }
     </>
 }

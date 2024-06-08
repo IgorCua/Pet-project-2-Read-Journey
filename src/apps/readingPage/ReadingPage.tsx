@@ -77,7 +77,7 @@ export const ReadingPage = () => {
                         url={bookInfo.imageUrl}
                         title={bookInfo.title}
                         author={bookInfo.author}
-
+                        isModal={false}
                         sx={{
                             marginBottom: '20px'
                         }}
