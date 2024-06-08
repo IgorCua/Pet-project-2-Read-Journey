@@ -4,7 +4,7 @@ import { FormTextField } from "../../components/materialUI/FormTextField"
 import { CircleInside, CircleOutside, Container, ContainerNoStats, ContainerStats, Form, FormHeader, Header, Input, MyReadingContainer, MyReadingHeader, Submit, Text } from "./styled"
 import { Box, TextFieldProps } from "@mui/material"
 import { theme } from "../../styles/themes"
-import { borderRadius } from "@mui/system"
+import { borderRadius, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
 import { useSelector } from "react-redux"
 import { selectBookInfo } from "../../redux/books/selectors"
@@ -79,7 +79,24 @@ export const ReadingPage = () => {
                         author={bookInfo.author}
                         isModal={false}
                         sx={{
-                            marginBottom: '20px'
+                            marginBottom: '20px',
+                            textAlign: 'center',
+                             '& img':{
+                                cursor: 'auto',
+                            },
+                            '& h3': {
+                                textWrap: 'wrap'
+                            },
+                            '&:hover':{
+                                cursor: 'auto',
+                                '& img':{
+                                    boxShadow: `none`,
+                                },
+                                '& div':{
+                                    cursor: 'auto',
+                                    boxShadow: `none`,
+                                }
+                            },
                         }}
                     />}
 

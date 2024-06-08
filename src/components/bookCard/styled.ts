@@ -10,7 +10,7 @@ export const Container = styled('div')(({theme}) => ({
     display: 'flex',
     // flexWrap: 'wrap',
     flexDirection: 'column',
-    // cursor: 'pointer',
+    cursor: 'pointer',
 
     // '&:hover': {
     '&:hover img': {
@@ -23,7 +23,7 @@ export const Image = styled('img')(({theme}) => ({
     width: '100%',
     height: '208px',
     // maxHeight: '208px'
-    cursor: 'pointer',
+    // cursor: 'pointer',
     borderRadius: '8px',
     transitionDuration: '250ms',
     transitionProperty: 'box-shadow',
