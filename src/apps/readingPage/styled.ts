@@ -24,16 +24,18 @@ export const FormHeader = styled('h3')(({theme})=>({
     }
 }));
 
-export const Input = styled(TextField)(({theme}) => ({
+export const CustomInput = styled(TextField)(({theme}) => ({
     display: 'flex',
     flexDirection: 'row',
 
     '& .MuiInputBase-root::before': {
-        minWidth: '79px',
+        // minWidth: '79px',
         paddingLeft: '14px',
         content: '"Page number:"',
         alignSelf: 'center',
         fontSize: '12px',
+        display:' flex',
+        // flexGrow: 2,
         color: theme.palette.custom.textSecondary,
 
         zIndex: '1000',

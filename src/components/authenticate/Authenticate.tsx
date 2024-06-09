@@ -105,21 +105,32 @@ export const Authenticate = ({children}: Props) => {
                 // renderError()
             }
         }
-    }, [isModalOpen, setIsModalOpen, authError, booksError, errorObj]);
+        if(token && refreshToken){
+            setTimeout(() => {
+                console.log('seTimeout token', token)
+                console.log('seTimeout refreshToken', refreshToken)
+                if (!authError && !booksError) {
+                    axiosToken.set(refreshToken);
+                    dispatch(userRefreshToken());
+                }
+            }, handleDelay());
+        }
+    }, [isModalOpen, setIsModalOpen, authError, booksError, errorObj, token, refreshToken]);
 
-    if(token && refreshToken){
-        setTimeout(() => {
-            console.log('seTimeout token', token)
-            console.log('seTimeout refreshToken', refreshToken)
-            if (!authError && !booksError) {
-                axiosToken.set(refreshToken);
-                dispatch(userRefreshToken());
-            }
-        }, handleDelay());
-    }
+    // if(token && refreshToken){
+    //     setTimeout(() => {
+    //         console.log('seTimeout token', token)
+    //         console.log('seTimeout refreshToken', refreshToken)
+    //         if (!authError && !booksError) {
+    //             axiosToken.set(refreshToken);
+    //             dispatch(userRefreshToken());
+    //         }
+    //     }, handleDelay());
+    // }
     
     const authErrorDispatch = () => {
         dispatch(userLocalSignOut());
+        dispatch({type: 'SIGNOUT'});
     }
 
     return <>

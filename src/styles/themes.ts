@@ -1,4 +1,5 @@
 import { Theme, createTheme } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -262,10 +263,11 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
+          padding: '0px',
           width: '100%',
 
           backgroundColor: customTheme.bg2,
-          border: '1px solid transparent',
+          // border: '1px solid transparent',
           borderRadius: '12px',
 
           // '&:hover': {
@@ -275,13 +277,15 @@ export const theme = createTheme({
           //   border: `1px solid ${customTheme.authInputBorder}`,
           //   // borderRadius: '12px'
           // },
+
         },
         input: {
+          padding: '14px 16px 14px 14px',
+
+          fontSize: '12px',
+          
           color: customTheme.textMain,
           border: 'none',
-
-          padding: '14px 10px',
-          fontSize: '12px',
 
           // '&::placeholder': {
           //   color: customTheme.textSecondary,
@@ -304,24 +308,53 @@ export const theme = createTheme({
     MuiOutlinedInput:{
       styleOverrides:{
         root: {
-          paddingRight: '16px',
+          padding: '14px 16px 14px 14px',
           borderRadius: '12px',
           transitionDuration: '250ms',
-          transitionProperty:'border',
-          
-          border: '1px solid transparent',
+          transitionProperty:'border, border-color',
+          borderColor: customTheme.authInputBorder,
 
-          '&:hover': {
+          '& .MuiOutlinedInput-notchedOutline': {
+            borderColor: 'transparent',
+          },
+
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: customTheme.authInputBorder
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             border: `1px solid ${customTheme.authInputBorder}`,
           },
-          '&.Mui-focused': {
-            border: `1px solid ${customTheme.authInputBorder}`,
-            // borderRadius: '12px'
+          '&.Mui-error .MuiOutlinedInput-notchedOutline':{
+            borderColor: customTheme.utilRed
           },
         },
+        input: {
+          padding: '0px',
+        },
         notchedOutline: {
-          // borderBlockColor: 'green',
-          border: 'none',
+          margin: '0px',
+          top: '-5px',
+          right: '-1px',
+          bottom: '-1px',
+          left: '-1px',
+        }
+      }
+    },
+    MuiInputAdornment:{
+      styleOverrides:{
+        root:{
+          'p': {
+            fontSize: '12px',
+
+            color: customTheme.textSecondary,
+          }
+
+          // zIndex: '1000',
+        
+          // [customTheme.breakpoints.up('tablet')]: {
+          //   minWidth: '92px',
+          //   fontSize: '14px',
+          // }
         }
       }
     },

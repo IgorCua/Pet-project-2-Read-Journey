@@ -9,7 +9,7 @@ export const selectCurrentReading = (state: any): null | BookInterface => state.
 export const selectBookInfo = (state: any): null | BookInterface => state.books.bookInfo;
 export const selectBooksIsLoading = (state: any): boolean => state.books.isLoading;
 export const selectBooksIsError = (state: any): boolean => state.books.isError;
-export const selectBooksError = (state: any): boolean => state.books.error;
+export const selectBooksError = (state: any) => state.books.error;
 export const selectBooksCurrentReading = (state: any) => state.books.currentReading;
 
 export const selectRecommendedBooksIDsArr = createSelector(

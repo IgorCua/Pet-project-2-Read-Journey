@@ -118,11 +118,11 @@ export const LoginForm: React.FC = () => {
     }
 
     return <>
-    <Formik
-        initialValues={initialValues}
-        validationSchema={schema}
-        onSubmit={handleSubmit}
-    >
+        <Formik
+            initialValues={initialValues}
+            validationSchema={schema}
+            onSubmit={handleSubmit}
+        >
             {/* <Form onSubmit={formik.handleSubmit}> */}
             <LoginFormContainer>
                 <List>
@@ -147,5 +147,4 @@ export const LoginForm: React.FC = () => {
             </LoginFormContainer>
         </Formik>
     </>
-
 }

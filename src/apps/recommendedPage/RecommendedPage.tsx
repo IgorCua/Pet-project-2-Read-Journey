@@ -28,7 +28,7 @@ import { ErrorModal } from "../../components/errorModal/ErrorModal";
 export const RecommendedPage = () => {
     // const booksError = useSelector(selectBooksError);
     // const booksObj = useSelector(selectRecommendedBooks);
-    const booksError: any = useSelector(selectBooksError);
+    const booksError = useSelector(selectBooksError);
     const navigate = useNavigate();
     const [isErrorModal, setIsErrorModal] = useState(false);
     const handleLinkClick = () => {

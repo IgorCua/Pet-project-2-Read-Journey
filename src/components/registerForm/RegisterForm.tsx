@@ -95,7 +95,7 @@ export const RegisterForm: React.FC = () => {
                             [theme.breakpoints.up('tablet')]:{
                                 width: '20px', height: '20px'
                             }}}
-                        aria-label="toggle password visibility"
+                        aria-label="hide password"
                         onClick={() => setIsEyeOpen(false)}
                     />
                 </InputAdornment>
@@ -109,7 +109,7 @@ export const RegisterForm: React.FC = () => {
                             [theme.breakpoints.up('tablet')]:{
                                 width: '20px', height: '20px'
                             }}}
-                        aria-label="toggle password visibility"
+                        aria-label="show password"
                         onClick={() => setIsEyeOpen(true)}
                     />
                 </InputAdornment>   
@@ -135,8 +135,8 @@ export const RegisterForm: React.FC = () => {
                     </li>
                     <li>
                         <Field 
-                            type={!isEyeOpen ? 'password' : 'text'} 
-                            name='password' 
+                            
+                            name='password' type={!isEyeOpen ? 'password' : 'text'} 
                             component={PasswordField} 
                             InputProps={{ endAdornment: (renderEyeIcon())}}
                     />
