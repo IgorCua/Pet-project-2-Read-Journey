@@ -20,6 +20,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColorOptions {
     textMain?: string;
     textSecondary?: string;
+    textBlack?: string,
     bgWhite?: string;
     bg1?: string;
     bg2?: string;
@@ -38,6 +39,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColor {
     textMain: string;
     textSecondary: string;
+    textBlack: string,
     bgWhite: string;
     bg1: string;
     bg2: string;
@@ -96,6 +98,7 @@ declare module '@mui/material/styles/createPalette' {
 type CustomTeme = {
   textMain: string,
   textSecondary: string,
+  textBlack: string,
   bgWhite: string,
   bg1: string,
   bg2: string,
@@ -115,6 +118,7 @@ type CustomTeme = {
 const customTheme: CustomTeme = {
   textMain: '#F9F9F9',
   textSecondary: '#686868',
+  textBlack: '#1F1F1F',
   bgWhite: '#F9F9F9',
   bg1: 'rgba(227, 227, 227, 0.30)',
   bg2: '#262626',
@@ -148,6 +152,7 @@ export const theme = createTheme({
     custom: {
       textMain: '#F9F9F9',
       textSecondary: '#686868',
+      textBlack: '#1F1F1F',
       bgWhite: '#F9F9F9',
       bg1: 'rgba(227, 227, 227, 0.30)',
       bg2: '#262626',
@@ -206,7 +211,7 @@ export const theme = createTheme({
           padding: '0px',
           // height: '15px',
           // fontFamily: 'Gilroy'
-          transitionProperty: 'background-color',
+          transitionProperty: 'background-color, color',
           transitionDuration: '250ms',
 
           '&:hover':{
@@ -280,7 +285,7 @@ export const theme = createTheme({
 
         },
         input: {
-          padding: '14px 16px 14px 14px',
+          // padding: '14px 16px 14px 14px',
 
           fontSize: '12px',
           
@@ -308,13 +313,15 @@ export const theme = createTheme({
     MuiOutlinedInput:{
       styleOverrides:{
         root: {
-          padding: '14px 16px 14px 14px',
+          padding: '15px 16px 15px 14px',
           borderRadius: '12px',
-          transitionDuration: '250ms',
-          transitionProperty:'border, border-color',
+          // transitionDuration: '250ms',
+          // transitionProperty:'border, border-color',
           borderColor: customTheme.authInputBorder,
 
           '& .MuiOutlinedInput-notchedOutline': {
+            transitionDuration: '250ms',
+            transitionProperty:'border, border-color, color',
             borderColor: 'transparent',
           },
 

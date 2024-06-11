@@ -75,11 +75,11 @@ export const NameField = styled(FormTextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '13px 13px 13px 10px',
+        // padding: '13px 13px 13px 10px',
         fontSize: '12px',
         
         [theme.breakpoints.up('tablet')]: {
-            padding: '15px 14px 15px 10px',
+            // padding: '15px 14px 15px 10px',
 
             fontSize: '14px',
         },

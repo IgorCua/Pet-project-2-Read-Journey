@@ -1,10 +1,10 @@
 import { Field, Formik } from "formik";
 import { FormTextField } from "../materialUI/FormTextField";
-import { CustomErrorMessage, CustomForm, InputContainer, Submit } from "./formStyled";
+import { ButtonBox, CustomErrorMessage, CustomForm, InputContainer, Submit } from "./formStyled";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 
 interface InputDataObjInterface {
     type: string,
@@ -19,6 +19,7 @@ type Props = {
     submitName: string,
     inputsDataArr: InputDataObjInterface[] | [],
     sx?: {}
+    children?: ReactElement
 }
 
 export const Form = (props: Props) => {
@@ -28,7 +29,8 @@ export const Form = (props: Props) => {
         inputsDataArr, 
         handleSubmit, 
         submitName, 
-        sx
+        sx,
+        children
     } = props;
     const [isEyeOpen, setIsEyeOpen] = useState(false);
 
@@ -65,7 +67,7 @@ export const Form = (props: Props) => {
               </InputAdornment>   
         )
     }
-    console.log('Form isEyeOpened', isEyeOpen)
+    
     return <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -98,7 +100,6 @@ export const Form = (props: Props) => {
                                     <InputAdornment 
                                         position="start"
                                     >{`${obj.placeholder}`}</InputAdornment>,
-                                
                                 endAdornment: (renderEyeIcon())
                             }}
                         />
@@ -107,9 +108,12 @@ export const Form = (props: Props) => {
                 }
                 </InputContainer>
             })}
-            <Submit type="submit">
-            {submitName}
+            <ButtonBox>
+            <Submit id="submitButton" type="submit">
+                {submitName}
             </Submit>
+                {children}
+            </ButtonBox>
         </CustomForm>
     </Formik>
 }

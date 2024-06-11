@@ -1,20 +1,40 @@
 import { Box, ButtonBase } from "@mui/material";
-import { styled } from "@mui/system";
+import { fontSize, lineHeight, styled } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
 
 export const CustomForm = styled(Form)(({theme}) =>({
-    // width: '100%',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'start',
-    // flexWrap: 'wrap',
+    flexWrap: 'wrap',
 
     // gap: '20px',
 
+    // nth-last-of-type(n + 2)
+    '& .MuiBox-root:nth-last-of-type(n + 3)': {
+        marginBottom: '8px',
+
+        [theme.breakpoints.up('tablet')]: {
+            marginBottom: '14px',
+        },
+        '&:last-of-type':{
+            // marginBottom: '0'
+            display: 'flex',
+            flexWrap: 'wrap'
+        }
+    },
+
+    '& input, p': {
+        [theme.breakpoints.up('tablet')]: {
+            fontSize: '14px',
+            lineHeight: '18px'
+        },
+    },
+
     [theme.breakpoints.up('tablet')]: {
-        width: '472px',
+        maxWidth: '472px',
         // marginBottom: '174px'
     },
+
     [theme.breakpoints.only('tablet')]: {
         marginBottom: '174px'
     }
@@ -43,8 +63,14 @@ export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
 
 })) as typeof ErrorMessage;
 
+export const ButtonBox = styled(Box)(({theme}) => ({
+    display: 'flex',
+    flexWrap: 'wrap',
+    alignItems: 'center'
+})) as typeof Box;
+
 export const Submit = styled(ButtonBase)(({theme}) => ({
-    marginTop: '20px',
+    // marginTop: '20px',
     // width: '91px',
     padding: '10px 20px',
     borderRadius: '30px',
@@ -53,6 +79,7 @@ export const Submit = styled(ButtonBase)(({theme}) => ({
     color: theme.palette.custom.textMain,
 
     [theme.breakpoints.up('tablet')]: {
+        // marginTop: '82px',
         padding: '12px 28px',
 
         fontSize: '16px',
