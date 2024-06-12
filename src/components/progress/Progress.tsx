@@ -30,11 +30,15 @@ import { ButtonBase, IconButton, Typography } from "@mui/material";
 import { Icon } from "../icon/Icon";
 import { useState } from "react";
 import { Opacity } from "@mui/icons-material";
+import { useDispatch } from "react-redux";
+import { booksDeleteReading } from "../../redux/books/operations";
+import { AppDispatch } from "../../redux/store";
 
 export const Progress = () => {
     const bookInfo = useSelector(selectBookInfo);
     const progressArr = bookInfo ? bookInfo.progress : null;
     const [isDiary, setIsDiary] = useState(true);
+    const dispatch = useDispatch<AppDispatch>();
 
     const progressDataArr: any = progressArr && progressArr.map((elem) => {
         let result: any = {};
@@ -67,11 +71,14 @@ export const Progress = () => {
     }
 
     const handleIconClick = () => {
-        console.log('click')
+        console.log('click');
     }
 
-    const handleDeleteDiaryData = (id: string) => {
-        console.log('delete', id)
+    const handleDeleteDiaryData = (readingId: string) => {
+        console.log('delete', readingId);
+        if(bookInfo?._id){
+            dispatch(booksDeleteReading({bookId: bookInfo._id, readingId: readingId}));
+        }
     }
 
     console.log(isDiary)
@@ -81,7 +88,7 @@ export const Progress = () => {
                 Diary
             </Header>
             <IconContainer>
-                <IconButton size="small" sx={{padding: '2px'}} onClick={handleIconClick}>
+                <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(true)}>
                     <Icon 
                         iconName={'#icon-sand-clock'}
                         sx={{
@@ -95,7 +102,7 @@ export const Progress = () => {
                         }}
                     />
                 </IconButton>
-                <IconButton size="small" sx={{padding: '2px'}} onClick={handleIconClick}>
+                <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(false)}>
                     <Icon 
                         iconName={'#icon-pie-chart'}
                         sx={{
@@ -112,7 +119,7 @@ export const Progress = () => {
             </IconContainer>
         </HeaderContainer>
         {/* <ScrollWrapper> */}
-            <ListContainer>
+            {isDiary && <ListContainer>
                 <DiaryList>
                     {progressArr && progressDataArr && progressArr.map((elem, i)=>{
                         return <DiaryListItem key={elem._id} id="listItem">
@@ -153,7 +160,9 @@ export const Progress = () => {
                         </DiaryListItem>
                     })}
                 </DiaryList>
-            </ListContainer>
+            </ListContainer>}
+
+            {!isDiary && <></>}
         {/* </ScrollWrapper> */}
     </Container>
 }

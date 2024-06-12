@@ -42,20 +42,20 @@ export const ListContainer = styled(Box)(({theme})=>({
     // borderLeft: `2px solid ${theme.palette.custom.bg3}`,
     borderRadius: '12px',
 
-    '&::-webkit-scrollbar': {
-        position: 'absolute',
-        // left: '-10px'
-    },
+    // '&::-webkit-scrollbar': {
+    //     position: 'absolute',
+    //     // left: '-10px'
+    // },
 
-    '&::-webkit-scrollbar-track': {
-        boxShadow: 'none', 
-        borderRadius: '5px'
-    },
+    // '&::-webkit-scrollbar-track': {
+    //     boxShadow: 'none', 
+    //     borderRadius: '5px'
+    // },
 
-    '::-webkit-scrollbar-thumb': {
-        background: theme.palette.custom.bg1, 
-        borderRadius: '5px'
-    },
+    // '::-webkit-scrollbar-thumb': {
+    //     background: theme.palette.custom.bg1, 
+    //     borderRadius: '5px'
+    // },
 }));
 
 export const DiaryList = styled(List)(({theme}) => ({
@@ -191,3 +191,5 @@ export const ListItemPagesPerHour = styled(Typography)(({theme}) => ({
 export const Text = styled(Typography)(({theme}) => ({
 
 })) as typeof Typography;
+
+
