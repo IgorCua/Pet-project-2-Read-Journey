@@ -130,13 +130,13 @@ export const DiaryListItem = styled(ListItem)(({theme}) => ({
 
 }));
 
-export const Square = styled(Box)(({theme}) => ({
-    width: '16px',
-    height: '16px',
+// export const Square = styled(Box)(({theme}) => ({
+//     width: '16px',
+//     height: '16px',
 
-    border: `4px solid ${theme.palette.custom.bg1}`,
-    borderRadius: '4px'
-})) as typeof Box;
+//     border: `4px solid ${theme.palette.custom.bg1}`,
+//     borderRadius: '4px'
+// })) as typeof Box;
 
 export const ListItemContainer = styled(Box)(({theme}) => ({
     // '&:nth-of-type(1)': {
@@ -148,7 +148,7 @@ export const ListItemDate = styled(Typography)(({theme}) => ({
     marginBottom: '16px',
 
     fontSize: '12px',
-    lineHeight: '12px'
+    lineHeight: '12px',
     // color: theme.palette.custom.textSecondary,
 
     // '&:first-of-type': {
@@ -192,4 +192,57 @@ export const Text = styled(Typography)(({theme}) => ({
 
 })) as typeof Typography;
 
+export const ProgressContainer = styled(Box)(({theme}) => ({
+    padding: '20px',
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
 
+    // padding: '16px 16px 16px 23px',
+    // maxHeight: '211px',
+    backgroundColor: theme.palette.custom.bg2,
+    // position: 'relative',
+
+    borderRadius: '12px'
+})) as typeof Box;
+
+export const CircleContainer = styled(Box)(({theme}) => ({
+    display: 'flex',
+    justifyContent:'center',
+    alignItems: 'center',
+    position: 'relative',
+})) as typeof Box;
+
+export const DataContainer = styled(Box)(({theme}) => ({
+    display: 'flex',
+    width: '95px',
+    gap: '15px',
+    // justifyContent:'center',
+    // alignItems: 'center',
+    // position: 'relative'
+    // border: '1px solid red'
+})) as typeof Box;
+
+export const Square = styled(Box)(({theme}) => ({
+    width: '14px',
+    height: '14px',
+    display: 'flex',
+    // justifyContent:'center',
+    // alignItems: 'center',
+    // position: 'relative'
+    backgroundColor: theme.palette.custom.utilGreen,
+
+    borderRadius: '4px'
+})) as typeof Box;
+
+export const DataTextContainer = styled(Box)(({theme}) => ({
+    display: 'flex',
+    width: '66px',
+    flexDirection: 'column',
+    // justifyContent:'center',
+    // alignItems: 'center',
+    // position: 'relative'
+    // border: '1px solid green'
+})) as typeof Box;

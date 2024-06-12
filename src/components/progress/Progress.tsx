@@ -10,7 +10,10 @@
 import { useSelector } from "react-redux"
 import { selectBookInfo } from "../../redux/books/selectors"
 import { 
+    CircleContainer,
     Container, 
+    DataContainer, 
+    DataTextContainer, 
     DiaryList, 
     DiaryListItem, 
     Header, 
@@ -23,6 +26,7 @@ import {
     ListItemPagesNum, 
     ListItemPagesPerHour, 
     ListItemPercent, 
+    ProgressContainer, 
     ScrollWrapper, 
     Square 
 } from "./styled";
@@ -33,6 +37,7 @@ import { Opacity } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { booksDeleteReading } from "../../redux/books/operations";
 import { AppDispatch } from "../../redux/store";
+import { theme } from "../../styles/themes";
 
 export const Progress = () => {
     const bookInfo = useSelector(selectBookInfo);
@@ -70,10 +75,6 @@ export const Progress = () => {
         return day + '.' + month + '.' + year;
     }
 
-    const handleIconClick = () => {
-        console.log('click');
-    }
-
     const handleDeleteDiaryData = (readingId: string) => {
         console.log('delete', readingId);
         if(bookInfo?._id){
@@ -81,7 +82,24 @@ export const Progress = () => {
         }
     }
 
-    console.log(isDiary)
+    const CountReadingPercent = () => {
+        let result = 0;
+        const lastProgress = bookInfo?.progress[bookInfo.progress.length - 1];
+        if(lastProgress){
+            if(lastProgress.finishPage) result = +(lastProgress.finishPage / bookInfo.totalPages * 100).toFixed(2);
+            if(!lastProgress.finishPage) result = +(lastProgress.startPage / bookInfo.totalPages * 100).toFixed(2);
+        }
+        return result;
+    }
+
+    const getFinishedPages = () => {
+        const lastProgress = bookInfo?.progress[bookInfo.progress.length - 1]
+        if(lastProgress?.finishPage) return lastProgress.finishPage;
+        if(!lastProgress?.finishPage) return lastProgress?.startPage;
+    }
+
+    console.log(isDiary);
+
     return <Container component={'div'}>
         <HeaderContainer>
             <Header variant="h2">
@@ -162,7 +180,41 @@ export const Progress = () => {
                 </DiaryList>
             </ListContainer>}
 
-            {!isDiary && <></>}
+            {!isDiary && <ProgressContainer>
+                <CircleContainer>
+                    <Icon iconName={'#icon-progress-circle'} sx={{
+                        width: '116px', 
+                        height: '116px', 
+                        transform: 'rotate(270deg)',
+                        // strokeDashoffset: '565.48px'
+                        transitionDuration: '350px',
+                        transitionProperty: 'stroke-dashoffset',
+                        strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`
+                    }}/>
+                    <Typography sx={{
+                        position: 'absolute',
+                        color: theme.palette.custom.textMain
+                    }}>
+                        {CountReadingPercent()}%
+                    </Typography>
+                </CircleContainer>
+                <DataContainer>
+                    <Square/>
+                    <DataTextContainer>
+                        <Typography sx={{
+                            marginBottom: '4px',
+                            fontSize: '14px',
+                            lineHeight: '18px',
+                            color: theme.palette.custom.textMain
+                        }}>{CountReadingPercent()}%</Typography>
+                        <Typography sx={{
+                            fontSize: '10px',
+                            lineHeight: '12px',
+                            color: theme.palette.custom.textSecondary
+                        }}>{getFinishedPages()} pages read</Typography>
+                    </DataTextContainer>
+                </DataContainer>
+            </ProgressContainer>}
         {/* </ScrollWrapper> */}
     </Container>
 }
