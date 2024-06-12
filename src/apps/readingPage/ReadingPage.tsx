@@ -162,9 +162,9 @@ export const ReadingPage = () => {
                         }}
                     />}
                     
-                    {bookInfo?.progress && <Progress/>}
+                    {bookInfo?.progress.length !== 0 && <Progress/>}
 
-                    {!bookInfo?.progress && <ContainerStats component={'section'}>
+                    {bookInfo?.progress.length === 0 && <ContainerStats component={'section'}>
                         <ContainerNoStats>
                             <Header variant="h2">Progress</Header>
                             {/* <ImageContainer> */}
