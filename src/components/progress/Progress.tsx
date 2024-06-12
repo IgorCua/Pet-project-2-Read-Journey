@@ -103,7 +103,7 @@ export const Progress = () => {
     return <Container component={'div'}>
         <HeaderContainer>
             <Header variant="h2">
-                Diary
+                {isDiary ? 'Diary' : 'Progress'}
             </Header>
             <IconContainer>
                 <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(true)}>
