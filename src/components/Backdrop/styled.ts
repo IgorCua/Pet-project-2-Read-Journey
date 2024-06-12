@@ -15,6 +15,9 @@ export const Container = styled('div')(({theme}) => ({
     [theme.breakpoints.up('mobileM')]: {
         padding: '40px 98px'
     },
+    [theme.breakpoints.up('tablet')]: {
+        width: '500px'
+    }
 }));
 
 export const Button = styled(ButtonBase)(({theme})=>({

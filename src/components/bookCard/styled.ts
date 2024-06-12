@@ -93,6 +93,10 @@ export const BackdropCardContainer = styled('div')(({theme}) => ({
 
     overflow:'hidden',
     textOverflow: 'ellipsis',
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '320px'
+    }
 }));
 
 export const BackdropDescrContainer = styled('div')(({theme}) => ({
@@ -109,6 +113,10 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
 
     '& p:nth-type-of(1)': {
         width: '120px'
+    },
+
+    [theme.breakpoints.up('tablet')]: {
+
     }
 }));
 
