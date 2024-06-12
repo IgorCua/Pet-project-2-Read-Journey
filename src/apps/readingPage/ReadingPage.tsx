@@ -18,7 +18,7 @@ import {
 } from "./styled";
 import { Box, Input, InputAdornment, InputBase, TextField, TextFieldProps } from "@mui/material"
 import { theme } from "../../styles/themes"
-import { borderRadius, display, maxWidth, textAlign } from "@mui/system"
+// import { borderRadius, display, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
 import { useSelector } from "react-redux"
 import { selectBookInfo, selectBooksError, selectBooksIsError } from "../../redux/books/selectors"
@@ -29,6 +29,7 @@ import { ErrorModal } from "../../components/errorModal/ErrorModal"
 import { Icon } from "../../components/icon/Icon";
 import { Form } from "../../components/form/Form";
 import * as Yup from 'yup';
+import { Progress } from "../../components/progress/Progress";
 
 
 const schemaStart = Yup.object().shape({
@@ -161,7 +162,9 @@ export const ReadingPage = () => {
                         }}
                     />}
                     
-                    <ContainerStats component={'section'}>
+                    {bookInfo?.progress && <Progress/>}
+
+                    {!bookInfo?.progress && <ContainerStats component={'section'}>
                         <ContainerNoStats>
                             <Header variant="h2">Progress</Header>
                             {/* <ImageContainer> */}
@@ -192,7 +195,7 @@ export const ReadingPage = () => {
                                 }}>🌟</Text>
                             </Box>
                         </ContainerNoStats>
-                    </ContainerStats>
+                    </ContainerStats>}
                 </>
             </Dashboard>
             

@@ -28,7 +28,8 @@ type BookInfoProgress = {
     finishPage?: number,
     finishReading?: string,
     speed?: number,
-    status?: 'in-progress' | 'inactive' | 'active'
+    status?: 'in-progress' | 'inactive' | 'active',
+    _id: string
 }
 
 export interface BookInterface {

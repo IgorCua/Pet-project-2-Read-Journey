@@ -22,7 +22,9 @@ const customStyles = {
         // width: '4px'
     },
     '::-webkit-scrollbar': {
+        // position: 'absolute',
         width: '5px',
+        // right: '-15px'
     },
     
     '::-webkit-scrollbar-track': {
