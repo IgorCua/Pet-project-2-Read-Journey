@@ -141,7 +141,7 @@ export const Figure = styled('figure')(({theme}) => ({
     },
     [theme.breakpoints.up('desktop')]: {
         width:'600px',
-        height: '100%',
+        height: 'auto',
         // paddingTop: '20px',
         // paddingLeft: '40px',
         // paddingRight: '40px'

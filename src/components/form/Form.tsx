@@ -109,9 +109,9 @@ export const Form = (props: Props) => {
                 </InputContainer>
             })}
             <ButtonBox>
-            <Submit id="submitButton" type="submit">
-                {submitName}
-            </Submit>
+                <Submit id="submitButton" type="submit">
+                    {submitName}
+                </Submit>
                 {children}
             </ButtonBox>
         </CustomForm>

@@ -86,7 +86,7 @@ export const LoginPage = () => {
     }
     
     return (
-        // <PageWrapper>
+        <PageWrapper>
             <DecorationContainer>
             <Section>
                 <IconContainer>
@@ -104,6 +104,7 @@ export const LoginPage = () => {
                     submitName="Log In"
                     sx={{
                         '& .MuiBox-root:last-of-type': {
+                            marginTop: '75px',
                             gap: '14px',
                             [theme.breakpoints.up('tablet')]: {
                                 marginTop: '146px',
@@ -131,6 +132,6 @@ export const LoginPage = () => {
                 <PhoneImg/>
             </Figure>
             </DecorationContainer>
-        // </PageWrapper>
+        </PageWrapper>
     )
 }

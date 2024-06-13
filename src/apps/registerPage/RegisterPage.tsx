@@ -91,7 +91,7 @@ export const RegisterPage = () => {
     }
 
     return (
-        // <PageWrapper>
+        <PageWrapper>
             <DecorationContainer>
             <Section>
                 <IconContainer>
@@ -108,6 +108,7 @@ export const RegisterPage = () => {
                     submitName="Registration"
                     sx={{
                         '& .MuiBox-root:last-of-type': {
+                            marginTop: '20px',
                             gap: '14px',
                             [theme.breakpoints.up('tablet')]: {
                                 marginTop: '82px',
@@ -135,6 +136,6 @@ export const RegisterPage = () => {
                 <PhoneImg/>
             </Figure>
             </DecorationContainer>
-        // </PageWrapper>
+        </PageWrapper>
     )
 }
