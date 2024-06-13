@@ -10,8 +10,9 @@ export const Container = styled('div')(({theme}) => ({
     display: 'flex',
     // flexWrap: 'wrap',
     flexDirection: 'column',
+    alignItems: 'center',
     cursor: 'pointer',
-
+    
     // '&:hover': {
     '&:hover img': {
         boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
@@ -20,7 +21,7 @@ export const Container = styled('div')(({theme}) => ({
 
 export const Image = styled('img')(({theme}) => ({
     marginBottom: '8px',
-    width: '100%',
+    width: '137px',
     height: '208px',
     // maxHeight: '208px'
     // cursor: 'pointer',
@@ -93,6 +94,10 @@ export const BackdropCardContainer = styled('div')(({theme}) => ({
 
     overflow:'hidden',
     textOverflow: 'ellipsis',
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '320px'
+    }
 }));
 
 export const BackdropDescrContainer = styled('div')(({theme}) => ({
@@ -109,6 +114,10 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
 
     '& p:nth-type-of(1)': {
         width: '120px'
+    },
+
+    [theme.breakpoints.up('tablet')]: {
+
     }
 }));
 

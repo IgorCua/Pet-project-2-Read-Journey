@@ -1,4 +1,5 @@
 import { Theme, createTheme } from "@mui/material";
+import zIndex from "@mui/material/styles/zIndex";
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -19,6 +20,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColorOptions {
     textMain?: string;
     textSecondary?: string;
+    textBlack?: string,
     bgWhite?: string;
     bg1?: string;
     bg2?: string;
@@ -37,6 +39,7 @@ declare module '@mui/material/styles/createPalette' {
   interface CustomPaletteColor {
     textMain: string;
     textSecondary: string;
+    textBlack: string,
     bgWhite: string;
     bg1: string;
     bg2: string;
@@ -95,6 +98,7 @@ declare module '@mui/material/styles/createPalette' {
 type CustomTeme = {
   textMain: string,
   textSecondary: string,
+  textBlack: string,
   bgWhite: string,
   bg1: string,
   bg2: string,
@@ -114,6 +118,7 @@ type CustomTeme = {
 const customTheme: CustomTeme = {
   textMain: '#F9F9F9',
   textSecondary: '#686868',
+  textBlack: '#1F1F1F',
   bgWhite: '#F9F9F9',
   bg1: 'rgba(227, 227, 227, 0.30)',
   bg2: '#262626',
@@ -147,6 +152,7 @@ export const theme = createTheme({
     custom: {
       textMain: '#F9F9F9',
       textSecondary: '#686868',
+      textBlack: '#1F1F1F',
       bgWhite: '#F9F9F9',
       bg1: 'rgba(227, 227, 227, 0.30)',
       bg2: '#262626',
@@ -205,7 +211,7 @@ export const theme = createTheme({
           padding: '0px',
           // height: '15px',
           // fontFamily: 'Gilroy'
-          transitionProperty: 'background-color',
+          transitionProperty: 'background-color, color',
           transitionDuration: '250ms',
 
           '&:hover':{
@@ -262,10 +268,11 @@ export const theme = createTheme({
     MuiInputBase: {
       styleOverrides: {
         root: {
+          padding: '0px',
           width: '100%',
 
           backgroundColor: customTheme.bg2,
-          border: '1px solid transparent',
+          // border: '1px solid transparent',
           borderRadius: '12px',
 
           // '&:hover': {
@@ -275,13 +282,15 @@ export const theme = createTheme({
           //   border: `1px solid ${customTheme.authInputBorder}`,
           //   // borderRadius: '12px'
           // },
+
         },
         input: {
+          // padding: '14px 16px 14px 14px',
+
+          fontSize: '12px',
+          
           color: customTheme.textMain,
           border: 'none',
-
-          padding: '14px 10px',
-          fontSize: '12px',
 
           // '&::placeholder': {
           //   color: customTheme.textSecondary,
@@ -304,24 +313,55 @@ export const theme = createTheme({
     MuiOutlinedInput:{
       styleOverrides:{
         root: {
-          paddingRight: '16px',
+          padding: '15px 16px 15px 14px',
           borderRadius: '12px',
-          transitionDuration: '250ms',
-          transitionProperty:'border',
-          
-          border: '1px solid transparent',
+          // transitionDuration: '250ms',
+          // transitionProperty:'border, border-color',
+          borderColor: customTheme.authInputBorder,
 
-          '&:hover': {
+          '& .MuiOutlinedInput-notchedOutline': {
+            transitionDuration: '250ms',
+            transitionProperty:'border, border-color, color',
+            borderColor: 'transparent',
+          },
+
+          '&:hover .MuiOutlinedInput-notchedOutline': {
+            borderColor: customTheme.authInputBorder
+          },
+          '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
             border: `1px solid ${customTheme.authInputBorder}`,
           },
-          '&.Mui-focused': {
-            border: `1px solid ${customTheme.authInputBorder}`,
-            // borderRadius: '12px'
+          '&.Mui-error .MuiOutlinedInput-notchedOutline':{
+            borderColor: customTheme.utilRed
           },
         },
+        input: {
+          padding: '0px',
+        },
         notchedOutline: {
-          // borderBlockColor: 'green',
-          border: 'none',
+          margin: '0px',
+          top: '-5px',
+          right: '-1px',
+          bottom: '-1px',
+          left: '-1px',
+        }
+      }
+    },
+    MuiInputAdornment:{
+      styleOverrides:{
+        root:{
+          'p': {
+            fontSize: '12px',
+
+            color: customTheme.textSecondary,
+          }
+
+          // zIndex: '1000',
+        
+          // [customTheme.breakpoints.up('tablet')]: {
+          //   minWidth: '92px',
+          //   fontSize: '14px',
+          // }
         }
       }
     },

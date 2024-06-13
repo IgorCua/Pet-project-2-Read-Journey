@@ -46,11 +46,11 @@ export const InputTitle = styled(TextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '14px 14px 14px 10px',
+        // padding: '14px 14px 14px 10px',
         fontSize: '12px',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            // padding: '16px 14px 16px 10px',
             width: '84px',
 
             fontSize: '14px',
@@ -75,11 +75,11 @@ export const InputAuthor = styled(TextField)(({theme})=>({
         },
     },
     '& div input': {
-        padding: '14px 14px 14px 10px',
+        // padding: '14px 14px 14px 10px',
         fontSize: '12px',
 
         [theme.breakpoints.up('tablet')]: {
-            padding: '16px 14px 16px 10px',
+            // padding: '16px 14px 16px 10px',
             
             fontSize: '14px',
         },

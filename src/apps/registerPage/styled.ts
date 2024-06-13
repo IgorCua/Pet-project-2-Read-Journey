@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, ButtonBase } from "@mui/material";
 import { display, height, maxWidth, styled, width } from "@mui/system";
 
 export const DecorationContainer = styled('div')(({theme}) => ({
@@ -80,6 +80,33 @@ export const Span = styled('span')(({theme}) => ({
     color: theme.palette.custom.textSecondary
 }));
 
+export const LinkButton = styled(ButtonBase)(({theme})=>({
+    padding: '0px',
+    height: '20px',
+    // alignSelf: 'center',
+    // end: '-20px',
+    // bottom:'-31px',
+
+    color: theme.palette.custom.textSecondary,
+    fontSize: '12px',
+    // lineHeight: 'calc(14 / 12)', /* 116.667% */
+    letterSpacing: '-0.24px',
+    textDecorationLine: 'underline',
+
+    borderRadius: '5px',
+
+    '&:hover': {
+        color: theme.palette.custom.bg1
+    },
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '14px',
+        lineHeight: '18px', /* 128.571% */
+        letterSpacing: '-0.28px',
+        textDecorationLine: 'underline'
+    }
+})) as typeof ButtonBase;
+
 export const Section = styled('section')(({theme}) => ({
     padding: '20px 20px',
     width: '100%',
@@ -114,7 +141,7 @@ export const Figure = styled('figure')(({theme}) => ({
     },
     [theme.breakpoints.up('desktop')]: {
         width:'600px',
-        height: '100%',
+        height: 'auto',
         // paddingTop: '20px',
         // paddingLeft: '40px',
         // paddingRight: '40px'

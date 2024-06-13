@@ -27,6 +27,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectBooksIsError, selectUserBooksIDsArr, selectUserBooksTitlesArr } from "../../redux/books/selectors";
 import { ErrorModal } from "../errorModal/ErrorModal";
+import { theme } from "../../styles/themes";
 
 type Props = {
     id: string,
@@ -170,7 +171,11 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                             height: '208px',
                             // maxHeight: '208px'
                             borderRadius: '8px',
-                            cursor: 'auto'
+                            cursor: 'auto',
+                            [theme.breakpoints.up('tablet')]: {
+                                maxWidth: '153px',
+                                height: '233px'
+                            }
                         }}/>
                         <BackdropDescrContainer sx={{textAlign: 'center'}}>
                             <Header variant="h3" noWrap sx={{

@@ -1,9 +1,90 @@
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { FormTextField } from "../materialUI/FormTextField"
-import { Form, FormHeader, InputAuthor, InputTitle, InputNumOfPages, Submit } from "./styled"
+import { 
+    // Form, 
+    FormHeader, 
+    InputAuthor, 
+    InputTitle, 
+    InputNumOfPages, 
+    Submit 
+} from "./styled";
 import React, { useEffect, useRef } from "react";
 import { booksGetRecommended } from "../../redux/books/operations";
+import { Form } from "../form/Form";
+import * as Yup from 'yup';
+import { theme } from "../../styles/themes";
+
+const schemaRecommended = Yup.object().shape({
+    // name: Yup
+    //     .string()
+    //     .min(3, 'Name must be at least 3 characters')
+    //     .max(64, 'Name must be less than 65 characters')
+    //     .required('Name is a required field'),
+    title: Yup
+        .string()
+        .min(1, 'Email must be at least 3 characters')
+        .max(64, 'Email must be less than 65 characters')
+        .required('Email is a required field')
+        .matches(
+            /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 
+            'Email is invalid'
+        ),
+    author: Yup
+        .string()
+        .min(1, 'Password must be at least 7 characters')
+        .max(64, 'Password must be less than 65 characters')
+        .required('Password is a required field')
+});
+
+const schemaLibrary = Yup.object().shape({
+    // name: Yup
+    //     .string()
+    //     .min(3, 'Name must be at least 3 characters')
+    //     .max(64, 'Name must be less than 65 characters')
+    //     .required('Name is a required field'),
+    title: Yup
+        .string()
+        .min(1, 'Email must be at least 3 characters')
+        .max(64, 'Email must be less than 65 characters')
+        .required('Email is a required field')
+        .matches(
+            /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, 
+            'Email is invalid'
+        ),
+    author: Yup
+        .string()
+        .min(1, 'Password must be at least 7 characters')
+        .max(64, 'Password must be less than 65 characters')
+        .required('Password is a required field'),
+    pages: Yup
+        .string()
+        .min(1, 'Password must be at least 7 characters')
+        .max(64, 'Password must be less than 65 characters')
+        .required('Password is a required field')
+});
+
+const inputsDataArrRecommended = [
+    {type: 'text', name: 'title', placeholder: 'Book title:'},
+    {type: 'text', name: 'author', placeholder: 'The author:'},
+];
+
+const inputsDataArrLibrary = [
+    {type: 'text', name: 'title', placeholder: 'Book title:'},
+    {type: 'text', name: 'author', placeholder: 'The author:'},
+    {type: 'text', name: 'pages', placeholder: 'Number of pages:'},
+];
+
+const initialValRecommended = {
+    title: '',
+    author: ''
+};
+
+const initialValLibrary = {
+    title: '',
+    author: '',
+    pages: ''
+};
 
 type AppDispatch = typeof store.dispatch;
 // type RefType = <null | React.ReactHTMLElement>
@@ -99,13 +180,25 @@ export const Filter = ({numOfInputs, requestLimit, setFilterData, sx}: Props) =>
 
     }, [])
 
-    return <Form onSubmit={handleSubmit} style={sx}>
-        <FormHeader>Filters:</FormHeader>
-        <InputTitle type="text" name="title"/>
-        <InputAuthor type="text" name="author"/>
-        {numOfInputs === 3 && 
-            <InputNumOfPages type="text" name="numberOfPages"/>
-        }
-        <Submit type="submit">Apply</Submit>
-    </Form>
+    // return <Form onSubmit={handleSubmit} style={sx}>
+    //     <FormHeader>Filters:</FormHeader>
+    //     <InputTitle type="text" name="title"/>
+    //     <InputAuthor type="text" name="author"/>
+    //     {numOfInputs === 3 && 
+    //         <InputNumOfPages type="text" name="numberOfPages"/>
+    //     }
+    //     <Submit type="submit">Apply</Submit>
+    // </Form>
+    return <Form
+        initialValues={requestLimit === 3 ? initialValLibrary : initialValRecommended}
+        validationSchema={requestLimit === 3 ? schemaLibrary : schemaRecommended}
+        handleSubmit={handleSubmit}
+        submitName="Apply"
+        inputsDataArr={requestLimit === 3 ? inputsDataArrLibrary : inputsDataArrRecommended}
+        sx={{
+            '& .MuiBox-root:last-of-type': {
+                marginTop: '20px',
+            },
+        }}
+    />
 }

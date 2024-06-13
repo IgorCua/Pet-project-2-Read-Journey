@@ -1,4 +1,5 @@
 import { GlobalStyles } from "@mui/material";
+import { theme } from "./themes";
 
 const customStyles = {
     body: {
@@ -21,26 +22,42 @@ const customStyles = {
         display: 'none',
         // width: '4px'
     },
-    '::-webkit-scrollbar': {
-        width: '5px',
-    },
+    // '::-webkit-scrollbar': {
+    //     // position: 'absolute',
+    //     width: '5px',
+    //     // right: '-15px'
+    // },
     
-    '::-webkit-scrollbar-track': {
-        boxShadow: 'inset 0 0 5px grey', 
-        borderRadius: '5px'
-    },
+    // '::-webkit-scrollbar-track': {
+    //     boxShadow: 'inset 0 0 5px grey', 
+    //     borderRadius: '5px'
+    // },
        
-      /* Handle */
-    '::-webkit-scrollbar-thumb': {
-        background: 'red', 
-        borderRadius: '5px'
-    },
+    //   /* Handle */
+    // '::-webkit-scrollbar-thumb': {
+    //     background: 'red', 
+    //     borderRadius: '5px'
+    // },
       
       /* Handle on hover */
     '::-webkit-scrollbar-thumb:hover': {
         background: '#b30000'
     },
+    '::-webkit-scrollbar': {
+        position: 'absolute',
+        width: '5px'
+        // left: '-10px'
+    },
 
+    '::-webkit-scrollbar-track': {
+        boxShadow: 'none', 
+        borderRadius: '5px'
+    },
+
+    '::-webkit-scrollbar-thumb': {
+        background: theme.palette.custom.bg1, 
+        borderRadius: '5px'
+    },
     '*': {
         boxSizing: 'border-box'
     },

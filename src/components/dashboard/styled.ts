@@ -2,8 +2,8 @@ import { styled } from "@mui/system";
 import { Box } from "@mui/material";
 
 export const Section = styled(Box)(({theme}) => ({
-    marginTop: '10px',
-    marginBottom: '10px',
+    // marginTop: '10px',
+    // marginBottom: '10px',
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
@@ -21,7 +21,7 @@ export const Section = styled(Box)(({theme}) => ({
 
     [theme.breakpoints.up('desktop')]:{
         padding: '20px 20px',
-        marginRight: '16px',
+        // marginRight: '16px',
         width: '353px',
         flexDirection: 'column',
     }

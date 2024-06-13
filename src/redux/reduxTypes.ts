@@ -28,7 +28,14 @@ type BookInfoProgress = {
     finishPage?: number,
     finishReading?: string,
     speed?: number,
-    status?: 'in-progress' | 'inactive' | 'active'
+    status?: 'in-progress' | 'inactive' | 'active',
+    _id: string
+}
+
+type typeBookInfoTimeLeft = {
+    hours: number,
+    minutes: number,
+    seconds: number
 }
 
 export interface BookInterface {
@@ -39,7 +46,8 @@ export interface BookInterface {
     totalPages: number,
     satus: string,
     owner: string,
-    progress: BookInfoProgress[] | []
+    progress: BookInfoProgress[] | [],
+    timeLeftToRead: typeBookInfoTimeLeft
 }
 
 // interface BookProgressInterface {
