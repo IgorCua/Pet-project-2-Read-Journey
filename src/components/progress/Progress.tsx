@@ -116,6 +116,10 @@ export const Progress = () => {
                             cursor: 'pointer',
                             '&:hover':{
                                 opacity: '1'
+                            },
+                            [theme.breakpoints.up('tablet')]: {
+                                width: '20px', 
+                                height: '20px', 
                             }
                         }}
                     />
@@ -130,6 +134,10 @@ export const Progress = () => {
                             cursor: 'pointer',
                             '&:hover':{
                                 opacity: '1'
+                            },
+                            [theme.breakpoints.up('tablet')]: {
+                                width: '20px', 
+                                height: '20px', 
                             }
                         }}
                     />
@@ -164,6 +172,10 @@ export const Progress = () => {
                                 width: '43px', 
                                 height: '18px', 
                                 marginBottom: '4px',
+                                [theme.breakpoints.up('tablet')]: {
+                                    width: '59px', 
+                                    height: '25px', 
+                                }
                             }}/>
                             <ListItemPagesPerHour>
                                 {elem.speed ? `${elem.speed} pages per hour` : 'active reading'}
@@ -189,11 +201,22 @@ export const Progress = () => {
                         // strokeDashoffset: '565.48px'
                         transitionDuration: '350px',
                         transitionProperty: 'stroke-dashoffset',
-                        strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`
+                        strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`,
+
+                        [theme.breakpoints.up('tablet')]: {
+                            //line width 12
+                            width: '138px', 
+                            height: '138px', 
+                        }
                     }}/>
                     <Typography sx={{
                         position: 'absolute',
-                        color: theme.palette.custom.textMain
+                        color: theme.palette.custom.textMain,
+                        [theme.breakpoints.up('tablet')]: {
+                            //line width 12
+                            fontSize: '20px',
+                            lineHeight: '20px', 
+                        }
                     }}>
                         {CountReadingPercent()}%
                     </Typography>
@@ -205,12 +228,20 @@ export const Progress = () => {
                             marginBottom: '4px',
                             fontSize: '14px',
                             lineHeight: '18px',
-                            color: theme.palette.custom.textMain
+                            color: theme.palette.custom.textMain,
+                            [theme.breakpoints.up('tablet')]: {
+                                fontSize: '20px',
+                                lineHeight: '20px', 
+                            }
                         }}>{CountReadingPercent()}%</Typography>
                         <Typography sx={{
                             fontSize: '10px',
                             lineHeight: '12px',
-                            color: theme.palette.custom.textSecondary
+                            color: theme.palette.custom.textSecondary,
+                            [theme.breakpoints.up('tablet')]: {
+                                fontSize: '12px',
+                                lineHeight: '14px', 
+                            }
                         }}>{getFinishedPages()} pages read</Typography>
                     </DataTextContainer>
                 </DataContainer>

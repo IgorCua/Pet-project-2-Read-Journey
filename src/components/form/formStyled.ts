@@ -36,8 +36,12 @@ export const CustomForm = styled(Form)(({theme}) =>({
     },
 
     [theme.breakpoints.only('tablet')]: {
-        marginBottom: '174px'
-    }
+        // marginBottom: '174px'
+    },
+    // [theme.breakpoints.up('desktop')]: {
+    //     width: '400px'
+    // }
+
 }));
 
 export const InputContainer = styled(Box)(({theme}) =>({

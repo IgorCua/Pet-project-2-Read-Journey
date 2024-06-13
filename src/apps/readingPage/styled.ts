@@ -1,12 +1,35 @@
 import { Box, ButtonBase, TextField, Typography, styled } from "@mui/material";
 
 export const Container = styled(Box)(({theme}) => ({
+    marginTop: '10px',
     width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '10px',
+    
+    [theme.breakpoints.up('tablet')]: {
+        marginTop: '16px',
+        gap: '16px'
+    },
+    
+    [theme.breakpoints.up('desktop')]: {
+        // width: '100%'
+        flexDirection: 'row',
+    },
+})) as typeof Box;
+
+export const FormContainer = styled('section')(({theme})=>({
+    display: 'flex',
+    flexDirection: 'column',
+    
+    [theme.breakpoints.up('tablet')]: {
+        // width: '47%'
+        maxWidth: '46%'
+    },
+    [theme.breakpoints.up('desktop')]: {
+        maxWidth: '100%'
+    }
 }));
-
-export const Form = styled('form')({
-
-});
 
 export const FormHeader = styled('h3')(({theme})=>({
     marginLeft: '14px',
@@ -81,7 +104,11 @@ export const ContainerStats = styled(Box)(({theme}) => ({
 
 export const ContainerNoStats = styled(Box)(({theme}) => ({
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
+
+    [theme.breakpoints.up('tablet')]:{
+        width:'305px'
+    }
 })) as typeof Box;
 
 export const Header = styled(Typography)(({theme}) => ({
@@ -91,7 +118,12 @@ export const Header = styled(Typography)(({theme}) => ({
     lineHeight: '18px',
     fontWeight: '700',
     
-    color: theme.palette.custom.textMain
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]:{
+        fontSize: '20px',
+        lineHeight: '20px',
+    }
 })) as typeof Typography;
 
 export const Text = styled(Typography)(({theme}) => ({    
@@ -100,7 +132,8 @@ export const Text = styled(Typography)(({theme}) => ({
     // letterSpacing: 'calc(16px / 100px)',
     letterSpacing: '-0.02em',
     
-    color: theme.palette.custom.textSecondary
+    color: theme.palette.custom.textSecondary,
+
 })) as typeof Typography;
 
 export const MyReadingContainer = styled(Box)(({theme}) => ({
@@ -112,17 +145,53 @@ export const MyReadingContainer = styled(Box)(({theme}) => ({
 
     backgroundColor: theme.palette.custom.bg3,
 
-    borderRadius: '30px'
+    borderRadius: '30px',
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '100%'
+    }
 }));
 
-export const MyReadingHeader = styled(Typography)(({theme}) => ({
+export const MyReadingHeaderContainer = styled(Box)(({theme}) => ({
+    width: '100%',
     marginBottom: '40px',
+    display: 'flex',
+    justifyContent: 'space-between',
+    // marginBottom: '40px',
+    // alignSelf: 'start',
+
+    // fontSize: '20px',
+    // lineHeight: '20px',
+    // fontWeight: '700',
+    color: theme.palette.custom.textMain
+})) as typeof Box;
+
+export const MyReadingHeader = styled(Box)(({theme}) => ({
     alignSelf: 'start',
 
     fontSize: '20px',
     lineHeight: '20px',
     fontWeight: '700',
-    color: theme.palette.custom.textMain
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '28px',
+        lineHeight: '32px',
+    }
+})) as typeof Typography;
+
+export const MyReadingTimeLeft = styled(Box)(({theme}) => ({
+    alignSelf: 'start',
+
+    fontSize: '10px',
+    lineHeight: '16px',
+    fontWeight: '500',
+    color: theme.palette.custom.textSecondary,
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '14px',
+        lineHeight: '18px',
+    }
 })) as typeof Typography;
 
 export const CircleOutside = styled(Box)(({theme}) => ({
@@ -133,12 +202,17 @@ export const CircleOutside = styled(Box)(({theme}) => ({
     alignItems: 'center',
 
     borderRadius: '50%',
-    border: `2px solid ${theme.palette.custom.bgWhite}`
+    border: `2px solid ${theme.palette.custom.bgWhite}`,
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '50px',
+        height: '50px',
+    }
 }));
 
 export const CircleInside = styled(Box)(({theme}) => ({
     width: '30px',
-    height: '29px',
+    height: '30px',
     transitionDuration: '300ms',
     transitionProperty: 'height, width, border-radius',
 
@@ -146,4 +220,10 @@ export const CircleInside = styled(Box)(({theme}) => ({
 
     borderRadius: '50%',
     // border: `1px solid ${theme.palette.custom.bgWhite}`
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '40px',
+        height: '40px',
+        borderRadius: '50%'
+    }
 })) as typeof Box;

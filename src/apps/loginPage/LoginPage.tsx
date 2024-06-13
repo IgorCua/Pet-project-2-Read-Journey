@@ -86,7 +86,7 @@ export const LoginPage = () => {
     }
     
     return (
-        <PageWrapper>
+        // <PageWrapper>
             <DecorationContainer>
             <Section>
                 <IconContainer>
@@ -131,6 +131,6 @@ export const LoginPage = () => {
                 <PhoneImg/>
             </Figure>
             </DecorationContainer>
-        </PageWrapper>
+        // </PageWrapper>
     )
 }

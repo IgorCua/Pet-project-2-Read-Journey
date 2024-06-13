@@ -14,7 +14,10 @@ import {
     MyReadingContainer, 
     MyReadingHeader, 
     Submit, 
-    Text 
+    Text, 
+    MyReadingHeaderContainer,
+    MyReadingTimeLeft,
+    FormContainer
 } from "./styled";
 import { Box, Input, InputAdornment, InputBase, TextField, TextFieldProps } from "@mui/material"
 import { theme } from "../../styles/themes"
@@ -30,6 +33,7 @@ import { Icon } from "../../components/icon/Icon";
 import { Form } from "../../components/form/Form";
 import * as Yup from 'yup';
 import { Progress } from "../../components/progress/Progress";
+import { fontSize, fontWeight, lineHeight, maxWidth, minWidth } from "@mui/system";
 
 
 const schemaStart = Yup.object().shape({
@@ -137,48 +141,65 @@ export const ReadingPage = () => {
             erorrCode={booksError.response?.status}
             errorMessage={handleErrorMessage()}
         />}
-        <Container component='section'>
-            <Dashboard sx={{gap: '40px'}}>
+        <Container component='div'>
+            <Dashboard sx={{
+                gap: '40px',
+                [theme.breakpoints.up('tablet')]: {
+                    // padding: '32px 16px 16px 32px'
+                    padding: '32px',
+                    gap: '40px'
+                },
+                [theme.breakpoints.up('desktop')]: {
+                    padding: '32px 20px 20px 20px',
+                    minWidth: '353px',
+                    gap: '40px',
+                }
+            }}>
                 <>
-                    {!isReading && <Form
-                        initialValues={initialValuesStart}
-                        validationSchema={schemaStart}
-                        handleSubmit={handleSubmit}
-                        inputsDataArr={pageStartData}
-                        submitName={'Start'}
-                        sx={{
-                            gap: '20px'
-                        }}
-                    />}
+                    <FormContainer>
+                        <FormHeader>{isReading ? 'Stop page:' : 'Start page:'}</FormHeader>
+                        {!isReading && <Form
+                            initialValues={initialValuesStart}
+                            validationSchema={schemaStart}
+                            handleSubmit={handleSubmit}
+                            inputsDataArr={pageStartData}
+                            submitName={'Start'}
+                            sx={{
+                                gap: '20px',
+                            }}
+                        />}
 
-                    {isReading && <Form
-                        initialValues={initialValuesEnd}
-                        validationSchema={schemaEnd}
-                        handleSubmit={handleSubmit}
-                        inputsDataArr={pageEndData}
-                        submitName={'Stop'}
-                        sx={{
-                            gap: '20px'
-                        }}
-                    />}
+                        {isReading && <Form
+                            initialValues={initialValuesEnd}
+                            validationSchema={schemaEnd}
+                            handleSubmit={handleSubmit}
+                            inputsDataArr={pageEndData}
+                            submitName={'Stop'}
+                            sx={{
+                                gap: '20px',
+                            }}
+                        />}
+                    </FormContainer>
+
                     
                     {bookInfo?.progress.length !== 0 && <Progress/>}
 
                     {bookInfo?.progress.length === 0 && <ContainerStats component={'section'}>
                         <ContainerNoStats>
                             <Header variant="h2">Progress</Header>
-                            {/* <ImageContainer> */}
-                            {/* <Image 
-                                🌟
-                            /> */}
-                            {/* </ImageContainer> */}
                             <Text component='p' sx={{
-                                marginBottom: '20px'
+                                marginBottom: '20px',
+                                [theme.breakpoints.up('tablet')]:{
+                                    marginBottom: '50px',
+                                },
+                                [theme.breakpoints.up('desktop')]:{
+                                    marginBottom: '60px',
+                                }
                             }}>
                                 Here you will see when and how much you read. To record, click on the red button above.
                             </Text>
                             <Box component={'div'} sx={{
-                                padding: '22px 24px',
+                                height: '80px',
                                 width: '80px',
                                 display: 'flex',
                                 justifyContent: 'center',
@@ -187,11 +208,21 @@ export const ReadingPage = () => {
 
                                 backgroundColor: theme.palette.custom.bg2,
 
-                                borderRadius: '50%'
+                                borderRadius: '50%',
+                                [theme.breakpoints.up('tablet')]:{
+                                    marginBottom: '60px',
+                                    // padding: '22px 24px',
+                                    width: '100px',
+                                    height: '100px'
+                                }
                             }}>
                                 <Text component={'p'} sx={{
                                     fontSize: '34px',
                                     lineHeight: '34px',
+                                    [theme.breakpoints.up('tablet')]:{
+                                        fontSize: '50px',
+                                        lineHeight: '70px',
+                                    }
                                 }}>🌟</Text>
                             </Box>
                         </ContainerNoStats>
@@ -200,7 +231,14 @@ export const ReadingPage = () => {
             </Dashboard>
             
             <MyReadingContainer>
-                <MyReadingHeader>My reading</MyReadingHeader>
+                <MyReadingHeaderContainer>
+                    <MyReadingHeader>My reading</MyReadingHeader>
+                    <MyReadingTimeLeft>
+                        {bookInfo?.timeLeftToRead && `${bookInfo?.timeLeftToRead?.hours} hours and 
+                            ${bookInfo?.timeLeftToRead?.minutes} minutes left`
+                        }
+                    </MyReadingTimeLeft>
+                </MyReadingHeaderContainer>
                 
                 {bookInfo && <BookCard
                     cardType="recommended"
@@ -212,12 +250,42 @@ export const ReadingPage = () => {
                     sx={{
                         marginBottom: '20px',
                         textAlign: 'center',
+                        justifyContent: 'center',
+                        [theme.breakpoints.up('tablet')]: {
+                            maxWidth: '320px',
+                        },
+                        [theme.breakpoints.up('desktop')]: {
+                            // maxWidth: '224px',
+                        },
                         '& img':{
                             cursor: 'auto',
+                            [theme.breakpoints.up('tablet')]: {
+                                height: '256px',
+                                width: '169px',
+                            },
+                            [theme.breakpoints.up('desktop')]: {
+                                height: '340px',
+                                width: '224px',
+                            },
                         },
                         '& h3': {
-                            textWrap: 'wrap'
+                            textWrap: 'wrap',
+                            [theme.breakpoints.up('tablet')]: {
+                                marginBottom: '4px',
+                                overflow: 'visible',
+
+                                fontSize: '20px',
+                                lineHeight: '20px'
+                            },
                         },
+
+                        '& p':{
+                            [theme.breakpoints.up('tablet')]: {
+                                fontSize: '14px',
+                                lineHeight: '18px'
+                            },
+                        },
+
                         '&:hover':{
                             cursor: 'auto',
                             '& img':{
@@ -237,7 +305,12 @@ export const ReadingPage = () => {
                         : <CircleInside sx={{
                             width: '15px',
                             height: '15px',
-                            borderRadius: '3px'
+                            borderRadius: '3px',
+                            [theme.breakpoints.up('tablet')]: {
+                                width: '20px',
+                                height: '20px',
+                                borderRadius: '3px',
+                            },
                         }}/>
                     }
                 </CircleOutside>

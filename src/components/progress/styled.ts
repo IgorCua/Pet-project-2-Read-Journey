@@ -1,24 +1,39 @@
 import { Opacity } from "@mui/icons-material";
 import { Box, List, ListItem, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled(Box)(({theme}) => ({
-
+    [theme.breakpoints.up('tablet')]: {
+        width: '50%',
+        // maxWidth: '100%',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        width: '100%',
+        // maxWidth: '100%',
+    }
 })) as typeof Box;
 
 export const HeaderContainer = styled(Box)(({theme}) => ({
     marginBottom: '22px',
     display: 'flex',
     justifyContent: 'space-between',
+
+    [theme.breakpoints.up('tablet')]: {
+        marginBottom: '16px',
+    }
 })) as typeof Box;
 
 export const Header = styled(Typography)(({theme}) => ({
-
     fontSize: '18px',
     lineHeight: '18px',
     fontWeight: '700',
 
-    color: theme.palette.custom.textMain
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '20px',
+        lineHeight: '20px',
+    }
 })) as typeof Typography;
 
 export const IconContainer = styled(Box)(({theme}) => ({
@@ -34,7 +49,7 @@ export const ScrollWrapper = styled(Box)(({theme})=>({
 
 export const ListContainer = styled(Box)(({theme})=>({
     padding: '16px 16px 16px 23px',
-    maxHeight: '211px',
+    height: '211px',
     backgroundColor: theme.palette.custom.bg2,
     position: 'relative',
     overflowY:'auto',
@@ -42,20 +57,13 @@ export const ListContainer = styled(Box)(({theme})=>({
     // borderLeft: `2px solid ${theme.palette.custom.bg3}`,
     borderRadius: '12px',
 
-    // '&::-webkit-scrollbar': {
-    //     position: 'absolute',
-    //     // left: '-10px'
-    // },
-
-    // '&::-webkit-scrollbar-track': {
-    //     boxShadow: 'none', 
-    //     borderRadius: '5px'
-    // },
-
-    // '::-webkit-scrollbar-thumb': {
-    //     background: theme.palette.custom.bg1, 
-    //     borderRadius: '5px'
-    // },
+    [theme.breakpoints.up('tablet')]: {
+        height: '252px'
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // width: '50%',
+        height: '373px',
+    }
 }));
 
 export const DiaryList = styled(List)(({theme}) => ({
@@ -142,6 +150,10 @@ export const ListItemContainer = styled(Box)(({theme}) => ({
     // '&:nth-of-type(1)': {
         // color: theme.palette.custom.textMain
     // }
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '16px',
+        lineHeight: '18px',
+    }
 })) as typeof Box;
 
 export const ListItemDate = styled(Typography)(({theme}) => ({
@@ -154,6 +166,11 @@ export const ListItemDate = styled(Typography)(({theme}) => ({
     // '&:first-of-type': {
     //     color: theme.palette.custom.textMain
     // }
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '16px',
+        lineHeight: '18px',
+    }
 })) as typeof Typography;
 
 export const ListItemPercent = styled(Typography)(({theme}) => ({
@@ -162,13 +179,23 @@ export const ListItemPercent = styled(Typography)(({theme}) => ({
     fontSize: '14px',
     lineHeight: '18px',
 
-    color: theme.palette.custom.textMain
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '20px',
+        lineHeight: '20px',
+    }
 })) as typeof Typography;
 
 export const ListItemMins = styled(Typography)(({theme}) => ({
     // color: theme.palette.custom.textSecondary
     fontSize: '10px',
     lineHeight: '12px',
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '12px',
+        lineHeight: '14px',
+    }
 })) as typeof Typography;
 
 export const ListItemPagesNum = styled(Typography)(({theme}) => ({
@@ -176,6 +203,11 @@ export const ListItemPagesNum = styled(Typography)(({theme}) => ({
     // color: theme.palette.custom.textSecondary
     fontSize: '12px',
     lineHeight: '12px',
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '14px',
+        lineHeight: '18px',
+    }
 })) as typeof Typography;
 
 export const ListItemPagesPerHour = styled(Typography)(({theme}) => ({
@@ -184,8 +216,13 @@ export const ListItemPagesPerHour = styled(Typography)(({theme}) => ({
     // color: theme.palette.custom.textSecondary
     fontSize: '10px',
     lineHeight: '12px',
-    textAlign: 'center'
-
+    textAlign: 'center',
+    
+    [theme.breakpoints.up('tablet')]: {
+        width: '59px',
+        fontSize: '12px',
+        lineHeight: '14px',
+    }
 })) as typeof Typography;
 
 export const Text = styled(Typography)(({theme}) => ({
@@ -205,7 +242,11 @@ export const ProgressContainer = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.custom.bg2,
     // position: 'relative',
 
-    borderRadius: '12px'
+    borderRadius: '12px',
+
+    [theme.breakpoints.up('tablet')]: {
+        padding: '28px',
+    }
 })) as typeof Box;
 
 export const CircleContainer = styled(Box)(({theme}) => ({
@@ -217,12 +258,15 @@ export const CircleContainer = styled(Box)(({theme}) => ({
 
 export const DataContainer = styled(Box)(({theme}) => ({
     display: 'flex',
-    width: '95px',
+    // width: '95px',
     gap: '15px',
     // justifyContent:'center',
     // alignItems: 'center',
     // position: 'relative'
     // border: '1px solid red'
+    [theme.breakpoints.up('tablet')]: {
+        // width: '79px'
+    }
 })) as typeof Box;
 
 export const Square = styled(Box)(({theme}) => ({
@@ -239,10 +283,13 @@ export const Square = styled(Box)(({theme}) => ({
 
 export const DataTextContainer = styled(Box)(({theme}) => ({
     display: 'flex',
-    width: '66px',
+    // width: '66px',
     flexDirection: 'column',
     // justifyContent:'center',
     // alignItems: 'center',
     // position: 'relative'
     // border: '1px solid green'
+    [theme.breakpoints.up('tablet')]: {
+        // width: '79px'
+    }
 })) as typeof Box;

@@ -91,7 +91,7 @@ export const RegisterPage = () => {
     }
 
     return (
-        <PageWrapper>
+        // <PageWrapper>
             <DecorationContainer>
             <Section>
                 <IconContainer>
@@ -135,6 +135,6 @@ export const RegisterPage = () => {
                 <PhoneImg/>
             </Figure>
             </DecorationContainer>
-        </PageWrapper>
+        // </PageWrapper>
     )
 }
