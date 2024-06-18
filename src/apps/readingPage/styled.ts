@@ -47,57 +47,6 @@ export const FormHeader = styled('h3')(({theme})=>({
     }
 }));
 
-export const CustomInput = styled(TextField)(({theme}) => ({
-    display: 'flex',
-    flexDirection: 'row',
-
-    '& .MuiInputBase-root::before': {
-        // minWidth: '79px',
-        paddingLeft: '14px',
-        content: '"Page number:"',
-        alignSelf: 'center',
-        fontSize: '12px',
-        display:' flex',
-        // flexGrow: 2,
-        color: theme.palette.custom.textSecondary,
-
-        zIndex: '1000',
-        
-        [theme.breakpoints.up('tablet')]: {
-            minWidth: '92px',
-            fontSize: '14px',
-        },
-    },
-    '& input': {
-        padding: '13px 10px 13px 10px',
-
-        fontSize: '12px',
-
-        [theme.breakpoints.up('tablet')]: {
-            padding: '15px 4px 15px 10px',
-            
-            fontSize: '14px',
-        },
-    }
-})) as typeof TextField;
-
-export const Submit = styled(ButtonBase)(({theme}) => ({
-    marginTop: '20px',
-    // width: '91px',
-    padding: '10px 20px',
-    borderRadius: '30px',
-    border: '1px solid rgba(249, 249, 249, 0.20)',
-
-    color: theme.palette.custom.textMain,
-
-    [theme.breakpoints.up('tablet')]: {
-        padding: '12px 28px',
-
-        fontSize: '16px',
-        lineHeight: '18px'
-    }
-})) as typeof ButtonBase;
-
 export const ContainerStats = styled(Box)(({theme}) => ({
 
 })) as typeof Box;

@@ -82,6 +82,52 @@ export const CardsContainer = styled('div')(({theme}) => ({
     // }
 }));
 
+export const HeaderContainer = styled('div')(({theme}) => ({
+    marginBottom: '20px',
+    display: 'flex',
+    justifyContent: 'space-between',
+
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.down('tablet')]: {
+        minWidth:'240px',
+        maxWidth:'290px',
+        width:'100%',  
+    },
+    [theme.breakpoints.up('tablet')]: {
+        width:'100%',  
+    }
+}));
+
+export const Header = styled('h3')(({theme}) => ({
+    fontWeight: '700',
+    fontSize: '20px',
+    lineHeight: '20px',
+
+    [theme.breakpoints.up('tablet')]: {
+        fontSize: '28px',
+        lineHeight: '32px',
+    }
+}));
+
+export const MenuIconWrapper = styled(IconButton)(({theme}) => ({
+    padding: '0',
+    width: '32px',
+    height: '32px',
+    // display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'relative',
+    color: theme.palette.custom.bg1,
+
+    border: `1px solid ${theme.palette.custom.buttonBorderGrey}`,
+
+    [theme.breakpoints.up('tablet')]: {
+        width: '40px', 
+        height: '40px', 
+    }
+})) as typeof IconButton;
+
 export const DescripotionList = styled(List)(({theme}) => ({
     padding: '20px 20px',
     display: 'flex',

@@ -10,10 +10,8 @@ import {
     // Form, 
     FormHeader, 
     Header, 
-    CustomInput, 
     MyReadingContainer, 
     MyReadingHeader, 
-    Submit, 
     Text, 
     MyReadingHeaderContainer,
     MyReadingTimeLeft,
@@ -33,8 +31,6 @@ import { Icon } from "../../components/icon/Icon";
 import { Form } from "../../components/form/Form";
 import * as Yup from 'yup';
 import { Progress } from "../../components/progress/Progress";
-import { fontSize, fontWeight, lineHeight, maxWidth, minWidth } from "@mui/system";
-
 
 const schemaStart = Yup.object().shape({
     pageStart: Yup

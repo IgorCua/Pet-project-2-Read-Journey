@@ -15,8 +15,9 @@ import {
     LibraryHeaderContainer,
     LibraryHeader,
     // LibrarySelect,
-    ContainerFilter,
-    ContainerBooks
+    ContainerForm,
+    ContainerBooks,
+    FormHeader
 } from "./styled";
 import { Filter } from "../../components/filter/Filter";
 import { store } from "../../redux/store";
@@ -37,6 +38,38 @@ import { useNavigate } from "react-router-dom";
 import { Icon } from "../../components/icon/Icon";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import { SelectForm } from "../../components/materialUI/SelectForm";
+import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
+import { Form } from "../../components/form/Form";
+import * as Yup from 'yup';
+import { theme } from "../../styles/themes";
+import { Dashboard } from "../../components/dashboard/Dashboard";
+
+const schema = Yup.object().shape({
+    title: Yup
+        .string()
+        .min(1, 'Book title must be at least 3 characters')
+        .max(32, 'Book title must be less than 65 characters'),
+    author: Yup
+        .string()
+        .min(1, 'Author must be at least 7 characters')
+        .max(32, 'Author must be less than 65 characters'),
+    pages: Yup
+        .string()
+        .min(1, 'Author must be at least 7 characters')
+        .max(32, 'Author must be less than 65 characters')
+});
+
+const inputsDataArr = [
+    { type: 'text', name: 'title', placeholder: 'Book title:'},
+    { type: 'text', name: 'author', placeholder: 'The author:'},
+    { type: 'text', name: 'pages', placeholder: 'Number of pages:'}
+]
+
+const initialValues = {
+    title: '',
+    author: '',
+    pages: ''
+}
 
 type AppDispatch = typeof store.dispatch;
 
@@ -45,6 +78,12 @@ interface Request {
     // title?: string,
     // author?: string,
     limit?: number
+}
+
+interface SubmitValues {
+    title: string,
+    author: string,
+    pages: number
 }
 
 export const UserLibraryPage = () => {
@@ -61,9 +100,9 @@ export const UserLibraryPage = () => {
 
     const navigate = useNavigate();
     const [filterData, setFilterData] = useState<any>({
-        title: null,
-        author: null,
-        totalPages: null
+        title: '',
+        author: '',
+        totalPages: ''
     });
     const [isErrorModal, setIsErrorModal] = useState(false);
     
@@ -123,10 +162,10 @@ export const UserLibraryPage = () => {
 
     // console.log('booksError', booksError);
     // console.log('filterData', filterData);
-
+    console.log(filterData);
     const shouldCardRender = (book: any) => {
         const {title, author, totalPages} = filterData;
-                    
+        // console.log(filterData);  
         const regexFn = (inputVal: any): any => {
             return new RegExp(inputVal, 'i');
         }
@@ -134,16 +173,18 @@ export const UserLibraryPage = () => {
         if(!title && !author && !totalPages){
             return true;
         }
-
-        if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
-            return false;
-        }
-        if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
-            return false;
-        }
-        if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
-            return false;
-        }
+        // console.log(filterData)
+        // return true
+        // if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
+        //     return false;
+        // }
+        // if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
+        //     return false;
+        // }
+        // if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
+        //     return false;
+        // }
+        
         return true;
         // if(totalPages) {
         //     console.log(`${book.totalPages}`.includes(totalPages))
@@ -177,6 +218,11 @@ export const UserLibraryPage = () => {
         return booksError.response?.data.message;
     }
 
+    const handleSubmit = (values: SubmitValues, {resetForm}: any) => {
+        setFilterData(values);
+        resetForm();
+    }
+
     return <Container>
         {booksError && booksError.response.status !== 401 && <ErrorModal 
             type='booksError'
@@ -185,52 +231,56 @@ export const UserLibraryPage = () => {
             erorrCode={booksError.response?.status}
             errorMessage={handleErrorMessage()}
         />}
-        <ContainerFilter>
-            <Filter 
-                numOfInputs={3} 
-                requestLimit={3} 
-                setFilterData={setFilterData}
-                sx={{
-                    width: '100%'
-                }}
-            />
-            <ContainerRecommended>
-                <Header variant="h2">Recommended books</Header>
-                <ContainerFilterCards>
-                    {recommendedBooks && recommendedBooks.results.map((book, i) => {
-                        return <BookCard 
-                            key={i}
-                            id={book._id}
-                            cardType="recommended"
-                            title={book.title}
-                            author={book.author}
-                            pages={book.totalPages}
-                            url={book.imageUrl}
-                            sx={{
+        <Dashboard>
+            <>
+                <ContainerForm>
+                    <FormHeader>Filter:</FormHeader>
+                    <Form
+                        initialValues={initialValues}
+                        validationSchema={schema}
+                        inputsDataArr={inputsDataArr}
+                        handleSubmit={handleSubmit}
+                        submitName="Apply"
+                        sx={{
+                            '& .MuiBox-root:last-of-type': {
+                                marginTop: '20px',
+                                
+                                [theme.breakpoints.up('tablet')]:{
+                                    marginTop: '38px',
+                                },
+                                [theme.breakpoints.up('desktop')]:{
+                                    marginTop: '20px',
+                                },
+                            },
+                        }}
+                    />
+                </ContainerForm>
+
+                <ContainerRecommended>
+                    <Header variant="h2">Recommended books</Header>
+                    <ContainerFilterCards>
+                        <RecommendedBooks booksLimit={3} sx={{
+                            '& div':{
                                 width: '71px',
-                                '& img': {
-                                    height: '107px'
-                                },
-                                '& h3': {
-                                    fontSize: '10px',
-                                    lineHeight: '12px',
-                                },
-                                // '& p': {
-                                //     fontSize: '10px',
-                                //     lineHeight: '12px',
-                                // }
-                            }}
-                        />
-                    })}
-                </ContainerFilterCards>
-                <ContainerLinks>
-                    <LinkButton onClick={handleLinkClick}>Home</LinkButton>
-                    <IconWrapper onClick={handleLinkClick} >
-                        <Icon iconName={'#icon-arrow-right'} sx={{width: '24px', height: '24px'}}/>
-                    </IconWrapper>
-                </ContainerLinks>
-            </ContainerRecommended>
-        </ContainerFilter>
+                                    '& img': {
+                                        height: '107px'
+                                    },
+                                    '& h3': {
+                                        fontSize: '10px',
+                                        lineHeight: '12px',
+                                    },
+                            }
+                        }}/>
+                    </ContainerFilterCards>
+                    <ContainerLinks>
+                        <LinkButton onClick={handleLinkClick}>Home</LinkButton>
+                        <IconWrapper onClick={handleLinkClick} >
+                            <Icon iconName={'#icon-arrow-right'} sx={{width: '24px', height: '24px'}}/>
+                        </IconWrapper>
+                    </ContainerLinks>
+                </ContainerRecommended>
+            </>
+        </Dashboard>
 
         <ContainerMyLibrary>
             <LibraryHeaderContainer>
