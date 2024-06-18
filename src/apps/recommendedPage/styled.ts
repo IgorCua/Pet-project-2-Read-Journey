@@ -1,5 +1,5 @@
 import { ButtonBase, IconButton, List, Typography } from "@mui/material";
-import { borderRadius, display, maxWidth, styled, width } from "@mui/system";
+import { styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     marginTop: '10px',
@@ -20,40 +20,26 @@ export const Container = styled('div')(({theme}) => ({
     }
 }));
 
-export const Section = styled('section')(({theme}) => ({
-    padding: '20px 20px',
-    display: 'flex', 
-    gap: '20px',
+export const ContainerForm = styled('section')(({theme}) => ({
     flexDirection: 'column',
-
-    backgroundColor: theme.palette.custom.bg3,
-    borderRadius: '30px',
-
-    [theme.breakpoints.up('tablet')]: {
-        '&:nth-of-type(1)': {
-            // maxWidth: '353px',
-            padding: '30px 30px',
-            gap: '32px',
-            flexDirection: 'row'
-        },
-
-        '&:nth-of-type(2)': {
-            padding: '40px 40px'
-        }
+    [theme.breakpoints.up('tablet')]:{
+        minWidth: '46%'
     },
-    
-    [theme.breakpoints.up('desktop')]: {
-        '&:nth-of-type(1)': {
-            maxWidth: '353px',
-            padding: '20px 20px',
-            flexDirection: 'column',
-        },
 
-        // '&:nth-of-type(2)': {
-        //     // padding: '40px 40px'
-        // }
+    [theme.breakpoints.up('desktop')]:{
+        minWidth: '100%'
     }
 }));
+
+export const FormHeader = styled(Typography)(({theme}) => ({
+    marginBottom: '8px',
+    marginLeft: '15px',
+
+    fontSize: '14px',
+    lineHeight: '14px',
+
+    color: theme.palette.custom.textMain,
+})) as typeof Typography;
 
 export const CardsContainer = styled('div')(({theme}) => ({
     padding: '20px 20px',
@@ -68,18 +54,6 @@ export const CardsContainer = styled('div')(({theme}) => ({
         width: '100%',
         padding: '40px 40px'
     },
-    
-    // [theme.breakpoints.up('desktop')]: {
-    //     '&:nth-of-type(1)': {
-    //         maxWidth: '353px',
-    //         padding: '20px 20px',
-    //         flexDirection: 'column',
-    //     },
-
-    //     // '&:nth-of-type(2)': {
-    //     //     // padding: '40px 40px'
-    //     // }
-    // }
 }));
 
 export const HeaderContainer = styled('div')(({theme}) => ({

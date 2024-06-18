@@ -340,7 +340,7 @@ export const theme = createTheme({
         },
         notchedOutline: {
           margin: '0px',
-          top: '-5px',
+          top: '-6px',
           right: '-1px',
           bottom: '-1px',
           left: '-1px',

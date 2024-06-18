@@ -45,14 +45,14 @@ export const Authenticate = ({children}: Props) => {
         };
     }, [authError]);
 
-    const handleDelay = () => {
+    const handleDelay = useCallback(() => {
         // console.log("authenticate decoded token", decodedToken);
         if(decodedToken) {
             console.log('authenticate count to refresh', decodedToken.exp * 1000 - new Date().getTime());
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;
-    }
+    }, [decodedToken])
 
     // const renderError = ()=> {
     //     return <ErrorModal
@@ -107,7 +107,7 @@ export const Authenticate = ({children}: Props) => {
         }
         if(token && refreshToken){
             setTimeout(() => {
-                // console.log('seTimeout token', token)
+                console.log('seTimeout token', token)
                 // console.log('seTimeout refreshToken', refreshToken)
                 if (!authError && !booksError) {
                     axiosToken.set(refreshToken);
@@ -115,7 +115,17 @@ export const Authenticate = ({children}: Props) => {
                 }
             }, handleDelay());
         }
-    }, [isModalOpen, setIsModalOpen, authError, booksError, errorObj, token, refreshToken]);
+    }, [
+        isModalOpen, 
+        setIsModalOpen, 
+        authError, 
+        booksError, 
+        errorObj, 
+        token, 
+        refreshToken, 
+        handleDelay, 
+        dispatch
+    ]);
 
     // if(token && refreshToken){
     //     setTimeout(() => {

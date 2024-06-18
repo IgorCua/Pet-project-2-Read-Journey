@@ -53,7 +53,7 @@ export const FormHeader = styled(Typography)(({theme}) => ({
     color: theme.palette.custom.textMain,
 
     [theme.breakpoints.up('tablet')]:{
-
+        
     },
 
     [theme.breakpoints.up('desktop')]:{

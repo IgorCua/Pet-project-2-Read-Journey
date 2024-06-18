@@ -23,7 +23,7 @@ import { Filter } from "../../components/filter/Filter";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { booksGetRecommended, booksGetUserBooks } from "../../redux/books/operations";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 import { 
     selectBooksError, 
@@ -97,7 +97,7 @@ export const UserLibraryPage = () => {
     // const booksErrorURL = booksError ? booksError.config.url : null;
     // const booksErrorCode = booksError ? booksError.response.status : null;
     // const booksErrorMessage = booksError ? booksError.response.data.message : null;
-
+    const [isRecommendedLoading, setIsRecommendedLoading] = useState(true);
     const navigate = useNavigate();
     const [filterData, setFilterData] = useState<any>({
         title: '',
@@ -132,7 +132,9 @@ export const UserLibraryPage = () => {
         if(!booksError && (!recommendedBooks || recommendedBooks.results.length !== 3)) {
             const randomPage = Math.floor(Math.random() * 9);
             request.page = randomPage;
-            dispatch(booksGetRecommended(request));
+            dispatch(booksGetRecommended(request)).then((res:any) => {
+                if(res.meta.requestStatus === 'fulfilled') setIsRecommendedLoading(false);
+            });
         };
         
         if(!booksError && userBooks === null && userBooksMemo === null){
@@ -162,7 +164,7 @@ export const UserLibraryPage = () => {
 
     // console.log('booksError', booksError);
     // console.log('filterData', filterData);
-    console.log(filterData);
+    // console.log(filterData);
     const shouldCardRender = (book: any) => {
         const {title, author, totalPages} = filterData;
         // console.log(filterData);  
@@ -173,14 +175,13 @@ export const UserLibraryPage = () => {
         if(!title && !author && !totalPages){
             return true;
         }
-        // console.log(filterData)
-        // return true
-        // if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
-        //     return false;
-        // }
-        // if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
-        //     return false;
-        // }
+        console.log('shouldCardRender', filterData)
+        if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
+            return false;
+        }
+        if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
+            return false;
+        }
         // if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
         //     return false;
         // }
@@ -231,6 +232,7 @@ export const UserLibraryPage = () => {
             erorrCode={booksError.response?.status}
             errorMessage={handleErrorMessage()}
         />}
+        <Suspense>
         <Dashboard>
             <>
                 <ContainerForm>
@@ -256,21 +258,28 @@ export const UserLibraryPage = () => {
                     />
                 </ContainerForm>
 
-                <ContainerRecommended>
+                <ContainerRecommended sx={{}}>
                     <Header variant="h2">Recommended books</Header>
                     <ContainerFilterCards>
-                        <RecommendedBooks booksLimit={3} sx={{
+                        {!isRecommendedLoading && <RecommendedBooks 
+                            booksLimit={3} 
+                            isLoading={isRecommendedLoading}
+                            setIsLoading={setIsRecommendedLoading}
+                            sx={{
+                            '&':{
+                                gap: '20px',
+                            },
                             '& div':{
                                 width: '71px',
-                                    '& img': {
-                                        height: '107px'
-                                    },
-                                    '& h3': {
-                                        fontSize: '10px',
-                                        lineHeight: '12px',
-                                    },
+                                '& img': {
+                                    height: '107px'
+                                },
+                                '& h3': {
+                                    fontSize: '10px',
+                                    lineHeight: '12px',
+                                },
                             }
-                        }}/>
+                        }}/>}
                     </ContainerFilterCards>
                     <ContainerLinks>
                         <LinkButton onClick={handleLinkClick}>Home</LinkButton>
@@ -281,7 +290,7 @@ export const UserLibraryPage = () => {
                 </ContainerRecommended>
             </>
         </Dashboard>
-
+        </Suspense>
         <ContainerMyLibrary>
             <LibraryHeaderContainer>
                 <LibraryHeader>My Library</LibraryHeader>

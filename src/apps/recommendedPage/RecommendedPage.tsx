@@ -13,12 +13,14 @@ import {
     ListHeader, 
     ListItemText, 
     NumberDiv, 
-    Section, 
+    // Section, 
     Span,
     CardsContainer,
     HeaderContainer,
     Header,
-    MenuIconWrapper
+    MenuIconWrapper,
+    ContainerForm,
+    FormHeader
 } from "./styled";
 import { Icon } from "../../components/icon/Icon";
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
@@ -34,6 +36,7 @@ import { Box } from "@mui/system";
 import { AppDispatch } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { booksGetRecommended } from "../../redux/books/operations";
+import { Dashboard } from "../../components/dashboard/Dashboard";
 
 const schema = Yup.object().shape({
     title: Yup
@@ -74,6 +77,7 @@ export const RecommendedPage = () => {
     const booksError = useSelector(selectBooksError);
     const navigate = useNavigate();
     const [isErrorModal, setIsErrorModal] = useState(false);
+    const [isRecommendedLoading, setIsRecommendedLoading] = useState(true);
     const handleLinkClick = () => {
         navigate('/library');
     }
@@ -99,7 +103,7 @@ export const RecommendedPage = () => {
         }
         if(window.innerWidth > 1280) {
             req.limit = 12;
-            return 12;
+            // return 12;
         }
     }
   
@@ -150,7 +154,7 @@ export const RecommendedPage = () => {
     }
 
     const handleSubmit = ( values: FormValues, {resetForm}: any) => {
-        console.log('recommended form', values);
+        // console.log('recommended form', values);
         dispatch(booksGetRecommended(values));
     }
 
@@ -163,26 +167,30 @@ export const RecommendedPage = () => {
                 erorrCode={booksError.response?.status}
                 errorMessage={handleErrorMessage()}
             />}
-            <Section>
-                
-                <Form
-                    initialValues={initialValues}
-                    validationSchema={schema}
-                    inputsDataArr={inputsDataArr}
-                    handleSubmit={handleSubmit}
-                    submitName="Apply"
-                    sx={{
-                        '& .MuiBox-root:last-of-type': {
-                            marginTop: '20px',
-                        },
-                        [theme.breakpoints.up('tablet')]: {
-                            minWidth: '46%'
-                        },
-                        [theme.breakpoints.up('desktop')]: {
-                            minWidth: '100%'
-                        }
-                    }}
-                />
+            <Dashboard>
+                <>
+                <ContainerForm>
+                    <FormHeader>Filter:</FormHeader>
+                    <Form
+                        initialValues={initialValues}
+                        validationSchema={schema}
+                        inputsDataArr={inputsDataArr}
+                        handleSubmit={handleSubmit}
+                        submitName="Apply"
+                        sx={{
+                            '& .MuiBox-root:last-of-type': {
+                                marginTop: '20px',
+                            },
+                            [theme.breakpoints.up('tablet')]: {
+                                minWidth: '46%'
+                            },
+                            [theme.breakpoints.up('desktop')]: {
+                                minWidth: '100%'
+                            }
+                        }}
+                    />
+                </ContainerForm>
+
                 <DescripotionList>
                     <ListItem>
                         <ListHeader>
@@ -221,7 +229,8 @@ export const RecommendedPage = () => {
                         "Books are <FigureSpan>windows</FigureSpan> to the world, and reading is a journey into the unknown."
                     </FigureText>
                 </Figure>}
-            </Section>
+                </>
+            </Dashboard>
             
             <CardsContainer>
                 <HeaderContainer>
@@ -256,7 +265,11 @@ export const RecommendedPage = () => {
                         </MenuIconWrapper>
                     </Box>
                 </HeaderContainer>
-                <RecommendedBooks booksLimit={req.limit}/>
+                <RecommendedBooks 
+                    booksLimit={req.limit} 
+                    isLoading={isRecommendedLoading} 
+                    setIsLoading={setIsRecommendedLoading}
+                />
             </CardsContainer>
         </Container>
     )

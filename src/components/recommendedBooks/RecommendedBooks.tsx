@@ -1,9 +1,9 @@
-import { Box, IconButton } from "@mui/material"
+import { Box, IconButton, Typography } from "@mui/material"
 import { CardsContainer, CardsDecorationContainer, Section, IconWrapper } from "./styled"
 import { Icon } from "../icon/Icon"
-import { useEffect } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { useSelector } from "react-redux"
-import { selectRecommendedBooks } from "../../redux/books/selectors"
+import { selectRecommendedBooks, selectRecommendedIsLoading } from "../../redux/books/selectors"
 import { useDispatch } from "react-redux"
 import { store } from "../../redux/store"
 import { booksGetRecommended } from "../../redux/books/operations"
@@ -23,12 +23,16 @@ interface Request {
 type Props = {
     booksLimit?: number | null,
     title?: string,
+    isLoading?: boolean,
+    setIsLoading?: any
     sx?: {}
 }
 
-export const RecommendedBooks = ({booksLimit, sx}: Props) => {
+export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Props) => {
     const booksObj = useSelector(selectRecommendedBooks);
     const dispatch = useDispatch<AppDispatch>();
+    // const recommendedIsLoading = useSelector(selectRecommendedIsLoading);
+
     let req: Request = {
         page: booksObj ? booksObj.page : 1,
         limit: 2
@@ -56,26 +60,35 @@ export const RecommendedBooks = ({booksLimit, sx}: Props) => {
     req.limit = booksLimit ? booksLimit : handlePageLimit();
 
     useEffect(()=>{
-        // if(!booksObj || booksObj.results.length !== 2) {
         if(!booksObj && !booksLimit) {
             handlePageLimit();
-            dispatch(booksGetRecommended(req));
+            dispatch(booksGetRecommended(req)).then((res:any) => {
+                if(res.meta.requestStatus === 'fulfilled') setIsLoading(false);
+            });
         }
 
-        // if((booksObj && booksObj.results.length === 3) || (!booksObj && !booksLimit)) {
-        //     req.page = 1;
-        //     dispatch(booksGetRecommended(req));
-        // }
         if((booksObj && booksObj.results.length === 3) && !booksLimit) {
-            // console.log('recommended component', booksLimit, booksObj.results.length);
             req.page = 1;
-            dispatch(booksGetRecommended(req));
+            dispatch(booksGetRecommended(req)).then((res:any) => {
+                if(res.meta.requestStatus === 'fulfilled') setIsLoading(false);
+            });
         }
     });
 
-    return <CardsContainer sx={sx}>
-        {booksObj && booksObj.results.map((book, i)=>{
-            if(window.innerWidth < 768 && i < 2){
+    return <Suspense fallback={<Typography>Loading...</Typography>}>
+        {!isLoading && <CardsContainer sx={sx}>
+            {booksObj && booksObj.results.map((book, i)=>{
+                if(window.innerWidth < 768 && i < 2){
+                    return <BookCard
+                        key={i}
+                        id={book._id}
+                        cardType="recommended"
+                        url={book.imageUrl}
+                        title={book.title}
+                        author={book.author}
+                        pages={book.totalPages}
+                    />
+                }
                 return <BookCard
                     key={i}
                     id={book._id}
@@ -85,16 +98,8 @@ export const RecommendedBooks = ({booksLimit, sx}: Props) => {
                     author={book.author}
                     pages={book.totalPages}
                 />
-            }
-            return <BookCard
-                key={i}
-                id={book._id}
-                cardType="recommended"
-                url={book.imageUrl}
-                title={book.title}
-                author={book.author}
-                pages={book.totalPages}
-            />
-        })}
-    </CardsContainer>
+            })}
+        </CardsContainer>}
+    </Suspense>
+
 }
