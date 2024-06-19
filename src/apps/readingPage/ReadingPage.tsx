@@ -80,7 +80,7 @@ export const ReadingPage = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const booksError = useSelector(selectBooksError);
-    // const isBooksError = useSelector(selectBooksIsError);
+    const isBooksError = useSelector(selectBooksIsError);
     const [isErrorModal, setIsErrorModal] = useState(false);
 
     // const handleSubmit = (event: React.FormEvent<any>) => {
@@ -118,8 +118,11 @@ export const ReadingPage = () => {
                 console.log('active');
                 setIsReading(true);
             }
+        };
+        if(isBooksError){
+            setIsErrorModal(true);
         }
-    }, [bookInfo]);
+    }, [bookInfo, isBooksError]);
 
     const handleErrorMessage = () => {
         if(booksError && booksError.response?.status >= 500){

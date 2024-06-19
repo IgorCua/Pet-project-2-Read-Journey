@@ -124,22 +124,28 @@ export const UserLibraryPage = () => {
     }, [userBooksIdArr]);
 
     useEffect(()=>{
-        if (!isErrorModal){}
-        if(!booksError && (!recommendedBooks || recommendedBooks.results.length !== 3)) {
-            const randomPage = Math.floor(Math.random() * 9);
-            request.page = randomPage;
-            dispatch(booksGetRecommended(request)).then((res:any) => {
-                if(res.meta.requestStatus === 'fulfilled') setIsRecommendedLoading(false);
-            });
-        };
+        if(!booksError){
+            if(!recommendedBooks || recommendedBooks.results.length !== 3) {
+                const randomPage = Math.floor(Math.random() * 9);
+                request.page = randomPage;
+                dispatch(booksGetRecommended(request)).then((res:any) => {
+                    if(res.meta.requestStatus === 'fulfilled') setIsRecommendedLoading(false);
+                });
+            };
+            
+            if(recommendedBooks && recommendedBooks.results.length === 3){
+                setIsRecommendedLoading(false);
+            }
+    
+            if(userBooks === null && userBooksMemo === null){
+                setTimeout(() => {
+                    console.log('useEffect books', userBooks);
+                    console.log('useEffect memo', userBooksMemo);
+                    dispatch(booksGetUserBooks(null));
+                }, 1000);
+            };
+        }
         
-        if(!booksError && userBooks === null && userBooksMemo === null){
-            setTimeout(() => {
-                console.log('useEffect books', userBooks);
-                console.log('useEffect memo', userBooksMemo);
-                dispatch(booksGetUserBooks(null));
-            }, 1000);
-        };
         
         if(booksError) {
             // if( booksErrorCode === 500
@@ -152,7 +158,14 @@ export const UserLibraryPage = () => {
             setIsErrorModal(true)
         }
 
-    }, [filterData, booksError, request, recommendedBooks, dispatch, isBooksErrorMemo]);
+    }, [
+        filterData, 
+        booksError, 
+        request, 
+        recommendedBooks, 
+        dispatch, 
+        isBooksErrorMemo
+    ]);
 
     const handleLinkClick = () => {
         navigate('/recommended');
