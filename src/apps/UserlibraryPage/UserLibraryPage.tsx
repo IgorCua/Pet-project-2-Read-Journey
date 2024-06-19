@@ -120,12 +120,8 @@ export const UserLibraryPage = () => {
     }, [userBooks]);
 
     const isBooksErrorMemo = useMemo(() => {
-        // isBooksError ? false : 
         return isBooksError;
     }, [userBooksIdArr]);
-    // const RecommendedMemo = useMemo(() => {
-    //     return recommendedBooks ? recommendedBooks : null;
-    // }, [recommendedBooks]);
 
     useEffect(()=>{
         if (!isErrorModal){}
@@ -162,29 +158,25 @@ export const UserLibraryPage = () => {
         navigate('/recommended');
     }
 
-    // console.log('booksError', booksError);
-    // console.log('filterData', filterData);
-    // console.log(filterData);
     const shouldCardRender = (book: any) => {
-        const {title, author, totalPages} = filterData;
-        // console.log(filterData);  
+        const {title, author, pages} = filterData;
         const regexFn = (inputVal: any): any => {
             return new RegExp(inputVal, 'i');
         }
 
-        if(!title && !author && !totalPages){
+        if(!title && !author && !pages){
             return true;
         }
-        console.log('shouldCardRender', filterData)
+
         if(title.length !== 0 && book.title.search(regexFn(`${title}`)) === -1){
             return false;
         }
         if (author.length !== 0 && book.author.search(regexFn(`${author}`)) === -1){
             return false;
         }
-        // if (totalPages.length !== 0 && `${book.totalPages}`.search(regexFn(`${totalPages}`)) === -1){
-        //     return false;
-        // }
+        if (pages.length !== 0 && `${book.totalPages.trim()}`.search(regexFn(`${pages}`)) === -1){
+            return false;
+        }
         
         return true;
         // if(totalPages) {
