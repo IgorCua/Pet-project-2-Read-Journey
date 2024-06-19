@@ -57,7 +57,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
     // const isBookError = useSelector(selectBooksIsError);
     // const userBooksIdArr = useSelector(selectUserBooksIDsArr);
     const userBooksTitlesArr = useSelector(selectUserBooksTitlesArr);
-    // const [isReading, setIsReading] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     
@@ -195,10 +194,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                     {handleButtonRender() && 
                         <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
                     }
-                    {/* { (cardType === 'myReading' && !isReading) ? 
-                        <Icon iconName={'#'}/>
-                        : <Icon iconName={'#'}/>
-                    } */}
                 </BackdropContainer>
             </CustomBackdrop>
         }

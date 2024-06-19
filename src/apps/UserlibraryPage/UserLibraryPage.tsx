@@ -195,9 +195,6 @@ export const UserLibraryPage = () => {
     // const handleErrorMessage = () => {
     //     if(booksError && booksError.response?.status >= 500
     //     ){
-    //         // console.log('500 error', booksError)
-    //         // console.log('500 error', booksErrorCode)
-    //         // console.log('500 error', booksErrorURL)
     //         // console.log('500 error', booksErrorMessage)
     //         if(booksErrorURL.includes('/books/')
     //             && booksErrorMessage === "Cannot read properties of undefined (reading 'toString')"
@@ -269,7 +266,7 @@ export const UserLibraryPage = () => {
                             '&':{
                                 gap: '20px',
                             },
-                            '& div':{
+                            '& .MuiBox-root':{
                                 width: '71px',
                                 '& img': {
                                     height: '107px'

@@ -1,5 +1,4 @@
 import { Theme, createTheme } from "@mui/material";
-import zIndex from "@mui/material/styles/zIndex";
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
