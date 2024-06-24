@@ -166,6 +166,7 @@ export const RecommendedPage = () => {
                 setIsModalOpen={setIsErrorModal}
                 erorrCode={booksError.response?.status}
                 errorMessage={handleErrorMessage()}
+
             />}
             <Dashboard>
                 <>

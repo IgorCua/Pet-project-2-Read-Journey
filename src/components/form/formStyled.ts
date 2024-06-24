@@ -63,11 +63,24 @@ export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
     zIndex: '100',
     
     [theme.breakpoints.up('tablet')]: {
-        top: '35px',
-        fontSize: '14px',
+        top: '30px',
+        fontSize: '12px',
     },
 
 })) as typeof ErrorMessage;
+
+export const ErrorBox: any = styled('div')(({theme}) => ({
+    margin: '0px',
+    top: '0px',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+
+    boxShadow: '0px 0px 0px 1px red',
+    borderRadius: '12px',
+    zIndex: '5'
+    // zIndex: '1000'
+}));
 
 export const ButtonBox = styled(Box)(({theme}) => ({
     display: 'flex',
