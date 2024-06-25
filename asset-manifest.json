@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pet-project-2-read-journey/static/css/main.81b94d71.css",
-    "main.js": "/pet-project-2-read-journey/static/js/main.81e778bf.js",
+    "main.js": "/pet-project-2-read-journey/static/js/main.14b22b45.js",
     "static/js/453.359ea441.chunk.js": "/pet-project-2-read-journey/static/js/453.359ea441.chunk.js",
     "static/media/iPhone-15-Black-pc-2x.png": "/pet-project-2-read-journey/static/media/iPhone-15-Black-pc-2x.589c7eddf437dd92c2f2.png",
     "static/media/iPhone-15-Black-pc-1x.png": "/pet-project-2-read-journey/static/media/iPhone-15-Black-pc-1x.eb3b5245e8c99ec0e404.png",
@@ -16,11 +16,11 @@
     "static/media/icons.svg": "/pet-project-2-read-journey/static/media/icons.10aa3b9e50ce4fec56cac685a29bd668.svg",
     "index.html": "/pet-project-2-read-journey/index.html",
     "main.81b94d71.css.map": "/pet-project-2-read-journey/static/css/main.81b94d71.css.map",
-    "main.81e778bf.js.map": "/pet-project-2-read-journey/static/js/main.81e778bf.js.map",
+    "main.14b22b45.js.map": "/pet-project-2-read-journey/static/js/main.14b22b45.js.map",
     "453.359ea441.chunk.js.map": "/pet-project-2-read-journey/static/js/453.359ea441.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.81b94d71.css",
-    "static/js/main.81e778bf.js"
+    "static/js/main.14b22b45.js"
   ]
 }
