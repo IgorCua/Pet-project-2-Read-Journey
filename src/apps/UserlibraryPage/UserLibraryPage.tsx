@@ -221,9 +221,9 @@ export const UserLibraryPage = () => {
         return booksError.response?.data.message;
     }
 
-    const handleSubmit = (values: SubmitValues, {resetForm}: any) => {
+    const handleSubmit = (values: SubmitValues) => {
         setFilterData(values);
-        resetForm();
+        // resetForm();
     }
 
     return <Container>

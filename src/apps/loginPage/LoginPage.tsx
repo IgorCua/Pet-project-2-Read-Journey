@@ -70,11 +70,12 @@ export const LoginPage = () => {
     const navigate = useNavigate();
     // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
-    const handleSubmit = async ( values: FormValues, {resetForm}: any) => {
+    // const handleSubmit = async ( values: FormValues, {resetForm}: any) => {
+    const handleSubmit = async ( values: FormValues, resetForm: any) => {
         
         // console.log('registerForm submit', values);
         await dispatch(userSignin(values)).then((res) => {
-            if(res.meta.requestStatus === 'fulfilled') resetForm();
+            // if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
 
         dispatch(booksGetUserBooks(null));

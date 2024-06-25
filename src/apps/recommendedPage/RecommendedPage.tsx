@@ -153,7 +153,7 @@ export const RecommendedPage = () => {
         return theme.palette.custom.textMain
     }
 
-    const handleSubmit = ( values: FormValues, {resetForm}: any) => {
+    const handleSubmit = ( values: FormValues) => {
         // console.log('recommended form', values);
         dispatch(booksGetRecommended(values));
     }

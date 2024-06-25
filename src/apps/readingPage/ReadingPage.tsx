@@ -84,7 +84,7 @@ export const ReadingPage = () => {
     const [isErrorModal, setIsErrorModal] = useState(false);
 
     // const handleSubmit = (event: React.FormEvent<any>) => {
-    const handleSubmit = (values: FormValues, {resetForm}: any) => {
+    const handleSubmit = (values: FormValues) => {
         // event.preventDefault();
         const {pageStart, pageEnd} = values;
 
@@ -112,10 +112,10 @@ export const ReadingPage = () => {
 
     useEffect(()=>{
         if(bookInfo && bookInfo.progress.length > 0){
-            console.log('useEffect bookInfo');
+            // console.log('useEffect bookInfo');
             // console.log(bookInfo.progress[bookInfo.progress.length - 1].status);
             if (progressLastData && progressLastData.status === 'active'){
-                console.log('active');
+                // console.log('active');
                 setIsReading(true);
             }
         };

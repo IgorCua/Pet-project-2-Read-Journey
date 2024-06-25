@@ -169,6 +169,7 @@ export const Form = (props: Props) => {
         validationSchema: validationSchema,
       
         handleSubmit: values => {
+            console.log(values);
             handleSubmit(values);
         //   return values;
         },

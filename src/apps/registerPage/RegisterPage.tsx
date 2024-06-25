@@ -78,10 +78,10 @@ export const RegisterPage = () => {
 
     // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
-    const handleSubmit = ( values: FormValues, {resetForm}: any) => {
+    const handleSubmit = ( values: FormValues) => {
         
         dispatch(userSignup(values)).then((res) => {
-            if(res.meta.requestStatus === 'fulfilled') resetForm();
+            // if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
         // resetForm();
     }
