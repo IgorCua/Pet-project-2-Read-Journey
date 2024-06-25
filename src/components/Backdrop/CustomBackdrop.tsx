@@ -13,7 +13,7 @@ type Props = {
 
 export const CustomBackdrop = (props: Props) => {
     const {
-        isModalOpen, 
+        isModalOpen,
         setIsModalOpen, 
         children, 
         sx

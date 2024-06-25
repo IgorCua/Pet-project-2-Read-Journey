@@ -3,9 +3,11 @@ import { fontSize, lineHeight, styled } from "@mui/system";
 import { ErrorMessage, Form } from "formik";
 
 export const CustomForm = styled(Form)(({theme}) =>({
+    // width: '100%',
     display: 'flex',
     alignItems: 'start',
-    flexWrap: 'wrap',
+    // flexWrap: 'wrap',
+    flexDirection: 'column',
 
     // gap: '20px',
 
@@ -14,7 +16,7 @@ export const CustomForm = styled(Form)(({theme}) =>({
         marginBottom: '8px',
 
         [theme.breakpoints.up('tablet')]: {
-            marginBottom: '14px',
+            // marginBottom: '14px',
         },
         '&:last-of-type':{
             // marginBottom: '0'
@@ -61,11 +63,24 @@ export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
     zIndex: '100',
     
     [theme.breakpoints.up('tablet')]: {
-        top: '35px',
-        fontSize: '14px',
+        top: '30px',
+        fontSize: '12px',
     },
 
 })) as typeof ErrorMessage;
+
+export const ErrorBox: any = styled('div')(({theme}) => ({
+    margin: '0px',
+    top: '0px',
+    width: '100%',
+    height: '100%',
+    position: 'absolute',
+
+    boxShadow: '0px 0px 0px 1px red',
+    borderRadius: '12px',
+    zIndex: '5'
+    // zIndex: '1000'
+}));
 
 export const ButtonBox = styled(Box)(({theme}) => ({
     display: 'flex',

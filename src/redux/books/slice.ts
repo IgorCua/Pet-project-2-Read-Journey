@@ -5,6 +5,7 @@ import { BookInterface, recomendedBooksInterface, PendingAction, RejectedAction 
 
 interface initialStateInterface {
     recommendedBooks: recomendedBooksInterface | null,
+    // recommendedIsLoading: boolean | null,
     userBooks: BookInterface[] | [],
     // userBooks: BookInterface[] | null,
     readingStart: any | null,
@@ -16,24 +17,9 @@ interface initialStateInterface {
     error: any
 }
 
-// interface BookInfo {
-//     _id: string,
-//     title: string
-// }
-
-// const bookInfo = {
-//     _id: null,
-//     title: null,
-//     author: null,
-//     imageUrl: null,
-//     totalPages: null,
-//     satus: null,
-//     owner: null,
-//     progress: []
-// }
-
 const initialState = {
     recommendedBooks: null,
+    // recommendedIsLoading: true,
     userBooks: [],
     readingStart: null,
     readingEnd: null,
@@ -52,7 +38,7 @@ const booksSlice = createSlice({
         builder
             .addCase(booksGetRecommended.fulfilled, (state, action: PayloadAction<any>) => {
                 state.recommendedBooks = action.payload.data;
-                // console.log
+                // state.recommendedIsLoading = false;
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
@@ -64,15 +50,7 @@ const booksSlice = createSlice({
                 state.isError = false;
                 state.error = null;
             })
-            // .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
-            //     // state.userBooks = [...state.userBooks, action.payload];
-            //     state.userBooks = action.payload.data;
-            //     state.isLoading = false;
-            //     state.isError = false;
-            //     state.error = null;
-            // })
             .addCase(booksAddById.fulfilled, (state, action: PayloadAction<any>) => {
-                // console.log(action.payload);
                 state.userBooks = action.payload.data;
                 state.isLoading = false;
                 state.isError = false;
@@ -125,6 +103,7 @@ const booksSlice = createSlice({
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
                 (state, _) => {
+                    // state.recommendedIsLoading = true;
                     state.isLoading = true;
                     state.isError = false;
                     state.error = null;

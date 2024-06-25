@@ -54,7 +54,7 @@ export function Header() {
             }}>
                 <Container>
                     <Toolbar 
-                        disableGutters 
+                        disableGutters
                         sx={{
                             justifyContent: 'space-between',
                             [theme.breakpoints.up('tablet')]: {
@@ -66,10 +66,10 @@ export function Header() {
                         <Box sx={{
                             flexGrow: 1,
                             display: 'flex',
-
+                            // width: 'auto',
                             [theme.breakpoints.up('tablet')]: {
                                 flexGrow: 0,
-                                gap: '4px'
+                                gap: '4px',
                             }
                         }}>
                             <Icon iconName='#icon-logo' sx={{width: '32px', height: '17px'}}/>

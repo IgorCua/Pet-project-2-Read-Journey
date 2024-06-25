@@ -1,7 +1,7 @@
-import { ButtonBase, Typography } from "@mui/material";
+import { Box, ButtonBase, Typography } from "@mui/material";
 import { maxWidth, styled, width } from "@mui/system";
 
-export const Container = styled('div')(({theme}) => ({
+export const Container = styled(Box)(({theme}) => ({
     minWidth:'71px',
     // width:'137px',
     maxWidth: '137px',
@@ -17,7 +17,7 @@ export const Container = styled('div')(({theme}) => ({
     '&:hover img': {
         boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
     },
-}));
+})) as typeof Box;
 
 export const Image = styled('img')(({theme}) => ({
     marginBottom: '8px',

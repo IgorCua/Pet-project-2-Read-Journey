@@ -1,5 +1,4 @@
 import { Theme, createTheme } from "@mui/material";
-import zIndex from "@mui/material/styles/zIndex";
 
 declare module '@mui/material/styles' {
   interface BreakpointOverrides {
@@ -340,7 +339,7 @@ export const theme = createTheme({
         },
         notchedOutline: {
           margin: '0px',
-          top: '-5px',
+          top: '-6px',
           right: '-1px',
           bottom: '-1px',
           left: '-1px',

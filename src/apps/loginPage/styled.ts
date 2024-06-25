@@ -24,7 +24,6 @@ export const DecorationContainer = styled('div')(({theme}) => ({
 }));
 
 export const IconContainer = styled('div')(({theme}) => ({
-    width: '182px',
     marginBottom: '40px',
     display: 'flex',
     flexDirection: 'row',

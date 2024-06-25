@@ -126,7 +126,14 @@ export const RegisterPage = () => {
                                 color: theme.palette.custom.textMain,
                                 backgroundColor: theme.palette.custom.bg2
                             }
-                        }
+                        },
+                        '& .MuiBox-root:nth-last-of-type(n + 3)': {
+                            marginBottom: '8px',
+                    
+                            [theme.breakpoints.up('tablet')]: {
+                                marginBottom: '14px',
+                            },
+                        },
                     }}
                 >
                     <LinkButton onClick={handleLinkButton}>Already have an account?</LinkButton>

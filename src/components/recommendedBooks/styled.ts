@@ -1,4 +1,4 @@
-import { IconButton } from "@mui/material";
+import { Box, IconButton } from "@mui/material";
 import { fontSize, maxWidth, minWidth, styled } from "@mui/system";
 
 export const Section = styled('section')(({theme}) => ({
@@ -18,33 +18,33 @@ export const Section = styled('section')(({theme}) => ({
     }
 }));
 
-export const HeaderContainer = styled('div')(({theme}) => ({
-    marginBottom: '20px',
-    display: 'flex',
-    justifyContent: 'space-between',
+// export const HeaderContainer = styled('div')(({theme}) => ({
+//     marginBottom: '20px',
+//     display: 'flex',
+//     justifyContent: 'space-between',
 
-    color: theme.palette.custom.textMain,
+//     color: theme.palette.custom.textMain,
 
-    [theme.breakpoints.down('tablet')]: {
-        minWidth:'240px',
-        maxWidth:'290px',
-        width:'100%',  
-    },
-    [theme.breakpoints.up('tablet')]: {
-        width:'100%',  
-    }
-}));
+//     [theme.breakpoints.down('tablet')]: {
+//         minWidth:'240px',
+//         maxWidth:'290px',
+//         width:'100%',  
+//     },
+//     [theme.breakpoints.up('tablet')]: {
+//         width:'100%',  
+//     }
+// }));
 
-export const Header = styled('h3')(({theme}) => ({
-    fontWeight: '700',
-    fontSize: '20px',
-    lineHeight: '20px',
+// export const Header = styled('h3')(({theme}) => ({
+//     fontWeight: '700',
+//     fontSize: '20px',
+//     lineHeight: '20px',
 
-    [theme.breakpoints.up('tablet')]: {
-        fontSize: '28px',
-        lineHeight: '32px',
-    }
-}));
+//     [theme.breakpoints.up('tablet')]: {
+//         fontSize: '28px',
+//         lineHeight: '32px',
+//     }
+// }));
 
 export const IconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
@@ -64,7 +64,7 @@ export const IconWrapper = styled(IconButton)(({theme}) => ({
     }
 })) as typeof IconButton;
 
-export const CardsContainer = styled('div')(({theme}) => ({
+export const CardsContainer = styled(Box)(({theme}) => ({
     display: 'flex',
     // minWidth: '200px',
     // maxWidth: '300px',
@@ -84,7 +84,7 @@ export const CardsContainer = styled('div')(({theme}) => ({
         // flexWrap: 'wrap',
         gap: '20px',
     }
-}));
+})) as typeof Box;
 
 export const CardsDecorationContainer = styled('div')(({theme}) => ({
     display: 'flex',

@@ -45,14 +45,14 @@ export const Authenticate = ({children}: Props) => {
         };
     }, [authError]);
 
-    const handleDelay = () => {
-        console.log("authenticate decoded token", decodedToken);
+    const handleDelay = useCallback(() => {
+        // console.log("authenticate decoded token", decodedToken);
         if(decodedToken) {
             console.log('authenticate count to refresh', decodedToken.exp * 1000 - new Date().getTime());
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;
-    }
+    }, [decodedToken])
 
     // const renderError = ()=> {
     //     return <ErrorModal
@@ -68,14 +68,14 @@ export const Authenticate = ({children}: Props) => {
     useEffect(() => {
         if(authError){
             if(authError.config.url === "/users/signin"){
-                console.log('Authenticate');
+                // console.log('Authenticate');
                 errorObj.errorCode = authError.response.status;
                 errorObj.errorMessage = 'Email or password is wrong.'; 
                 setIsModalOpen(true);
                 // return
             }
             if(authError.config.url === "/users/signup"){
-                console.log('Authenticate');
+                // console.log('Authenticate');
                 errorObj.errorCode = authError.response.status;
                 errorObj.errorMessage = 'User already exist.'; 
                 setIsModalOpen(true);
@@ -96,7 +96,7 @@ export const Authenticate = ({children}: Props) => {
         }
         if(!authError && booksError){
             if(booksError.response?.status === 401) {
-                console.log('Authenticate books error', booksError.response.status);
+                // console.log('Authenticate books error', booksError.response.status);
                 // errorObj.dispatchAction = userLocalSignOut();
                 errorObj.errorCode = booksError.response.status;
                 errorObj.errorMessage = 'Your session timed out.';
@@ -108,14 +108,24 @@ export const Authenticate = ({children}: Props) => {
         if(token && refreshToken){
             setTimeout(() => {
                 console.log('seTimeout token', token)
-                console.log('seTimeout refreshToken', refreshToken)
+                // console.log('seTimeout refreshToken', refreshToken)
                 if (!authError && !booksError) {
                     axiosToken.set(refreshToken);
                     dispatch(userRefreshToken());
                 }
             }, handleDelay());
         }
-    }, [isModalOpen, setIsModalOpen, authError, booksError, errorObj, token, refreshToken]);
+    }, [
+        isModalOpen, 
+        setIsModalOpen, 
+        authError, 
+        booksError, 
+        errorObj, 
+        token, 
+        refreshToken, 
+        handleDelay, 
+        dispatch
+    ]);
 
     // if(token && refreshToken){
     //     setTimeout(() => {
