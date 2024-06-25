@@ -25,7 +25,7 @@ export const CustomForm = styled(Form)(({theme}) =>({
         }
     },
 
-    '& input, p': {
+    '& input': {
         [theme.breakpoints.up('tablet')]: {
             fontSize: '14px',
             lineHeight: '18px'
@@ -60,10 +60,10 @@ export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
     color: 'red',
     fontSize: '10px',
 
-    zIndex: '100',
+    zIndex: '10',
     
     [theme.breakpoints.up('tablet')]: {
-        top: '30px',
+        top: '34px',
         fontSize: '12px',
     },
 
