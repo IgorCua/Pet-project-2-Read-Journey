@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/pet-project-2-read-journey/static/css/main.81b94d71.css",
-    "main.js": "/pet-project-2-read-journey/static/js/main.14b22b45.js",
+    "main.js": "/pet-project-2-read-journey/static/js/main.c4b86127.js",
     "static/js/453.359ea441.chunk.js": "/pet-project-2-read-journey/static/js/453.359ea441.chunk.js",
     "static/media/iPhone-15-Black-pc-2x.png": "/pet-project-2-read-journey/static/media/iPhone-15-Black-pc-2x.589c7eddf437dd92c2f2.png",
     "static/media/iPhone-15-Black-pc-1x.png": "/pet-project-2-read-journey/static/media/iPhone-15-Black-pc-1x.eb3b5245e8c99ec0e404.png",
@@ -13,14 +13,14 @@
     "static/media/Gilroy-Bold.ttf": "/pet-project-2-read-journey/static/media/Gilroy-Bold.6884672270cb49a41306.ttf",
     "static/media/Gilroy-Light.ttf": "/pet-project-2-read-journey/static/media/Gilroy-Light.1a25de360e096d7c3e24.ttf",
     "static/media/books-2x.png": "/pet-project-2-read-journey/static/media/books-2x.44b6ec6f6ae474af1f18.png",
-    "static/media/icons.svg": "/pet-project-2-read-journey/static/media/icons.10aa3b9e50ce4fec56cac685a29bd668.svg",
+    "static/media/icons.svg": "/pet-project-2-read-journey/static/media/icons.97a5e16b585d0cfa138294fe02d7b433.svg",
     "index.html": "/pet-project-2-read-journey/index.html",
     "main.81b94d71.css.map": "/pet-project-2-read-journey/static/css/main.81b94d71.css.map",
-    "main.14b22b45.js.map": "/pet-project-2-read-journey/static/js/main.14b22b45.js.map",
+    "main.c4b86127.js.map": "/pet-project-2-read-journey/static/js/main.c4b86127.js.map",
     "453.359ea441.chunk.js.map": "/pet-project-2-read-journey/static/js/453.359ea441.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.81b94d71.css",
-    "static/js/main.14b22b45.js"
+    "static/js/main.c4b86127.js"
   ]
 }
