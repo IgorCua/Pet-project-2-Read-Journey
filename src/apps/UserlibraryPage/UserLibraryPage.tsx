@@ -14,12 +14,10 @@ import {
     ContainerEmptyLibrary,
     LibraryHeaderContainer,
     LibraryHeader,
-    // LibrarySelect,
     ContainerForm,
     ContainerBooks,
     FormHeader
 } from "./styled";
-import { Filter } from "../../components/filter/Filter";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
 import { booksGetRecommended, booksGetUserBooks } from "../../redux/books/operations";
@@ -29,7 +27,6 @@ import {
     selectBooksError, 
     selectBooksIsError, 
     selectRecommendedBooks, 
-    // selectRecommendedBooksIDsArr, 
     selectUserBooks, 
     selectUserBooksIDsArr
 } from "../../redux/books/selectors";
@@ -75,8 +72,6 @@ type AppDispatch = typeof store.dispatch;
 
 interface Request {
     page: number,
-    // title?: string,
-    // author?: string,
     limit?: number
 }
 
@@ -93,10 +88,6 @@ export const UserLibraryPage = () => {
     const userBooksIdArr = useSelector(selectUserBooksIDsArr);
     const isBooksError = useSelector(selectBooksIsError);
     const booksError: any = useSelector(selectBooksError);
-    // const recommendedBooksIDs = useSelector(selectRecommendedBooksIDsArr)
-    // const booksErrorURL = booksError ? booksError.config.url : null;
-    // const booksErrorCode = booksError ? booksError.response.status : null;
-    // const booksErrorMessage = booksError ? booksError.response.data.message : null;
     const [isRecommendedLoading, setIsRecommendedLoading] = useState(true);
     const navigate = useNavigate();
     const [filterData, setFilterData] = useState<any>({
@@ -192,9 +183,7 @@ export const UserLibraryPage = () => {
         }
         
         return true;
-        // if(totalPages) {
-        //     console.log(`${book.totalPages}`.includes(totalPages))
-        // }
+       
     }
     
     // const handleErrorMessage = () => {

@@ -1,6 +1,6 @@
 import { Backdrop, IconButton } from "@mui/material";
-import React, { MouseEvent } from "react";
-import { Button, Container } from "./styled";
+import React from "react";
+import { Container } from "./styled";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
 
@@ -37,12 +37,9 @@ export const CustomBackdrop = (props: Props) => {
                 size="small"
                 aria-label="close book modal"
                 aria-controls="book-modal"
-                // aria-haspopup="true"
                 onClick={() => setIsModalOpen(false)}
                 color='inherit'
                 sx={{
-                    // width: '22px', 
-                    // height: '22px', 
                     position: 'absolute',
                     right: '16px',
                     top: '16px',

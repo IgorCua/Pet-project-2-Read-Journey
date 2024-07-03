@@ -88,7 +88,6 @@ export const MenuIconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
     width: '32px',
     height: '32px',
-    // display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -133,7 +132,6 @@ export const DescripotionList = styled(List)(({theme}) => ({
 })) as typeof List;
 
 export const NumberDiv = styled('div')(({theme}) => ({
-    // marginRight: '12px',
     minWidth: '40px',
     height: '40px',
     display: 'flex',
@@ -201,15 +199,12 @@ export const LinkButton = styled(ButtonBase)(({theme}) => ({
         backgroundColor: theme.palette.custom.bg3
     },
 
-    // [theme.breakpoints.up('tablet')]: {
-    // }
 }))as typeof ButtonBase;;
 
 export const IconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
     width: '32px',
     height: '32px',
-    // display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',

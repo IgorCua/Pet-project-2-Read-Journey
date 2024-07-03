@@ -1,15 +1,12 @@
-import { Box, IconButton, Typography } from "@mui/material"
-import { CardsContainer, CardsDecorationContainer, Section, IconWrapper } from "./styled"
-import { Icon } from "../icon/Icon"
-import { Suspense, useEffect, useState } from "react"
+import { Typography } from "@mui/material"
+import { CardsContainer } from "./styled"
+import { Suspense, useEffect } from "react"
 import { useSelector } from "react-redux"
-import { selectRecommendedBooks, selectRecommendedIsLoading } from "../../redux/books/selectors"
+import { selectRecommendedBooks } from "../../redux/books/selectors"
 import { useDispatch } from "react-redux"
 import { store } from "../../redux/store"
 import { booksGetRecommended } from "../../redux/books/operations"
 import { BookCard } from "../bookCard/BookCard"
-import { theme } from "../../styles/themes"
-import { userRefreshToken } from "../../redux/auth/operations"
 
 type AppDispatch = typeof store.dispatch;
 

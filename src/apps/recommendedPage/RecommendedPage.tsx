@@ -1,6 +1,4 @@
-import { IconButton, List, ListItem } from "@mui/material";
-import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
-import { Filter } from "../../components/filter/Filter";
+import { ListItem } from "@mui/material";
 import { 
     Container, 
     DescripotionList, 
@@ -13,7 +11,6 @@ import {
     ListHeader, 
     ListItemText, 
     NumberDiv, 
-    // Section, 
     Span,
     CardsContainer,
     HeaderContainer,
@@ -27,7 +24,7 @@ import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedB
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectRecommendedBooks } from "../../redux/books/selectors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import * as Yup from 'yup';
 import { Form } from "../../components/form/Form";
@@ -55,7 +52,6 @@ const inputsDataArr = [
 ]
 
 const initialValues = {
-    // name: '',
     title: '',
     author: ''
 }
@@ -72,8 +68,6 @@ type FormValues = {
 }
 
 export const RecommendedPage = () => {
-    // const booksError = useSelector(selectBooksError);
-    // const booksObj = useSelector(selectRecommendedBooks);
     const booksError = useSelector(selectBooksError);
     const navigate = useNavigate();
     const [isErrorModal, setIsErrorModal] = useState(false);
@@ -85,25 +79,18 @@ export const RecommendedPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     let req: Request = {
         page: booksObj ? booksObj.page : 1,
-        // limit: booksLimit ? booksLimit : 0
         limit: null
     }
     const handleBooksLimit = () => {
         if(window.innerWidth < 768) {
             req.limit = 2;
-            // return 2;
         }
         if(window.innerWidth < 1024) {
             req.limit = 8;
-            // return 8;
         }
-        // if(window.innerWidth <= 1024) {
-        //     req.limit = 10;
-        //     // return 10;
-        // }
+        
         if(window.innerWidth >= 1280) {
             req.limit = 12;
-            // return 12;
         }
     }
   
@@ -154,7 +141,6 @@ export const RecommendedPage = () => {
     }
 
     const handleSubmit = ( values: FormValues) => {
-        // console.log('recommended form', values);
         dispatch(booksGetRecommended(values));
     }
 

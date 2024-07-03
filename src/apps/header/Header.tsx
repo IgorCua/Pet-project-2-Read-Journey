@@ -1,7 +1,6 @@
 import { NavLink, Outlet } from "react-router-dom"
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper"
 
-// import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -21,14 +20,11 @@ import { Backdrop } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { userSignOut } from "../../redux/auth/operations";
-import { useSelector } from "react-redux";
-import { selectName } from "../../redux/auth/selectors";
 
 export type AppDispatch = typeof store.dispatch;
 
 export function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // const userName = useSelector(selectName);
     const dispatch = useDispatch<AppDispatch>();
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
@@ -62,11 +58,9 @@ export function Header() {
                             }
                         }}>
 
-                        {/* logo box */}
                         <Box sx={{
                             flexGrow: 1,
                             display: 'flex',
-                            // width: 'auto',
                             [theme.breakpoints.up('tablet')]: {
                                 flexGrow: 0,
                                 gap: '4px',
@@ -161,7 +155,6 @@ export function Header() {
                                 aria-label="account of current user"
                                 aria-controls="menu-appbar"
                                 aria-haspopup="true"
-                                // onClick={handleOpenNavMenu}
                                 onClick={() => setIsModalOpen(true)}
                                 color="inherit"
                                 sx={{padding: '0'}}

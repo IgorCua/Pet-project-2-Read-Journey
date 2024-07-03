@@ -1,6 +1,3 @@
-// import styled from "@emotion/styled";
-// import { Container, styled } from "@mui/material";
-// import Button from '@mui/material/Button';
 import { PhoneImg } from "../../components/PhoneImg/PhoneImg";
 import { Icon } from "../../components/icon/Icon";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
@@ -21,7 +18,6 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { userSignup } from "../../redux/auth/operations";
 import { theme } from "../../styles/themes";
-import { color, fontWeight } from "@mui/system";
 
 interface InitialValuesInterface {
     name: string,
@@ -76,8 +72,6 @@ export const RegisterPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
 
-    // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
-
     const handleSubmit = ( values: FormValues) => {
         
         dispatch(userSignup(values)).then((res) => {
@@ -116,7 +110,6 @@ export const RegisterPage = () => {
                         },
 
                         '& button:nth-of-type(1)':{
-                            // marginRight: '14px',
                             fontWeight: '700',
 
                             color: theme.palette.custom.textBlack,

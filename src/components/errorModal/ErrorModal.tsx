@@ -65,14 +65,6 @@ export const ErrorModal = (props: Props) => {
         setIsModalOpen(!isModalOpen);
     };
 
-    // const handleDispatch = () => {
-    //     // console.log('handleDispatch',dispatchAction);
-    //     // if(type === 'userError') dispatch(userRemoveError());
-    //     // if(type === 'booksError') dispatch(booksRemoveError());
-    //     navigate('/login');
-    //     dispatch(dispatchAction())
-    // }
-
     return <Backdrop
         open={isModalOpen}
         onClick={handleError}

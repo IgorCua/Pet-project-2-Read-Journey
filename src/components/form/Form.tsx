@@ -1,11 +1,10 @@
-import { Field, Formik, FormikErrors, FormikProps, FormikValues, withFormik } from "formik";
+import { Field, FormikProps, withFormik } from "formik";
 import { FormTextField } from "../materialUI/FormTextField";
 import { ButtonBox, CustomErrorMessage, CustomForm, ErrorBox, InputContainer, Submit } from "./formStyled";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
 import { ReactElement, useState } from "react";
-import zIndex from "@mui/material/styles/zIndex";
 
 
 interface InputDataObjInterface {
@@ -149,8 +148,6 @@ const InnerForm = (props: Props & FormikProps<any>) => {
 }
 
 export const Form = (props: Props) => {
-    // const { touched, errors, isSubmitting, message } = props;
-    // const { touched, errors, isSubmitting } = props;
     const {
         initialValues, 
         validationSchema, 
@@ -162,16 +159,13 @@ export const Form = (props: Props) => {
     } = props;
 
     const MyForm = withFormik<any, any>({
-        // Transform outer props into form values
         mapPropsToValues: () => ({...initialValues}),
       
-        // Add a custom validation function (this can be async too!)
         validationSchema: validationSchema,
       
         handleSubmit: values => {
             console.log(values);
             handleSubmit(values);
-        //   return values;
         },
     })(InnerForm);
 

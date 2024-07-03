@@ -1,4 +1,3 @@
-// import { useSelector } from "react-redux";
 import { 
     AddToLibraryBtn, 
     Author, 
@@ -13,19 +12,16 @@ import {
     StartReadingBtn,
     TitleContainer
 } from "./styled";
-// import { selectRecommendedBooks } from "../../redux/books/selectors";
 import { Icon } from "../icon/Icon";
 import React, { useState } from "react";
 import { IconButton } from "@mui/material";
-// import { theme } from "../../styles/themes";
 import { store } from "../../redux/store";
 import { useDispatch } from "react-redux";
-// import { userAddBookByID } from "../../redux/auth/operations";
 import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { booksAddById, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectBooksError, selectBooksIsError, selectUserBooksIDsArr, selectUserBooksTitlesArr } from "../../redux/books/selectors";
+import { selectUserBooksTitlesArr } from "../../redux/books/selectors";
 import { ErrorModal } from "../errorModal/ErrorModal";
 import { theme } from "../../styles/themes";
 
@@ -38,7 +34,6 @@ type Props = {
     pages?: number | string,
     isModal?: boolean
     sx?: {}
-    // handleClick?: (title: any) => void
 }
 
 type BackdropProps = {
@@ -53,9 +48,6 @@ type AppDispatch = typeof store.dispatch;
 export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}: Props) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isError, setIsError] = useState(false);
-    // const bookError = useSelector(selectBooksError);
-    // const isBookError = useSelector(selectBooksIsError);
-    // const userBooksIdArr = useSelector(selectUserBooksIDsArr);
     const userBooksTitlesArr = useSelector(selectUserBooksTitlesArr);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
@@ -67,7 +59,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                 && event.target.localName !== "svg" 
                 && event.target.localName !== "use"
             ){
-                // console.log('current target', event.currentTarget.localName);
                 if(event.target !== event.currentTarget)setIsModalOpen(!isModalOpen);
                 return;
             }
@@ -94,7 +85,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
     }
 
     const handleStartReading = () => {
-        // console.log('Start reading click');
         dispatch(booksGetBookInfo(id));
         navigate('/reading');
     }
@@ -131,7 +121,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                         padding: '0px'
                     }}>
                     <Icon 
-                        // onClick={handleDeleteBook}
                         iconName={'#icon-trash-bin-red'} 
                         sx={{
                             padding: '5px 4px',
@@ -148,7 +137,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                             borderRadius: '50%',
 
                             cursor: 'pointer',
-                            // zIndex: '',
                             '&:hover':{
                                 backgroundColor: 'rgba(232, 80, 80, 0.3)',
                                 border: '1px solid rgba(232, 80, 80, 0.5)',
@@ -168,7 +156,6 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                             marginBottom: '16px',
                             width: '100%',
                             height: '208px',
-                            // maxHeight: '208px'
                             borderRadius: '8px',
                             cursor: 'auto',
                             [theme.breakpoints.up('tablet')]: {

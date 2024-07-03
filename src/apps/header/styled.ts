@@ -1,7 +1,5 @@
 import { ButtonBase } from "@mui/material";
-import { display, height, lineHeight, padding, positions, styled, width } from "@mui/system";
-
-// export const HeaderWrapper = styled
+import { styled } from "@mui/system";
 
 export const UserContainer = styled('div')(({theme}) => ({
     width: '35px',
@@ -15,14 +13,6 @@ export const UserContainer = styled('div')(({theme}) => ({
 
     border: `1px solid ${theme.palette.custom.buttonBorderGrey}`,
     borderRadius: '50%',
-
-    // [theme.breakpoints.up('mobile')]: {
-    //     marginRight:'10px'
-    // },
-    
-    // [theme.breakpoints.up('tablet')]: {
-    //     marginRight:'16px'
-    // }
 }));
 
 export const NavContainer = styled('div')(({theme})=> ({
@@ -37,7 +27,6 @@ export const NavContainer = styled('div')(({theme})=> ({
 
     backgroundColor: theme.palette.custom.bg2,
 
-    // zIndex: -100,
     '& button:first-of-type': {
         right: '30px',
         width: '28px', 
@@ -77,13 +66,11 @@ export const Nav = styled('nav')(({theme})=> ({
 
             [theme.breakpoints.up('tablet')]: {
                 fontSize: '16px',
-                // lineHeight: '20px',
             }
         },
 
         '& div': {
             position: 'absolute',
-            // marginTop: '4px',
             width: '100%',
             height: '3px',
             display: 'none',
@@ -111,9 +98,6 @@ export const Nav = styled('nav')(({theme})=> ({
         color: theme.palette.custom.textMain
     },
     '& a.active div': {
-        
-        // transitionDuration: '250ms',
-        // transitionProperty: 'display',
         cursor: 'auto',
         display: 'block',
 
@@ -129,7 +113,6 @@ export const Nav = styled('nav')(({theme})=> ({
         gap: '20px',
     },
     [theme.breakpoints.up('tablet')]: {
-        // height: 'auto',
         width: 'auto',
         flexDirection:'row',
         gap: '32px'

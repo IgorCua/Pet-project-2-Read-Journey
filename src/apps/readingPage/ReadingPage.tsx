@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react"
 import { Dashboard } from "../../components/dashboard/Dashboard"
-import { FormTextField } from "../../components/materialUI/FormTextField"
 import { 
     CircleInside, 
     CircleOutside, 
     Container, 
     ContainerNoStats, 
     ContainerStats, 
-    // Form, 
     FormHeader, 
     Header, 
     MyReadingContainer, 
@@ -17,7 +15,7 @@ import {
     MyReadingTimeLeft,
     FormContainer
 } from "./styled";
-import { Box, Input, InputAdornment, InputBase, TextField, TextFieldProps } from "@mui/material"
+import { Box } from "@mui/material"
 import { theme } from "../../styles/themes"
 // import { borderRadius, display, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
@@ -27,7 +25,6 @@ import { useDispatch } from "react-redux"
 import { booksSaveEndOfReading, booksSaveReadingStart } from "../../redux/books/operations"
 import { store } from "../../redux/store"
 import { ErrorModal } from "../../components/errorModal/ErrorModal"
-import { Icon } from "../../components/icon/Icon";
 import { Form } from "../../components/form/Form";
 import * as Yup from 'yup';
 import { Progress } from "../../components/progress/Progress";
@@ -85,7 +82,6 @@ export const ReadingPage = () => {
 
     // const handleSubmit = (event: React.FormEvent<any>) => {
     const handleSubmit = (values: FormValues) => {
-        // event.preventDefault();
         const {pageStart, pageEnd} = values;
 
         if(pageStart && bookInfo){ 
@@ -105,17 +101,12 @@ export const ReadingPage = () => {
             }
         }
         
-        // console.log(event!.currentTarget!.elements[0].value as HTMLInputElement)
         setIsReading(!isReading);
-        // event.target.reset();
     }
 
     useEffect(()=>{
         if(bookInfo && bookInfo.progress.length > 0){
-            // console.log('useEffect bookInfo');
-            // console.log(bookInfo.progress[bookInfo.progress.length - 1].status);
             if (progressLastData && progressLastData.status === 'active'){
-                // console.log('active');
                 setIsReading(true);
             }
         };
@@ -144,7 +135,6 @@ export const ReadingPage = () => {
             <Dashboard sx={{
                 gap: '40px',
                 [theme.breakpoints.up('tablet')]: {
-                    // padding: '32px 16px 16px 32px'
                     padding: '32px',
                     gap: '40px'
                 },

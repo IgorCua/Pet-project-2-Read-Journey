@@ -90,18 +90,6 @@ export const DiaryList = styled(List)(({theme}) => ({
         marginBottom: '17px'
     },
 
-    // '$ li:not(:first-child)': {
-    // '& li:hover': {
-    //     '& svg':{
-    //         opacity: '1',
-    //     },
-
-    //     '& div:nth-of-type(1) p:nth-of-type(1)':{
-    //         color: theme.palette.custom.textMain
-    //     }
-    //     // color: 'red',
-    //     // border: `2px solid ${theme.palette.custom.bg4}`,
-    // }
 })) as typeof List;
 
 export const DiaryListItem = styled(ListItem)(({theme}) => ({
@@ -117,34 +105,12 @@ export const DiaryListItem = styled(ListItem)(({theme}) => ({
         marginRight: '6px',
         display: 'flex',
         flexDirection: 'column',
-        // justifyContent: 'flex-end',
         alignItems: 'flex-end'
     },
 
-    // '&:hover': {
-    //     '& svg':{
-    //         opacity: '1',
-    //     },
-
-    //     '& div:nth-of-type(1) p:nth-of-type(1)':{
-    //         color: theme.palette.custom.textMain
-    //     }
-    // }
-
 }));
 
-// export const Square = styled(Box)(({theme}) => ({
-//     width: '16px',
-//     height: '16px',
-
-//     border: `4px solid ${theme.palette.custom.bg1}`,
-//     borderRadius: '4px'
-// })) as typeof Box;
-
 export const ListItemContainer = styled(Box)(({theme}) => ({
-    // '&:nth-of-type(1)': {
-        // color: theme.palette.custom.textMain
-    // }
     [theme.breakpoints.up('tablet')]: {
         fontSize: '16px',
         lineHeight: '18px',
@@ -156,11 +122,6 @@ export const ListItemDate = styled(Typography)(({theme}) => ({
 
     fontSize: '12px',
     lineHeight: '12px',
-    // color: theme.palette.custom.textSecondary,
-
-    // '&:first-of-type': {
-    //     color: theme.palette.custom.textMain
-    // }
 
     [theme.breakpoints.up('tablet')]: {
         fontSize: '16px',
@@ -183,7 +144,6 @@ export const ListItemPercent = styled(Typography)(({theme}) => ({
 })) as typeof Typography;
 
 export const ListItemMins = styled(Typography)(({theme}) => ({
-    // color: theme.palette.custom.textSecondary
     fontSize: '10px',
     lineHeight: '12px',
 
@@ -195,7 +155,6 @@ export const ListItemMins = styled(Typography)(({theme}) => ({
 
 export const ListItemPagesNum = styled(Typography)(({theme}) => ({
     marginBottom: '16px',
-    // color: theme.palette.custom.textSecondary
     fontSize: '12px',
     lineHeight: '12px',
 
@@ -208,7 +167,6 @@ export const ListItemPagesNum = styled(Typography)(({theme}) => ({
 export const ListItemPagesPerHour = styled(Typography)(({theme}) => ({
     width: '43px',
 
-    // color: theme.palette.custom.textSecondary
     fontSize: '10px',
     lineHeight: '12px',
     textAlign: 'center',
@@ -239,10 +197,7 @@ export const ProgressContainer = styled(Box)(({theme}) => ({
     justifyContent: 'center',
     alignItems: 'center',
 
-    // padding: '16px 16px 16px 23px',
-    // maxHeight: '211px',
     backgroundColor: theme.palette.custom.bg2,
-    // position: 'relative',
 
     borderRadius: '12px',
 
@@ -264,12 +219,7 @@ export const CircleContainer = styled(Box)(({theme}) => ({
 
 export const DataContainer = styled(Box)(({theme}) => ({
     display: 'flex',
-    // width: '95px',
     gap: '15px',
-    // justifyContent:'center',
-    // alignItems: 'center',
-    // position: 'relative'
-    // border: '1px solid red'
     [theme.breakpoints.up('tablet')]: {
         // width: '79px'
     }
@@ -279,9 +229,6 @@ export const Square = styled(Box)(({theme}) => ({
     width: '14px',
     height: '14px',
     display: 'flex',
-    // justifyContent:'center',
-    // alignItems: 'center',
-    // position: 'relative'
     backgroundColor: theme.palette.custom.utilGreen,
 
     borderRadius: '4px'
@@ -289,13 +236,7 @@ export const Square = styled(Box)(({theme}) => ({
 
 export const DataTextContainer = styled(Box)(({theme}) => ({
     display: 'flex',
-    // width: '66px',
     flexDirection: 'column',
-    // justifyContent:'center',
-    // alignItems: 'center',
-    // position: 'relative'
-    // border: '1px solid green'
     [theme.breakpoints.up('tablet')]: {
-        // width: '79px'
     }
 })) as typeof Box;

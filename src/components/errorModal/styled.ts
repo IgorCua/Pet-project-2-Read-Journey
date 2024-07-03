@@ -42,13 +42,6 @@ export const ErrorMessage = styled('div')(({theme})=>({
     color: theme.palette.custom.textMain
 }));
 
-// export const Button = styled(ButtonBase)(({theme})=>({
-//     width: '91px',
-//     padding: '10px 20px',
-//     borderRadius: '30px',
-//     border: '1px solid rgba(249, 249, 249, 0.20)',
-// })) as typeof ButtonBase;
-
 export const ErrorButton = styled(Button)(({theme})=>({
 
     fontStyle: 'normal',
