@@ -178,7 +178,13 @@ export const Progress = () => {
                             top: '-3px',
                             left: '-25px',
                             opacity: '0.3',
-                            zIndex: '1000'
+                            // zIndex: '0',
+                            [theme.breakpoints.up('tablet')]: {
+                                width: '20px', 
+                                height: '20px',
+                                top: '0px',
+                                left: '-26px',
+                            }
                         }}/>}
                         <ListItemContainer sx={{flexGrow: 1}}>
                             {!ifSameDate(i) && <ListItemDate>{progressDataArr[i].date}</ListItemDate>}

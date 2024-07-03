@@ -70,28 +70,20 @@ export const ListContainer = styled(Box)(({theme})=>({
 }));
 
 export const DiaryList = styled(List)(({theme}) => ({
-    // maxHeight: '211px',
     paddingLeft: '16px',
     transitionDuration: '250ms',
     transitionProperty: 'color, opacity',
-    // overflowY: 'visible',
-    // overflowY: 'scroll',
-    // overflow:'visible',
-
 
     color: theme.palette.custom.textSecondary,
 
     borderLeft: `2px solid ${theme.palette.custom.bg3}`,
-    // borderRadius: '12px',
 
     '& li:nth-of-type(1) div:nth-of-type(1) p:nth-of-type(1)': {
         color: theme.palette.custom.textMain
     },
 
     '& li:nth-of-type(1) svg:first-of-type':{
-        // '& svg': {
-            opacity: '1'
-        // }
+        opacity: '1'
     },
 
     '& .MuiListItem-root:nth-last-of-type(n + 2)': {
