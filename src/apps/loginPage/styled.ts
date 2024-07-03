@@ -120,7 +120,6 @@ export const Section = styled('div')(({theme}) => ({
 export const Figure = styled('figure')(({theme}) => ({
     height: '351px',
     width: '100%',
-    paddingTop: '20px',
     display: 'flex',
     justifyContent: 'center',
     // alignItems: 'center',

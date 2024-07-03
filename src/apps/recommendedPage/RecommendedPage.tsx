@@ -97,11 +97,11 @@ export const RecommendedPage = () => {
             req.limit = 8;
             // return 8;
         }
-        if(window.innerWidth >= 1024) {
-            req.limit = 10;
-            // return 10;
-        }
-        if(window.innerWidth > 1280) {
+        // if(window.innerWidth <= 1024) {
+        //     req.limit = 10;
+        //     // return 10;
+        // }
+        if(window.innerWidth >= 1280) {
             req.limit = 12;
             // return 12;
         }

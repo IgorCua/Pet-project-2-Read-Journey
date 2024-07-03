@@ -20,6 +20,9 @@ export const HeaderContainer = styled(Box)(({theme}) => ({
 
     [theme.breakpoints.up('tablet')]: {
         marginBottom: '16px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        marginBottom: '20px',
     }
 })) as typeof Box;
 
@@ -184,7 +187,7 @@ export const ListItemPercent = styled(Typography)(({theme}) => ({
     [theme.breakpoints.up('tablet')]: {
         fontSize: '20px',
         lineHeight: '20px',
-    }
+    },
 })) as typeof Typography;
 
 export const ListItemMins = styled(Typography)(({theme}) => ({
@@ -229,6 +232,13 @@ export const Text = styled(Typography)(({theme}) => ({
 
 })) as typeof Typography;
 
+export const StatisticsDescription = styled(Typography)(({theme}) => ({
+    marginBottom: '20px',
+    fontSize: '14px',
+    lineHeight: '18px',
+    color: theme.palette.custom.textSecondary
+})) as typeof Typography;
+
 export const ProgressContainer = styled(Box)(({theme}) => ({
     padding: '20px',
     width: '100%',
@@ -246,10 +256,14 @@ export const ProgressContainer = styled(Box)(({theme}) => ({
 
     [theme.breakpoints.up('tablet')]: {
         padding: '28px',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        padding: '20px',
     }
 })) as typeof Box;
 
 export const CircleContainer = styled(Box)(({theme}) => ({
+    marginBottom: '10px',
     display: 'flex',
     justifyContent:'center',
     alignItems: 'center',

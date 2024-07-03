@@ -47,11 +47,11 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
             req.limit = 8;
             return 8;
         }
-        if(window.innerWidth >= 1024) {
+        if(window.innerWidth <= 1024) {
             req.limit = 10;
             return 10;
         }
-        if(window.innerWidth > 1280) {
+        if(window.innerWidth >= 1280) {
             req.limit = 12;
             return 12;
         }
@@ -69,6 +69,7 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
 
         if((booksObj && booksObj.results.length === 3) && !booksLimit) {
             req.page = 1;
+            handlePageLimit();
             dispatch(booksGetRecommended(req)).then((res:any) => {
                 if(res.meta.requestStatus === 'fulfilled') setIsLoading(false);
             });

@@ -149,7 +149,7 @@ export const ReadingPage = () => {
                     gap: '40px'
                 },
                 [theme.breakpoints.up('desktop')]: {
-                    padding: '32px 20px 20px 20px',
+                    padding: '40px 20px 20px 20px',
                     minWidth: '353px',
                     gap: '40px',
                 }

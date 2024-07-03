@@ -28,7 +28,8 @@ import {
     ListItemPercent, 
     ProgressContainer, 
     ScrollWrapper, 
-    Square 
+    Square, 
+    StatisticsDescription
 } from "./styled";
 import { ButtonBase, IconButton, Typography } from "@mui/material";
 import { Icon } from "../icon/Icon";
@@ -66,7 +67,7 @@ export const Progress = () => {
 
         return result;
     });
-    
+    console.log(progressDataArr)
     function getFormattedDate(date: any) {
         let year = date.getFullYear();
         let month = (1 + date.getMonth()).toString().padStart(2, '0');
@@ -98,7 +99,30 @@ export const Progress = () => {
         if(!lastProgress?.finishPage) return lastProgress?.startPage;
     }
 
-    console.log(isDiary);
+    const ifSameDate = (i: number) => {
+        if((progressDataArr[i - 1])){
+            if(progressDataArr[i - 1].date !== progressDataArr[i].date){
+                return false;
+            }
+            return true;
+        }
+    }
+    
+    console.log(progressDataArr);
+    
+    const handlePagesRead = (date: string) => {
+        const dayHistory = progressDataArr.filter((obj: {
+            minutes: string,
+            finishedPages: number,
+            date: string,
+            percent: string
+        }
+        ) => {
+            return obj.date === date
+        });
+
+        return dayHistory[dayHistory.length - 1].finishedPages;
+    }
 
     return <Container component={'div'}>
         <HeaderContainer>
@@ -149,7 +173,7 @@ export const Progress = () => {
                 <DiaryList>
                     {progressArr && progressDataArr && progressArr.map((elem, i)=>{
                         return <DiaryListItem key={elem._id} id="listItem">
-                        <Icon iconName={'#icon-square'} sx={{
+                        {!ifSameDate(i) && <Icon iconName={'#icon-square'} sx={{
                             position: 'absolute',
                             width: '16px', 
                             height: '16px',
@@ -157,9 +181,9 @@ export const Progress = () => {
                             left: '-25px',
                             opacity: '0.3',
                             zIndex: '1000'
-                        }}/>
+                        }}/>}
                         <ListItemContainer sx={{flexGrow: 1}}>
-                            <ListItemDate>{progressDataArr[i].date}</ListItemDate>
+                            {!ifSameDate(i) && <ListItemDate>{progressDataArr[i].date}</ListItemDate>}
                             <ListItemPercent>{progressDataArr[i].percent}%</ListItemPercent>
                             <ListItemMins>
                                 {progressDataArr[i].minutes ? `${progressDataArr[i].minutes} minutes` : 'active reading'}
@@ -167,7 +191,7 @@ export const Progress = () => {
                         </ListItemContainer>
 
                         <ListItemContainer>
-                            <ListItemPagesNum>{progressDataArr[i].finishedPages} pages</ListItemPagesNum>
+                           {!ifSameDate(i) && <ListItemPagesNum>{handlePagesRead(progressDataArr[i].date)} pages</ListItemPagesNum>}
                             <Icon iconName={'#icon-reading-chart'} sx={{
                                 width: '43px', 
                                 height: '18px', 
@@ -191,7 +215,9 @@ export const Progress = () => {
                     })}
                 </DiaryList>
             </ListContainer>}
-
+            {!isDiary && window.innerWidth >= 1280 && <StatisticsDescription>
+                    Each page, each chapter is a new round of knowledge, a new step towards understanding. By rewriting statistics, we create our own reading history.
+                </StatisticsDescription>}
             {!isDiary && <ProgressContainer>
                 <CircleContainer>
                     <Icon iconName={'#icon-progress-circle'} sx={{
@@ -202,12 +228,21 @@ export const Progress = () => {
                         transitionDuration: '350px',
                         transitionProperty: 'stroke-dashoffset',
                         strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`,
+                        strokeWidth: '10px',
+                        // 'circle': {
+                        //     strokeWidth: '15px'
+                        // },
 
                         [theme.breakpoints.up('tablet')]: {
-                            //line width 12
+                            strokeWidth: '12.42px',
                             width: '138px', 
                             height: '138px', 
-                        }
+                        },
+                        [theme.breakpoints.up('desktop')]: {
+                            strokeWidth: '15.12px',
+                            width: '189px', 
+                            height: '189px', 
+                        },
                     }}/>
                     <Typography sx={{
                         position: 'absolute',
@@ -232,6 +267,9 @@ export const Progress = () => {
                             [theme.breakpoints.up('tablet')]: {
                                 fontSize: '20px',
                                 lineHeight: '20px', 
+                            },
+                            [theme.breakpoints.up('desktop')]: {
+                                marginBottom: '8px'
                             }
                         }}>{CountReadingPercent()}%</Typography>
                         <Typography sx={{
