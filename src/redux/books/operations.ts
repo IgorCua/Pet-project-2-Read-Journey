@@ -84,7 +84,6 @@ export const booksRemoveBook = createAsyncThunk(
             axiosToken.set();
             await booksRemoveBookAPI(data);
             const userBooks = await booksGetUserBooksAPI(null);
-            // console.log('user books', userBooks)
             return userBooks;
         }
         catch (error: unknown) {
@@ -115,7 +114,6 @@ export const booksSaveReadingStart = createAsyncThunk(
         try{
             await axiosToken.set();
             const res = await booksSaveReadingStartAPI(data);
-            console.log('booksSaveReadingStart', res);
             return res;
         }
         catch (error: unknown) {
@@ -131,7 +129,6 @@ export const booksSaveEndOfReading = createAsyncThunk(
         try{
             await axiosToken.set();
             const res = await booksSaveEndOfReadingAPI(data);
-            console.log('booksSaveEndOfReading', res);
             return res;
         }
         catch (error: unknown) {

@@ -108,8 +108,6 @@ export const Progress = () => {
         }
     }
     
-    console.log(progressDataArr);
-    
     const handlePagesRead = (date: string) => {
         const dayHistory = progressDataArr.filter((obj: {
             minutes: string,
