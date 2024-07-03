@@ -71,6 +71,7 @@ export const ListContainer = styled(Box)(({theme})=>({
 
 export const DiaryList = styled(List)(({theme}) => ({
     paddingLeft: '16px',
+    paddingRight: '18px',
     transitionDuration: '250ms',
     transitionProperty: 'color, opacity',
 
@@ -102,7 +103,6 @@ export const DiaryListItem = styled(ListItem)(({theme}) => ({
     },
 
     '& .MuiBox-root:nth-of-type(2)':{
-        marginRight: '6px',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'flex-end'

@@ -31,7 +31,7 @@ import {
     Square, 
     StatisticsDescription
 } from "./styled";
-import { ButtonBase, IconButton, Typography } from "@mui/material";
+import { Box, ButtonBase, IconButton, Typography } from "@mui/material";
 import { Icon } from "../icon/Icon";
 import { useState } from "react";
 import { Opacity } from "@mui/icons-material";
@@ -196,25 +196,31 @@ export const Progress = () => {
 
                         <ListItemContainer>
                            {!ifSameDate(i) && <ListItemPagesNum>{handlePagesRead(progressDataArr[i].date)} pages</ListItemPagesNum>}
-                            <Icon iconName={'#icon-reading-chart'} sx={{
-                                width: '43px', 
-                                height: '18px', 
-                                marginBottom: '4px',
-                                [theme.breakpoints.up('tablet')]: {
-                                    width: '59px', 
-                                    height: '25px', 
-                                }
-                            }}/>
+                            <Box sx={{marginBottom: '4px', position: 'relative'}}>
+                                <Icon iconName={'#icon-reading-chart'} sx={{
+                                    width: '43px', 
+                                    height: '18px', 
+                                    [theme.breakpoints.up('tablet')]: {
+                                        width: '59px', 
+                                        height: '25px', 
+                                    }
+                                }}/>
+                                <IconButton size="small" onClick={() => handleDeleteDiaryData(elem._id)} sx={{
+                                    padding: '0px',
+                                    position: 'absolute',
+                                    right: '0px',
+                                    transform: 'translate(22px, -150%)'
+                                }}>
+                                    <Icon iconName={'#icon-trash-bin'} sx={{
+                                        width: '14px', 
+                                        height: '14px',
+                                    }}/>
+                                </IconButton> 
+                            </Box>
                             <ListItemPagesPerHour>
                                 {elem.speed ? `${elem.speed} pages per hour` : 'active reading'}
                             </ListItemPagesPerHour>
-                        </ListItemContainer>
-                        <IconButton size="small" onClick={() => handleDeleteDiaryData(elem._id)} sx={{
-                            padding: '0px',
-
-                        }}>
-                            <Icon iconName={'#icon-trash-bin'} sx={{width: '14px', height: '14px'}}/>
-                        </IconButton>    
+                        </ListItemContainer>   
                         </DiaryListItem>
                     })}
                 </DiaryList>
