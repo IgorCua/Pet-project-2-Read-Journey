@@ -1,4 +1,4 @@
-import { ButtonBase } from "@mui/material";
+import { ButtonBase, Typography } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const UserContainer = styled('div')(({theme}) => ({
@@ -14,6 +14,27 @@ export const UserContainer = styled('div')(({theme}) => ({
     border: `1px solid ${theme.palette.custom.buttonBorderGrey}`,
     borderRadius: '50%',
 }));
+
+export const UserName = styled(Typography)(({theme}) => ({
+    maxWidth: '180px',
+    marginRight: '16px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    display: 'none',
+    
+    fontSize: '16px',
+    lineHeight: '16px',
+    fontWeight: '700',
+
+
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('desktop')]: {
+        display: 'block',
+        lineHeight: '18px',
+    }
+})) as typeof Typography;
+
 
 export const NavContainer = styled('div')(({theme})=> ({
     paddingTop: '34px',
@@ -117,10 +138,6 @@ export const Nav = styled('nav')(({theme})=> ({
         flexDirection:'row',
         gap: '32px'
     },
-}));
-
-export const LinkContainer = styled(`div`)(({theme})=> ({
-
 }));
 
 export const LogOffBtn = styled(ButtonBase)(({theme})=>({

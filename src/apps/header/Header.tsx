@@ -13,19 +13,23 @@ import {
     LogOffBtn, 
     Nav, 
     NavContainer, 
-    UserContainer 
+    UserContainer, 
+    UserName
 } from "./styled";
 import React, { useState } from "react";
 import { Backdrop } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { store } from "../../redux/store";
 import { userSignOut } from "../../redux/auth/operations";
+import { useSelector } from "react-redux";
+import { selectAuthUserName } from "../../redux/auth/selectors";
 
 export type AppDispatch = typeof store.dispatch;
 
 export function Header() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const dispatch = useDispatch<AppDispatch>();
+    const userName = useSelector(selectAuthUserName);
 
     const handleModal = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget)setIsModalOpen(!isModalOpen);
@@ -121,7 +125,12 @@ export function Header() {
                         </Box>
                         
                         {/* user icon, log out btn */}
-                        <Box sx={{ flexGrow: 0 }}>
+                        <Box sx={{ 
+                            flexGrow: 0, 
+                            display: 'flex', 
+                            flexDirection: 'row', 
+                            alignItems: 'center' 
+                        }}>
                             <IconButton sx={{ 
                                 p: 0,
                                 [theme.breakpoints.up('mobileS')]: {
@@ -129,14 +138,16 @@ export function Header() {
                                 },
                                 
                                 [theme.breakpoints.up('tablet')]: {
-                                    marginRight:'16px'
+                                    marginRight:'8px'
                                 }
                             }}>
                                 <UserContainer>
-                                    <p>L</p>
+                                    {userName ? <Typography>{userName[0]}</Typography> : <p>N</p>}
                                 </UserContainer>
                             </IconButton>
-                            
+
+                            <UserName>{userName}</UserName>
+
                             <LogOffBtn 
                                 onClick={handleLogOut}
                             >Log out</LogOffBtn>
