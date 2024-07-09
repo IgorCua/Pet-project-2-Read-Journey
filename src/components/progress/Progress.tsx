@@ -122,6 +122,29 @@ export const Progress = () => {
         return dayHistory[dayHistory.length - 1].finishedPages;
     }
 
+    function fibonacciMemoized(n: any) {
+        const cache: any = {};
+        
+        function fibonacci(n: any): any {
+          if (n === 0 || n === 1) {
+            return n;
+          }
+      
+          if (cache[n]) {
+            return cache[n];
+          }
+      
+          const result = fibonacci(n - 1) + fibonacci(n - 2);
+          cache[n] = result;
+          return result;
+        }
+        console.log('cache', cache)
+        return fibonacci(n);
+      }
+      
+      console.log(fibonacciMemoized(15)); // Output: 5 (calculated and stored in cache)
+      console.log(fibonacciMemoized(15));
+
     return <Container component={'div'}>
         <HeaderContainer>
             <Header variant="h2">
@@ -209,7 +232,8 @@ export const Progress = () => {
                                     padding: '0px',
                                     position: 'absolute',
                                     right: '0px',
-                                    transform: 'translate(22px, -150%)'
+                                    top: '50%',
+                                    transform: 'translate(22px, -50%)'
                                 }}>
                                     <Icon iconName={'#icon-trash-bin'} sx={{
                                         width: '14px', 

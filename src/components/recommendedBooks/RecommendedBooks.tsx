@@ -1,12 +1,16 @@
-import { Typography } from "@mui/material"
-import { CardsContainer } from "./styled"
-import { Suspense, useEffect } from "react"
-import { useSelector } from "react-redux"
-import { selectRecommendedBooks } from "../../redux/books/selectors"
-import { useDispatch } from "react-redux"
-import { store } from "../../redux/store"
-import { booksGetRecommended } from "../../redux/books/operations"
-import { BookCard } from "../bookCard/BookCard"
+import { Typography } from "@mui/material";
+import { Suspense, lazy, useEffect } from "react";
+import { CardsContainer } from "./styled";
+import { useSelector } from "react-redux";
+import { selectRecommendedBooks } from "../../redux/books/selectors";
+import { useDispatch } from "react-redux";
+import { store } from "../../redux/store";
+import { booksGetRecommended } from "../../redux/books/operations";
+
+const BookCard: React.FC<any> = lazy((): any => 
+    import('../bookCard/BookCard')
+    .then((module) => ({default: module.BookCard}))
+);
 
 type AppDispatch = typeof store.dispatch;
 
@@ -73,8 +77,9 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
         }
     });
 
-    return <Suspense fallback={<Typography>Loading...</Typography>}>
-        {!isLoading && <CardsContainer sx={sx}>
+    return <Suspense fallback={<Typography sx={{fontSize: '60px', color: 'white'}}>Loading...</Typography>}>
+        {/* {!isLoading && <CardsContainer sx={sx}> */}
+        <CardsContainer sx={sx}>
             {booksObj && booksObj.results.map((book, i)=>{
                 if(window.innerWidth < 768 && i < 2){
                     return <BookCard
@@ -97,7 +102,7 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
                     pages={book.totalPages}
                 />
             })}
-        </CardsContainer>}
+        </CardsContainer>
     </Suspense>
 
 }

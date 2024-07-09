@@ -15,10 +15,18 @@ export const Container = styled(Box)(({theme}) => ({
     },
 })) as typeof Box;
 
-export const Image = styled('img')(({theme}) => ({
+export const ImageContainer = styled(Box)(({theme}) => ({
     marginBottom: '8px',
     width: '137px',
     height: '208px',
+    borderRadius: '8px',
+    background: `url(${require('../../assets/images/book-opened-small-2x.png')}) no-repeat center`,
+    backgroundSize: '111px 72px'
+})) as typeof Box;
+
+export const Image = styled('img')(({theme}) => ({
+    width: '100%',
+    height: '100%',
     borderRadius: '8px',
     transitionDuration: '250ms',
     transitionProperty: 'box-shadow',

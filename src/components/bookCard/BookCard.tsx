@@ -8,6 +8,7 @@ import {
     DescriptionContainer, 
     Header, 
     Image, 
+    ImageContainer, 
     Pages, 
     StartReadingBtn,
     TitleContainer
@@ -108,7 +109,9 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
             errorMessage="Book already added."
         />
         <Container sx={sx} onClick={handleCardClick}>
-            <Image src={url}/>
+            <ImageContainer>
+                <Image src={url}/>
+            </ImageContainer>
             <DescriptionContainer>
                 <TitleContainer>
                     <Header variant="h3" noWrap>{title}</Header>
@@ -152,7 +155,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
             isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
                 <BackdropContainer>
                     <BackdropCardContainer>
-                        <Image src={url} sx={{ 
+                        <Image loading="lazy" src={url} sx={{ 
                             marginBottom: '16px',
                             width: '100%',
                             height: '208px',

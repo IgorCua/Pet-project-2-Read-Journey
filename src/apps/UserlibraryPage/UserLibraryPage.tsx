@@ -262,7 +262,7 @@ export const UserLibraryPage = () => {
                             },
                             '& .MuiBox-root':{
                                 width: '71px',
-                                '& img': {
+                                '&:first-of-type': {
                                     height: '107px'
                                 },
                                 '& h3': {
