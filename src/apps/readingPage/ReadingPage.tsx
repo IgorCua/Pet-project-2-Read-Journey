@@ -208,6 +208,7 @@ export const ReadingPage = () => {
                                 <Text component={'p'} sx={{
                                     fontSize: '34px',
                                     lineHeight: '34px',
+                                    transform: 'translate(0px, 2px)',
                                     [theme.breakpoints.up('tablet')]:{
                                         fontSize: '50px',
                                         lineHeight: '70px',
@@ -246,7 +247,7 @@ export const ReadingPage = () => {
                         [theme.breakpoints.up('desktop')]: {
                             // maxWidth: '224px',
                         },
-                        '& img':{
+                        '& .MuiBox-root:first-of-type':{
                             cursor: 'auto',
                             [theme.breakpoints.up('tablet')]: {
                                 height: '256px',
