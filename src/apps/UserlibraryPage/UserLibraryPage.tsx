@@ -224,7 +224,11 @@ export const UserLibraryPage = () => {
             errorMessage={handleErrorMessage()}
         />}
         <Suspense>
-        <Dashboard>
+        <Dashboard sx={{
+            [theme.breakpoints.up('desktop')]: {
+                gap: '78px'
+            }
+        }}>
             <>
                 <ContainerForm>
                     <FormHeader>Filter:</FormHeader>

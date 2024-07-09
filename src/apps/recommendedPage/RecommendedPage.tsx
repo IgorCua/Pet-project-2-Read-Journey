@@ -155,9 +155,7 @@ export const RecommendedPage = () => {
                 errorMessage={handleErrorMessage()}
 
             />}
-            <Dashboard sx={{
-                
-            }}>
+            <Dashboard>
                 <>
                 <ContainerForm>
                     <FormHeader>Filter:</FormHeader>
