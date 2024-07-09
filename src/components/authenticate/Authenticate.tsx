@@ -12,8 +12,6 @@ type Props = {
     children: React.ReactElement
 }
 
-type DispatchAction = () => void;
-
 type ErrorObj = {
     errorCode: string,
     errorMessage: string,

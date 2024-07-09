@@ -17,7 +17,7 @@ export const Section = styled(Box)(({theme}) => ({
     },
 
     [theme.breakpoints.up('desktop')]:{
-        padding: '20px 20px',
+        padding: '40px 20px 20px 20px',
         width: '353px',
         flexDirection: 'column',
     }

@@ -17,7 +17,8 @@ import {
     Header,
     MenuIconWrapper,
     ContainerForm,
-    FormHeader
+    FormHeader,
+    StyledListItem
 } from "./styled";
 import { Icon } from "../../components/icon/Icon";
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
@@ -154,7 +155,9 @@ export const RecommendedPage = () => {
                 errorMessage={handleErrorMessage()}
 
             />}
-            <Dashboard>
+            <Dashboard sx={{
+                
+            }}>
                 <>
                 <ContainerForm>
                     <FormHeader>Filter:</FormHeader>
@@ -179,29 +182,29 @@ export const RecommendedPage = () => {
                 </ContainerForm>
 
                 <DescripotionList>
-                    <ListItem>
+                    <StyledListItem>
                         <ListHeader>
                             Start your workout
                         </ListHeader>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <NumberDiv><p>1</p></NumberDiv>
                         <ListItemText>
                             Create a personal library: <Span>add the books you intend to read to it.</Span>
                         </ListItemText>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <NumberDiv><p>2</p></NumberDiv>
                         <ListItemText>
                             Create your first workout: <Span>define a goal, choose a period, start training.</Span>
                         </ListItemText>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <LinkButton onClick={handleLinkClick}>My library</LinkButton>
                         <IconWrapper onClick={handleLinkClick} size="small" sx={{padding: '0'}}>
                             <Icon iconName={'#icon-arrow-right'} sx={{width: '24px', height: '24px'}}/>
                         </IconWrapper>
-                    </ListItem>
+                    </StyledListItem>
                 </DescripotionList>
                 {window.innerWidth >= 1280 && <Figure>
                     <Img

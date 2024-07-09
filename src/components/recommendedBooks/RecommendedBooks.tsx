@@ -78,8 +78,8 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
     });
 
     return <Suspense fallback={<Typography sx={{fontSize: '60px', color: 'white'}}>Loading...</Typography>}>
-        {/* {!isLoading && <CardsContainer sx={sx}> */}
-        <CardsContainer sx={sx}>
+        {!isLoading && <CardsContainer sx={sx}>
+        {/* <CardsContainer sx={sx}> */}
             {booksObj && booksObj.results.map((book, i)=>{
                 if(window.innerWidth < 768 && i < 2){
                     return <BookCard
@@ -102,7 +102,7 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
                     pages={book.totalPages}
                 />
             })}
-        </CardsContainer>
+        </CardsContainer>}
     </Suspense>
 
 }

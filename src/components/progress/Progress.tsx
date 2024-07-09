@@ -67,7 +67,7 @@ export const Progress = () => {
 
         return result;
     });
-    console.log(progressDataArr)
+    
     function getFormattedDate(date: any) {
         let year = date.getFullYear();
         let month = (1 + date.getMonth()).toString().padStart(2, '0');
@@ -77,7 +77,6 @@ export const Progress = () => {
     }
 
     const handleDeleteDiaryData = (readingId: string) => {
-        console.log('delete', readingId);
         if(bookInfo?._id){
             dispatch(booksDeleteReading({bookId: bookInfo._id, readingId: readingId}));
         }
@@ -121,29 +120,6 @@ export const Progress = () => {
 
         return dayHistory[dayHistory.length - 1].finishedPages;
     }
-
-    function fibonacciMemoized(n: any) {
-        const cache: any = {};
-        
-        function fibonacci(n: any): any {
-          if (n === 0 || n === 1) {
-            return n;
-          }
-      
-          if (cache[n]) {
-            return cache[n];
-          }
-      
-          const result = fibonacci(n - 1) + fibonacci(n - 2);
-          cache[n] = result;
-          return result;
-        }
-        console.log('cache', cache)
-        return fibonacci(n);
-      }
-      
-      console.log(fibonacciMemoized(15)); // Output: 5 (calculated and stored in cache)
-      console.log(fibonacciMemoized(15));
 
     return <Container component={'div'}>
         <HeaderContainer>
