@@ -223,7 +223,6 @@ export const UserLibraryPage = () => {
             erorrCode={booksError.response?.status}
             errorMessage={handleErrorMessage()}
         />}
-        <Suspense>
         <Dashboard sx={{
             [theme.breakpoints.up('desktop')]: {
                 gap: '78px'
@@ -285,7 +284,6 @@ export const UserLibraryPage = () => {
                 </ContainerRecommended>
             </>
         </Dashboard>
-        </Suspense>
         <ContainerMyLibrary>
             <LibraryHeaderContainer>
                 <LibraryHeader>My Library</LibraryHeader>

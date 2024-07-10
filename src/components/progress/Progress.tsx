@@ -10,6 +10,11 @@
 import { useSelector } from "react-redux"
 import { selectBookInfo } from "../../redux/books/selectors"
 import { 
+    BackdropContentContainer,
+    BackdropHeader,
+    BackdropImage,
+    BackdropSpan,
+    BackdropText,
     CircleContainer,
     Container, 
     DataContainer, 
@@ -33,18 +38,20 @@ import {
 } from "./styled";
 import { Box, ButtonBase, IconButton, Typography } from "@mui/material";
 import { Icon } from "../icon/Icon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Opacity } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { booksDeleteReading } from "../../redux/books/operations";
 import { AppDispatch } from "../../redux/store";
 import { theme } from "../../styles/themes";
+import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 
 export const Progress = () => {
     const bookInfo = useSelector(selectBookInfo);
     const progressArr = bookInfo ? bookInfo.progress : null;
     const [isDiary, setIsDiary] = useState(true);
     const dispatch = useDispatch<AppDispatch>();
+    const [isReadingFinished, setIsReadingFinished] = useState(false);
 
     const progressDataArr: any = progressArr && progressArr.map((elem) => {
         let result: any = {};
@@ -121,179 +128,218 @@ export const Progress = () => {
         return dayHistory[dayHistory.length - 1].finishedPages;
     }
 
-    return <Container component={'div'}>
-        <HeaderContainer>
-            <Header variant="h2">
-                {isDiary ? 'Diary' : 'Progress'}
-            </Header>
-            <IconContainer>
-                <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(true)}>
-                    <Icon 
-                        iconName={'#icon-sand-clock'}
-                        sx={{
-                            width: '16px', 
-                            height: '16px', 
-                            opacity: `${isDiary ? 1 : 0.3}`,
-                            cursor: 'pointer',
-                            '&:hover':{
-                                opacity: '1'
-                            },
-                            [theme.breakpoints.up('tablet')]: {
-                                width: '20px', 
-                                height: '20px', 
-                            }
-                        }}
-                    />
-                </IconButton>
-                <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(false)}>
-                    <Icon 
-                        iconName={'#icon-pie-chart'}
-                        sx={{
-                            width: '16px', 
-                            height: '16px', 
-                            opacity: `${!isDiary ? 1 : 0.3}`,
-                            cursor: 'pointer',
-                            '&:hover':{
-                                opacity: '1'
-                            },
-                            [theme.breakpoints.up('tablet')]: {
-                                width: '20px', 
-                                height: '20px', 
-                            }
-                        }}
-                    />
-                </IconButton>
-            </IconContainer>
-        </HeaderContainer>
-        {/* <ScrollWrapper> */}
-            {isDiary && <ListContainer>
-                <DiaryList>
-                    {progressArr && progressDataArr && progressArr.map((elem, i)=>{
-                        return <DiaryListItem key={elem._id} id="listItem">
-                        {!ifSameDate(i) && <Icon iconName={'#icon-square'} sx={{
-                            position: 'absolute',
-                            width: '16px', 
-                            height: '16px',
-                            top: '-3px',
-                            left: '-25px',
-                            opacity: '0.3',
-                            // zIndex: '0',
-                            [theme.breakpoints.up('tablet')]: {
-                                width: '20px', 
-                                height: '20px',
-                                top: '0px',
-                                left: '-26px',
-                            }
-                        }}/>}
-                        <ListItemContainer sx={{flexGrow: 1}}>
-                            {!ifSameDate(i) && <ListItemDate>{progressDataArr[i].date}</ListItemDate>}
-                            <ListItemPercent>{progressDataArr[i].percent}%</ListItemPercent>
-                            <ListItemMins>
-                                {progressDataArr[i].minutes ? `${progressDataArr[i].minutes} minutes` : 'active reading'}
-                            </ListItemMins>
-                        </ListItemContainer>
+    useEffect(() => {
+        if(CountReadingPercent() >= 100) setIsReadingFinished(true);
+    })
 
-                        <ListItemContainer>
-                           {!ifSameDate(i) && <ListItemPagesNum>{handlePagesRead(progressDataArr[i].date)} pages</ListItemPagesNum>}
-                            <Box sx={{marginBottom: '4px', position: 'relative'}}>
-                                <Icon iconName={'#icon-reading-chart'} sx={{
-                                    width: '43px', 
-                                    height: '18px', 
-                                    [theme.breakpoints.up('tablet')]: {
-                                        width: '59px', 
-                                        height: '25px', 
-                                    }
-                                }}/>
-                                <IconButton size="small" onClick={() => handleDeleteDiaryData(elem._id)} sx={{
-                                    padding: '0px',
-                                    position: 'absolute',
-                                    right: '0px',
-                                    top: '50%',
-                                    transform: 'translate(22px, -50%)'
-                                }}>
-                                    <Icon iconName={'#icon-trash-bin'} sx={{
-                                        width: '14px', 
-                                        height: '14px',
+    return <>
+        {isReadingFinished && <CustomBackdrop 
+            isModalOpen={isReadingFinished} 
+            setIsModalOpen={setIsReadingFinished}
+            sx={{
+                
+                [theme.breakpoints.up('mobileS')]: {
+                    padding: '60px 46px'
+                },
+                [theme.breakpoints.up('mobileM')]: {
+                    padding: '60px 46px'
+                },
+                [theme.breakpoints.up('tablet')]: {
+                    padding: '50px'
+                }
+            }}
+        >
+            <BackdropContentContainer>
+                <BackdropImage 
+                    alt="books image"
+                    src={`${require('../../assets/images/books-1x.png')}`}
+                    srcSet={`
+                        ${require("../../assets/images/books-1x.png")} 1x,
+                        ${require("../../assets/images/books-2x.png")} 2x
+                    `}
+                />
+                <BackdropHeader>The book is read</BackdropHeader>
+                <BackdropText>
+                    It was an <BackdropSpan component={'span'}>exciting journey</BackdropSpan>, 
+                    where each page revealed new horizons, 
+                    and the characters became inseparable friends.
+                </BackdropText>
+            </BackdropContentContainer>
+        </CustomBackdrop>}
+        <Container component={'div'}>
+            <HeaderContainer>
+                <Header variant="h2">
+                    {isDiary ? 'Diary' : 'Progress'}
+                </Header>
+                <IconContainer>
+                    <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(true)}>
+                        <Icon 
+                            iconName={'#icon-sand-clock'}
+                            sx={{
+                                width: '16px', 
+                                height: '16px', 
+                                opacity: `${isDiary ? 1 : 0.3}`,
+                                cursor: 'pointer',
+                                '&:hover':{
+                                    opacity: '1'
+                                },
+                                [theme.breakpoints.up('tablet')]: {
+                                    width: '20px', 
+                                    height: '20px', 
+                                }
+                            }}
+                        />
+                    </IconButton>
+                    <IconButton size="small" sx={{padding: '2px'}} onClick={() => setIsDiary(false)}>
+                        <Icon 
+                            iconName={'#icon-pie-chart'}
+                            sx={{
+                                width: '16px', 
+                                height: '16px', 
+                                opacity: `${!isDiary ? 1 : 0.3}`,
+                                cursor: 'pointer',
+                                '&:hover':{
+                                    opacity: '1'
+                                },
+                                [theme.breakpoints.up('tablet')]: {
+                                    width: '20px', 
+                                    height: '20px', 
+                                }
+                            }}
+                        />
+                    </IconButton>
+                </IconContainer>
+            </HeaderContainer>
+            {/* <ScrollWrapper> */}
+                {isDiary && <ListContainer>
+                    <DiaryList>
+                        {progressArr && progressDataArr && progressArr.map((elem, i)=>{
+                            return <DiaryListItem key={elem._id} id="listItem">
+                            {!ifSameDate(i) && <Icon iconName={'#icon-square'} sx={{
+                                position: 'absolute',
+                                width: '16px', 
+                                height: '16px',
+                                top: '-3px',
+                                left: '-25px',
+                                opacity: '0.3',
+                                // zIndex: '0',
+                                [theme.breakpoints.up('tablet')]: {
+                                    width: '20px', 
+                                    height: '20px',
+                                    top: '0px',
+                                    left: '-26px',
+                                }
+                            }}/>}
+                            <ListItemContainer sx={{flexGrow: 1}}>
+                                {!ifSameDate(i) && <ListItemDate>{progressDataArr[i].date}</ListItemDate>}
+                                <ListItemPercent>{progressDataArr[i].percent}%</ListItemPercent>
+                                <ListItemMins>
+                                    {progressDataArr[i].minutes ? `${progressDataArr[i].minutes} minutes` : 'active reading'}
+                                </ListItemMins>
+                            </ListItemContainer>
+
+                            <ListItemContainer>
+                            {!ifSameDate(i) && <ListItemPagesNum>{handlePagesRead(progressDataArr[i].date)} pages</ListItemPagesNum>}
+                                <Box sx={{marginBottom: '4px', position: 'relative'}}>
+                                    <Icon iconName={'#icon-reading-chart'} sx={{
+                                        width: '43px', 
+                                        height: '18px', 
+                                        [theme.breakpoints.up('tablet')]: {
+                                            width: '59px', 
+                                            height: '25px', 
+                                        }
                                     }}/>
-                                </IconButton> 
-                            </Box>
-                            <ListItemPagesPerHour>
-                                {elem.speed ? `${elem.speed} pages per hour` : 'active reading'}
-                            </ListItemPagesPerHour>
-                        </ListItemContainer>   
-                        </DiaryListItem>
-                    })}
-                </DiaryList>
-            </ListContainer>}
-            {!isDiary && window.innerWidth >= 1280 && <StatisticsDescription>
-                    Each page, each chapter is a new round of knowledge, a new step towards understanding. By rewriting statistics, we create our own reading history.
-                </StatisticsDescription>}
-            {!isDiary && <ProgressContainer>
-                <CircleContainer>
-                    <Icon iconName={'#icon-progress-circle'} sx={{
-                        width: '116px', 
-                        height: '116px', 
-                        transform: 'rotate(270deg)',
-                        // strokeDashoffset: '565.48px'
-                        transitionDuration: '350px',
-                        transitionProperty: 'stroke-dashoffset',
-                        strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`,
-                        strokeWidth: '10px',
-                        // 'circle': {
-                        //     strokeWidth: '15px'
-                        // },
+                                    <IconButton size="small" onClick={() => handleDeleteDiaryData(elem._id)} sx={{
+                                        padding: '0px',
+                                        position: 'absolute',
+                                        right: '0px',
+                                        top: '50%',
+                                        transform: 'translate(22px, -50%)'
+                                    }}>
+                                        <Icon iconName={'#icon-trash-bin'} sx={{
+                                            width: '14px', 
+                                            height: '14px',
+                                        }}/>
+                                    </IconButton> 
+                                </Box>
+                                <ListItemPagesPerHour>
+                                    {elem.speed ? `${elem.speed} pages per hour` : 'active reading'}
+                                </ListItemPagesPerHour>
+                            </ListItemContainer>   
+                            </DiaryListItem>
+                        })}
+                    </DiaryList>
+                </ListContainer>}
+                {!isDiary && window.innerWidth >= 1280 && <StatisticsDescription>
+                        Each page, each chapter is a new round of knowledge, a new step towards understanding. By rewriting statistics, we create our own reading history.
+                    </StatisticsDescription>}
+                {!isDiary && <ProgressContainer>
+                    <CircleContainer>
+                        <Icon iconName={'#icon-progress-circle'} sx={{
+                            width: '116px', 
+                            height: '116px', 
+                            transform: 'rotate(270deg)',
+                            // strokeDashoffset: '565.48px'
+                            transitionDuration: '350px',
+                            transitionProperty: 'stroke-dashoffset',
+                            strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`,
+                            strokeWidth: '10px',
+                            // 'circle': {
+                            //     strokeWidth: '15px'
+                            // },
 
-                        [theme.breakpoints.up('tablet')]: {
-                            strokeWidth: '12.42px',
-                            width: '138px', 
-                            height: '138px', 
-                        },
-                        [theme.breakpoints.up('desktop')]: {
-                            strokeWidth: '15.12px',
-                            width: '189px', 
-                            height: '189px', 
-                        },
-                    }}/>
-                    <Typography sx={{
-                        position: 'absolute',
-                        color: theme.palette.custom.textMain,
-                        [theme.breakpoints.up('tablet')]: {
-                            //line width 12
-                            fontSize: '20px',
-                            lineHeight: '20px', 
-                        }
-                    }}>
-                        {CountReadingPercent()}%
-                    </Typography>
-                </CircleContainer>
-                <DataContainer>
-                    <Square/>
-                    <DataTextContainer>
-                        <Typography sx={{
-                            marginBottom: '4px',
-                            fontSize: '14px',
-                            lineHeight: '18px',
-                            color: theme.palette.custom.textMain,
                             [theme.breakpoints.up('tablet')]: {
-                                fontSize: '20px',
-                                lineHeight: '20px', 
+                                strokeWidth: '12.42px',
+                                width: '138px', 
+                                height: '138px', 
                             },
                             [theme.breakpoints.up('desktop')]: {
-                                marginBottom: '8px'
-                            }
-                        }}>{CountReadingPercent()}%</Typography>
+                                strokeWidth: '15.12px',
+                                width: '189px', 
+                                height: '189px', 
+                            },
+                        }}/>
                         <Typography sx={{
-                            fontSize: '10px',
-                            lineHeight: '12px',
-                            color: theme.palette.custom.textSecondary,
+                            position: 'absolute',
+                            color: theme.palette.custom.textMain,
                             [theme.breakpoints.up('tablet')]: {
-                                fontSize: '12px',
-                                lineHeight: '14px', 
+                                //line width 12
+                                fontSize: '20px',
+                                lineHeight: '20px', 
                             }
-                        }}>{getFinishedPages()} pages read</Typography>
-                    </DataTextContainer>
-                </DataContainer>
-            </ProgressContainer>}
-        {/* </ScrollWrapper> */}
-    </Container>
+                        }}>
+                            {CountReadingPercent()}%
+                        </Typography>
+                    </CircleContainer>
+                    <DataContainer>
+                        <Square/>
+                        <DataTextContainer>
+                            <Typography sx={{
+                                marginBottom: '4px',
+                                fontSize: '14px',
+                                lineHeight: '18px',
+                                color: theme.palette.custom.textMain,
+                                [theme.breakpoints.up('tablet')]: {
+                                    fontSize: '20px',
+                                    lineHeight: '20px', 
+                                },
+                                [theme.breakpoints.up('desktop')]: {
+                                    marginBottom: '8px'
+                                }
+                            }}>{CountReadingPercent()}%</Typography>
+                            <Typography sx={{
+                                fontSize: '10px',
+                                lineHeight: '12px',
+                                color: theme.palette.custom.textSecondary,
+                                [theme.breakpoints.up('tablet')]: {
+                                    fontSize: '12px',
+                                    lineHeight: '14px', 
+                                }
+                            }}>{getFinishedPages()} pages read</Typography>
+                        </DataTextContainer>
+                    </DataContainer>
+                </ProgressContainer>}
+            {/* </ScrollWrapper> */}
+        </Container>
+    </>
 }

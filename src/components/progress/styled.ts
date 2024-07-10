@@ -1,6 +1,81 @@
 import { Opacity } from "@mui/icons-material";
 import { Box, List, ListItem, Typography } from "@mui/material";
-import { maxWidth, styled, width } from "@mui/system";
+import { height, maxWidth, styled, width } from "@mui/system";
+
+export const BackdropContentContainer = styled(Box)(({theme}) => ({
+    maxWidth: '242px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignContent: 'center',
+    justifyContent: 'center',
+    textAlign: 'center',
+
+    [theme.breakpoints.up('tablet')]: {
+        // maxWidth: '100%',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // maxWidth: '100%',
+    }
+})) as typeof Box;
+
+export const BackdropImage = styled('img')(({theme}) => ({
+    marginBottom: '20px',
+    alignSelf: 'center',
+    height: '50px',
+    width: '50px',
+
+    [theme.breakpoints.up('tablet')]: {
+        marginBottom: '32px',
+        width: '68px',
+        height: '70px',
+        // maxWidth: '100%',
+    },
+}));
+
+export const BackdropHeader = styled(Typography)(({theme}) => ({
+    marginBottom: '10px',
+    fontSize: '18px',
+    lineHeight: '18px',
+
+    color: theme.palette.custom.textMain,
+    [theme.breakpoints.up('tablet')]: {
+        marginBottom: '14px',
+        fontSize: '20px',
+        lineHeight: '20px',
+        // maxWidth: '100%',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // maxWidth: '100%',
+    }
+})) as typeof Typography;
+
+export const BackdropText = styled(Typography)(({theme}) => ({
+    fontSize: '14px',
+    lineHeight: '18px',
+
+    color: theme.palette.custom.textSecondary,
+
+    [theme.breakpoints.up('tablet')]: {
+        // maxWidth: '100%',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // maxWidth: '100%',
+    }
+})) as typeof Typography;
+
+export const BackdropSpan = styled(Typography)(({theme}) => ({
+    fontSize: '14px',
+    lineHeight: '18px',
+
+    color: theme.palette.custom.textMain,
+
+    [theme.breakpoints.up('tablet')]: {
+        // maxWidth: '100%',
+    },
+    [theme.breakpoints.up('desktop')]: {
+        // maxWidth: '100%',
+    }
+})) as typeof Typography;
 
 export const Container = styled(Box)(({theme}) => ({
     [theme.breakpoints.up('tablet')]: {
