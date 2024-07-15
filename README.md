@@ -25,7 +25,8 @@ Must include:
 
 Unauthorized user
 
-  Register page "/register"
+  Register page "/register"  
+  
   Consists of a RegisterForm and a link to the Login page /login ("Already have an account?")
 
   - RegisterForm contains inputs (Name, Email, Password), a "submit" button - Registration, and should be validated using the react-hook-form + Yup libraries.
@@ -41,6 +42,7 @@ Unauthorized user
     redirected to the private Recommended page /recommended.
 
 Login page "/login"
+
 Consists of a LoginForm and a link to the Register page /register ("Don’t have an account?")
 
 - LoginForm contains inputs (Email, Password), a "submit" button - Log In, and should be validated using the react-hook-form + Yup libraries.
@@ -55,6 +57,7 @@ Consists of a LoginForm and a link to the Register page /register ("Don’t have
   redirected to the private Recommended page /recommended.
 
 Authorized user
+
 It includes a Header that is displayed on all pages for an authorized user.
 
 The Header includes:
@@ -78,6 +81,7 @@ The Header includes:
 - Regardless of the backend response, the user should be 'logged out' on the client side by clearing the redux store and localStorage.
 
 Recommended page "/recommended"
+
 Consists of panel Dashboard and RecommendedBooks block.
 
 The Dashboard component should be implemented as a universal component that wraps different content depending on the page. On the Recommended page, it includes:
@@ -100,6 +104,7 @@ The RecommendedBooks component includes:
  
  	
 My Library page "/library"
+
 Consists of panel Dashboard and MyLibraryBooks block.
 
 - The Dashboard component should be implemented as a universal component that wraps different content depending on the page. On the My Library page, it includes:
@@ -114,6 +119,7 @@ The MyLibraryBooks component includes:
 - List of user's books, presented as a series of cards. Each book card includes an image of the book cover, its title, author, and a button. Clicking this button  sends a request to the server to delete the book from the user's library. Clicking on the book cover opens a modal window with detailed information about the book and a 'Start reading' button (which allows the user to begin reading by navigating to the Reading Page). Clicking on the backdrop of the modal window, the button with a cross icon, or pressing the ESC key should close the modal window.
 
 Reading page "/reading"
+
 Consists of panel Dashboard and MyBook block.
 
 - The Dashboard component should be implemented as a universal component that wraps different content depending on the page. On the Reading page, it includes:
