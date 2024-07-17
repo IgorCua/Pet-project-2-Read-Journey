@@ -1,10 +1,11 @@
 import { Field, FormikProps, withFormik } from "formik";
 import { FormTextField } from "../materialUI/FormTextField";
-import { ButtonBox, CustomErrorMessage, CustomForm, ErrorBox, InputContainer, Submit } from "./formStyled";
+import { ButtonBox, StyledErrorMessage, CustomForm, ErrorBox, InputContainer, Submit } from "./formStyled";
 import { InputAdornment } from "@mui/material";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
 import { ReactElement, useState } from "react";
+import { positions } from "@mui/system";
 
 
 interface InputDataObjInterface {
@@ -83,8 +84,9 @@ const InnerForm = (props: Props & FormikProps<any>) => {
 
     return <CustomForm sx={sx}>
         {inputsDataArr.length > 0 && inputsDataArr.map((obj, i) => {
-            return <InputContainer key={i}>{obj.type !== 'password' 
+            return <><InputContainer key={i}>{obj.type !== 'password' 
                 ? <>
+                    <ErrorBox name={obj.name} sx={checkIfError(obj.name) && {boxShadow: '0px 0px 0px 1px red'}}>
                     <Field 
                         type={obj.type} 
                         name={obj.name} 
@@ -106,10 +108,11 @@ const InnerForm = (props: Props & FormikProps<any>) => {
                             },
                         }}
                     />
-                    <CustomErrorMessage name={obj.name} component='p'/>
-                    {checkIfError(obj.name) && <ErrorBox name={obj.name}/>}
+                    </ErrorBox>
+                    <StyledErrorMessage name={obj.name} component='p'/>
                 </>
                 : <>
+                    <ErrorBox name={obj.name} sx={checkIfError(obj.name) && {boxShadow: '0px 0px 0px 1px red'}}>
                     <Field 
                         type={!isEyeOpen ? 'password' : 'text'} 
                         name={obj.name} 
@@ -123,7 +126,7 @@ const InnerForm = (props: Props & FormikProps<any>) => {
                         }}
                         sx={{
                             zIndex: '10',
-
+                            position: 'relative',
                             '&:hover .MuiOutlinedInput-notchedOutline': {
                                 borderColor: `${checkIfError(obj.name) ? 'transparent' : theme.palette.custom.authInputBorder}`
                             },
@@ -132,11 +135,14 @@ const InnerForm = (props: Props & FormikProps<any>) => {
                             },
                         }}
                     />
-                    <CustomErrorMessage name={obj.name} component='p'/>
-                    {checkIfError(obj.name) && <ErrorBox name={obj.name}/>}
+                    </ErrorBox>
+                    {/* {checkIfError(obj.name) && <ErrorBox name={obj.name}/>} */}
+                    <StyledErrorMessage name={obj.name} component='p'/>
                 </>
             }
             </InputContainer>
+            {/* <StyledErrorMessage name={obj.name} component='p'/> */}
+            </>
         })}
         <ButtonBox>
             <Submit id="submitButton" type="submit">

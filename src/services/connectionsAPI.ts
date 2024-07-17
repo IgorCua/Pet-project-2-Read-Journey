@@ -13,13 +13,6 @@ interface IUserSignin {
     password: string
 }
 
-// interface IBooksGetRecommended {
-//     title?: string,
-//     author?: string,
-//     page?: number
-//     limit?: number
-// }
-
 interface IBooksAddBook {
     title: string,
     author: string,
@@ -32,6 +25,7 @@ interface IBooksGetRecommended {
     page?: number | string | null
     limit?: number | string | null
 }
+
 type PaginationResponse<T> = {
     results: T[],
     totalPages: number,
@@ -39,9 +33,7 @@ type PaginationResponse<T> = {
     perPage: number
 }
 
-// type ErrorMessage = {
-//     message: string
-// }
+
 type Book = {
     _id: string,
     title: string,
@@ -50,15 +42,6 @@ type Book = {
     totalPages: number,
     recommended: boolean
 }
-
-// interface BookProgressInterface {
-//     startPage: number,
-//     startReading: Date | string,
-//     finishPage: number,
-//     finishReading: string,
-//     speed: number,
-//     status: string
-// }
 
 interface AddBookInterface {
     _id: string,
@@ -84,7 +67,6 @@ type SignupRes = {
     message: string
 }
 
-// user connections
 export const usersSignupAPI = (data: IUserSighup) => {
     return axios.post<SignupRes>('/users/signup', data).then(res => {
         return res;
@@ -118,16 +100,10 @@ export const usersSignOutAPI = () => {
 // books connections
 // create object success error responces
 export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-// export const booksGetRecommendedAPI = (data: any) => {
     return axios.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {
         return res;
     });
 };
-// export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-//     return axios.get<PaginationResponse<Book> | ErrorMessage>('/users/signout', {params: data}).then(res => {
-//         return res;
-//     });
-// };
 
 export const booksAddBookAPI = (data: IBooksAddBook) => {
     return axios.post<any, AddBookInterface>('/books/recommend', data).then(res => {
@@ -150,7 +126,6 @@ export const booksRemoveBookAPI = (data: string) => {
 export const booksGetUserBooksAPI = (data: UserBooksByStatus) => {
     console.log('booksGetUserBooksAPI', data);
     return axios.get<any, AddBookInterface[]>('/books/own', {params: data}).then(res => {
-    // return axios.get<any, any>('/books/own', {params: data}).then(res => {
         return res;
     });
 };

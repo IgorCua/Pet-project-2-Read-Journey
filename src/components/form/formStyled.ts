@@ -40,20 +40,27 @@ export const InputContainer = styled(Box)(({theme}) =>({
     width: '100%'
 })) as typeof Box;
 
-export const CustomErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
-    position: 'absolute',
-    top: '30px',
-    left: '14px',
+export const StyledErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
+    // position: 'absolute',
+    // top: '30px',
+    // left: '14px',
+    marginTop: '4px',
+    paddingLeft: '14px',
+    paddingRight: '14px',
 
     lineHeight: '1.1em',
-    color: 'red',
     fontSize: '10px',
+    color: 'red',
 
     zIndex: '10',
     
     [theme.breakpoints.up('tablet')]: {
         top: '34px',
         fontSize: '12px',
+    },
+
+    [theme.breakpoints.up('desktop')]: {
+        marginTop: '8px',
     },
 
 })) as typeof ErrorMessage;
@@ -63,9 +70,11 @@ export const ErrorBox: any = styled('div')(({theme}) => ({
     top: '0px',
     width: '100%',
     height: '100%',
-    position: 'absolute',
+    // height: '50px',
+    // position: 'absolute',
 
-    boxShadow: '0px 0px 0px 1px red',
+    // boxShadow: '0px 0px 0px 1px red',
+    boxShadow: 'none',
     borderRadius: '12px',
     zIndex: '5'
 }));
