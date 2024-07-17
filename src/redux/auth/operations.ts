@@ -6,7 +6,7 @@ import {
     usersRefreshTokenAPI,
     usersSignOutAPI, 
     // booksAddByIdAPI
-} from "../../services/connectionsAPI"
+} from "../../services/userConnectionsAPI"
 import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
