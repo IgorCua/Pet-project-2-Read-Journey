@@ -54,11 +54,10 @@ export const ErrorModal = (props: Props) => {
         }
     }, [isModalOpen]);
 
-    if(typeof dispatchFunction === 'function')console.log('error dispatch');
+    // if(typeof dispatchFunction === 'function')console.log('error dispatch');
     
     const handleError = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget) {
-            console.log('error modal');
             if(type === 'userError') dispatch(userRemoveError());
             if(type === 'booksError') dispatch(booksRemoveError());
         };

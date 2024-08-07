@@ -84,7 +84,7 @@ const InnerForm = (props: Props & FormikProps<any>) => {
 
     return <CustomForm sx={sx}>
         {inputsDataArr.length > 0 && inputsDataArr.map((obj, i) => {
-            return <><InputContainer key={i}>{obj.type !== 'password' 
+            return <InputContainer key={i}>{obj.type !== 'password' 
                 ? <>
                     <ErrorBox name={obj.name} sx={checkIfError(obj.name) && {boxShadow: '0px 0px 0px 1px red'}}>
                     <Field 
@@ -136,13 +136,10 @@ const InnerForm = (props: Props & FormikProps<any>) => {
                         }}
                     />
                     </ErrorBox>
-                    {/* {checkIfError(obj.name) && <ErrorBox name={obj.name}/>} */}
                     <StyledErrorMessage name={obj.name} component='p'/>
                 </>
             }
             </InputContainer>
-            {/* <StyledErrorMessage name={obj.name} component='p'/> */}
-            </>
         })}
         <ButtonBox>
             <Submit id="submitButton" type="submit">
@@ -170,7 +167,6 @@ export const Form = (props: Props) => {
         validationSchema: validationSchema,
       
         handleSubmit: values => {
-            console.log(values);
             handleSubmit(values);
         },
     })(InnerForm);

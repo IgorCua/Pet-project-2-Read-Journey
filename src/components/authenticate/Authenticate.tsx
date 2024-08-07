@@ -39,7 +39,6 @@ export const Authenticate = ({children}: Props) => {
 
     const handleDelay = useCallback(() => {
         if(decodedToken) {
-            // console.log('authenticate count to refresh', decodedToken.exp * 1000 - new Date().getTime());
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;

@@ -38,6 +38,7 @@ export const DescriptionContainer = styled('div')(({theme}) => ({
     display: 'flex',
     flexDirection: 'row',
     alignContent: 'center',
+    justifyContent: 'center',
 
     // 'img:has(~ &:hover)': {
     //     boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
@@ -101,6 +102,7 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center', 
+    justifyContent: 'center',
     
     '& p':{
         maxWidth: '100%'

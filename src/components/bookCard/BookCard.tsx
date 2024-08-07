@@ -37,13 +37,6 @@ type Props = {
     sx?: {}
 }
 
-type BackdropProps = {
-    url: string,
-    title: string,
-    author: string,
-    pages?: number,
-}
-
 type AppDispatch = typeof store.dispatch;
 
 export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}: Props) => {
