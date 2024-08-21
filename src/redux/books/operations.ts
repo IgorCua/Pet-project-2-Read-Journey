@@ -1,8 +1,16 @@
 import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
-import { booksAddBookAPI, booksAddByIdAPI, booksDeleteReadingAPI, booksGetBookInfoAPI, booksGetRecommendedAPI, booksGetUserBooksAPI, booksRemoveBookAPI, booksSaveEndOfReadingAPI, booksSaveReadingStartAPI } from "../../services/connectionsAPI";
-// import axios from "axios";
+import { 
+    booksAddBookAPI, 
+    booksAddByIdAPI, 
+    booksDeleteReadingAPI, 
+    booksGetBookInfoAPI, 
+    booksGetRecommendedAPI, 
+    booksGetUserBooksAPI, 
+    booksRemoveBookAPI, 
+    booksSaveEndOfReadingAPI, 
+    booksSaveReadingStartAPI 
+} from "../../services/booksConnectionsAPI";
 import { axiosToken } from "../../services/axiosSettings";
-// import { BookInterface } from "../reduxTypes";
 
 interface GetRecommendedInterface {
     title?: string,
@@ -21,14 +29,10 @@ interface BooksSaveReading {
     id: string,
     page: number
 }
-// type GetUserBooksInterface = 'unread' | 'in-progress' | 'done' | null;
+
 type UserBooksByStatus = {
     status: string
 } | null;
-// type UserBooksByStatus = {
-//     status: 'unread' | 'in-progress' | 'done'
-// } | null;
-// type GetUserBooksInterface = any;
 
 export const booksGetRecommended: any = createAsyncThunk(
     'books/getRecommended',
@@ -84,7 +88,6 @@ export const booksRemoveBook = createAsyncThunk(
             axiosToken.set();
             await booksRemoveBookAPI(data);
             const userBooks = await booksGetUserBooksAPI(null);
-            // console.log('user books', userBooks)
             return userBooks;
         }
         catch (error: unknown) {
@@ -115,7 +118,6 @@ export const booksSaveReadingStart = createAsyncThunk(
         try{
             await axiosToken.set();
             const res = await booksSaveReadingStartAPI(data);
-            console.log('booksSaveReadingStart', res);
             return res;
         }
         catch (error: unknown) {
@@ -131,7 +133,6 @@ export const booksSaveEndOfReading = createAsyncThunk(
         try{
             await axiosToken.set();
             const res = await booksSaveEndOfReadingAPI(data);
-            console.log('booksSaveEndOfReading', res);
             return res;
         }
         catch (error: unknown) {

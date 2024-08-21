@@ -85,9 +85,13 @@
         <path fill="#30B94D" fill-opacity=".2" d="M60 1 1 9.421V25h59V1Z"/>
         <rect width="60" height="3" fill="#30B94D" rx="1" transform="scale(-1 1) rotate(9.184 -29.76 -370.536)"/>
     </symbol>
-    <symbol id="icon-square" fill="none" viewBox="0 0 16 16">
-        <rect width="16" height="16" fill="#F9F9F9" rx="4"/>
-        <rect width="8" height="8" x="4" y="4" fill="#141414" rx="2"/>
+    <symbol id="icon-square" fill="none" viewBox="0 0 20 20">
+        <rect width="20" height="20" fill="#F9F9F9" rx="4"/>
+        <rect width="12" height="12" x="4" y="4" fill="#141414" rx="2"/>
+    </symbol>
+    <symbol id="icon-square-grey" fill="none" viewBox="0 0 20 20">
+        <rect width="20" height="20" fill="#F9F9F9" rx="4"/>
+        <rect width="12" height="12" x="4" y="4" fill="#141414" rx="2"/>
     </symbol>
     <symbol id="icon-trash-bin" fill="none" viewBox="0 0 14 14">
         <path stroke="#686868" stroke-linecap="round" stroke-linejoin="round" d="M1.75 3.5h10.5M11.083 3.5v8.167a1.167 1.167 0 0 1-1.166 1.166H4.083a1.167 1.167 0 0 1-1.166-1.166V3.5m1.75 0V2.333a1.167 1.167 0 0 1 1.166-1.166h2.334a1.167 1.167 0 0 1 1.166 1.166V3.5M5.833 6.417v3.5M8.167 6.417v3.5"/>
@@ -121,8 +125,8 @@
     </symbol>
     
     <symbol id='icon-progress-circle' viewBox="-25 -25 250 250" version="1.1">
-        <circle r="90" cx="100" cy="100" fill="transparent" stroke="#1f1f1f" stroke-width="15" stroke-dasharray="565.48px" stroke-dashoffset="0"></circle>
-        <circle r="90" cx="100" cy="100" stroke="#30b94d" stroke-width="16px" stroke-linecap="round"  fill="transparent" stroke-dasharray="565.48px"></circle>
+        <circle r="90" cx="100" cy="100" fill="transparent" stroke="#1f1f1f" stroke-dasharray="565.48px" stroke-dashoffset="0"></circle>
+        <circle r="90" cx="100" cy="100" stroke="#30b94d" stroke-linecap="round"  fill="transparent" stroke-dasharray="565.48px"></circle>
     </symbol>
     
   </defs>

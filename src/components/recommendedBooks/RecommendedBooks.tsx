@@ -1,15 +1,16 @@
-import { Box, IconButton, Typography } from "@mui/material"
-import { CardsContainer, CardsDecorationContainer, Section, IconWrapper } from "./styled"
-import { Icon } from "../icon/Icon"
-import { Suspense, useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { selectRecommendedBooks, selectRecommendedIsLoading } from "../../redux/books/selectors"
-import { useDispatch } from "react-redux"
-import { store } from "../../redux/store"
-import { booksGetRecommended } from "../../redux/books/operations"
-import { BookCard } from "../bookCard/BookCard"
-import { theme } from "../../styles/themes"
-import { userRefreshToken } from "../../redux/auth/operations"
+import { Typography } from "@mui/material";
+import { Suspense, lazy, useEffect } from "react";
+import { CardsContainer } from "./styled";
+import { useSelector } from "react-redux";
+import { selectRecommendedBooks } from "../../redux/books/selectors";
+import { useDispatch } from "react-redux";
+import { store } from "../../redux/store";
+import { booksGetRecommended } from "../../redux/books/operations";
+
+const BookCard: React.FC<any> = lazy((): any => 
+    import('../bookCard/BookCard')
+    .then((module) => ({default: module.BookCard}))
+);
 
 type AppDispatch = typeof store.dispatch;
 
@@ -47,11 +48,11 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
             req.limit = 8;
             return 8;
         }
-        if(window.innerWidth >= 1024) {
+        if(window.innerWidth <= 1024) {
             req.limit = 10;
             return 10;
         }
-        if(window.innerWidth > 1280) {
+        if(window.innerWidth >= 1280) {
             req.limit = 12;
             return 12;
         }
@@ -69,14 +70,16 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
 
         if((booksObj && booksObj.results.length === 3) && !booksLimit) {
             req.page = 1;
+            handlePageLimit();
             dispatch(booksGetRecommended(req)).then((res:any) => {
                 if(res.meta.requestStatus === 'fulfilled') setIsLoading(false);
             });
         }
     });
 
-    return <Suspense fallback={<Typography>Loading...</Typography>}>
+    return <Suspense fallback={<Typography sx={{fontSize: '60px', color: 'white'}}>Loading...</Typography>}>
         {!isLoading && <CardsContainer sx={sx}>
+        {/* <CardsContainer sx={sx}> */}
             {booksObj && booksObj.results.map((book, i)=>{
                 if(window.innerWidth < 768 && i < 2){
                     return <BookCard

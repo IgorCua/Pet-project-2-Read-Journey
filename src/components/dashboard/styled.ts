@@ -2,13 +2,10 @@ import { styled } from "@mui/system";
 import { Box } from "@mui/material";
 
 export const Section = styled(Box)(({theme}) => ({
-    // marginTop: '10px',
-    // marginBottom: '10px',
     padding: '20px 20px',
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
-    // justifyContent: 'space-between',
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
@@ -20,8 +17,7 @@ export const Section = styled(Box)(({theme}) => ({
     },
 
     [theme.breakpoints.up('desktop')]:{
-        padding: '20px 20px',
-        // marginRight: '16px',
+        padding: '40px 20px 20px 20px',
         width: '353px',
         flexDirection: 'column',
     }
@@ -38,7 +34,6 @@ export const SectionTest = styled(Box)(({theme}) => ({
 
     [theme.breakpoints.up('tablet')]: {
         '&:nth-of-type(1)': {
-            // maxWidth: '353px',
             padding: '30px 30px',
             gap: '32px',
             flexDirection: 'row'
@@ -55,9 +50,5 @@ export const SectionTest = styled(Box)(({theme}) => ({
             padding: '20px 20px',
             flexDirection: 'column',
         },
-
-        // '&:nth-of-type(2)': {
-        //     // padding: '40px 40px'
-        // }
     }
 })) as typeof Box;

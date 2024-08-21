@@ -1,9 +1,10 @@
 import { ButtonBase } from "@mui/material";
-import { styled } from "@mui/system";
+import { maxWidth, styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     position: 'relative',
-
+    display: 'flex', 
+    justifyContent: 'center',
     backgroundColor: theme.palette.custom.bg3,
 
     border: `1px solid ${theme.palette.custom.modalBorder}`,
@@ -16,7 +17,7 @@ export const Container = styled('div')(({theme}) => ({
         padding: '40px 98px'
     },
     [theme.breakpoints.up('tablet')]: {
-        width: '500px'
+        maxWidth: '500px'
     }
 }));
 

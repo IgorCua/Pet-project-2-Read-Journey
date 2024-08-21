@@ -1,5 +1,5 @@
-import { Button, ButtonBase } from "@mui/material";
-import { display, height, maxWidth, styled, width } from "@mui/system";
+import { ButtonBase } from "@mui/material";
+import { styled } from "@mui/system";
 
 export const DecorationContainer = styled('div')(({theme}) => ({
     width: '100%',
@@ -120,26 +120,18 @@ export const Section = styled('div')(({theme}) => ({
 export const Figure = styled('figure')(({theme}) => ({
     height: '351px',
     width: '100%',
-    paddingTop: '20px',
     display: 'flex',
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
 
     [theme.breakpoints.up("tablet")]: {
-        // paddingTop: '20px',
-        // paddingLeft: '40px',
-        // paddingRight: '40px'
         display: 'none'
     },
     [theme.breakpoints.up('desktop')]: {
         width:'600px',
         height: '100%',
-        // paddingTop: '20px',
-        // paddingLeft: '40px',
-        // paddingRight: '40px'
         display: 'block'
     }
 }));

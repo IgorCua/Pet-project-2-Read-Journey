@@ -1,14 +1,12 @@
 import { ButtonBase, IconButton, Typography } from "@mui/material";
-import { borderRadius, display, styled } from "@mui/system";
+import { styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     marginTop: '10px',
     display: 'flex',
     gap: '10px',
     flexDirection: 'column',
-    // backgroundColor: theme.palette.custom.bg3,
 
-    // borderRadius: '30px'
     [theme.breakpoints.up('tablet')]: {
         width: '100%',
         marginTop: '16px',
@@ -16,22 +14,9 @@ export const Container = styled('div')(({theme}) => ({
         flexDirection: 'column'
     },
     [theme.breakpoints.up('desktop')]: {
-        // width: '100%',
-        // marginTop: '16px',
-        // gap: '16px',
-        // display: 'flex',
         flexDirection: 'row'
     }
 }));
-
-// export const DecorationContainer = styled('div')(({theme}) => ({
-//     // marginTop: '10px',
-//     // padding: '20px 20px',
-
-//     backgroundColor: theme.palette.custom.bg3,
-
-//     borderRadius: '30px'
-// }));
 
 export const ContainerForm = styled('section')(({theme}) => ({
     flexDirection: 'column',

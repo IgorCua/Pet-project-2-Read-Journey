@@ -1,5 +1,5 @@
-import { ButtonBase, IconButton, List, Typography } from "@mui/material";
-import { styled } from "@mui/system";
+import { ButtonBase, IconButton, List, ListItem, Typography } from "@mui/material";
+import { maxWidth, styled } from "@mui/system";
 
 export const Container = styled('div')(({theme}) => ({
     marginTop: '10px',
@@ -88,7 +88,6 @@ export const MenuIconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
     width: '32px',
     height: '32px',
-    // display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',
@@ -133,7 +132,6 @@ export const DescripotionList = styled(List)(({theme}) => ({
 })) as typeof List;
 
 export const NumberDiv = styled('div')(({theme}) => ({
-    // marginRight: '12px',
     minWidth: '40px',
     height: '40px',
     display: 'flex',
@@ -151,8 +149,8 @@ export const NumberDiv = styled('div')(({theme}) => ({
     borderRadius: '50%',
 
     [theme.breakpoints.up('tablet')]: {
-        minWidth: '40px',
-        height: '40px',
+        minWidth: '44px',
+        height: '44px',
 
         fontSize: '18px',
         lineHeight: '18px',
@@ -170,10 +168,25 @@ export const ListHeader = styled('h2')(({theme}) => ({
     }
 }));
 
-export const ListItemText = styled('h2')({
+export const StyledListItem = styled(ListItem)(({theme}) => ({
+    '&:nth-of-type(2) h3': {
+        maxWidth: '200px'
+    },
+    // '&:nth-of-type(3) h3': {
+    //     width: '205px'
+    // }
+    [theme.breakpoints.up('tablet')]: {
+        '&:nth-of-type(1)': {
+            marginBottom: '40px'
+        },
+    }
+}))
+
+export const ListItemText = styled('h3')({
+    textAlign:'left',
     fontSize: '14px',
     lineHeight: '18px',
-    fontWeight: '500'
+    fontWeight: '500',
 });
 
 export const Span = styled('span')(({theme}) => ({
@@ -201,15 +214,12 @@ export const LinkButton = styled(ButtonBase)(({theme}) => ({
         backgroundColor: theme.palette.custom.bg3
     },
 
-    // [theme.breakpoints.up('tablet')]: {
-    // }
 }))as typeof ButtonBase;;
 
 export const IconWrapper = styled(IconButton)(({theme}) => ({
     padding: '0',
     width: '32px',
     height: '32px',
-    // display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     position: 'relative',

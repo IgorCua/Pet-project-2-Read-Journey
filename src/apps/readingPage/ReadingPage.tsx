@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react"
 import { Dashboard } from "../../components/dashboard/Dashboard"
-import { FormTextField } from "../../components/materialUI/FormTextField"
 import { 
     CircleInside, 
     CircleOutside, 
     Container, 
     ContainerNoStats, 
     ContainerStats, 
-    // Form, 
     FormHeader, 
     Header, 
     MyReadingContainer, 
@@ -17,7 +15,7 @@ import {
     MyReadingTimeLeft,
     FormContainer
 } from "./styled";
-import { Box, Input, InputAdornment, InputBase, TextField, TextFieldProps } from "@mui/material"
+import { Box } from "@mui/material"
 import { theme } from "../../styles/themes"
 // import { borderRadius, display, maxWidth, textAlign } from "@mui/system"
 import { BookCard } from "../../components/bookCard/BookCard"
@@ -27,7 +25,6 @@ import { useDispatch } from "react-redux"
 import { booksSaveEndOfReading, booksSaveReadingStart } from "../../redux/books/operations"
 import { store } from "../../redux/store"
 import { ErrorModal } from "../../components/errorModal/ErrorModal"
-import { Icon } from "../../components/icon/Icon";
 import { Form } from "../../components/form/Form";
 import * as Yup from 'yup';
 import { Progress } from "../../components/progress/Progress";
@@ -84,8 +81,7 @@ export const ReadingPage = () => {
     const [isErrorModal, setIsErrorModal] = useState(false);
 
     // const handleSubmit = (event: React.FormEvent<any>) => {
-    const handleSubmit = (values: FormValues, {resetForm}: any) => {
-        // event.preventDefault();
+    const handleSubmit = (values: FormValues) => {
         const {pageStart, pageEnd} = values;
 
         if(pageStart && bookInfo){ 
@@ -105,17 +101,12 @@ export const ReadingPage = () => {
             }
         }
         
-        // console.log(event!.currentTarget!.elements[0].value as HTMLInputElement)
         setIsReading(!isReading);
-        // event.target.reset();
     }
 
     useEffect(()=>{
         if(bookInfo && bookInfo.progress.length > 0){
-            console.log('useEffect bookInfo');
-            // console.log(bookInfo.progress[bookInfo.progress.length - 1].status);
             if (progressLastData && progressLastData.status === 'active'){
-                console.log('active');
                 setIsReading(true);
             }
         };
@@ -144,12 +135,11 @@ export const ReadingPage = () => {
             <Dashboard sx={{
                 gap: '40px',
                 [theme.breakpoints.up('tablet')]: {
-                    // padding: '32px 16px 16px 32px'
                     padding: '32px',
                     gap: '40px'
                 },
                 [theme.breakpoints.up('desktop')]: {
-                    padding: '32px 20px 20px 20px',
+                    padding: '40px 20px 20px 20px',
                     minWidth: '353px',
                     gap: '40px',
                 }
@@ -218,6 +208,7 @@ export const ReadingPage = () => {
                                 <Text component={'p'} sx={{
                                     fontSize: '34px',
                                     lineHeight: '34px',
+                                    transform: 'translate(0px, 2px)',
                                     [theme.breakpoints.up('tablet')]:{
                                         fontSize: '50px',
                                         lineHeight: '70px',
@@ -256,7 +247,7 @@ export const ReadingPage = () => {
                         [theme.breakpoints.up('desktop')]: {
                             // maxWidth: '224px',
                         },
-                        '& img':{
+                        '& .MuiBox-root:first-of-type':{
                             cursor: 'auto',
                             [theme.breakpoints.up('tablet')]: {
                                 height: '256px',

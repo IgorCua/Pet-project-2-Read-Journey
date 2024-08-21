@@ -1,4 +1,4 @@
-import { Box, ButtonBase, TextField, Typography, styled } from "@mui/material";
+import { Box, Typography, styled } from "@mui/material";
 
 export const Container = styled(Box)(({theme}) => ({
     marginTop: '10px',
@@ -89,7 +89,6 @@ export const MyReadingContainer = styled(Box)(({theme}) => ({
     padding: '40px 20px',
     display: 'flex',
     flexDirection: 'column',
-    // justifyContent: 'center',
     alignItems: 'center',
 
     backgroundColor: theme.palette.custom.bg3,
@@ -106,12 +105,7 @@ export const MyReadingHeaderContainer = styled(Box)(({theme}) => ({
     marginBottom: '40px',
     display: 'flex',
     justifyContent: 'space-between',
-    // marginBottom: '40px',
-    // alignSelf: 'start',
-
-    // fontSize: '20px',
-    // lineHeight: '20px',
-    // fontWeight: '700',
+    
     color: theme.palette.custom.textMain
 })) as typeof Box;
 
@@ -168,7 +162,6 @@ export const CircleInside = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.custom.utilRed,
 
     borderRadius: '50%',
-    // border: `1px solid ${theme.palette.custom.bgWhite}`
 
     [theme.breakpoints.up('tablet')]: {
         width: '40px',

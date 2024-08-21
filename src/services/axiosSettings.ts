@@ -1,6 +1,8 @@
 import axios from "axios";
 import localStorage from "redux-persist/es/storage";
 
+axios.defaults.baseURL = 'https://readjourney.b.goit.study/api';
+
 export const axiosToken = {
     set(token?: string) {
         if(token) {

@@ -6,7 +6,7 @@ import {
     usersRefreshTokenAPI,
     usersSignOutAPI, 
     // booksAddByIdAPI
-} from "../../services/connectionsAPI"
+} from "../../services/userConnectionsAPI"
 import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
@@ -92,23 +92,6 @@ export const userRefreshToken = createAsyncThunk(
         }
     }
 );
-
-// export const userAddBookByID = createAsyncThunk(
-//     'auth/addBookByID',
-
-//     async ( data: string, { rejectWithValue }) => {
-//         try{
-//             axiosToken.set();
-//             const res: any = await booksAddByIdAPI(data);
-//             // console.log(res)
-
-//             return res;
-//         }
-//         catch (error: unknown) {
-//             return rejectWithValue(error);
-//         }
-//     }
-// );
 
 export const userSignOut = createAsyncThunk(
     'auth/signOut',

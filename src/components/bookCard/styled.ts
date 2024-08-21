@@ -3,28 +3,30 @@ import { maxWidth, styled, width } from "@mui/system";
 
 export const Container = styled(Box)(({theme}) => ({
     minWidth:'71px',
-    // width:'137px',
     maxWidth: '137px',
-    // width: '110px',
     width: '100%',
     display: 'flex',
-    // flexWrap: 'wrap',
     flexDirection: 'column',
     alignItems: 'center',
     cursor: 'pointer',
     
-    // '&:hover': {
     '&:hover img': {
         boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
     },
 })) as typeof Box;
 
-export const Image = styled('img')(({theme}) => ({
+export const ImageContainer = styled(Box)(({theme}) => ({
     marginBottom: '8px',
     width: '137px',
     height: '208px',
-    // maxHeight: '208px'
-    // cursor: 'pointer',
+    borderRadius: '8px',
+    background: `url(${require('../../assets/images/book-opened-small-2x.png')}) no-repeat center`,
+    backgroundSize: '111px 72px'
+})) as typeof Box;
+
+export const Image = styled('img')(({theme}) => ({
+    width: '100%',
+    height: '100%',
     borderRadius: '8px',
     transitionDuration: '250ms',
     transitionProperty: 'box-shadow',
@@ -32,12 +34,11 @@ export const Image = styled('img')(({theme}) => ({
 
 export const DescriptionContainer = styled('div')(({theme}) => ({
     width: '100%',
-    // overflow:'hidden',
     textOverflow: 'ellipsis',
     display: 'flex',
     flexDirection: 'row',
     alignContent: 'center',
-    // justifyContent: 'center',
+    justifyContent: 'center',
 
     // 'img:has(~ &:hover)': {
     //     boxShadow: `0px 0px 0px 3px ${theme.palette.custom.buttonBorderGrey}`
@@ -71,8 +72,6 @@ export const Author = styled(Typography)(({theme}) => ({
 })) as typeof Typography;
 
 export const BackdropContainer = styled('div')(({theme}) => ({
-    // padding: '40px 0px',
-    // width: '335px',
     position: 'relative',
 
     display:'flex',
@@ -80,15 +79,11 @@ export const BackdropContainer = styled('div')(({theme}) => ({
     alignItems: 'center',
 
     backgroundColor: theme.palette.custom.bg3,
-
-    // border: `1px solid ${theme.palette.custom.modalBorder}`,
-    // borderRadius: '12px',
 }));
 
 export const BackdropCardContainer = styled('div')(({theme}) => ({
     width: '140px',
     display: 'flex',
-    // justifyContent: 'center',
     flexDirection: 'column',
     alignItems: 'center',
 
@@ -107,6 +102,7 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center', 
+    justifyContent: 'center',
     
     '& p':{
         maxWidth: '100%'
@@ -124,7 +120,6 @@ export const BackdropDescrContainer = styled('div')(({theme}) => ({
 export const Pages = styled(Typography)(({theme}) => ({
     fontSize: '10px',
     lineHeight: '12px',
-    // textOverflow: 'ellipsis'
 
     color: theme.palette.custom.textMain
 })) as typeof Typography;

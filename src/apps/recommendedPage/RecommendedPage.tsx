@@ -1,6 +1,4 @@
-import { IconButton, List, ListItem } from "@mui/material";
-import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
-import { Filter } from "../../components/filter/Filter";
+import { ListItem } from "@mui/material";
 import { 
     Container, 
     DescripotionList, 
@@ -13,21 +11,21 @@ import {
     ListHeader, 
     ListItemText, 
     NumberDiv, 
-    // Section, 
     Span,
     CardsContainer,
     HeaderContainer,
     Header,
     MenuIconWrapper,
     ContainerForm,
-    FormHeader
+    FormHeader,
+    StyledListItem
 } from "./styled";
 import { Icon } from "../../components/icon/Icon";
 import { RecommendedBooks } from "../../components/recommendedBooks/RecommendedBooks";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectBooksError, selectRecommendedBooks } from "../../redux/books/selectors";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { ErrorModal } from "../../components/errorModal/ErrorModal";
 import * as Yup from 'yup';
 import { Form } from "../../components/form/Form";
@@ -55,7 +53,6 @@ const inputsDataArr = [
 ]
 
 const initialValues = {
-    // name: '',
     title: '',
     author: ''
 }
@@ -72,8 +69,6 @@ type FormValues = {
 }
 
 export const RecommendedPage = () => {
-    // const booksError = useSelector(selectBooksError);
-    // const booksObj = useSelector(selectRecommendedBooks);
     const booksError = useSelector(selectBooksError);
     const navigate = useNavigate();
     const [isErrorModal, setIsErrorModal] = useState(false);
@@ -85,25 +80,18 @@ export const RecommendedPage = () => {
     const dispatch = useDispatch<AppDispatch>();
     let req: Request = {
         page: booksObj ? booksObj.page : 1,
-        // limit: booksLimit ? booksLimit : 0
         limit: null
     }
     const handleBooksLimit = () => {
         if(window.innerWidth < 768) {
             req.limit = 2;
-            // return 2;
         }
         if(window.innerWidth < 1024) {
             req.limit = 8;
-            // return 8;
         }
-        if(window.innerWidth >= 1024) {
-            req.limit = 10;
-            // return 10;
-        }
-        if(window.innerWidth > 1280) {
+        
+        if(window.innerWidth >= 1280) {
             req.limit = 12;
-            // return 12;
         }
     }
   
@@ -153,8 +141,7 @@ export const RecommendedPage = () => {
         return theme.palette.custom.textMain
     }
 
-    const handleSubmit = ( values: FormValues, {resetForm}: any) => {
-        // console.log('recommended form', values);
+    const handleSubmit = ( values: FormValues) => {
         dispatch(booksGetRecommended(values));
     }
 
@@ -193,29 +180,29 @@ export const RecommendedPage = () => {
                 </ContainerForm>
 
                 <DescripotionList>
-                    <ListItem>
+                    <StyledListItem>
                         <ListHeader>
                             Start your workout
                         </ListHeader>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <NumberDiv><p>1</p></NumberDiv>
                         <ListItemText>
                             Create a personal library: <Span>add the books you intend to read to it.</Span>
                         </ListItemText>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <NumberDiv><p>2</p></NumberDiv>
                         <ListItemText>
                             Create your first workout: <Span>define a goal, choose a period, start training.</Span>
                         </ListItemText>
-                    </ListItem>
-                    <ListItem>
+                    </StyledListItem>
+                    <StyledListItem>
                         <LinkButton onClick={handleLinkClick}>My library</LinkButton>
                         <IconWrapper onClick={handleLinkClick} size="small" sx={{padding: '0'}}>
                             <Icon iconName={'#icon-arrow-right'} sx={{width: '24px', height: '24px'}}/>
                         </IconWrapper>
-                    </ListItem>
+                    </StyledListItem>
                 </DescripotionList>
                 {window.innerWidth >= 1280 && <Figure>
                     <Img

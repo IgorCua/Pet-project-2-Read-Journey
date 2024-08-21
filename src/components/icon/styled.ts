@@ -8,12 +8,3 @@ export const CustomIcon = styled(SvgIcon)(({theme}) => ({
     justifyContent: 'center',
     alignItems: 'center',
 }));
-// export const CustomButton = styled(Button)(({ theme }) => ({
-//     color: 'black',
-//     textTransform: 'none',
-//     // backgroundColor: 'grey',
-//     '&:hover': {
-//         // backgroundColor: 'yellow'
-//         backgroundColor: theme.palette.custom.utilBlue
-//     }
-// })) as typeof Button;

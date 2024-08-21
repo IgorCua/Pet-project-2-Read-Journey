@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { PageWrapper } from "../../components/PageWrapper/PageWrapper";
 import { Section, Figure, DecorationContainer, Header, IconContainer, IconHeader, Span, LinkButton } from "./styled";
 import { Icon } from "../../components/icon/Icon";
@@ -13,11 +12,6 @@ import { store } from "../../redux/store";
 import * as Yup from 'yup';
 
 const schema = Yup.object().shape({
-    // name: Yup
-    //     .string()
-    //     .min(3, 'Name must be at least 3 characters')
-    //     .max(64, 'Name must be less than 65 characters')
-    //     .required('Name is a required field'),
     email: Yup
         .string()
         .min(3, 'Email must be at least 3 characters')
@@ -40,19 +34,16 @@ const inputsDataArr = [
 ]
 
 interface InitialValuesInterface {
-    // name: string,
     email: string,
     password: string
 }
 
 const initialValues: InitialValuesInterface = {
-    // name: '',
     email: '',
     password: ''
 }
 
 type FormValues = {
-    // name: string,
     email: string,
     password: string
 }
@@ -60,25 +51,17 @@ type FormValues = {
 export type AppDispatch = typeof store.dispatch;
 
 export const LoginPage = () => {
-    // export type TargetGroup = {
-    //     id: number;
-    //     name: string;
-    //     targets: Target[];
-    //     children?: TargetGroup[];
-    // }
+    
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
-    // const { handleChange, handleReset, submitForm, touched, errors, values } = useFormikContext() ?? {};
 
-    const handleSubmit = async ( values: FormValues, {resetForm}: any) => {
+    const handleSubmit = async ( values: FormValues, resetForm: any) => {
         
-        // console.log('registerForm submit', values);
         await dispatch(userSignin(values)).then((res) => {
-            if(res.meta.requestStatus === 'fulfilled') resetForm();
+            // if(res.meta.requestStatus === 'fulfilled') resetForm();
         });
 
         dispatch(booksGetUserBooks(null));
-        // resetForm();
     }
 
     const handleLinkButton = () => {
@@ -94,7 +77,6 @@ export const LoginPage = () => {
                     <IconHeader>Reading Journey</IconHeader>
                 </IconContainer>
                 <Header>Expand your mind, reading <Span>a book</Span></Header>
-                {/* <LoginForm/> */}
 
                 <Form
                     initialValues={initialValues}
@@ -112,7 +94,6 @@ export const LoginPage = () => {
                         },
 
                         '& button:nth-of-type(1)':{
-                            // marginRight: '14px',
                             fontWeight: '700',
 
                             color: theme.palette.custom.textBlack,

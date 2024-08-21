@@ -9,8 +9,6 @@ export const WrapperDiv = styled('div')(({theme}) => ({
     display: 'flex',
     flexWrap: 'wrap',
     justifyContent: 'center',
-    // overflow: 'hidden',
-    // overflowY: 'auto',
     
     [theme.breakpoints.up('tablet')]: {
         padding: '32px 32px',

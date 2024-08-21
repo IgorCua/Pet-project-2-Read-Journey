@@ -1,6 +1,6 @@
 import { Backdrop, IconButton } from "@mui/material";
-import React, { MouseEvent } from "react";
-import { Button, Container } from "./styled";
+import React from "react";
+import { Container } from "./styled";
 import { Icon } from "../icon/Icon";
 import { theme } from "../../styles/themes";
 
@@ -29,30 +29,29 @@ export const CustomBackdrop = (props: Props) => {
         sx={{
             backgroundColor: theme.palette.custom.backdropBackground,
             zIndex: '1000',
-            ...sx
+            // ...sx,
         }}
     >
-        <Container>
+        
+        <Container sx={{position: 'relative', ...sx}}>
             <IconButton
                 size="small"
-                aria-label="close book modal"
-                aria-controls="book-modal"
-                // aria-haspopup="true"
+                aria-label="close backdrop"
+                aria-controls="close backdrop button"
                 onClick={() => setIsModalOpen(false)}
                 color='inherit'
                 sx={{
-                    // width: '22px', 
-                    // height: '22px', 
                     position: 'absolute',
                     right: '16px',
                     top: '16px',
-                    color: theme.palette.custom.textMain
+                    color: theme.palette.custom.textMain,
                 }} 
                 >
                     <Icon 
                         iconName='#icon-close' 
-                        sx={{width: '22px', height: '22px',
-                            
+                        sx={{
+                            width: '22px', 
+                            height: '22px',
                         }} 
                     />
             </IconButton>

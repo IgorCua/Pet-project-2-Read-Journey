@@ -82,9 +82,6 @@ export const Span = styled('span')(({theme}) => ({
 export const LinkButton = styled(ButtonBase)(({theme})=>({
     padding: '0px',
     height: '20px',
-    // alignSelf: 'center',
-    // end: '-20px',
-    // bottom:'-31px',
 
     color: theme.palette.custom.textSecondary,
     fontSize: '12px',
@@ -124,26 +121,18 @@ export const Section = styled('section')(({theme}) => ({
 export const Figure = styled('figure')(({theme}) => ({
     height: '351px',
     width: '100%',
-    paddingTop: '20px',
     display: 'flex',
     justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: theme.palette.custom.bg3,
 
     borderRadius: '30px',
 
     [theme.breakpoints.up("tablet")]: {
-        // paddingTop: '20px',
-        // paddingLeft: '40px',
-        // paddingRight: '40px'
         display: 'none'
     },
     [theme.breakpoints.up('desktop')]: {
         width:'600px',
         height: 'auto',
-        // paddingTop: '20px',
-        // paddingLeft: '40px',
-        // paddingRight: '40px'
         display: 'block'
     }
 }));

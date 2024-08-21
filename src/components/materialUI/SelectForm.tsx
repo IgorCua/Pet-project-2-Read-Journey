@@ -37,7 +37,6 @@ export const SelectForm = () => {
             inputProps={{ 'aria-label': 'Without label' }}
             sx={{
                 padding: '0px',
-                // backgroundColor: theme.palette.custom.bg4,
                 backgroundColor: 'transparent',
                 border: `1px solid ${theme.palette.custom.authInputBorder}`,
                 '.MuiSelect-select': {
@@ -56,7 +55,6 @@ export const SelectForm = () => {
                   sx: {
                     marginTop: '4px',
                     minHeight: '122px',
-                    // overflowx: 'hidden'
                     backgroundColor: theme.palette.custom.bg2,
 
                     borderRadius: '12px',
@@ -66,13 +64,10 @@ export const SelectForm = () => {
                     sx: {
                         padding:'14px 0px',
                         width: '100%',
-                        // paddingTop: '12px',
                         color: theme.palette.custom.textSecondary,
-                        // overflowx: 'hidden'
                         
                         '& li': {
                             padding: '0px 14px',
-                            // paddingLeft: '5px',
                             minHeight:'10px',
                             width: '100%',
 
@@ -91,12 +86,10 @@ export const SelectForm = () => {
                 
             }}
         >
-            {/* <MenuItem value="">All books</MenuItem> */}
             <MenuItem value={'unread'}>Unread</MenuItem>
             <MenuItem value={'in-progress'}>In progress</MenuItem>
             <MenuItem value={'done'}>Done</MenuItem>
             <MenuItem value={''}>All books</MenuItem>
-            {/* <MenuItem value={'All books'}sx={{minHeight: '20px'}}>All Books</MenuItem> */}
         </Select>
     </FormControl>
 }

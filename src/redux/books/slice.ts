@@ -103,7 +103,6 @@ const booksSlice = createSlice({
             .addMatcher(
                 (action): action is PendingAction => action.type.startsWith('auth') && action.type.endsWith('/pending'),
                 (state, _) => {
-                    // state.recommendedIsLoading = true;
                     state.isLoading = true;
                     state.isError = false;
                     state.error = null;
@@ -117,7 +116,6 @@ const booksSlice = createSlice({
                     state.isLoading = false;
                     state.isError = true;
                     state.error = action.payload;
-                    // console.log('books slice error', action.payload)
                 }
             )
     },
