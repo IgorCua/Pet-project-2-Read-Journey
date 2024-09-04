@@ -118,7 +118,9 @@ export const Section = styled('div')(({theme}) => ({
 }));
 
 export const Figure = styled('figure')(({theme}) => ({
-    height: '351px',
+    paddingTop: '20px',
+    // height: '351px',
+    // maxHeight: '100%',
     width: '100%',
     display: 'flex',
     justifyContent: 'center',
@@ -130,6 +132,7 @@ export const Figure = styled('figure')(({theme}) => ({
         display: 'none'
     },
     [theme.breakpoints.up('desktop')]: {
+        paddingTop: '80px',
         width:'600px',
         height: '100%',
         display: 'block'

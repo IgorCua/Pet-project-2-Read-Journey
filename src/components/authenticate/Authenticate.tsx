@@ -20,11 +20,16 @@ type ErrorObj = {
 type AppDispatch = typeof store.dispatch;
 
 export const Authenticate = ({children}: Props) => {
+    console.log('Authenticate')
     const token = useSelector(selectToken);
     const refreshToken = useSelector(selectRefreshToken);
     const decodedToken = token && JSON.parse(atob(token.split('.')[1]));
     const authError: any = useSelector(selectAuthError);
     const booksError: any = useSelector(selectBooksError);
+    const tokenMemo = useMemo(() => {
+        const savedToken = token;
+        return savedToken;
+    }, [token]);
 
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -42,7 +47,7 @@ export const Authenticate = ({children}: Props) => {
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;
-    }, [decodedToken])
+    }, [decodedToken]);
 
     useEffect(() => {
         if(authError){
@@ -72,26 +77,40 @@ export const Authenticate = ({children}: Props) => {
                 setIsModalOpen(true);
             }
         }
-        if(token && refreshToken){
-            setTimeout(() => {
-                console.log('seTimeout token', token)
-                if (!authError && !booksError) {
-                    axiosToken.set(refreshToken);
-                    dispatch(userRefreshToken());
-                }
-            }, handleDelay());
-        }
     }, [
         isModalOpen, 
         setIsModalOpen, 
         authError, 
         booksError, 
         errorObj, 
-        token, 
-        refreshToken, 
-        handleDelay, 
-        dispatch
+        // token, 
+        // refreshToken,
+        // handleDelay, 
+        // dispatch
     ]);
+
+    const testFn = () => {
+        return token;
+    }
+    useEffect(() => {
+        if(token && refreshToken && !authError){
+            setTimeout(() => {
+                console.log('seTimeout token', token);
+                if (!authError) {
+                    axiosToken.set(refreshToken);
+                    dispatch(userRefreshToken()).then((res)=>{
+                        // console.log(res);
+                        // if(res.payload.data){
+                        //     axiosToken.set(res.payload.data.token);
+                        // }
+                    });
+                    axiosToken.set(token);
+
+                }
+            }, handleDelay());
+        }
+    // }, [token, refreshToken, authError, tokenMemo, dispatch, handleDelay]);
+    }, [token, refreshToken, authError, dispatch, handleDelay]);
 
     // if(token && refreshToken){
     //     setTimeout(() => {
@@ -101,7 +120,9 @@ export const Authenticate = ({children}: Props) => {
     //             axiosToken.set(refreshToken);
     //             dispatch(userRefreshToken());
     //         }
-    //     }, handleDelay());
+    //     // }, handleDelay());
+    //     }, 60000);
+
     // }
     
     const authErrorDispatch = () => {

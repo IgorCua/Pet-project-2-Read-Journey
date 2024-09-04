@@ -48,7 +48,7 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
             req.limit = 8;
             return 8;
         }
-        if(window.innerWidth <= 1024) {
+        if(window.innerWidth >= 1024) {
             req.limit = 10;
             return 10;
         }
@@ -59,7 +59,7 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
     }
 
     req.limit = booksLimit ? booksLimit : handlePageLimit();
-
+    console.log('recommendedBooks', req, window.innerWidth);
     useEffect(()=>{
         if(!booksObj && !booksLimit) {
             handlePageLimit();
@@ -79,7 +79,6 @@ export const RecommendedBooks = ({booksLimit, isLoading, setIsLoading, sx}: Prop
 
     return <Suspense fallback={<Typography sx={{fontSize: '60px', color: 'white'}}>Loading...</Typography>}>
         {!isLoading && <CardsContainer sx={sx}>
-        {/* <CardsContainer sx={sx}> */}
             {booksObj && booksObj.results.map((book, i)=>{
                 if(window.innerWidth < 768 && i < 2){
                     return <BookCard

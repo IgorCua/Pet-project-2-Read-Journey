@@ -1,7 +1,7 @@
 import { Image, ImageContainer } from "./styled";
 
 export const PhoneImg = () => {
-    return <>    
+    return (    
         <ImageContainer>
             <Image 
                 alt="phone image" 
@@ -12,6 +12,5 @@ export const PhoneImg = () => {
                 `}
             />
         </ImageContainer>
-    </>
-
+    )
 }

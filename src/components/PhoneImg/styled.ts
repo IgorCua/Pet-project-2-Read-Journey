@@ -2,12 +2,15 @@ import { Container } from "@mui/material";
 import { styled } from "@mui/system";
 
 export const ImageContainer = styled(Container)(({theme}) => ({
-    width: '100%',
-    height: '100%',
+    height: '331px',
     position: 'relative',
     overflow: 'hidden',
     display: 'flex',
     justifyContent: 'center',
+
+    [theme.breakpoints.up('desktop')]: {
+        height: '100%'
+    }
 }));
 
 export const Image = styled('img')(({theme}) => ({
@@ -23,6 +26,5 @@ export const Image = styled('img')(({theme}) => ({
     
     [theme.breakpoints.up('desktop')]: {
         width: '405px',
-        top: '80px'
     }
 }));

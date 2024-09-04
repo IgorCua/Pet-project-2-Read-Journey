@@ -12,25 +12,12 @@ type Props = {
 
 export const PrivateRoute: React.FC<Props> = ({component, redirectTo = "/register"}): any => {
     const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-    // const navigate = useNavigate();
     
-    // if(isLoggedIn) navigate(redirectTo, {replace: true});
-    
-    // useEffect(() => {
-    //     if(isLoggedIn) navigate(`${redirectTo}`, {replace: true});
-    // }, [isLoggedIn, redirectTo, navigate]);
     return isLoggedIn ? component : <Navigate to={redirectTo} replace={true}/>;
-    // return component;
 }
 
 export const PublicRoute: React.FC<Props> = ({component, redirectTo = "/recommended"}): any => {
     const isLoggedIn = useSelector(selectAuthIsLoggedIn);
-    // const navigate = useNavigate();
-    // if(!isLoggedIn) navigate(redirectTo, {replace: true});
-    // useEffect(() => {
-    //     if(!isLoggedIn) navigate(`${redirectTo}`, {replace: true});
-    // }, [isLoggedIn, redirectTo, navigate]);
 
     return !isLoggedIn ? component : <Navigate to={redirectTo} replace={true}/>;
-    // return component;
 }

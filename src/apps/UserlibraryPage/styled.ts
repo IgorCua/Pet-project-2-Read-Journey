@@ -79,7 +79,7 @@ export const Header = styled(Typography)(({theme}) => ({
     }
 })) as typeof Typography;
 
-export const ContainerFilterCards = styled('div')(({theme}) => ({
+export const ContainerRecommendedBooks = styled('div')(({theme}) => ({
     marginBottom: '11px',
     display: 'flex',
     justifyContent: 'flex-start',
