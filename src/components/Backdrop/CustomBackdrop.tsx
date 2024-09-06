@@ -24,6 +24,7 @@ export const CustomBackdrop = (props: Props) => {
     }
 
     return <Backdrop
+        aria-hidden={isModalOpen ? 'false' : 'true'}
         open={isModalOpen}
         onClick={handleModal}
         sx={{

@@ -307,7 +307,6 @@ export const UserLibraryPage = () => {
                             sx={{width: '137px'}}
                         />
                     }
-
                 })}
             </ContainerBooks>}
 
