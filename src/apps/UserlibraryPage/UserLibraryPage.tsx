@@ -231,7 +231,7 @@ export const UserLibraryPage = () => {
             }
         }}>
             <>
-                <ContainerForm>
+                <ContainerForm sx={{}}>
                     <FormHeader>Filter:</FormHeader>
                     <Form
                         initialValues={initialValues}

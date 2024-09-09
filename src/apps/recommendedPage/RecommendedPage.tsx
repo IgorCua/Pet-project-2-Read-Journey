@@ -92,7 +92,7 @@ export const RecommendedPage = () => {
             req.limit = 8;
             return;
         }
-        if(window.innerWidth >= 1024) {
+        if(window.innerWidth < 1280) {
             req.limit = 10;
             return;
         }

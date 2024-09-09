@@ -58,7 +58,7 @@ export const ContainerRecommended = styled('div')(({theme}) => ({
     
     [theme.breakpoints.up('tablet')]: {
         paddingTop: '26px',
-        width: '313px'
+        minWidth: '313px'
     }
 }));
 
@@ -136,6 +136,7 @@ export const ContainerMyLibrary = styled('section')(({theme}) => ({
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
+    // justifyContent: 'center',
 
     backgroundColor: theme.palette.custom.bg3,
 
@@ -206,6 +207,8 @@ export const ContainerBooks = styled('div')(({theme}) => ({
     display: 'flex',
     flexWrap: 'wrap',
     gap: '20px',
+    // justifyContent: 'center',
+    // alignSelf: 'center',
 
     [theme.breakpoints.up('tablet')]:{
         gap: '25px',
