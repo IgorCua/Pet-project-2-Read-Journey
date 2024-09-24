@@ -1,4 +1,3 @@
-import { ListItem } from "@mui/material";
 import { 
     Container, 
     DescripotionList, 
@@ -114,7 +113,6 @@ export const RecommendedPage = () => {
             if (req.page === booksObj.totalPages) return;
             req.page += 1;
             handlePageLimit();
-            console.log(window.innerWidth)
             dispatch(booksGetRecommended(req));
         }
         return;
@@ -154,7 +152,7 @@ export const RecommendedPage = () => {
 
     return (
         <Container>
-            {booksError && booksError.response.status !== 401 && <ErrorModal 
+            {booksError && booksError.response?.status !== 401 && <ErrorModal 
                 type='booksError'
                 isModalOpen={isErrorModal}
                 setIsModalOpen={setIsErrorModal}

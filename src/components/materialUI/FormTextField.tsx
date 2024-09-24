@@ -1,5 +1,5 @@
-import React, { memo } from 'react';
-import { FieldProps, getIn } from 'formik';
+import React from 'react';
+import { FieldProps} from 'formik';
 import { TextField, TextFieldProps } from '@mui/material';
 
 /**
@@ -13,7 +13,6 @@ export const FormTextField: React.FC<FieldProps & TextFieldProps> = function (pr
 
   // const { InputProps , error, helperText, field, form, ...rest } = props;
   const { InputProps, field, ...rest } = props;
-  // console.log(InputProps)
 
   return (
     <TextField

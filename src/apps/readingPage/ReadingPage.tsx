@@ -231,7 +231,7 @@ export const ReadingPage = () => {
                 </MyReadingHeaderContainer>
                 
                 {bookInfo && <BookCard
-                    cardType="recommended"
+                    cardType="myReading"
                     id={bookInfo._id}
                     url={bookInfo.imageUrl}
                     title={bookInfo.title}

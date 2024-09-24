@@ -7,7 +7,6 @@ import {
     usersSignOutAPI, 
     // booksAddByIdAPI
 } from "../../services/userConnectionsAPI"
-import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
     name: string, 
@@ -26,9 +25,6 @@ export const userSignup = createAsyncThunk(
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
             const res: any = await usersSignupAPI(data);
-            const {token}: any = res.data;
-
-            axiosToken.set(token);
 
             if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
 
@@ -46,11 +42,7 @@ export const userSignin = createAsyncThunk(
     async (data: ISignin, thunkApi) => {
         try{
             const res: any = await usersSigninAPI(data);
-            const {token}:any = res.data;
 
-            axiosToken.set(token);
-
-            // console.log('action', res)
             if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
 
             return res;
@@ -66,7 +58,6 @@ export const userGetCurrent = createAsyncThunk(
 
     async ( _, { rejectWithValue }) => {
         try{
-            axiosToken.set();
             const res = await usersGetCurrentAPI();
             return res;
         }
@@ -79,11 +70,19 @@ export const userGetCurrent = createAsyncThunk(
 export const userRefreshToken = createAsyncThunk(
     'auth/refreshToken',
 
-    async ( _, { rejectWithValue }) => {
+    async ( data: {token: string, refreshToken: string} | undefined, { rejectWithValue }) => {
         try{
+            if(data){
+                return {
+                    data:{
+                        token: data.token,
+                        refreshToken: data.refreshToken
+                    }
+                }
+            }
+
             const res: any = await usersRefreshTokenAPI();
             if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
-            axiosToken.set(res.data.token);
 
             return res;
         }
@@ -102,7 +101,6 @@ export const userSignOut = createAsyncThunk(
             localStorage.removeItem('refreshToken');
             
             const res = await usersSignOutAPI();
-            axiosToken.unset();
             return res;
         }
         catch (error: unknown) {
@@ -119,7 +117,6 @@ export const userLocalSignOut = createAsyncThunk(
             localStorage.removeItem('persist:auth');
             localStorage.removeItem('refreshToken');
             
-            axiosToken.unset();
             return null;
         }
         catch (error: unknown) {
@@ -127,6 +124,14 @@ export const userLocalSignOut = createAsyncThunk(
         }
     }
 );
+
+export const userAddError = createAsyncThunk(
+    'auth/addError',
+
+    (data: any) => {
+        return data
+    }
+)
 
 export const userRemoveError = createAction(
     'auth/removeError',

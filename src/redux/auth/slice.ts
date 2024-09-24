@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { 
+    userAddError,
     userGetCurrent, 
     userLocalSignOut, 
     userRefreshToken, 
@@ -9,6 +10,7 @@ import {
     userSignup 
 } from "./operations";
 import { PendingAction, RejectedAction } from "../reduxTypes";
+import { AddCard } from "@mui/icons-material";
 
 interface IInitialState {
     _id: string | null,
@@ -105,6 +107,10 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
+            })
+            .addCase(userAddError.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
             })
             .addCase(userRemoveError, (state, action) => {
                 state.error = action.payload;

@@ -25,6 +25,7 @@ import { useSelector } from "react-redux";
 import { selectUserBooks, selectUserBooksTitlesArr } from "../../redux/books/selectors";
 import { ErrorModal } from "../errorModal/ErrorModal";
 import { theme } from "../../styles/themes";
+import clsx from "clsx";
 
 type Props = {
     id: string,
@@ -105,9 +106,13 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
         />
         <Container sx={sx} onClick={handleCardClick}>
             <ImageContainer>
-                <Image src={url}/>
+                <Image src={url} loading="lazy"/>
             </ImageContainer>
-            <DescriptionContainer>
+            <DescriptionContainer 
+                className={clsx(
+                    cardType && cardType !== 'recommended' && cardType
+                )}
+            >
                 <TitleContainer>
                     <Header variant="h3" noWrap>{title}</Header>
                     <Author noWrap>{author}</Author>
