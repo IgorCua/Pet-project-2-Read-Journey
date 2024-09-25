@@ -16,6 +16,13 @@ export const Section = styled(Box)(({theme}) => ({
         gap: '32px'
     },
 
+    [theme.breakpoints.up('laptop')]:{
+        // padding: '32px 32px',
+        // flexDirection: 'row',
+        // gap: '32px'
+        justifyContent: 'space-between'
+    },
+
     [theme.breakpoints.up('desktop')]:{
         padding: '40px 20px 20px 20px',
         width: '353px',

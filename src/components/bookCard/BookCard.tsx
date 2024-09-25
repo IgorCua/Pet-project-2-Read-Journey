@@ -22,9 +22,10 @@ import { CustomBackdrop } from "../Backdrop/CustomBackdrop";
 import { booksAddById, booksGetBookInfo, booksRemoveBook } from "../../redux/books/operations";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectUserBooksTitlesArr } from "../../redux/books/selectors";
+import { selectUserBooks, selectUserBooksTitlesArr } from "../../redux/books/selectors";
 import { ErrorModal } from "../errorModal/ErrorModal";
 import { theme } from "../../styles/themes";
+import clsx from "clsx";
 
 type Props = {
     id: string,
@@ -43,6 +44,7 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isError, setIsError] = useState(false);
     const userBooksTitlesArr = useSelector(selectUserBooksTitlesArr);
+    const userBooks = useSelector(selectUserBooks);
     const dispatch = useDispatch<AppDispatch>();
     const navigate = useNavigate();
     
@@ -79,18 +81,19 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
     }
 
     const handleStartReading = () => {
-        dispatch(booksGetBookInfo(id));
-        navigate('/reading');
+        const book = userBooks.find((elem) => {
+            return elem.title === title;
+        });
+
+        if (book) {
+            dispatch(booksGetBookInfo(book._id));
+            navigate('/reading');
+        }
     }
 
     const handleButtonRender = () => {
         if(userBooksTitlesArr){
-            if(userBooksTitlesArr.includes(title) === true){
-                return true;
-            }
-            if(userBooksTitlesArr.includes(title) === false) {
-                return false;
-            }
+            return userBooksTitlesArr.includes(title) ? true : false;
         }
     }
     return <>
@@ -103,9 +106,13 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
         />
         <Container sx={sx} onClick={handleCardClick}>
             <ImageContainer>
-                <Image src={url}/>
+                <Image src={url} loading="lazy"/>
             </ImageContainer>
-            <DescriptionContainer>
+            <DescriptionContainer 
+                className={clsx(
+                    cardType && cardType !== 'recommended' && cardType
+                )}
+            >
                 <TitleContainer>
                     <Header variant="h3" noWrap>{title}</Header>
                     <Author noWrap>{author}</Author>
@@ -144,8 +151,8 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                 }
             </DescriptionContainer>
         </Container>
-        { isModal !== null && isModal !== false && 
-            isModalOpen && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
+        { isModal !== false && isModalOpen 
+            && <CustomBackdrop isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen}>
                 <BackdropContainer>
                     <BackdropCardContainer>
                         <Image loading="lazy" src={url} sx={{ 
@@ -172,10 +179,16 @@ export const BookCard = ({id, cardType, url, title, author, pages, isModal, sx}:
                     </BackdropCardContainer>
 
                     {!handleButtonRender() && 
-                        <AddToLibraryBtn onClick={handleAddToLibrary}>Add to library</AddToLibraryBtn>
+                        <AddToLibraryBtn
+                            aria-label="add to library"
+                            onClick={handleAddToLibrary}
+                        >Add to library</AddToLibraryBtn>
                     }
                     {handleButtonRender() && 
-                        <StartReadingBtn onClick={handleStartReading}>Start reading</StartReadingBtn>
+                        <StartReadingBtn 
+                            aria-label="start reading"
+                            onClick={handleStartReading}
+                        >Start reading</StartReadingBtn>
                     }
                 </BackdropContainer>
             </CustomBackdrop>

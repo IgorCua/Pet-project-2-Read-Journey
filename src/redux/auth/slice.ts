@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { 
+    userAddError,
     userGetCurrent, 
     userLocalSignOut, 
     userRefreshToken, 
@@ -9,6 +10,7 @@ import {
     userSignup 
 } from "./operations";
 import { PendingAction, RejectedAction } from "../reduxTypes";
+import { AddCard } from "@mui/icons-material";
 
 interface IInitialState {
     _id: string | null,
@@ -60,7 +62,7 @@ const authSlice = createSlice({
             .addCase(userSignin.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
                 state.isLoading = false;
-                state.isError = false
+                state.isError = false;
                 state.error = null;
                 state.name = action.payload.data.name;
                 state.email = action.payload.data.email;
@@ -70,14 +72,14 @@ const authSlice = createSlice({
             .addCase(userGetCurrent.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
                 state.isLoading = false;
-                state.isError = false
+                state.isError = false;
                 state.error = null;
                 state = {...state, ...action.payload};
             })
             .addCase(userRefreshToken.fulfilled, (state, action: PayloadAction<any>) => {
                 state.isLoggedIn = true;
                 state.isLoading = false;
-                state.isError = false
+                state.isError = false;
                 state.error = null;
                 state.token = action.payload.data.token;
                 state.refreshToken = action.payload.data.refreshToken;
@@ -89,7 +91,7 @@ const authSlice = createSlice({
                 state.token = null;
                 state.isLoggedIn = false;
                 state.isLoading = false;
-                state.isError = false
+                state.isError = false;
                 state.error = null;
             })
             .addCase('SIGNOUT', (state) => {
@@ -105,6 +107,10 @@ const authSlice = createSlice({
                 state.isLoading = false;
                 state.isError = false;
                 state.error = null;
+            })
+            .addCase(userAddError.rejected, (state, action) => {
+                state.isLoading = false;
+                state.error = action.payload;
             })
             .addCase(userRemoveError, (state, action) => {
                 state.error = action.payload;

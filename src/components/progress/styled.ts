@@ -290,6 +290,10 @@ export const CircleContainer = styled(Box)(({theme}) => ({
     justifyContent:'center',
     alignItems: 'center',
     position: 'relative',
+
+    [theme.breakpoints.up('tablet')]: {
+        marginBottom: '16px',
+    }
 })) as typeof Box;
 
 export const DataContainer = styled(Box)(({theme}) => ({

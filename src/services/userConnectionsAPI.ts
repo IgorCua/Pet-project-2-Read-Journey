@@ -1,4 +1,4 @@
-import axios from "axios";
+import { client } from "./axiosClient";
 
 interface IUserSighup {
     name: string,
@@ -20,34 +20,36 @@ type SignupResponse = {
     message: string
 }
 
-export const usersSignupAPI = (data: IUserSighup) => {
-    return axios.post<SignupResponse>('/users/signup', data).then(res => {
-        return res;
-    });
+export const usersSignupAPI = (data: IUserSighup): any => {
+    return client.post<SignupResponse>(
+        '/users/signup', 
+        data,
+        { headers: {Authorization: false} }
+    )
 };
 
 export const usersSigninAPI = (data: IUserSignin) => {
-    return axios.post('/users/signin', data).then(res => {
-        return res;
-    });
+    return client.post(
+        '/users/signin',
+        data,
+        { headers: {Authorization: false} }
+    )
 };
 
 export const usersGetCurrentAPI = () => {
-    return axios.get('/users/current').then(res => {
+    return client.get('/users/current').then(res => {
         return res;
     });
 };
 
 export const usersRefreshTokenAPI = () => {
-    return axios.get('/users/current/refresh').then(res => {
+    return client.get('/users/current/refresh').then(res => {
         return res;
     });
 };
 
 export const usersSignOutAPI = () => {
-    return axios.post('/users/signout').then(res => {
+    return client.post('/users/signout').then(res => {
         return res;
     });
 };
-
-export {}

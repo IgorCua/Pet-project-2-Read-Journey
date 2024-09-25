@@ -1,6 +1,6 @@
 import { 
     Container, 
-    ContainerFilterCards, 
+    ContainerRecommendedBooks, 
     ContainerRecommended, 
     ContainerLinks, 
     Header, 
@@ -154,6 +154,8 @@ export const UserLibraryPage = () => {
         booksError, 
         request, 
         recommendedBooks, 
+        userBooks,
+        userBooksMemo,
         dispatch, 
         isBooksErrorMemo
     ]);
@@ -229,7 +231,7 @@ export const UserLibraryPage = () => {
             }
         }}>
             <>
-                <ContainerForm>
+                <ContainerForm sx={{}}>
                     <FormHeader>Filter:</FormHeader>
                     <Form
                         initialValues={initialValues}
@@ -254,7 +256,7 @@ export const UserLibraryPage = () => {
 
                 <ContainerRecommended sx={{}}>
                     <Header variant="h2">Recommended books</Header>
-                    <ContainerFilterCards>
+                    <ContainerRecommendedBooks>
                         {!isRecommendedLoading && <RecommendedBooks 
                             booksLimit={3} 
                             isLoading={isRecommendedLoading}
@@ -274,7 +276,7 @@ export const UserLibraryPage = () => {
                                 },
                             }
                         }}/>}
-                    </ContainerFilterCards>
+                    </ContainerRecommendedBooks>
                     <ContainerLinks>
                         <LinkButton onClick={handleLinkClick}>Home</LinkButton>
                         <IconWrapper onClick={handleLinkClick} >
@@ -305,7 +307,6 @@ export const UserLibraryPage = () => {
                             sx={{width: '137px'}}
                         />
                     }
-
                 })}
             </ContainerBooks>}
 

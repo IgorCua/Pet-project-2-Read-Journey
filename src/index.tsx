@@ -10,6 +10,9 @@ import { ThemeProvider } from '@mui/system';
 import { theme } from './styles/themes';
 import { PersistGate } from 'redux-persist/integration/react';
 // import { emotionTheme, theme } from './styles/themes';
+import { injectStore } from './services/axiosClient';
+
+injectStore(store);
 
 const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement

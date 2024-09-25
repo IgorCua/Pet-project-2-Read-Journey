@@ -131,6 +131,7 @@ export const Progress = () => {
     })
 
     return <>
+        {/* backdrop called when book is finished */}
         {isReadingFinished && <CustomBackdrop
             isModalOpen={isReadingFinished}
             setIsModalOpen={setIsReadingFinished}
@@ -164,6 +165,8 @@ export const Progress = () => {
                 </BackdropText>
             </BackdropContentContainer>
         </CustomBackdrop>}
+
+        {/* progress container */}
         <Container component={'div'}>
             <HeaderContainer>
                 <Header variant="h2">
@@ -208,7 +211,11 @@ export const Progress = () => {
                     </IconButton>
                 </IconContainer>
             </HeaderContainer>
+
+            {/* diary component */}
             {isDiary && <ListContainer>
+                
+                {/* progress statistics */}
                 <DiaryList>
                     {progressArr && progressDataArr && progressArr.map((elem, i) => {
                         return <DiaryListItem key={elem._id} id="listItem">
@@ -270,6 +277,8 @@ export const Progress = () => {
             {!isDiary && window.innerWidth >= 1280 && <StatisticsDescription>
                 Each page, each chapter is a new round of knowledge, a new step towards understanding. By rewriting statistics, we create our own reading history.
             </StatisticsDescription>}
+
+            {/* progress bar component */}
             {!isDiary && <ProgressContainer>
                 <CircleContainer>
                     <Icon iconName={'#icon-progress-circle'} sx={{
@@ -279,21 +288,22 @@ export const Progress = () => {
                         // strokeDashoffset: '565.48px'
                         transitionDuration: '350px',
                         transitionProperty: 'stroke-dashoffset',
-                        strokeDashoffset: `${565.48 - (565.48 / 100 * CountReadingPercent())}px`,
-                        strokeWidth: '10px',
+                        strokeDashoffset: `${710.20 - (710.20 / 100 * CountReadingPercent())}px`,
+                        strokeWidth: '18px',
                         // 'circle': {
                         //     strokeWidth: '15px'
                         // },
 
                         [theme.breakpoints.up('tablet')]: {
-                            strokeWidth: '12.42px',
+                            padding: '0',
+                            strokeWidth: '22px',
                             width: '138px',
                             height: '138px',
                         },
                         [theme.breakpoints.up('desktop')]: {
-                            strokeWidth: '15.12px',
-                            width: '189px',
-                            height: '189px',
+                            // strokeWidth: '22.12px',
+                            width: '168px',
+                            height: '168px',
                         },
                     }} />
                     <Typography sx={{
@@ -316,12 +326,11 @@ export const Progress = () => {
                             fontSize: '14px',
                             lineHeight: '18px',
                             color: theme.palette.custom.textMain,
+                            
                             [theme.breakpoints.up('tablet')]: {
+                                marginBottom: '8px',
                                 fontSize: '20px',
                                 lineHeight: '20px',
-                            },
-                            [theme.breakpoints.up('desktop')]: {
-                                marginBottom: '8px'
                             }
                         }}>{CountReadingPercent()}%</Typography>
                         <Typography sx={{

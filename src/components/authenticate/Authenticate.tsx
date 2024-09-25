@@ -42,10 +42,10 @@ export const Authenticate = ({children}: Props) => {
             return decodedToken.exp * 1000 - new Date().getTime();
         };
         return -1;
-    }, [decodedToken])
+    }, [decodedToken]);
 
     useEffect(() => {
-        if(authError){
+        if(authError && Object.keys(authError).length > 0){
             if(authError.config.url === "/users/signin"){
                 errorObj.errorCode = authError.response.status;
                 errorObj.errorMessage = 'Email or password is wrong.'; 
@@ -72,38 +72,27 @@ export const Authenticate = ({children}: Props) => {
                 setIsModalOpen(true);
             }
         }
-        if(token && refreshToken){
-            setTimeout(() => {
-                console.log('seTimeout token', token)
-                if (!authError && !booksError) {
-                    axiosToken.set(refreshToken);
-                    dispatch(userRefreshToken());
-                }
-            }, handleDelay());
-        }
     }, [
         isModalOpen, 
         setIsModalOpen, 
         authError, 
         booksError, 
         errorObj, 
-        token, 
-        refreshToken, 
-        handleDelay, 
-        dispatch
     ]);
 
-    // if(token && refreshToken){
-    //     setTimeout(() => {
-    //         console.log('seTimeout token', token)
-    //         console.log('seTimeout refreshToken', refreshToken)
-    //         if (!authError && !booksError) {
-    //             axiosToken.set(refreshToken);
-    //             dispatch(userRefreshToken());
-    //         }
-    //     }, handleDelay());
-    // }
-    
+    useEffect(() => {
+        if(token && refreshToken && !authError){
+            // setTimeout(() => {
+            //     if (!authError) {
+            //         axiosToken.set(refreshToken);
+            //         dispatch(userRefreshToken())
+            //         axiosToken.set(token);
+
+            //     }
+            // }, handleDelay());
+        }
+    }, [token, refreshToken, authError, dispatch, handleDelay]);
+
     const authErrorDispatch = () => {
         dispatch(userLocalSignOut());
         dispatch({type: 'SIGNOUT'});

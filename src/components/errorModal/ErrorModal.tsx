@@ -54,8 +54,6 @@ export const ErrorModal = (props: Props) => {
         }
     }, [isModalOpen]);
 
-    // if(typeof dispatchFunction === 'function')console.log('error dispatch');
-    
     const handleError = (event: React.MouseEvent<HTMLElement>) => {
         if(event.target === event.currentTarget) {
             if(type === 'userError') dispatch(userRemoveError());

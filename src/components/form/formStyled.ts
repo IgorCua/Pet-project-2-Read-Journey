@@ -68,8 +68,8 @@ export const StyledErrorMessage: any = styled(ErrorMessage)(({theme}) => ({
 export const ErrorBox: any = styled('div')(({theme}) => ({
     margin: '0px',
     top: '0px',
-    width: '100%',
-    height: '100%',
+    // width: '100%',
+    // height: '100%',
     // height: '50px',
     // position: 'absolute',
 

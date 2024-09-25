@@ -78,6 +78,16 @@ export const LoginPage = () => {
                 </IconContainer>
                 <Header>Expand your mind, reading <Span>a book</Span></Header>
 
+                {/* {!isReading && <Form
+                            initialValues={initialValuesStart}
+                            validationSchema={schemaStart}
+                            handleSubmit={handleSubmit}
+                            inputsDataArr={pageStartData}
+                            submitName={'Start'}
+                            sx={{
+                                gap: '20px',
+                            }}
+                        />} */}
                 <Form
                     initialValues={initialValues}
                     validationSchema={schema}

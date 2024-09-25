@@ -1,4 +1,4 @@
-import axios from "axios";
+import { client } from "./axiosClient";
 
 interface IBooksAddBook {
     title: string,
@@ -45,55 +45,55 @@ type PaginationResponse<T> = {
 }
 
 export const booksGetRecommendedAPI = (data: IBooksGetRecommended) => {
-    return axios.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {
+    return client.get<any, PaginationResponse<Book>>('/books/recommend', {params: data}).then(res => {
         return res;
     });
 };
 
 export const booksAddBookAPI = (data: IBooksAddBook) => {
-    return axios.post<any, AddBookInterface>('/books/recommend', data).then(res => {
+    return client.post<any, AddBookInterface>('/books/recommend', data).then(res => {
         return res;
     });
 };
 
 export const booksAddByIdAPI = (data: string) => {
-    return axios.post<any, AddBookInterface>(`/books/add/${data}`).then(res => {
+    return client.post<any, AddBookInterface>(`/books/add/${data}`).then(res => {
         return res;
     });
 };
 
 export const booksRemoveBookAPI = (data: string) => {
-    return axios.delete(`/books/remove/${data}`).then(res => {
+    return client.delete(`/books/remove/${data}`).then(res => {
         return res;
     });
 };
 
 export const booksGetUserBooksAPI = (data: UserBooksByStatus) => {
-    return axios.get<any, AddBookInterface[]>('/books/own', {params: data}).then(res => {
+    return client.get<any, AddBookInterface[]>('/books/own', {params: data}).then(res => {
         return res;
     });
 };
 
 export const booksSaveReadingStartAPI = (data: {id: string, page: number}) => {
-    return axios.post<any, AddBookInterface>('/books/reading/start', data).then(res => {
+    return client.post<any, AddBookInterface>('/books/reading/start', data).then(res => {
         return res;
     });
 };
 
 export const booksSaveEndOfReadingAPI = (data: {id: string, page: number}) => {
-    return axios.post<any, AddBookInterface>('/books/reading/finish', data).then(res => {
+    return client.post<any, AddBookInterface>('/books/reading/finish', data).then(res => {
         return res;
     });
 };
 
 export const booksDeleteReadingAPI = (data: { bookId: string, readingId: string }): any => {
-    return axios.delete('/books/reading', {params: data}).then(res => {
+    return client.delete('/books/reading', {params: data}).then(res => {
         return res;
     });
 };
 
 export const booksGetBookInfoAPI = (data: string) => {
-    return axios.get<any, AddBookInterface>(`/books/${data}`).then(res => {
+    return client.get<any, AddBookInterface>(`/books/${data}`).then(res => {
         return res;
     });
 };

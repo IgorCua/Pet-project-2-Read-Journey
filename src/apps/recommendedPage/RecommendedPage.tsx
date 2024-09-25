@@ -1,4 +1,3 @@
-import { ListItem } from "@mui/material";
 import { 
     Container, 
     DescripotionList, 
@@ -82,19 +81,25 @@ export const RecommendedPage = () => {
         page: booksObj ? booksObj.page : 1,
         limit: null
     }
-    const handleBooksLimit = () => {
+    
+    const handlePageLimit = () => {
         if(window.innerWidth < 768) {
             req.limit = 2;
+            return;
         }
         if(window.innerWidth < 1024) {
             req.limit = 8;
+            return;
         }
-        
+        if(window.innerWidth < 1280) {
+            req.limit = 10;
+            return;
+        }
         if(window.innerWidth >= 1280) {
             req.limit = 12;
+            return;
         }
     }
-  
     const handleErrorMessage = () => {
         if(booksError && booksError.response?.status >= 500){
             return 'Server error, please try to reload page.';
@@ -107,7 +112,7 @@ export const RecommendedPage = () => {
         if(booksObj){
             if (req.page === booksObj.totalPages) return;
             req.page += 1;
-            handleBooksLimit();
+            handlePageLimit();
             dispatch(booksGetRecommended(req));
         }
         return;
@@ -117,7 +122,7 @@ export const RecommendedPage = () => {
         if(booksObj){
             if (req.page === 1) return;
             req.page -= 1 ;
-            handleBooksLimit();
+            handlePageLimit();
             dispatch(booksGetRecommended(req));
         }
         return;
@@ -147,7 +152,7 @@ export const RecommendedPage = () => {
 
     return (
         <Container>
-            {booksError && booksError.response.status !== 401 && <ErrorModal 
+            {booksError && booksError.response?.status !== 401 && <ErrorModal 
                 type='booksError'
                 isModalOpen={isErrorModal}
                 setIsModalOpen={setIsErrorModal}

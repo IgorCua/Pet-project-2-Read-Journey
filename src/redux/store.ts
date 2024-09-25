@@ -39,7 +39,7 @@ const persistBooksConfig = {
 }
 
 const persistAuthReducer = persistReducer(persistAuthConfig, authSlice);
-const persistBooksReducer = persistReducer(persistBooksConfig, booksSlice)
+const persistBooksReducer = persistReducer(persistBooksConfig, booksSlice);
 // export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 
 export const store = configureStore({
