@@ -7,6 +7,7 @@ import {
     usersSignOutAPI, 
     // booksAddByIdAPI
 } from "../../services/userConnectionsAPI"
+import { axiosToken } from "../../services/axiosSettings";
 
 interface SignupInterface {
     name: string, 
@@ -25,9 +26,11 @@ export const userSignup = createAsyncThunk(
     async (data: SignupInterface, { rejectWithValue }) => {
         try{
             const res: any = await usersSignupAPI(data);
-
-            if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
-
+            if(res) {
+                localStorage.setItem('refreshToken', res.data.refreshToken);
+                axiosToken.set(res.data.token);
+            }
+            
             return res;
         }
         catch (error: unknown) {
@@ -43,7 +46,10 @@ export const userSignin = createAsyncThunk(
         try{
             const res: any = await usersSigninAPI(data);
 
-            if(res) localStorage.setItem('refreshToken', res.data.refreshToken);
+            if(res) {
+                localStorage.setItem('refreshToken', res.data.refreshToken);
+                axiosToken.set(res.data.token);
+            }
 
             return res;
         }
